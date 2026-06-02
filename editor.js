@@ -77,10 +77,28 @@ const BarkEditor = {
 //  DATA LOAD
 // ----------------------------------------------------------
 async function loadData() {
-  // Always fetch fresh from the repo file. Bust cache so editors see updates.
+  // If we already have a GitHub PAT (i.e. the user is an editor), pull data
+  // and SHA atomically from the GitHub API. This guarantees the SHA we hold
+  // matches the data we hold — so a Save can't silently clobber a newer
+  // version on origin. Non-editors fall back to the CDN copy (faster).
+  const pat = localStorage.getItem('bark.pat');
+  if (pat) {
+    try {
+      const j = await ghApi(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}?ref=${REPO_BRANCH}&_=${Date.now()}`);
+      // content is base64; decode + strip newlines added by GitHub API
+      const decoded = atob(String(j.content || '').replace(/\n/g, ''));
+      BarkEditor.data    = JSON.parse(decodeURIComponent(escape(decoded)));
+      BarkEditor.dataSha = j.sha;
+      return BarkEditor.data;
+    } catch (e) {
+      console.warn('[loadData] GitHub API path failed, falling back to CDN:', e.message);
+    }
+  }
+  // Public / fallback path
   const res = await fetch(`data.json?t=${Date.now()}`);
   if (!res.ok) throw new Error('Failed to load data.json');
-  BarkEditor.data = await res.json();
+  BarkEditor.data    = await res.json();
+  BarkEditor.dataSha = null;
   return BarkEditor.data;
 }
 
@@ -1700,14 +1718,27 @@ async function saveToGitHub() {
   try {
     const json = JSON.stringify(BarkEditor.data, null, 2);
     const b64 = utf8ToBase64(json);
-    const sha = BarkEditor.dataSha || await fetchFileSha(DATA_PATH);
+
+    // The SHA was captured at load time alongside the data we're editing.
+    // If it isn't set, we'd be saving blind — refuse rather than risk a
+    // silent overwrite of someone else's edits.
+    if (!BarkEditor.dataSha) {
+      // Try to recover by re-loading from the GitHub API
+      await loadData();
+      if (!BarkEditor.dataSha) {
+        throw new Error('Could not lock against current version. Reload the page and try again.');
+      }
+      alert('Re-synced with GitHub. Your edits are still here — click Save again.');
+      return;
+    }
+
     const result = await ghApi(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`, {
       method: 'PUT',
       body: JSON.stringify({
         message: `Edit content via editor (${BarkEditor.user.email})`,
         content: b64,
         branch: REPO_BRANCH,
-        ...(sha ? { sha } : {}),
+        sha: BarkEditor.dataSha,
       }),
     });
     BarkEditor.dataSha = result.content.sha;
@@ -1716,7 +1747,21 @@ async function saveToGitHub() {
     alert('Saved! 🎉\nGitHub Pages usually updates within ~60s.');
   } catch (e) {
     console.error(e);
-    alert('Save failed:\n\n' + e.message + '\n\nIf this says "Bad credentials", click Sign out then back in, and you\'ll be re-prompted for the token.');
+    const msg = String(e.message || '');
+    if (msg.includes('409') || msg.toLowerCase().includes('conflict') || msg.toLowerCase().includes('does not match')) {
+      // Conflict: someone else committed data.json since we loaded it.
+      if (confirm(
+        '⚠ Someone else has saved changes to the site since you loaded it.\n\n' +
+        'If you save now, their changes would be overwritten.\n\n' +
+        'Click OK to reload the page (you\'ll lose your unsaved changes but get theirs), or Cancel to keep your edits and try to merge them manually.'
+      )) {
+        location.reload();
+      }
+    } else if (msg.includes('Bad credentials') || msg.includes('401')) {
+      alert('Save failed: bad GitHub token.\n\nClick Sign out, then back in, and you\'ll be re-prompted for the token.');
+    } else {
+      alert('Save failed:\n\n' + msg);
+    }
   } finally {
     if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = '💾 Save & Publish'; }
   }
