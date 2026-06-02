@@ -659,6 +659,83 @@ function startExtrasTick() {
   _extrasTick = setInterval(renderExtras, 1000);
 }
 
+// ─── WOOD TYPES ────────────────────────────────────────────────────────────
+let _woodTypes = null;       // static, from wood-types.json
+let _woodCounts = null;      // dynamic, from backend /wood-counts
+let _woodCountsLastTs = 0;
+
+async function loadWoodTypes() {
+  if (_woodTypes) return _woodTypes;
+  try {
+    const r = await fetch('wood-types.json?t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    _woodTypes = j.woodTypes || [];
+  } catch (e) {
+    console.warn('[wood] Could not load wood-types.json:', e.message);
+    _woodTypes = [];
+  }
+  return _woodTypes;
+}
+
+async function loadWoodCounts(force) {
+  const now = Date.now();
+  if (!force && _woodCounts && (now - _woodCountsLastTs) < 30000) return _woodCounts;
+  try {
+    if (!BARK_BACKEND_URL) await loadBackendUrl();
+    if (!BARK_BACKEND_URL) throw new Error('NO_URL');
+    const r = await fetch(`${BARK_BACKEND_URL}/wood-counts`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    _woodCounts = j.counts || {};
+    _woodCountsLastTs = now;
+  } catch (e) {
+    console.warn('[wood] Could not load /wood-counts:', e.message);
+    if (!_woodCounts) _woodCounts = {};
+  }
+  return _woodCounts;
+}
+
+async function renderWoodSection() {
+  const grid = document.getElementById('woodGrid');
+  if (!grid) return; // not on extras page
+
+  const [types, counts] = await Promise.all([loadWoodTypes(), loadWoodCounts(false)]);
+
+  if (!types.length) {
+    grid.innerHTML = `<p class="players-empty">No wood types found. Make sure <code>wood-types.json</code> is in the repo (auto-published by bark-manager).</p>`;
+    return;
+  }
+
+  const totalWeight = types.reduce((s, w) => s + (w.rarityWeight || 1), 0);
+
+  grid.innerHTML = types.map(w => {
+    const chance  = (w.rarityWeight || 1) / totalWeight;
+    const oneInX  = Math.round(1 / chance);
+    const players = counts[w.woodID] || 0;
+    return `
+      <div class="wood-card ${w.isFancyWood ? 'wood-card-fancy' : ''}">
+        <div class="wood-card-head">
+          <h4 class="wood-card-name">${escapeHtml(w.woodID)}${w.isFancyWood ? ' <span class="wood-fancy-star">★</span>' : ''}</h4>
+          <span class="wood-card-rarity">1 in ${oneInX}</span>
+        </div>
+        <div class="wood-card-count">
+          <span class="wood-card-count-num">${players}</span>
+          <span class="wood-card-count-label">player${players === 1 ? '' : 's'}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Refresh counts periodically while on the extras page
+let _woodTick = null;
+function startWoodTick() {
+  if (_woodTick) clearInterval(_woodTick);
+  if (!document.getElementById('woodGrid')) return;
+  _woodTick = setInterval(() => { loadWoodCounts(true).then(renderWoodSection); }, 30000);
+}
+
 // ----------------------------------------------------------
 //  PLAYERS — linked Discord accounts
 // ----------------------------------------------------------
@@ -958,6 +1035,8 @@ function rerenderPage() {
   renderPlayers(document.querySelector('.players-page-target'));
   renderExtras();
   startExtrasTick();
+  renderWoodSection();
+  startWoodTick();
   applyTextOverrides();
   updateEditorBar();
 }

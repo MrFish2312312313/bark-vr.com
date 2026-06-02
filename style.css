@@ -1632,6 +1632,80 @@ body.editing .inline-editable.inline-editing {
 }
 
 /* ============================
+   WOOD-TYPES BLOCK (extras page)
+   ============================ */
+.wood-block {
+  border-top: 1px solid var(--border);
+  padding-top: 36px;
+  margin-top: 36px;
+}
+.wood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.wood-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.wood-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.wood-card-fancy {
+  border-color: var(--accent2);
+  background: linear-gradient(160deg, rgba(255,60,172,0.08), rgba(0,229,255,0.03));
+}
+.wood-card-fancy:hover { border-color: #ff7eb6; }
+.wood-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.wood-card-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.wood-fancy-star {
+  color: var(--accent2);
+  font-size: 0.95em;
+}
+.wood-card-rarity {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.wood-card-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.wood-card-count-num {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.wood-card-count-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ============================
    PLAYERS PAGE
    ============================ */
 .players-section { padding: 50px 0 100px; }
