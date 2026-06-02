@@ -43,7 +43,7 @@ const MEDIA_DIR   = 'media';
 // ─── Bark backend (Discord-bot link server) ────────────────────────────────
 // IMPORTANT: must be HTTPS or browsers will block requests from bark-vr.com.
 // Use Cloudflare Tunnel / ngrok / a hosted deploy to put your backend on HTTPS.
-const BARK_BACKEND_URL = 'https://CHANGE-ME.trycloudflare.com';
+const BARK_BACKEND_URL = 'https://procurement-boxes-euros-diary.trycloudflare.com';
 
 // ----------------------------------------------------------
 //  STATE
