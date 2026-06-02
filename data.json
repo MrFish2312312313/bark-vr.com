@@ -298,6 +298,13 @@
         "description": "Very Oval-Like",
         "image": "media/1780426578441-SampleScene_Custom..._02.06.2026_13-55-23.png",
         "effect": "it's just there, probably eatable in the future"
+      },
+      {
+        "id": "clancy",
+        "name": "Clancy",
+        "description": "\"Can't change what you've done. Start fresh next semester\"",
+        "image": "media/1780426926177-SampleScene_Custom..._02.06.2026_13-59-17.png",
+        "effect": "Grants access to Songs Next Semester, and Paladin Strait by Twenty One Pilots"
       }
     ],
     "cosmetics": [],
