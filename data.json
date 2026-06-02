@@ -354,6 +354,20 @@
         "description": "Suggested by JJTERRYVR, he a borb.",
         "image": "media/1780428768531-SampleScene_Custom..._02.06.2026_14-31-39.png",
         "effect": "Is very fun to use as a bowling ball or chuck into tornados"
+      },
+      {
+        "id": "leaf-blade",
+        "name": "Leaf Blade",
+        "description": "Obtained with the Jungle Ninja Bundle",
+        "image": "media/1780428889576-SampleScene_Custom..._02.06.2026_14-33-31.png",
+        "effect": "Cut's vines, when you slice with it, it LEAVES behind leaf particles (pun indented)"
+      },
+      {
+        "id": "flying-cube",
+        "name": "Flying Cube",
+        "description": "Only members of the Cube Crew have access to this item. Fun Fact: It was originally going to move your arms down and make them legs",
+        "image": "media/1780429044408-SampleScene_Custom..._02.06.2026_14-35-53.png",
+        "effect": "Let's you fly around, hard to master"
       }
     ],
     "cosmetics": [],
