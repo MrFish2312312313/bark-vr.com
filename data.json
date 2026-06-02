@@ -201,7 +201,43 @@
     }
   },
   "database": {
-    "items": [],
+    "items": [
+      {
+        "id": "duck",
+        "name": "Duck",
+        "description": "Just a little guy!",
+        "image": "media/1780419841451-SampleScene_Custom..._02.06.2026_12-03-56.png",
+        "effect": "He quacks if you click your trigger while holding him!"
+      },
+      {
+        "id": "bark-boy",
+        "name": "Bark Boy",
+        "description": "\"Come on mom, just one more game?\"",
+        "image": "media/1780419706259-SampleScene_Custom..._02.06.2026_12-00-54.png",
+        "effect": "Let's you spy on the Electric Arcade"
+      },
+      {
+        "id": "baseball-bat",
+        "name": "Baseball Bat",
+        "description": "*bonk*",
+        "image": "media/1780419806538-SampleScene_Custom..._02.06.2026_12-02-31.png",
+        "effect": "Let's you fling other players."
+      },
+      {
+        "id": "toy-hammer",
+        "name": "Toy Hammer",
+        "description": "*wham*",
+        "image": "media/1780419931413-SampleScene_Custom..._02.06.2026_12-04-50.png",
+        "effect": "Flings other players with extra power"
+      },
+      {
+        "id": "bamboo-bat",
+        "name": "Bamboo Bat",
+        "description": "*bink*",
+        "image": "media/1780420003272-SampleScene_Custom..._02.06.2026_12-06-13.png",
+        "effect": "flings other players"
+      }
+    ],
     "cosmetics": [],
     "maps": [],
     "npcs": []
