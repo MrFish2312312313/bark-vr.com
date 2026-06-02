@@ -40,6 +40,11 @@ const REPO_BRANCH = 'main';
 const DATA_PATH   = 'data.json';
 const MEDIA_DIR   = 'media';
 
+// ─── Bark backend (Discord-bot link server) ────────────────────────────────
+// IMPORTANT: must be HTTPS or browsers will block requests from bark-vr.com.
+// Use Cloudflare Tunnel / ngrok / a hosted deploy to put your backend on HTTPS.
+const BARK_BACKEND_URL = 'https://CHANGE-ME.trycloudflare.com';
+
 // ----------------------------------------------------------
 //  STATE
 // ----------------------------------------------------------
@@ -640,6 +645,285 @@ function startExtrasTick() {
 }
 
 // ----------------------------------------------------------
+//  PLAYERS — linked Discord accounts
+// ----------------------------------------------------------
+const BarkPlayers = {
+  list: null,       // array of profiles
+  loaded: false,
+  loading: false,
+  filter: '',
+};
+
+function imgSrc(p) {
+  if (!p) return '';
+  if (p.startsWith('http')) return p;
+  return BARK_BACKEND_URL.replace(/\/$/, '') + p;
+}
+
+function formatPlaytime(minutes) {
+  if (!minutes || isNaN(minutes)) return 'No data yet';
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  if (!h) return `${m}m`;
+  return `${h}h ${m}m`;
+}
+
+async function loadPlayers(force) {
+  if (BarkPlayers.loading) return;
+  BarkPlayers.loading = true;
+  const meta = document.getElementById('playersMeta');
+  if (meta) meta.textContent = 'Loading from backend…';
+  try {
+    const url = `${BARK_BACKEND_URL}/linked-profiles${force ? '?fresh=1' : ''}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Backend returned ${res.status}`);
+    const j = await res.json();
+    BarkPlayers.list = j.profiles || [];
+    BarkPlayers.loaded = true;
+  } catch (e) {
+    BarkPlayers.list = null;
+    if (meta) meta.innerHTML = `Could not reach the backend at <code>${escapeHtml(BARK_BACKEND_URL)}</code>.<br>
+      Make sure (1) the backend is running, (2) it's reachable over HTTPS, and (3) <code>BARK_BACKEND_URL</code> in editor.js points at it.`;
+    console.warn('[players] load failed:', e);
+  } finally {
+    BarkPlayers.loading = false;
+  }
+}
+
+function renderPlayers(container) {
+  if (!container) return;
+  if (!BarkPlayers.loaded) {
+    loadPlayers(false).then(() => renderPlayers(container));
+    return;
+  }
+  if (!BarkPlayers.list) return; // load error already shown
+
+  const meta = document.getElementById('playersMeta');
+  if (meta) meta.textContent = `${BarkPlayers.list.length} linked player${BarkPlayers.list.length === 1 ? '' : 's'}.`;
+
+  const filter = (BarkPlayers.filter || '').toLowerCase().trim();
+  const filtered = !filter ? BarkPlayers.list : BarkPlayers.list.filter(p =>
+    (p.displayName || '').toLowerCase().includes(filter) ||
+    (p.trelativeName || '').toLowerCase().includes(filter)
+  );
+
+  container.innerHTML = '';
+  filtered.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'player-card';
+    card.innerHTML = `
+      <div class="player-card-img-wrap">
+        ${p.imageUrl
+          ? `<img src="${escapeAttr(imgSrc(p.imageUrl))}" alt="${escapeAttr(p.displayName)}" class="player-card-img" onerror="this.style.display='none'" />`
+          : `<div class="player-card-img placeholder">${escapeHtml((p.displayName || '?')[0].toUpperCase())}</div>`}
+        ${p.moderated && BarkEditor.editing ? `<div class="player-mod-badge" title="Has moderator overrides">MOD</div>` : ''}
+      </div>
+      <div class="player-card-body">
+        <h3 class="player-card-name">${escapeHtml(p.displayName || 'Unknown')}</h3>
+        ${p.trelativeName ? `<p class="player-card-sub">${escapeHtml(p.trelativeName)}</p>` : ''}
+        ${p.description ? `<p class="player-card-desc">${escapeHtml(p.description)}</p>` : ''}
+      </div>
+      ${BarkEditor.editing ? `
+        <div class="player-mod-actions" onclick="event.stopPropagation()">
+          <button type="button" class="edit-btn" onclick="openPlayerModModal('${escapeAttr(p.discordId)}')">⚒ Moderate</button>
+        </div>
+      ` : ''}
+    `;
+    card.addEventListener('click', () => openPlayerDetail(p.discordId));
+    container.appendChild(card);
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<p class="players-empty">No players match "${escapeHtml(filter)}".</p>`;
+  }
+
+  // Wire up search + refresh once
+  const search = document.getElementById('playerSearch');
+  if (search && !search.dataset.wired) {
+    search.dataset.wired = '1';
+    search.addEventListener('input', () => {
+      BarkPlayers.filter = search.value;
+      renderPlayers(container);
+    });
+  }
+  const refresh = document.getElementById('playersRefresh');
+  if (refresh && !refresh.dataset.wired) {
+    refresh.dataset.wired = '1';
+    refresh.onclick = async () => {
+      refresh.disabled = true;
+      refresh.textContent = '↻ Refreshing…';
+      await loadPlayers(true);
+      refresh.disabled = false;
+      refresh.textContent = '↻ Refresh';
+      renderPlayers(container);
+    };
+  }
+}
+
+function openPlayerDetail(discordId) {
+  const p = (BarkPlayers.list || []).find(x => x.discordId === discordId);
+  const grid   = document.querySelector('.players-page-target');
+  const target = document.getElementById('playerDetailTarget');
+  if (!p || !target) return;
+
+  document.title = `${p.displayName} | BARKVR`;
+  if (grid) grid.style.display = 'none';
+  document.querySelector('.players-toolbar')?.style.setProperty('display', 'none');
+  target.style.display = 'block';
+
+  const items = (p.items || []);
+  target.innerHTML = `
+    <a href="#" class="back-link" id="playersBack">← BACK TO PLAYERS</a>
+    <div class="player-detail">
+      <div class="player-detail-head">
+        ${p.imageUrl
+          ? `<img src="${escapeAttr(imgSrc(p.imageUrl))}" alt="${escapeAttr(p.displayName)}" class="player-detail-img" />`
+          : `<div class="player-detail-img placeholder">${escapeHtml((p.displayName || '?')[0].toUpperCase())}</div>`}
+        <div>
+          <div class="section-label">// PLAYER</div>
+          <h1>${escapeHtml(p.displayName)}</h1>
+          ${p.trelativeName ? `<p class="player-detail-tre">🪪 ${escapeHtml(p.trelativeName)}</p>` : ''}
+          ${p.description ? `<p class="player-detail-desc">${escapeHtml(p.description)}</p>` : ''}
+        </div>
+      </div>
+
+      <div class="player-stats">
+        <div class="player-stat"><div class="stat-label">PAPER COINS</div><div class="stat-value">${p.coins ?? '—'}</div></div>
+        <div class="player-stat"><div class="stat-label">ARCADE TOKENS</div><div class="stat-value">${p.arcadeTokens ?? '—'}</div></div>
+        <div class="player-stat"><div class="stat-label">WOOD</div><div class="stat-value">${escapeHtml(p.woodID || '—')}</div></div>
+        <div class="player-stat"><div class="stat-label">PLAYTIME</div><div class="stat-value">${escapeHtml(formatPlaytime(p.minutesPlayed))}</div></div>
+      </div>
+
+      <div class="player-items">
+        <div class="section-label">// INVENTORY (${p.itemCount || 0})</div>
+        ${items.length
+          ? `<div class="player-items-grid">${items.map(it => `
+              <div class="player-item">
+                <span class="player-item-name">${escapeHtml(it.name)}</span>
+                ${it.count > 1 ? `<span class="player-item-count">×${it.count}</span>` : ''}
+              </div>
+            `).join('')}</div>`
+          : `<p class="players-empty">No items yet.</p>`}
+      </div>
+
+      ${BarkEditor.editing ? `
+        <div class="member-edit-actions">
+          <button class="btn-secondary" onclick="openPlayerModModal('${escapeAttr(p.discordId)}')">⚒ Moderate this account</button>
+        </div>
+      ` : ''}
+    </div>
+  `;
+  document.getElementById('playersBack').onclick = (e) => {
+    e.preventDefault();
+    closePlayerDetail();
+  };
+  applyTextOverrides();
+}
+
+function closePlayerDetail() {
+  const grid    = document.querySelector('.players-page-target');
+  const tools   = document.querySelector('.players-toolbar');
+  const target  = document.getElementById('playerDetailTarget');
+  if (grid)   grid.style.display = '';
+  if (tools)  tools.style.display = '';
+  if (target) { target.style.display = 'none'; target.innerHTML = ''; }
+  document.title = 'Players | BARKVR';
+}
+
+// ─── Moderation modal (editor only) ────────────────────────────────────────
+function getModSecret() {
+  let s = localStorage.getItem('bark.modSecret');
+  if (!s) {
+    s = prompt(
+      'Paste the backend moderation secret (WEATHER_SECRET in your bark-link-backend .env).\n\n' +
+      'It is stored only in this browser.'
+    );
+    if (s) localStorage.setItem('bark.modSecret', s.trim());
+  }
+  return s;
+}
+
+function openPlayerModModal(discordId) {
+  const p = (BarkPlayers.list || []).find(x => x.discordId === discordId);
+  if (!p) return;
+
+  showModal(`Moderate: ${p.displayName}`, `
+    <p class="modal-hint" style="margin-bottom:14px;">
+      All actions write to the backend immediately. They do NOT need a "Save & Publish".
+    </p>
+
+    <label>Override displayed name (leave blank to keep player's chosen name)</label>
+    <input id="modPlayerName" value="${escapeAttr(p.displayName || '')}" />
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+      <button type="button" class="btn-secondary" id="modClearImage">${p.imageUrl ? '🚫 Remove their profile image' : '✓ (no image)'}</button>
+      <button type="button" class="btn-secondary" id="modHide">🙈 Hide this player from the site</button>
+      <button type="button" class="btn-secondary danger" id="modRemove">⚠ Remove the account link entirely</button>
+    </div>
+  `, async () => {
+    // Save name override (only on submit)
+    const newName = (document.getElementById('modPlayerName').value || '').trim();
+    if (newName && newName !== p.displayName) {
+      await callMod(discordId, 'set-name', newName);
+    } else if (!newName) {
+      await callMod(discordId, 'clear-name');
+    }
+    await loadPlayers(true);
+    renderPlayers(document.querySelector('.players-page-target'));
+    return true;
+  });
+
+  document.getElementById('modClearImage').onclick = async () => {
+    if (!p.imageUrl) return;
+    if (!confirm('Remove this player\'s profile image from the site?')) return;
+    await callMod(discordId, 'clear-image');
+    await loadPlayers(true);
+    renderPlayers(document.querySelector('.players-page-target'));
+    document.querySelector('.bark-modal-close').click();
+  };
+  document.getElementById('modHide').onclick = async () => {
+    if (!confirm('Hide this player from the website? Their data stays on the backend; you can unhide later via the backend.')) return;
+    await callMod(discordId, 'hide');
+    await loadPlayers(true);
+    renderPlayers(document.querySelector('.players-page-target'));
+    document.querySelector('.bark-modal-close').click();
+  };
+  document.getElementById('modRemove').onclick = async () => {
+    if (!confirm('REMOVE the Discord ↔ PlayFab link entirely?\n\nThis cannot be undone from the website. The player would need to /barklink again with a new code.')) return;
+    await callMod(discordId, 'remove-link');
+    await loadPlayers(true);
+    renderPlayers(document.querySelector('.players-page-target'));
+    document.querySelector('.bark-modal-close').click();
+  };
+}
+
+async function callMod(discordId, action, value) {
+  const secret = getModSecret();
+  if (!secret) return;
+  try {
+    const res = await fetch(`${BARK_BACKEND_URL}/mod-profile`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ discordId, action, value, secret }),
+    });
+    const j = await res.json();
+    if (!j.success) {
+      if (j.message === 'Unauthorized') {
+        localStorage.removeItem('bark.modSecret');
+        alert('Wrong secret. Cleared — try again.');
+      } else {
+        alert('Action failed: ' + (j.message || res.status));
+      }
+    }
+    return j;
+  } catch (e) {
+    alert('Backend unreachable: ' + e.message);
+  }
+}
+
+window.openPlayerModModal = openPlayerModModal;
+
+// ----------------------------------------------------------
 //  RE-RENDER EVERYTHING ON CURRENT PAGE
 // ----------------------------------------------------------
 function rerenderPage() {
@@ -648,6 +932,7 @@ function rerenderPage() {
   renderGamesPage(document.querySelector('.games-page-target'));
   renderTeamMember(document.querySelector('.team-member-target'));
   renderStore(document.querySelector('.store-page-target'));
+  renderPlayers(document.querySelector('.players-page-target'));
   renderExtras();
   startExtrasTick();
   applyTextOverrides();
