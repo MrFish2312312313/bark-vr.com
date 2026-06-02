@@ -319,6 +319,13 @@
         "description": "Bumstronaut's favorite item, the sounds it makes is just Bumstronaut going \"moo\"",
         "image": "media/1780427259838-SampleScene_Custom..._02.06.2026_14-06-00.png",
         "effect": "Besides being an absolute adorable creature, it moos when you click your trigger while holding it."
+      },
+      {
+        "id": "easter-trophy-variant",
+        "name": "Easter Trophy Variant",
+        "description": "Could get this trophy during the 2025 easter update",
+        "image": "media/1780427409943-SampleScene_Custom..._02.06.2026_14-08-38.png",
+        "effect": "show's how og you are"
       }
     ],
     "cosmetics": [],
