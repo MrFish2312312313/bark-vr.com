@@ -1,0 +1,90 @@
+{
+  "updatedAt": "2026-06-02T16:09:59.327Z",
+  "woodTypes": [
+    {
+      "woodID": "Oak",
+      "rarityWeight": 40,
+      "isFancyWood": false
+    },
+    {
+      "woodID": "Birch",
+      "rarityWeight": 40,
+      "isFancyWood": false
+    },
+    {
+      "woodID": "Plank",
+      "rarityWeight": 20,
+      "isFancyWood": false
+    },
+    {
+      "woodID": "Rust",
+      "rarityWeight": 1,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Ghost",
+      "rarityWeight": 2,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Mangrove",
+      "rarityWeight": 20,
+      "isFancyWood": false
+    },
+    {
+      "woodID": "Dark Oak",
+      "rarityWeight": 15,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Nugget",
+      "rarityWeight": 0.1,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Rock",
+      "rarityWeight": 5,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "OGOG",
+      "rarityWeight": 0.1,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Realistic",
+      "rarityWeight": 0.1,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "glow",
+      "rarityWeight": 0.0001,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "easter",
+      "rarityWeight": 1,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "palm",
+      "rarityWeight": 15,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "carpet",
+      "rarityWeight": 5,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Bean",
+      "rarityWeight": 1,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Jungle",
+      "rarityWeight": 15,
+      "isFancyWood": true
+    }
+  ]
+}
