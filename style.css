@@ -1706,6 +1706,49 @@ body.editing .wood-card-cantget { pointer-events: auto; }
   bottom: 8px;
   right: 8px;
 }
+
+/* Wood image — square, rounded, sits at the top of the card */
+.wood-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+}
+.wood-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Rarity color tints (apply to the card border + the rarity badge) */
+.badge-rarity { background: var(--text-muted); color: #000; }
+
+.wood-rarity-uncommon  { border-color: #6ee07a; }
+.wood-rarity-uncommon  .badge-rarity { background: #6ee07a; color: #04210b; }
+
+.wood-rarity-epic      { border-color: #c97bff; }
+.wood-rarity-epic      .badge-rarity { background: #c97bff; color: #1a0033; }
+
+.wood-rarity-legendary { border-color: #ffd24a; }
+.wood-rarity-legendary .badge-rarity { background: #ffd24a; color: #2a1d00; }
+
+.wood-rarity-exotic    { border-color: #7ec8ff; }
+.wood-rarity-exotic    .badge-rarity { background: #7ec8ff; color: #042033; }
+
+.wood-rarity-dangboi   { border-color: #444; background: linear-gradient(160deg, #0a0a0a, #1a1a1a); }
+.wood-rarity-dangboi   .badge-rarity { background: #1a1a1a; color: #b0b0b0; border: 1px solid #555; }
+.wood-rarity-dangboi   .wood-card-name,
+.wood-rarity-dangboi   .wood-card-count-num { color: #d0d0d0; }
+.wood-rarity-dangboi   .wood-card-rarity    { color: #888; }
+
+/* When a rarity is set, the fancy magenta background is suppressed so the
+   rarity color dominates */
+.wood-card.wood-card-fancy[class*="wood-rarity-"] {
+  background: var(--card-bg);
+}
 .wood-card-head {
   display: flex;
   justify-content: space-between;
@@ -1745,6 +1788,138 @@ body.editing .wood-card-cantget { pointer-events: auto; }
   font-size: 0.78rem;
   color: var(--text-muted);
   letter-spacing: 0.06em;
+}
+
+/* ============================
+   DATABASE / INDEX PAGE
+   ============================ */
+.db-section { padding: 50px 0 100px; }
+.db-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.db-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  padding: 12px 22px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.15s;
+}
+.db-tab:hover { color: var(--text); }
+.db-tab.active { color: var(--accent); }
+.db-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(0,229,255,0.5);
+}
+.db-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+.db-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.db-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,229,255,0.15);
+}
+.db-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg3);
+  overflow: hidden;
+}
+.db-card-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.db-card-img.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--accent);
+  background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(255,60,172,0.1));
+}
+.db-card-body {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.db-card-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+.db-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.db-card.add-card {
+  border-style: dashed;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+.db-card.add-card:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Detail modal */
+.db-detail-img {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin: 0 auto 16px;
+  display: block;
+}
+.db-detail-desc {
+  color: var(--text);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+.db-detail-effect p {
+  color: var(--accent);
+  line-height: 1.7;
+  white-space: pre-wrap;
 }
 
 /* ============================

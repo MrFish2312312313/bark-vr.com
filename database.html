@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Games | BARKVR</title>
+  <title>Index | BARKVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -18,10 +18,10 @@
     </a>
     <div class="nav-links">
       <a href="index.html#about">ABOUT US</a>
-      <a href="games.html" class="active">GAMES</a>
+      <a href="games.html">GAMES</a>
       <a href="store.html">STORE</a>
       <a href="extras.html">EXTRAS</a>
-      <a href="database.html">INDEX</a>
+      <a href="database.html" class="active">INDEX</a>
       <a href="players.html">PLAYERS</a>
       <a href="careers.html">HIRING</a>
     </div>
@@ -43,14 +43,21 @@
       <div class="glow glow-1"></div>
     </div>
     <div class="page-hero-content">
-      <div class="section-label" data-text-key="games_hero_label">// OUR TITLES</div>
-      <h1 data-text-key="games_hero_title">GAMES</h1>
+      <div class="section-label" data-text-key="db_hero_label">// THE FIELD GUIDE</div>
+      <h1 data-text-key="db_hero_title">INDEX</h1>
     </div>
   </section>
 
-  <section class="game-detail">
+  <section class="db-section">
     <div class="container">
-      <div class="games-page-target">
+      <div class="db-tabs" id="dbTabs">
+        <button class="db-tab active" data-tab="items">Items</button>
+        <button class="db-tab" data-tab="cosmetics">Cosmetics</button>
+        <button class="db-tab" data-tab="maps">Maps</button>
+        <button class="db-tab" data-tab="npcs">NPCs</button>
+      </div>
+      <input type="text" id="dbSearch" class="players-search" placeholder="Search…" style="margin-bottom:24px;" />
+      <div class="db-grid db-target">
         <!-- rendered by editor.js -->
       </div>
     </div>

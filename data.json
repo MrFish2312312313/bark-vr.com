@@ -140,6 +140,12 @@
       "cannotGet": true
     }
   },
+  "database": {
+    "items": [],
+    "cosmetics": [],
+    "maps": [],
+    "npcs": []
+  },
   "slotDuration": 300,
   "seasons": [
     {

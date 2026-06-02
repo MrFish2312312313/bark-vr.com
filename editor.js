@@ -696,6 +696,15 @@ async function loadWoodCounts(force) {
   return _woodCounts;
 }
 
+const WOOD_RARITIES = [
+  { id: '',          label: 'Common (default)' },
+  { id: 'uncommon',  label: 'Uncommon — green'    },
+  { id: 'epic',      label: 'Epic — purple'       },
+  { id: 'legendary', label: 'Legendary — gold'    },
+  { id: 'exotic',    label: 'Exotic — sky blue'   },
+  { id: 'dangboi',   label: 'DANG BOI — black/grey' },
+];
+
 async function renderWoodSection() {
   const grid = document.getElementById('woodGrid');
   if (!grid) return; // not on extras page
@@ -718,6 +727,8 @@ async function renderWoodSection() {
     const ov = overrides[w.woodID] || {};
     const cantGet   = !!ov.cannotGet;
     const isLimited = !!ov.isLimited;
+    const rarity    = ov.rarity || '';
+    const image     = ov.image || '';
     const players   = counts[w.woodID] || 0;
 
     let rarityText;
@@ -733,10 +744,15 @@ async function renderWoodSection() {
     if (w.isFancyWood) classes.push('wood-card-fancy');
     if (cantGet)       classes.push('wood-card-cantget');
     if (isLimited)     classes.push('wood-card-limited');
+    if (rarity)        classes.push('wood-rarity-' + rarity);
+
+    const rarityLabel = WOOD_RARITIES.find(r => r.id === rarity)?.label.split(' — ')[0] || '';
 
     return `
       <div class="${classes.join(' ')}">
+        ${image ? `<div class="wood-card-img-wrap"><img src="${escapeAttr(image)}" alt="${escapeAttr(w.woodID)}" class="wood-card-img" onerror="this.parentElement.style.display='none'" /></div>` : ''}
         <div class="wood-badges">
+          ${rarity && rarity !== 'common' ? `<span class="badge badge-rarity">${escapeHtml(rarityLabel.toUpperCase())}</span>` : ''}
           ${isLimited ? `<span class="badge badge-limited">LIMITED</span>` : ''}
           ${cantGet   ? `<span class="badge badge-cantget">UNOBTAINABLE</span>` : ''}
         </div>
@@ -764,23 +780,51 @@ function openWoodOverrideModal(woodID) {
 
   showModal(`Wood: ${woodID}`, `
     <p class="modal-hint" style="margin-bottom:14px;">
-      Visual-only flags. These don't change anything in the game — they only adjust how this wood is displayed on the site.
+      Visual-only flags. None of this changes anything in-game — only the website display.
     </p>
+
+    <label>Image (square recommended — gets rounded corners)</label>
+    <div class="img-row">
+      <img id="modalWoodPreview" src="${escapeAttr(cur.image || '')}" class="img-preview" onerror="this.style.visibility='hidden'" />
+      <input type="file" id="modalWoodFile" accept="image/*" />
+    </div>
+
+    <label>Rarity</label>
+    <select id="modalWoodRarity">
+      ${WOOD_RARITIES.map(r => `<option value="${r.id}" ${(cur.rarity || '') === r.id ? 'selected' : ''}>${escapeHtml(r.label)}</option>`).join('')}
+    </select>
+
     <label class="checkbox-row">
       <input type="checkbox" id="modalWoodCantGet" ${cur.cannotGet ? 'checked' : ''} />
-      <span><strong>UNOBTAINABLE</strong> — show greyed out with a pink "UNOBTAINABLE" badge; exclude from the rarity-odds math</span>
+      <span><strong>UNOBTAINABLE</strong> — greys it out, "UNOBTAINABLE" badge, excluded from the rarity-odds math</span>
     </label>
     <label class="checkbox-row">
       <input type="checkbox" id="modalWoodLimited" ${cur.isLimited ? 'checked' : ''} />
-      <span><strong>LIMITED</strong> — show a magenta "LIMITED" badge</span>
+      <span><strong>LIMITED</strong> — pink "LIMITED" badge</span>
     </label>
   `, async () => {
-    const next = {};
+    const next = { ...cur };
+    delete next.cannotGet;
+    delete next.isLimited;
+    delete next.rarity;
     if (document.getElementById('modalWoodCantGet').checked) next.cannotGet = true;
     if (document.getElementById('modalWoodLimited').checked) next.isLimited = true;
+    const r = document.getElementById('modalWoodRarity').value;
+    if (r) next.rarity = r;
+
+    const file = document.getElementById('modalWoodFile').files[0];
+    if (file) {
+      try {
+        showSpinner('Uploading wood image...');
+        next.image = await uploadImage(file);
+      } catch (e) {
+        alert('Image upload failed: ' + e.message); hideSpinner(); return false;
+      }
+      hideSpinner();
+    }
 
     if (Object.keys(next).length === 0) {
-      delete BarkEditor.data.woodOverrides[woodID]; // clean up empty entries
+      delete BarkEditor.data.woodOverrides[woodID];
     } else {
       BarkEditor.data.woodOverrides[woodID] = next;
     }
@@ -789,6 +833,10 @@ function openWoodOverrideModal(woodID) {
     updateEditorBar();
     return true;
   });
+
+  // file preview
+  const f = document.getElementById('modalWoodFile');
+  if (f) f.addEventListener('change', e => previewInto('modalWoodPreview', e.target.files[0]));
 }
 
 window.openWoodOverrideModal = openWoodOverrideModal;
@@ -1089,6 +1137,198 @@ async function callMod(discordId, action, value) {
 window.openPlayerModModal = openPlayerModModal;
 
 // ----------------------------------------------------------
+//  DATABASE / INDEX (items, cosmetics, maps, npcs)
+// ----------------------------------------------------------
+const DB_CATEGORIES = ['items', 'cosmetics', 'maps', 'npcs'];
+
+const BarkDB = {
+  activeTab: 'items',
+  filter: '',
+};
+
+function renderDatabase() {
+  const grid = document.querySelector('.db-target');
+  if (!grid) return; // not on database page
+
+  // Make sure data has the structure
+  if (!BarkEditor.data.database) BarkEditor.data.database = { items: [], cosmetics: [], maps: [], npcs: [] };
+  for (const c of DB_CATEGORIES) {
+    if (!Array.isArray(BarkEditor.data.database[c])) BarkEditor.data.database[c] = [];
+  }
+
+  // Tabs
+  const tabs = document.querySelectorAll('.db-tab');
+  tabs.forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === BarkDB.activeTab);
+    if (!t.dataset.wired) {
+      t.dataset.wired = '1';
+      t.onclick = () => {
+        BarkDB.activeTab = t.dataset.tab;
+        renderDatabase();
+      };
+    }
+  });
+
+  // Search box
+  const search = document.getElementById('dbSearch');
+  if (search && !search.dataset.wired) {
+    search.dataset.wired = '1';
+    search.addEventListener('input', () => {
+      BarkDB.filter = search.value;
+      renderDatabase();
+    });
+  }
+
+  const entries = BarkEditor.data.database[BarkDB.activeTab] || [];
+  const filter  = (BarkDB.filter || '').toLowerCase().trim();
+  const filtered = !filter ? entries : entries.filter(e =>
+    (e.name || '').toLowerCase().includes(filter) ||
+    (e.description || '').toLowerCase().includes(filter) ||
+    (e.effect || '').toLowerCase().includes(filter)
+  );
+
+  grid.innerHTML = '';
+
+  filtered.forEach(entry => {
+    const realIdx = entries.indexOf(entry);
+    const card = document.createElement('div');
+    card.className = 'db-card';
+    card.innerHTML = `
+      <div class="db-card-img-wrap">
+        ${entry.image
+          ? `<img src="${escapeAttr(entry.image)}" alt="${escapeAttr(entry.name)}" class="db-card-img" onerror="this.style.display='none'" />`
+          : `<div class="db-card-img placeholder">${escapeHtml((entry.name || '?')[0].toUpperCase())}</div>`}
+      </div>
+      <div class="db-card-body">
+        <h3 class="db-card-name">${escapeHtml(entry.name || 'Untitled')}</h3>
+        ${entry.description ? `<p class="db-card-desc">${escapeHtml(entry.description)}</p>` : ''}
+      </div>
+      ${BarkEditor.editing ? `
+        <div class="edit-overlay" onclick="event.stopPropagation()">
+          <button class="edit-btn" onclick="openDbEntryModal('${BarkDB.activeTab}', ${realIdx})">✎</button>
+          <button class="edit-btn edit-btn-danger" onclick="deleteDbEntry('${BarkDB.activeTab}', ${realIdx})">✕</button>
+        </div>
+      ` : ''}
+    `;
+    card.addEventListener('click', () => openDbEntryDetail(BarkDB.activeTab, realIdx));
+    grid.appendChild(card);
+  });
+
+  if (filtered.length === 0 && !BarkEditor.editing) {
+    grid.innerHTML = `<p class="players-empty">Nothing here yet.</p>`;
+  }
+
+  if (BarkEditor.editing) {
+    const add = document.createElement('button');
+    add.className = 'db-card add-card';
+    add.type = 'button';
+    add.innerHTML = `<div class="add-plus">+</div><div class="add-label">Add ${BarkDB.activeTab.replace(/s$/, '')}</div>`;
+    add.onclick = () => openDbEntryModal(BarkDB.activeTab, null);
+    grid.appendChild(add);
+  }
+}
+
+function openDbEntryDetail(cat, idx) {
+  const e = BarkEditor.data.database[cat][idx];
+  if (!e) return;
+  const isItem = cat === 'items';
+
+  showModal(e.name || 'Untitled', `
+    ${e.image ? `<img src="${escapeAttr(e.image)}" class="db-detail-img" />` : ''}
+    ${e.description ? `<p class="db-detail-desc">${escapeHtml(e.description)}</p>` : ''}
+    ${isItem && e.effect ? `
+      <div class="db-detail-effect">
+        <div class="section-label" style="margin-top:18px;">// WHAT IT DOES</div>
+        <p>${escapeHtml(e.effect)}</p>
+      </div>` : ''}
+    ${BarkEditor.editing ? `
+      <div class="member-edit-actions" style="margin-top:24px;">
+        <button class="btn-secondary" onclick="document.querySelector('.bark-modal-close').click(); openDbEntryModal('${cat}', ${idx});">✎ Edit</button>
+      </div>` : ''}
+  `, async () => true);
+
+  // remove the Save button — this is read-only
+  const foot = document.querySelector('#barkModal .bark-modal-foot');
+  if (foot) foot.querySelector('#modalSave').style.display = 'none';
+}
+
+function openDbEntryModal(cat, idx) {
+  if (!BarkEditor.data.database) BarkEditor.data.database = {};
+  if (!Array.isArray(BarkEditor.data.database[cat])) BarkEditor.data.database[cat] = [];
+
+  const isNew = idx === null || idx === undefined;
+  const e = isNew ? { id: '', name: '', description: '', effect: '', image: '' }
+                  : { ...BarkEditor.data.database[cat][idx] };
+  const isItem = cat === 'items';
+  const single = cat.replace(/s$/, '');
+
+  showModal(`${isNew ? 'Add' : 'Edit'} ${single}`, `
+    <label>Image (square recommended)</label>
+    <div class="img-row">
+      <img id="modalDbImgPreview" src="${escapeAttr(e.image || '')}" class="img-preview" onerror="this.style.visibility='hidden'" />
+      <input type="file" id="modalDbImgFile" accept="image/*" />
+    </div>
+
+    <label>Name</label>
+    <input id="modalDbName" value="${escapeAttr(e.name)}" placeholder="e.g. Acorn" />
+
+    <label>Description</label>
+    <textarea id="modalDbDesc" rows="3">${escapeHtml(e.description || '')}</textarea>
+
+    ${isItem ? `
+      <label>What it does</label>
+      <textarea id="modalDbEffect" rows="3" placeholder="e.g. Heals 50% HP, drops a Wood ID, etc.">${escapeHtml(e.effect || '')}</textarea>
+    ` : ''}
+
+    <label>URL slug (optional — auto-generated from name if blank)</label>
+    <input id="modalDbId" value="${escapeAttr(e.id)}" />
+  `, async () => {
+    const next = {
+      id: (document.getElementById('modalDbId').value.trim() || slugify(document.getElementById('modalDbName').value)),
+      name: document.getElementById('modalDbName').value.trim(),
+      description: document.getElementById('modalDbDesc').value.trim(),
+      image: e.image || '',
+    };
+    if (!next.name) { alert('Name required'); return false; }
+    if (isItem) next.effect = document.getElementById('modalDbEffect').value.trim();
+
+    const file = document.getElementById('modalDbImgFile').files[0];
+    if (file) {
+      try {
+        showSpinner('Uploading image...');
+        next.image = await uploadImage(file);
+      } catch (err) {
+        alert('Image upload failed: ' + err.message); hideSpinner(); return false;
+      }
+      hideSpinner();
+    }
+
+    if (isNew) BarkEditor.data.database[cat].push(next);
+    else       BarkEditor.data.database[cat][idx] = next;
+    BarkEditor.dirty = true;
+    renderDatabase();
+    updateEditorBar();
+    return true;
+  });
+
+  const f = document.getElementById('modalDbImgFile');
+  if (f) f.addEventListener('change', ev => previewInto('modalDbImgPreview', ev.target.files[0]));
+}
+
+function deleteDbEntry(cat, idx) {
+  const e = BarkEditor.data.database[cat][idx];
+  if (!confirm(`Delete "${e.name || 'this entry'}"?`)) return;
+  BarkEditor.data.database[cat].splice(idx, 1);
+  BarkEditor.dirty = true;
+  renderDatabase();
+  updateEditorBar();
+}
+
+window.openDbEntryModal = openDbEntryModal;
+window.openDbEntryDetail = openDbEntryDetail;
+window.deleteDbEntry = deleteDbEntry;
+
+// ----------------------------------------------------------
 //  RE-RENDER EVERYTHING ON CURRENT PAGE
 // ----------------------------------------------------------
 function rerenderPage() {
@@ -1102,6 +1342,7 @@ function rerenderPage() {
   startExtrasTick();
   renderWoodSection();
   startWoodTick();
+  renderDatabase();
   applyTextOverrides();
   updateEditorBar();
 }
