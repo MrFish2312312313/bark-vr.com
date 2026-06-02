@@ -32,6 +32,7 @@ const ALLOWED_EMAILS = [
   'portergrahamrussell@icloud.com',
   'barkvrofficial@gmail.com',
   'mrfeesh456@gmail.com',
+  'bumstronaut52@gmail.com',
 ];
 
 const REPO_OWNER  = 'MrFish2312312313';
@@ -1357,6 +1358,51 @@ function shouldShowEditorBar() {
   return params.has('edit');
 }
 
+// ─── Hidden waffle 🧇 — secret 5-click trigger to open the editor ──────────
+function buildSecretWaffle() {
+  if (document.getElementById('secretWaffle')) return;
+  if (shouldShowEditorBar()) return; // bar already showing, no need
+  const w = document.createElement('button');
+  w.id = 'secretWaffle';
+  w.className = 'secret-waffle';
+  w.type = 'button';
+  w.setAttribute('aria-label', '');
+  w.textContent = '🧇';
+  document.body.appendChild(w);
+
+  let clicks = 0;
+  let rotation = 0;
+  let resetTimer = null;
+
+  w.addEventListener('click', e => {
+    e.preventDefault();
+    rotation += 360;
+    w.style.transform = `rotate(${rotation}deg)`;
+    clicks++;
+
+    // Each click resets the "no activity" timer to 1.2s
+    if (resetTimer) clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => { clicks = 0; }, 1200);
+
+    if (clicks >= 5) {
+      clicks = 0;
+      clearTimeout(resetTimer);
+      w.classList.add('secret-waffle-firing');
+      setTimeout(() => {
+        w.remove();
+        // Flip URL flag so the bar will show on this and subsequent pages
+        const params = new URLSearchParams(location.search);
+        params.set('edit', '1');
+        history.replaceState(null, '', `${location.pathname}?${params.toString()}${location.hash}`);
+        buildEditorBar();
+        updateEditorBar();
+        // Auto-launch the Google sign-in flow
+        setTimeout(startSignIn, 250);
+      }, 500);
+    }
+  });
+}
+
 function buildEditorBar() {
   if (document.getElementById('editorBar')) return;
   if (!shouldShowEditorBar()) return;
@@ -2061,6 +2107,7 @@ async function bootEditor() {
   }
 
   buildEditorBar();
+  buildSecretWaffle();
   rerenderPage();
 
   // Warn before leaving with unsaved edits
