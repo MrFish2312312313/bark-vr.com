@@ -250,6 +250,13 @@
         "description": "Obtained during the 2026 Bark To Beans update",
         "image": "media/1780420678312-SampleScene_Custom..._02.06.2026_12-17-01.png",
         "effect": "Looks cool"
+      },
+      {
+        "id": "bean-gun",
+        "name": "Bean Gun",
+        "description": "\"BEANS EVERYWHERE!!!\"",
+        "image": "media/1780421224868-SampleScene_Custom..._02.06.2026_12-26-20.png",
+        "effect": "Shoots Tons of Beans, Good Flying Method!"
       }
     ],
     "cosmetics": [],
