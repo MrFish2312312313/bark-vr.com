@@ -936,8 +936,10 @@ function renderPlayers(container) {
 
   const filter = (BarkPlayers.filter || '').toLowerCase().trim();
   const filtered = !filter ? BarkPlayers.list : BarkPlayers.list.filter(p =>
-    (p.displayName || '').toLowerCase().includes(filter) ||
-    (p.trelativeName || '').toLowerCase().includes(filter)
+    (p.displayName   || '').toLowerCase().includes(filter) ||
+    (p.trelativeName || '').toLowerCase().includes(filter) ||
+    (p.woodID        || '').toLowerCase().includes(filter) ||
+    (p.items || []).some(it => (it.name || '').toLowerCase().includes(filter))
   );
 
   container.innerHTML = '';
