@@ -46,6 +46,35 @@
           "text": "This game is so amazing 👍 if you don't like this, you're a stinky head"
         }
       ]
+    },
+    {
+      "id": "glorp",
+      "name": "Glorp!",
+      "tag": "Rat",
+      "tagline": "\"And all of a sudden, RATS!\"",
+      "shortDesc": "In this game, you play as a rat. you can travel through sewers, jam out to music, and most importantly, have fun!",
+      "fullDesc": "In this game, you play as a rat. there are currently 6 maps! we have a plethora of different cosmetics. its pretty much your common vr game!",
+      "downloadUrl": "https://www.meta.com/en-gb/experiences/glorp/8261849443905607/",
+      "downloadLabel": "Meta Quest",
+      "morePlatforms": "None lol",
+      "screenshot": "media/1780374971824-39036651_1092921542347234_3547306044307294493_n.webp",
+      "reviews": [
+        {
+          "stars": 5,
+          "author": "King_chickennugget",
+          "text": "I bought a house owners really nice I’m going to sleep in my new house"
+        },
+        {
+          "stars": 5,
+          "author": "SUSchunks",
+          "text": "This game is delicious anyone who finds this game should get it Pls do it’s a very yummy game! 🤤😋"
+        },
+        {
+          "stars": 5,
+          "author": "Bumstronaut",
+          "text": "This game is actually a w, So good am I right"
+        }
+      ]
     }
   ]
 }
