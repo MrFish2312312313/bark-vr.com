@@ -3,6 +3,12 @@
    Dark VR/gaming aesthetic
    ============================ */
 
+@font-face {
+  font-family: 'MonkeyLand';
+  src: url('fonts/MonkeyLand.otf') format('opentype');
+  font-display: swap;
+}
+
 :root {
   --bg:        #080b10;
   --bg2:       #0d1117;
@@ -16,6 +22,9 @@
   --radius:    6px;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body:    'Barlow', sans-serif;
+  /* MonkeyLand is all-caps only — use it only for elements that always
+     render uppercase. Falls back to Bebas Neue if the font fails to load. */
+  --font-allcaps: 'MonkeyLand', 'Bebas Neue', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -293,9 +302,10 @@ nav {
   text-align: center;
 }
 .page-hero-content h1 {
-  font-family: var(--font-display);
+  font-family: var(--font-allcaps);
   font-size: clamp(3rem, 8vw, 6rem);
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* ---- SECTION LABELS ---- */
