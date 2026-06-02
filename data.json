@@ -305,6 +305,13 @@
         "description": "\"Can't change what you've done. Start fresh next semester\"",
         "image": "media/1780426926177-SampleScene_Custom..._02.06.2026_13-59-17.png",
         "effect": "Grants access to Songs Next Semester, and Paladin Strait by Twenty One Pilots"
+      },
+      {
+        "id": "controller",
+        "name": "Controller",
+        "description": "Comes with the Basement Boss Bundle",
+        "image": "media/1780427039434-SampleScene_Custom..._02.06.2026_14-02-42.png",
+        "effect": "If you click your trigger while holding the controller, it plays 8 bit game noises"
       }
     ],
     "cosmetics": [],
