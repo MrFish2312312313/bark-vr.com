@@ -257,6 +257,13 @@
         "description": "\"BEANS EVERYWHERE!!!\"",
         "image": "media/1780421224868-SampleScene_Custom..._02.06.2026_12-26-20.png",
         "effect": "Shoots Tons of Beans, Good Flying Method!"
+      },
+      {
+        "id": "blurryface",
+        "name": "Blurryface",
+        "description": "\"My name's Blurryface an i care what you think\"",
+        "image": "media/1780421363611-SampleScene_Custom..._02.06.2026_12-28-23.png",
+        "effect": "Grants access to Songs Stressed out and Message Man by Twenty One Pilots"
       }
     ],
     "cosmetics": [],
