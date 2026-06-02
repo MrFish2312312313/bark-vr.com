@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- BARK-SEO-START -->
+  <meta name="description" content="Database of items, cosmetics, maps, and NPCs in BARK." />
+  <link rel="canonical" href="https://bark-vr.com/database" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bark-vr.com/database" />
+  <meta property="og:title" content="Index | BARKVR" />
+  <meta property="og:description" content="Database of items, cosmetics, maps, and NPCs in BARK." />
+  <meta property="og:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta property="og:site_name" content="BARKVR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Index | BARKVR" />
+  <meta name="twitter:description" content="Database of items, cosmetics, maps, and NPCs in BARK." />
+  <meta name="twitter:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta name="theme-color" content="#00e5ff" />
+  <!-- BARK-SEO-END -->
+  <title>Index | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css?v=24" />
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database" class="active">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label" data-text-key="db_hero_label">// THE FIELD GUIDE</div>
+      <h1 data-text-key="db_hero_title">INDEX</h1>
+    </div>
+  </section>
+
+  <section class="db-section">
+    <div class="container">
+      <div class="db-tabs" id="dbTabs">
+        <button class="db-tab active" data-tab="items">Items</button>
+        <button class="db-tab" data-tab="cosmetics">Cosmetics</button>
+        <button class="db-tab" data-tab="maps">Maps</button>
+        <button class="db-tab" data-tab="npcs">NPCs</button>
+      </div>
+      <input type="text" id="dbSearch" class="players-search" placeholder="Search…" style="margin-bottom:24px;" />
+      <div class="db-grid db-target">
+        <!-- rendered by editor.js -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="/#about">About</a>
+        <a href="/games">Games</a>
+        <a href="/store">Store</a>
+        <a href="/extras">Extras</a>
+        <a href="/database">Index</a>
+        <a href="/players">Players</a>
+        <a href="/careers">Hiring</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <p class="footer-copy" data-text-key="footer_copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="main.js"></script>
+  <script src="editor.js?v=24"></script>
+</body>
+</html>
