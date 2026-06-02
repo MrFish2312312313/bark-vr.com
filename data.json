@@ -15,6 +15,14 @@
       "description": "Bark developer. Lover of small fish and big features.",
       "avatarClass": "fish-avatar",
       "photo": "mrfish.webp"
+    },
+    {
+      "id": "army_vr",
+      "name": "Army VR",
+      "role": "Modeler",
+      "description": "Part of the original 3 creators of bark, made the player model and a lot more!",
+      "avatarClass": "",
+      "photo": "media/1780377010751-564644f26b9af0d5ed9dcf5851c7e545.png"
     }
   ],
   "games": [
@@ -83,8 +91,6 @@
       "name": "Bark Official Trading Cards! (Edition 1)",
       "priceUSD": 10,
       "url": "https://www.ebay.com/itm/800106781971",
-      "isNew": true,
-      "isLimited": true,
       "soldOut": false,
       "image": "media/1780376563369-IMG_8583.png"
     }
