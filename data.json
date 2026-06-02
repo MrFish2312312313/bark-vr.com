@@ -91,6 +91,25 @@
           "text": "This game is actually a w, So good am I right"
         }
       ]
+    },
+    {
+      "id": "parakeet_park",
+      "name": "Parakeet Park",
+      "tag": "Hangout",
+      "tagline": "SNOWMEN, ASSEMBLE!",
+      "shortDesc": "Snow has fallen down in Parakeet Park! Hop on down and chill out with your friends! Vibe to the music, Dance with the parakeets around the town that grows almost every update! Stay warm out there!",
+      "fullDesc": "Snow has fallen down in Parakeet Park! Hop on down and chill out with up to 19 your friends! Vibe to the holiday music, Go ice skating in the middle of the town, Dance with the parakeets around the town that grows almost every update! The world is ever changing, and you'll be able to meet new NPCs throughout the town! Stay warm out there, for it is chilly!",
+      "downloadUrl": "https://www.meta.com/en-gb/experiences/parakeet-park/25353334134260403/",
+      "downloadLabel": "STORE",
+      "morePlatforms": "None lol",
+      "screenshot": "media/1780416056532-IMG_8311.png",
+      "reviews": [
+        {
+          "stars": 5,
+          "author": "Treanor67",
+          "text": "IS good"
+        }
+      ]
     }
   ],
   "store": [
