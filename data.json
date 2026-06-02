@@ -284,6 +284,13 @@
         "description": "\"Move it up, move it up, it's a breach\"",
         "image": "media/1780425759110-SampleScene_Custom..._02.06.2026_13-10-04.png",
         "effect": "Grants access to Songs City Walls, and The Contract by Twenty One Pilots"
+      },
+      {
+        "id": "rat-world-ost-1",
+        "name": "Rat World OST.1",
+        "description": "\"Rat Rat Rat Rat Rat Rat\"",
+        "image": "media/1780426394438-SampleScene_Custom..._02.06.2026_13-52-05.png",
+        "effect": "Grants access to songs Eternity, Coin Snatcher, S*icide, and Fancy Rats"
       }
     ],
     "cosmetics": [],
