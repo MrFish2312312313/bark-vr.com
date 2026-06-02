@@ -375,6 +375,13 @@
         "description": "For Moderators Only",
         "image": "media/1780429675491-SampleScene_Custom..._02.06.2026_14-47-21.png",
         "effect": "Show's proof of being a mod"
+      },
+      {
+        "id": "no-phun-intended",
+        "name": "No Phun Intended",
+        "description": "\"Fast food greasy taco i love\"",
+        "image": "media/1780430096091-SampleScene_Custom..._02.06.2026_14-53-26.png",
+        "effect": "Grants access to songs Hole In The Ground, and Taco Bell Saga by Tyler Joseph (Twenty One Pilots lead singer)"
       }
     ],
     "cosmetics": [],
