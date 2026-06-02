@@ -215,6 +215,13 @@
         "description": "\"Come on mom, just one more game?\"",
         "image": "media/1780419706259-SampleScene_Custom..._02.06.2026_12-00-54.png",
         "effect": "Let's you spy on the Electric Arcade"
+      },
+      {
+        "id": "baseball-bat",
+        "name": "Baseball Bat",
+        "description": "*bonk*",
+        "image": "media/1780419806538-SampleScene_Custom..._02.06.2026_12-02-31.png",
+        "effect": "Let's you fling other players."
       }
     ],
     "cosmetics": [],
