@@ -110,6 +110,19 @@
           "text": "IS good"
         }
       ]
+    },
+    {
+      "id": "the_testevator",
+      "name": "The Testevator",
+      "tag": "Platformer • Action • Adventure",
+      "tagline": "\"What room am In again?\"",
+      "shortDesc": "Explore rooms using a magic elevator, Find hidden easter eggs, Get weirdly confused by dancing frogs, And have fun!",
+      "fullDesc": "Explore rooms using a magic elevator, Find hidden easter eggs, Get weirdly confused by dancing frogs,  Customize your body,  Laugh at strange things, And have fun!",
+      "downloadUrl": "",
+      "downloadLabel": "META QUEST",
+      "morePlatforms": "None lol",
+      "screenshot": "media/1780418968871-IMG_8377.png",
+      "reviews": []
     }
   ],
   "store": [
@@ -139,12 +152,6 @@
     "easter": {
       "cannotGet": true
     }
-  },
-  "database": {
-    "items": [],
-    "cosmetics": [],
-    "maps": [],
-    "npcs": []
   },
   "slotDuration": 300,
   "seasons": [
