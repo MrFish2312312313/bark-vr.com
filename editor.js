@@ -32,11 +32,8 @@ const ALLOWED_EMAILS = [
   'portergrahamrussell@icloud.com',
   'barkvrofficial@gmail.com',
   'mrfeesh456@gmail.com',
-<<<<<<< HEAD
   'bumstronaut52@gmail.com',
   'job.elliot.mason@gmail.com',
-=======
->>>>>>> parent of 08b4e5a (dfvfedbvfged)
 ];
 
 const REPO_OWNER  = 'MrFish2312312313';
