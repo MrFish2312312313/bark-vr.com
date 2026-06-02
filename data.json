@@ -264,6 +264,13 @@
         "description": "\"My name's Blurryface an i care what you think\"",
         "image": "media/1780421363611-SampleScene_Custom..._02.06.2026_12-28-23.png",
         "effect": "Grants access to Songs Stressed out and Message Man by Twenty One Pilots"
+      },
+      {
+        "id": "breach",
+        "name": "Breach",
+        "description": "\"Move it up, move it up, it's a breach\"",
+        "image": "media/1780425759110-SampleScene_Custom..._02.06.2026_13-10-04.png",
+        "effect": "Grants access to Songs City Walls, and The Contract by Twenty One Pilots"
       }
     ],
     "cosmetics": [],
