@@ -112,7 +112,7 @@ function renderTeam(container) {
   team.forEach((m, i) => {
     const card = document.createElement('a');
     card.className = 'team-card team-card-link';
-    card.href = `team.html?id=${encodeURIComponent(m.id)}`;
+    card.href = `/team?id=${encodeURIComponent(m.id)}`;
     card.innerHTML = `
       <div class="team-avatar ${m.avatarClass || ''}">
         <img src="${escapeAttr(m.photo)}" alt="${escapeAttr(m.name)}" />
@@ -154,7 +154,7 @@ function renderGamesTeaser(container) {
         <p>${escapeHtml(g.shortDesc || '')}</p>
         <div class="game-links">
           <a href="${escapeAttr(g.downloadUrl)}" target="_blank" class="btn-primary">Download on ${escapeHtml(g.downloadLabel || 'Store')}</a>
-          <a href="games.html#${escapeAttr(g.id)}" class="btn-ghost">View Details →</a>
+          <a href="/games#${escapeAttr(g.id)}" class="btn-ghost">View Details →</a>
         </div>
       </div>
       <div class="game-card-visual">
@@ -235,7 +235,7 @@ function renderTeamMember(container) {
       <div class="container">
         <p class="section-label">// NOT FOUND</p>
         <h2 class="section-title">Member not found</h2>
-        <a href="index.html#about" class="btn-secondary">← Back to team</a>
+        <a href="/#about" class="btn-secondary">← Back to team</a>
       </div>`;
     return;
   }
@@ -245,7 +245,7 @@ function renderTeamMember(container) {
 
   container.innerHTML = `
     <div class="container member-detail">
-      <a href="index.html#about" class="back-link">← BACK TO TEAM</a>
+      <a href="/#about" class="back-link">← BACK TO TEAM</a>
       <div class="member-detail-inner">
         <div class="member-photo ${m.avatarClass || ''}">
           <img src="${escapeAttr(m.photo)}" alt="${escapeAttr(m.name)}" />
@@ -1859,7 +1859,7 @@ function deleteTeam(index) {
   BarkEditor.data.team.splice(index, 1);
   BarkEditor.dirty = true;
   if (location.pathname.endsWith('team.html')) {
-    location.href = 'index.html#about';
+    location.href = '/#about';
   } else {
     rerenderPage();
   }
