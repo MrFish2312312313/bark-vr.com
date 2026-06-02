@@ -41,9 +41,24 @@ const DATA_PATH   = 'data.json';
 const MEDIA_DIR   = 'media';
 
 // ─── Bark backend (Discord-bot link server) ────────────────────────────────
-// IMPORTANT: must be HTTPS or browsers will block requests from bark-vr.com.
-// Use Cloudflare Tunnel / ngrok / a hosted deploy to put your backend on HTTPS.
-const BARK_BACKEND_URL = 'https://procurement-boxes-euros-diary.trycloudflare.com';
+// The bark-manager auto-publishes the current Cloudflare Tunnel URL into
+// backend-url.json (and git-pushes it). We fetch that file dynamically here
+// so the site always has the latest URL without manual edits.
+let BARK_BACKEND_URL = '';
+
+async function loadBackendUrl() {
+  try {
+    const r = await fetch('backend-url.json?t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    if (j && j.backendUrl) {
+      BARK_BACKEND_URL = String(j.backendUrl).replace(/\/$/, '');
+    }
+  } catch (e) {
+    console.warn('[bark] Could not load backend-url.json:', e.message);
+  }
+  return BARK_BACKEND_URL;
+}
 
 // ----------------------------------------------------------
 //  STATE
@@ -674,6 +689,8 @@ async function loadPlayers(force) {
   const meta = document.getElementById('playersMeta');
   if (meta) meta.textContent = 'Loading from backend…';
   try {
+    if (!BARK_BACKEND_URL) await loadBackendUrl();
+    if (!BARK_BACKEND_URL) throw new Error('NO_URL_FILE');
     const url = `${BARK_BACKEND_URL}/linked-profiles${force ? '?fresh=1' : ''}`;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Backend returned ${res.status}`);
@@ -682,8 +699,14 @@ async function loadPlayers(force) {
     BarkPlayers.loaded = true;
   } catch (e) {
     BarkPlayers.list = null;
-    if (meta) meta.innerHTML = `Could not reach the backend at <code>${escapeHtml(BARK_BACKEND_URL)}</code>.<br>
-      Make sure (1) the backend is running, (2) it's reachable over HTTPS, and (3) <code>BARK_BACKEND_URL</code> in editor.js points at it.`;
+    if (meta) {
+      if (e.message === 'NO_URL_FILE') {
+        meta.innerHTML = `Couldn't find <code>backend-url.json</code>. Start the <strong>Cloudflare Tunnel</strong> in bark-manager — it auto-publishes the URL when it starts.`;
+      } else {
+        meta.innerHTML = `Backend unreachable at <code>${escapeHtml(BARK_BACKEND_URL || '(no URL yet)')}</code>.<br>
+          Make sure (1) the backend is running, (2) the tunnel is running, and (3) the URL in <code>backend-url.json</code> matches the tunnel.`;
+      }
+    }
     console.warn('[players] load failed:', e);
   } finally {
     BarkPlayers.loading = false;
@@ -1633,7 +1656,7 @@ window.clearPat = clearPat;
 // ----------------------------------------------------------
 async function bootEditor() {
   try {
-    await loadData();
+    await Promise.all([loadData(), loadBackendUrl()]);
   } catch (e) {
     console.error(e);
     return;
