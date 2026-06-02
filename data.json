@@ -340,6 +340,13 @@
         "description": "Phil's Goblin Cousin",
         "image": "media/1780428522832-SampleScene_Custom..._02.06.2026_14-28-02.png",
         "effect": "Chills, helps you cheat in blinko"
+      },
+      {
+        "id": "hudson-s-bird",
+        "name": "Hudson's Bird",
+        "description": "Based off a drawing from a kid that goes to Bumstronaut's school",
+        "image": "media/1780428631452-SampleScene_Custom..._02.06.2026_14-29-31.png",
+        "effect": "Stares into your soul."
       }
     ],
     "cosmetics": [],
