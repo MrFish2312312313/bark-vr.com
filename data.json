@@ -222,6 +222,13 @@
         "description": "*bonk*",
         "image": "media/1780419806538-SampleScene_Custom..._02.06.2026_12-02-31.png",
         "effect": "Let's you fling other players."
+      },
+      {
+        "id": "toy-hammer",
+        "name": "Toy Hammer",
+        "description": "*wham*",
+        "image": "media/1780419931413-SampleScene_Custom..._02.06.2026_12-04-50.png",
+        "effect": "Flings other players with extra power"
       }
     ],
     "cosmetics": [],
