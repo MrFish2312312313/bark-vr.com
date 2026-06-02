@@ -1744,11 +1744,27 @@ body.editing .wood-card-cantget { pointer-events: auto; }
 .wood-rarity-dangboi   .wood-card-count-num { color: #d0d0d0; }
 .wood-rarity-dangboi   .wood-card-rarity    { color: #888; }
 
-/* When a rarity is set, the fancy magenta background is suppressed so the
-   rarity color dominates */
+/* When a rarity is set, the fancy magenta background AND magenta hover
+   border are both suppressed so the rarity color owns the look. The fancy
+   star also picks up the rarity color so it matches. */
 .wood-card.wood-card-fancy[class*="wood-rarity-"] {
   background: var(--card-bg);
 }
+.wood-card-fancy[class*="wood-rarity-"]:hover { /* keep rarity color on hover */
+  filter: brightness(1.05);
+}
+.wood-rarity-uncommon  .wood-fancy-star { color: #6ee07a; }
+.wood-rarity-epic      .wood-fancy-star { color: #c97bff; }
+.wood-rarity-legendary .wood-fancy-star { color: #ffd24a; }
+.wood-rarity-exotic    .wood-fancy-star { color: #7ec8ff; }
+.wood-rarity-dangboi   .wood-fancy-star { color: #b0b0b0; }
+
+/* Higher specificity than .wood-card-fancy:hover so the rarity border sticks */
+.wood-card-fancy.wood-rarity-uncommon:hover  { border-color: #6ee07a; }
+.wood-card-fancy.wood-rarity-epic:hover      { border-color: #c97bff; }
+.wood-card-fancy.wood-rarity-legendary:hover { border-color: #ffd24a; }
+.wood-card-fancy.wood-rarity-exotic:hover    { border-color: #7ec8ff; }
+.wood-card-fancy.wood-rarity-dangboi:hover   { border-color: #666; }
 .wood-card-head {
   display: flex;
   justify-content: space-between;
