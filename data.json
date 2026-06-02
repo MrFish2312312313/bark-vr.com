@@ -110,19 +110,6 @@
           "text": "IS good"
         }
       ]
-    },
-    {
-      "id": "the_testevator",
-      "name": "The Testevator",
-      "tag": "Platformer • Action • Adventure",
-      "tagline": "\"What room am In again?\"",
-      "shortDesc": "Explore rooms using a magic elevator, Find hidden easter eggs, Get weirdly confused by dancing frogs, And have fun!",
-      "fullDesc": "Explore rooms using a magic elevator, Find hidden easter eggs, Get weirdly confused by dancing frogs,  Customize your body,  Laugh at strange things, And have fun!",
-      "downloadUrl": "",
-      "downloadLabel": "META QUEST",
-      "morePlatforms": "None lol",
-      "screenshot": "media/1780418968871-IMG_8377.png",
-      "reviews": []
     }
   ],
   "store": [
@@ -144,14 +131,80 @@
   },
   "woodOverrides": {
     "Bean": {
-      "cannotGet": true
+      "cannotGet": true,
+      "rarity": "uncommon",
+      "image": "media/1780419379707-IMG_8514.png"
     },
     "easter special": {
       "cannotGet": true
     },
     "easter": {
-      "cannotGet": true
+      "cannotGet": true,
+      "rarity": "uncommon",
+      "image": "media/1780419288506-screen.png"
+    },
+    "Rust": {
+      "rarity": "legendary",
+      "image": "media/1780419024063-texture_diffuse_1.png"
+    },
+    "Ghost": {
+      "rarity": "legendary",
+      "image": "media/1780419087180-White-Square-PNG-Pic.png"
+    },
+    "Plank": {
+      "image": "media/1780419108412-wood.png"
+    },
+    "Birch": {
+      "image": "media/1780419117880-birch.png"
+    },
+    "Oak": {
+      "image": "media/1780419130715-treebark.png"
+    },
+    "Mangrove": {
+      "image": "media/1780419152274-mangrove.png"
+    },
+    "Dark Oak": {
+      "rarity": "uncommon",
+      "image": "media/1780419165245-dark_oak.png"
+    },
+    "OGOG": {
+      "rarity": "exotic",
+      "image": "media/1780419191921-og_wood.png"
+    },
+    "Rock": {
+      "rarity": "epic",
+      "image": "media/1780419204820-brickwerl.png"
+    },
+    "Nugget": {
+      "rarity": "exotic",
+      "image": "media/1780419217343-nugget_2.png"
+    },
+    "Realistic": {
+      "rarity": "exotic",
+      "image": "media/1780419234288-dark_bark.png"
+    },
+    "glow": {
+      "rarity": "dangboi",
+      "image": "media/1780419269529-neon-green.png"
+    },
+    "palm": {
+      "rarity": "uncommon",
+      "image": "media/1780419325018-palm_tree_bark_1.png"
+    },
+    "carpet": {
+      "rarity": "epic",
+      "image": "media/1780419359004-Untitled_design__2_.png"
+    },
+    "Jungle": {
+      "rarity": "uncommon",
+      "image": "media/1780419445048-jungle.png"
     }
+  },
+  "database": {
+    "items": [],
+    "cosmetics": [],
+    "maps": [],
+    "npcs": []
   },
   "slotDuration": 300,
   "seasons": [
