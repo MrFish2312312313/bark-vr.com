@@ -333,6 +333,13 @@
         "description": "\"Wait, this isn't a real album???\"",
         "image": "media/1780428414063-SampleScene_Custom..._02.06.2026_14-24-50.png",
         "effect": "Grant's access to songs Time To Say Goodbye, and Drag Path (Breach Digital Remains) by Twenty One Pilots"
+      },
+      {
+        "id": "greg",
+        "name": "Greg",
+        "description": "Phil's Goblin Cousin",
+        "image": "media/1780428522832-SampleScene_Custom..._02.06.2026_14-28-02.png",
+        "effect": "Chills, helps you cheat in blinko"
       }
     ],
     "cosmetics": [],
