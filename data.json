@@ -347,6 +347,13 @@
         "description": "Based off a drawing from a kid that goes to Bumstronaut's school",
         "image": "media/1780428631452-SampleScene_Custom..._02.06.2026_14-29-31.png",
         "effect": "Stares into your soul."
+      },
+      {
+        "id": "kevin",
+        "name": "Kevin",
+        "description": "Suggested by JJTERRYVR, he a borb.",
+        "image": "media/1780428768531-SampleScene_Custom..._02.06.2026_14-31-39.png",
+        "effect": "Is very fun to use as a bowling ball or chuck into tornados"
       }
     ],
     "cosmetics": [],
