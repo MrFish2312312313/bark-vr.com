@@ -1313,10 +1313,19 @@ body.editing {
   opacity: 0.85;
 }
 .store-card.sold-out .store-card-price { color: var(--text-muted); }
-.sold-out-badge {
+
+/* Stacked badges on cards (NEW / LIMITED / SOLD OUT) */
+.store-badges {
   position: absolute;
   top: 12px; left: 12px;
-  background: var(--accent2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  filter: none;
+}
+.badge {
+  display: inline-block;
   color: #fff;
   font-weight: 700;
   font-size: 0.7rem;
@@ -1324,7 +1333,56 @@ body.editing {
   padding: 6px 12px;
   border-radius: 4px;
   text-transform: uppercase;
-  filter: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.badge-new       { background: var(--accent);  color: #000; }
+.badge-limited   { background: linear-gradient(135deg, #ff3cac, #ff7eb6); }
+.badge-soldout   { background: var(--accent2); }
+
+/* Filter bar */
+.store-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.store-filter-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.store-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.store-filter-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+.store-filter-count {
+  background: rgba(0,0,0,0.25);
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.store-filter-btn.active .store-filter-count {
+  background: rgba(0,0,0,0.35);
 }
 
 /* Re-enable edit overlays on sold-out cards for editors */

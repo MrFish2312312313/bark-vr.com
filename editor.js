@@ -249,7 +249,7 @@ function editControls(kind, index) {
 // ----------------------------------------------------------
 async function renderStore(container) {
   if (!container) return;
-  const items = (BarkEditor.data.store) || [];
+  const allItems = (BarkEditor.data.store) || [];
   container.innerHTML = '';
 
   // Localized currency banner
@@ -261,7 +261,49 @@ async function renderStore(container) {
       : `Prices shown in ${currency} (converted from USD at ~${rate.toFixed(2)}).`;
   }
 
-  if (items.length === 0 && !BarkEditor.editing) {
+  // Build / refresh filter bar (rendered into a sibling element if present)
+  const filterBar = document.getElementById('storeFilterBar');
+  if (filterBar) {
+    const current = BarkEditor.storeFilter || 'all';
+    const counts = {
+      all: allItems.length,
+      new: allItems.filter(i => i.isNew).length,
+      limited: allItems.filter(i => i.isLimited).length,
+      instock: allItems.filter(i => !i.soldOut).length,
+      soldout: allItems.filter(i => i.soldOut).length,
+    };
+    filterBar.innerHTML = `
+      ${[
+        ['all', 'All'],
+        ['new', 'New'],
+        ['limited', 'Limited'],
+        ['instock', 'In Stock'],
+        ['soldout', 'Sold Out'],
+      ].map(([key, label]) => `
+        <button type="button" class="store-filter-btn ${current === key ? 'active' : ''}" data-filter="${key}">
+          ${label}<span class="store-filter-count">${counts[key]}</span>
+        </button>
+      `).join('')}
+    `;
+    filterBar.querySelectorAll('.store-filter-btn').forEach(btn => {
+      btn.onclick = () => {
+        BarkEditor.storeFilter = btn.dataset.filter;
+        rerenderPage();
+      };
+    });
+  }
+
+  // Apply filter
+  const filter = BarkEditor.storeFilter || 'all';
+  const items = allItems.filter(it => {
+    if (filter === 'new')     return !!it.isNew;
+    if (filter === 'limited') return !!it.isLimited;
+    if (filter === 'instock') return !it.soldOut;
+    if (filter === 'soldout') return !!it.soldOut;
+    return true;
+  });
+
+  if (allItems.length === 0 && !BarkEditor.editing) {
     container.innerHTML = `
       <div class="store-empty">
         <p class="section-label">// COMING SOON</p>
@@ -269,9 +311,17 @@ async function renderStore(container) {
         <p>Check back soon — we're cooking up merch.</p>
       </div>
     `;
+  } else if (allItems.length > 0 && items.length === 0) {
+    container.innerHTML = `
+      <div class="store-empty">
+        <h3>No items match this filter.</h3>
+        <p>Try a different category.</p>
+      </div>
+    `;
   }
 
-  items.forEach((it, i) => {
+  items.forEach((it) => {
+    const i = allItems.indexOf(it); // editor index in the underlying array
     const soldOut = !!it.soldOut;
     const price = formatLocalPrice(it.priceUSD, currency, rate);
 
@@ -285,7 +335,11 @@ async function renderStore(container) {
     card.innerHTML = `
       <div class="store-card-img-wrap">
         <img src="${escapeAttr(it.image || '')}" alt="${escapeAttr(it.name)}" class="store-card-img" />
-        ${soldOut ? `<div class="sold-out-badge">SOLD OUT</div>` : ''}
+        <div class="store-badges">
+          ${it.isNew     ? `<span class="badge badge-new">NEW</span>`         : ''}
+          ${it.isLimited ? `<span class="badge badge-limited">LIMITED</span>` : ''}
+          ${soldOut      ? `<span class="badge badge-soldout">SOLD OUT</span>`: ''}
+        </div>
       </div>
       <div class="store-card-body">
         <h3 class="store-card-name">${escapeHtml(it.name)}</h3>
@@ -442,6 +496,7 @@ function updateEditorBar() {
 function toggleEdit() {
   BarkEditor.editing = !BarkEditor.editing;
   document.body.classList.toggle('editing', BarkEditor.editing);
+  localStorage.setItem('bark.editing', BarkEditor.editing ? '1' : '0');
   rerenderPage();
 }
 
@@ -489,6 +544,7 @@ function signOut() {
   BarkEditor.editing = false;
   document.body.classList.remove('editing');
   localStorage.removeItem('bark.user');
+  localStorage.removeItem('bark.editing');
   if (window.google && google.accounts && google.accounts.id) {
     google.accounts.id.disableAutoSelect();
   }
@@ -829,12 +885,12 @@ function deleteGame(index) {
 // ----------------------------------------------------------
 function openStoreModal(index) {
   if (!BarkEditor.data.store) BarkEditor.data.store = [];
-  const isNew = index === null || index === undefined;
-  const it = isNew
-    ? { id: '', name: '', priceUSD: 0, image: '', url: '', soldOut: false }
+  const isCreating = index === null || index === undefined;
+  const it = isCreating
+    ? { id: '', name: '', priceUSD: 0, image: '', url: '', soldOut: false, isNew: true, isLimited: false }
     : { ...BarkEditor.data.store[index] };
 
-  showModal(`${isNew ? 'Add' : 'Edit'} Store Item`, `
+  showModal(`${isCreating ? 'Add' : 'Edit'} Store Item`, `
     <label>Item image</label>
     <div class="img-row">
       <img id="modalItemPreview" src="${escapeAttr(it.image || '')}" class="img-preview" onerror="this.style.visibility='hidden'" />
@@ -850,9 +906,18 @@ function openStoreModal(index) {
     <label>Click-through URL (where buyers go)</label>
     <input id="modalItemUrl" value="${escapeAttr(it.url || '')}" placeholder="https://your-store.com/product/..." />
 
+    <label>Tags / Status</label>
+    <label class="checkbox-row">
+      <input type="checkbox" id="modalItemNew" ${it.isNew ? 'checked' : ''} />
+      <span><strong>NEW</strong> — shows a cyan "NEW" badge on the card</span>
+    </label>
+    <label class="checkbox-row">
+      <input type="checkbox" id="modalItemLimited" ${it.isLimited ? 'checked' : ''} />
+      <span><strong>LIMITED</strong> — shows a pink "LIMITED" badge on the card</span>
+    </label>
     <label class="checkbox-row">
       <input type="checkbox" id="modalItemSoldOut" ${it.soldOut ? 'checked' : ''} />
-      <span>Sold out (item still shown, but greyed out and unclickable)</span>
+      <span><strong>SOLD OUT</strong> — item still shown but greyed out and unclickable</span>
     </label>
 
     <label>URL slug (optional)</label>
@@ -863,6 +928,8 @@ function openStoreModal(index) {
       name: document.getElementById('modalItemName').value.trim(),
       priceUSD: parseFloat(document.getElementById('modalItemPrice').value) || 0,
       url: document.getElementById('modalItemUrl').value.trim(),
+      isNew: document.getElementById('modalItemNew').checked,
+      isLimited: document.getElementById('modalItemLimited').checked,
       soldOut: document.getElementById('modalItemSoldOut').checked,
       image: it.image || '',
     };
@@ -879,8 +946,8 @@ function openStoreModal(index) {
       hideSpinner();
     }
 
-    if (isNew) BarkEditor.data.store.push(updated);
-    else      BarkEditor.data.store[index] = updated;
+    if (isCreating) BarkEditor.data.store.push(updated);
+    else            BarkEditor.data.store[index] = updated;
     BarkEditor.dirty = true;
     rerenderPage();
     return true;
@@ -1006,6 +1073,13 @@ async function bootEditor() {
   const stored = localStorage.getItem('bark.user');
   if (stored) {
     try { BarkEditor.user = JSON.parse(stored); } catch {}
+  }
+
+  // Restore edit-mode state across navigation
+  if (BarkEditor.user && isAllowed(BarkEditor.user.email)
+      && localStorage.getItem('bark.editing') === '1') {
+    BarkEditor.editing = true;
+    document.body.classList.add('editing');
   }
 
   buildEditorBar();
