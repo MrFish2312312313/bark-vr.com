@@ -2144,6 +2144,121 @@ body.editing .wood-card-cantget { pointer-events: auto; }
   .player-detail-img { width: 100%; max-width: 280px; height: auto; aspect-ratio: 1; }
 }
 
+/* ============================
+   SECRET WAFFLE — hidden editor trigger 🧇
+   ============================ */
+.secret-waffle {
+  position: fixed;
+  bottom: 14px;
+  left: 14px;
+  z-index: 150;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.18);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(1) brightness(0.5);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.25s, background 0.25s, color 0.25s;
+  -webkit-tap-highlight-color: transparent;
+}
+.secret-waffle:hover {
+  background: rgba(255,255,255,0.08);
+  filter: grayscale(0.6) brightness(0.8);
+}
+.secret-waffle:active { filter: grayscale(0) brightness(1); }
+.secret-waffle-firing {
+  filter: grayscale(0) brightness(1) drop-shadow(0 0 12px var(--accent)) !important;
+  background: rgba(0,229,255,0.2) !important;
+  animation: waffleFire 0.5s ease-out;
+}
+@keyframes waffleFire {
+  0%   { transform: scale(1)   rotate(0deg); }
+  50%  { transform: scale(1.5) rotate(720deg); }
+  100% { transform: scale(0)   rotate(1440deg); opacity: 0; }
+}
+
+/* ============================
+   MOBILE EDITOR MODE
+   ============================ */
+@media (max-width: 720px) {
+  .editor-bar-inner {
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .editor-status {
+    font-size: 0.74rem;
+    text-align: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .editor-status strong {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  .editor-actions { justify-content: center; gap: 6px; }
+  .editor-actions .btn-primary,
+  .editor-actions .btn-secondary,
+  .editor-actions .btn-ghost {
+    padding: 9px 12px;
+    font-size: 0.72rem;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+  body.has-editor-bar { padding-bottom: 96px; }
+
+  .bark-modal { padding: 0; }
+  .bark-modal-card {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .bark-modal-head { padding: 14px 18px; }
+  .bark-modal-head h3 { font-size: 1.3rem; }
+  .bark-modal-body { padding: 16px 18px; }
+  .bark-modal-foot { padding: 12px 18px; }
+  .bark-modal-foot .btn-primary,
+  .bark-modal-foot .btn-ghost {
+    padding: 12px 18px;
+    font-size: 0.85rem;
+  }
+
+  .edit-btn {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    min-width: 40px;
+  }
+
+  body.editing .inline-editable {
+    outline-style: solid;
+    outline-color: rgba(0,229,255,0.5);
+  }
+  body.editing .inline-editable:active {
+    background: rgba(0,229,255,0.12);
+  }
+
+  .review-edit-row { grid-template-columns: 1fr; }
+  .player-detail-head { grid-template-columns: 1fr; }
+  .store-filter-bar { justify-content: flex-start; }
+}
+
 /* Spinner overlay */
 .bark-spinner {
   position: fixed;
