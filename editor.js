@@ -473,6 +473,97 @@ function formatDuration(ms) {
   return `${s}s`;
 }
 
+// ----------------------------------------------------------
+//  SITE TEXT — inline-editable text overrides
+//  Any element with data-text-key="..." can be edited inline
+//  when an editor is in Edit Mode. Defaults come from the HTML.
+//  Stored in data.siteText[key]. Empty = use the HTML default.
+// ----------------------------------------------------------
+function getText(key) {
+  const stored = BarkEditor.data.siteText && BarkEditor.data.siteText[key];
+  return (stored != null && stored !== '') ? stored : null;
+}
+
+// Walk the DOM and overwrite [data-text-key] elements with saved overrides.
+// Captures the HTML's default on first run so we can restore / list it later.
+function applyTextOverrides() {
+  document.querySelectorAll('[data-text-key]').forEach(el => {
+    const key   = el.dataset.textKey;
+    const isHtml = el.dataset.textHtml === '1';
+    // remember the default once
+    if (el.dataset.defaultText == null) {
+      el.dataset.defaultText = isHtml ? el.innerHTML.trim() : el.textContent.trim();
+    }
+    const override = getText(key);
+    const value = override != null ? override : el.dataset.defaultText;
+    if (isHtml) el.innerHTML  = value;
+    else        el.textContent = value;
+  });
+  // Wire up inline editing if in edit mode
+  if (BarkEditor.editing) enableInlineEditing();
+  else                    disableInlineEditing();
+}
+
+function enableInlineEditing() {
+  document.querySelectorAll('[data-text-key]').forEach(el => {
+    if (el.dataset.inlineWired === '1') return;
+    el.dataset.inlineWired = '1';
+    el.classList.add('inline-editable');
+    el.setAttribute('contenteditable', 'plaintext-only');
+    el.addEventListener('focus',  onInlineFocus);
+    el.addEventListener('blur',   onInlineBlur);
+    el.addEventListener('keydown', onInlineKey);
+  });
+}
+
+function disableInlineEditing() {
+  document.querySelectorAll('[data-text-key]').forEach(el => {
+    if (el.dataset.inlineWired !== '1') return;
+    el.dataset.inlineWired = '0';
+    el.classList.remove('inline-editable');
+    el.removeAttribute('contenteditable');
+    el.removeEventListener('focus',  onInlineFocus);
+    el.removeEventListener('blur',   onInlineBlur);
+    el.removeEventListener('keydown', onInlineKey);
+  });
+}
+
+function onInlineFocus(e) {
+  e.currentTarget.classList.add('inline-editing');
+}
+function onInlineBlur(e) {
+  const el  = e.currentTarget;
+  el.classList.remove('inline-editing');
+  const key = el.dataset.textKey;
+  const isHtml = el.dataset.textHtml === '1';
+  const newVal = (isHtml ? el.innerHTML : el.textContent).trim();
+  const def    = (el.dataset.defaultText || '').trim();
+  if (!BarkEditor.data.siteText) BarkEditor.data.siteText = {};
+  if (newVal === def) {
+    delete BarkEditor.data.siteText[key]; // back to default → drop the override
+  } else {
+    BarkEditor.data.siteText[key] = newVal;
+  }
+  BarkEditor.dirty = true;
+  updateEditorBar();
+}
+function onInlineKey(e) {
+  // Esc cancels, Enter blurs (commits)
+  if (e.key === 'Escape') {
+    const el = e.currentTarget;
+    const key = el.dataset.textKey;
+    const isHtml = el.dataset.textHtml === '1';
+    const override = getText(key);
+    const value = override != null ? override : el.dataset.defaultText;
+    if (isHtml) el.innerHTML  = value;
+    else        el.textContent = value;
+    el.blur();
+  } else if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    e.currentTarget.blur();
+  }
+}
+
 function renderExtras() {
   const seasonCard = document.getElementById('seasonCard');
   if (!seasonCard) return; // not on extras page
@@ -559,6 +650,7 @@ function rerenderPage() {
   renderStore(document.querySelector('.store-page-target'));
   renderExtras();
   startExtrasTick();
+  applyTextOverrides();
   updateEditorBar();
 }
 
@@ -617,6 +709,7 @@ function updateEditorBar() {
   txt.innerHTML = `<strong>${escapeHtml(BarkEditor.user.email)}</strong> ${BarkEditor.editing ? '· EDITING' : '· viewing'}${BarkEditor.dirty ? ' · <em>unsaved</em>' : ''}`;
   actions.innerHTML = `
     <button class="btn-secondary" id="toggleEditBtn">${BarkEditor.editing ? 'Stop Editing' : '✎ Edit Mode'}</button>
+    ${BarkEditor.editing ? `<button class="btn-ghost" id="siteTextBtn">📝 Site Text</button>` : ''}
     ${BarkEditor.dirty ? `<button class="btn-primary" id="saveBtn">💾 Save & Publish</button>` : ''}
     <button class="btn-ghost" id="signOutBtn">Sign out</button>
   `;
@@ -624,7 +717,66 @@ function updateEditorBar() {
   document.getElementById('signOutBtn').onclick = signOut;
   const saveBtn = document.getElementById('saveBtn');
   if (saveBtn) saveBtn.onclick = saveToGitHub;
+  const siteTextBtn = document.getElementById('siteTextBtn');
+  if (siteTextBtn) siteTextBtn.onclick = openSiteTextModal;
 }
+
+// ----------------------------------------------------------
+//  MODAL — SITE TEXT (edit any text label on the site)
+// ----------------------------------------------------------
+function openSiteTextModal() {
+  if (!BarkEditor.data.siteText) BarkEditor.data.siteText = {};
+  const current = BarkEditor.data.siteText;
+
+  // Auto-discover every editable text on this page
+  const fields = [];
+  document.querySelectorAll('[data-text-key]').forEach(el => {
+    const key = el.dataset.textKey;
+    if (fields.find(f => f.key === key)) return; // dedupe
+    const def = el.dataset.defaultText || el.textContent.trim();
+    const longish = def.length > 60 || el.dataset.textHtml === '1';
+    fields.push({ key, label: prettifyKey(key), default: def, multiline: longish });
+  });
+  fields.sort((a, b) => a.label.localeCompare(b.label));
+
+  if (!fields.length) {
+    alert('No editable text on this page. You can also click any text in Edit Mode to change it directly.');
+    return;
+  }
+
+  const body = `
+    <p class="modal-hint" style="margin-bottom:14px;">
+      Tip: you can also click any text on the page while in Edit Mode to change it directly.
+    </p>
+    ${fields.map((f, i) => `
+      <label>${escapeHtml(f.label)}</label>
+      ${f.multiline
+        ? `<textarea id="siteText_${i}" rows="3">${escapeHtml(current[f.key] != null ? current[f.key] : f.default)}</textarea>`
+        : `<input id="siteText_${i}" value="${escapeAttr(current[f.key] != null ? current[f.key] : f.default)}" />`}
+      <p class="modal-hint">Default: ${escapeHtml(f.default)}</p>
+    `).join('')}
+  `;
+
+  showModal('Edit Site Text', body, async () => {
+    fields.forEach((f, i) => {
+      const v = (document.getElementById('siteText_' + i).value || '').trim();
+      if (!v || v === f.default) delete BarkEditor.data.siteText[f.key];
+      else                        BarkEditor.data.siteText[f.key] = v;
+    });
+    BarkEditor.dirty = true;
+    rerenderPage();
+    return true;
+  });
+}
+
+function prettifyKey(key) {
+  return key
+    .replace(/[._-]/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+window.openSiteTextModal = openSiteTextModal;
 
 function toggleEdit() {
   BarkEditor.editing = !BarkEditor.editing;

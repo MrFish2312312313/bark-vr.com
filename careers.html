@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
@@ -39,56 +39,56 @@
       <div class="glow glow-2"></div>
     </div>
     <div class="page-hero-content">
-      <div class="section-label">// JOIN THE STUDIO</div>
-      <h1>JOIN THE TEAM</h1>
+      <div class="section-label" data-text-key="careers_hero_label">// JOIN THE STUDIO</div>
+      <h1 data-text-key="careers_hero_title">JOIN THE TEAM</h1>
     </div>
   </section>
 
   <section class="careers-section">
     <div class="container">
-      <div class="section-label">// CURRENT OPENINGS</div>
-      <h2 class="section-title">Open Roles</h2>
+      <div class="section-label" data-text-key="careers_openings_label">// CURRENT OPENINGS</div>
+      <h2 class="section-title" data-text-key="careers_openings_title">Open Roles</h2>
 
       <div class="roles-grid">
         <div class="role-card">
           <div class="role-icon">{ }</div>
-          <h3>Coder</h3>
+          <h3 data-text-key="careers_role_coder_title">Coder</h3>
           <ul class="requirements">
-            <li>Know C#</li>
-            <li>Understanding of PlayFab, Photon, and Gorilla Locomotion</li>
-            <li>Know how to work as a team with GitHub Desktop</li>
-            <li>Have a capable PC</li>
-            <li>Know how to use Unity</li>
+            <li data-text-key="careers_role_coder_req1">Know C#</li>
+            <li data-text-key="careers_role_coder_req2">Understanding of PlayFab, Photon, and Gorilla Locomotion</li>
+            <li data-text-key="careers_role_coder_req3">Know how to work as a team with GitHub Desktop</li>
+            <li data-text-key="careers_role_coder_req4">Have a capable PC</li>
+            <li data-text-key="careers_role_coder_req5">Know how to use Unity</li>
           </ul>
         </div>
         <div class="role-card">
           <div class="role-icon">♪</div>
-          <h3>Musician</h3>
+          <h3 data-text-key="careers_role_musician_title">Musician</h3>
           <ul class="requirements">
-            <li>Know how to make looping tracks &amp; rhythms</li>
-            <li>Able to make songs as needed — no putting things off</li>
-            <li>Open to creative direction and feedback</li>
-            <li>Have all software/hardware you need (your choice)</li>
+            <li data-text-key="careers_role_musician_req1">Know how to make looping tracks &amp; rhythms</li>
+            <li data-text-key="careers_role_musician_req2">Able to make songs as needed — no putting things off</li>
+            <li data-text-key="careers_role_musician_req3">Open to creative direction and feedback</li>
+            <li data-text-key="careers_role_musician_req4">Have all software/hardware you need (your choice)</li>
           </ul>
         </div>
         <div class="role-card">
           <div class="role-icon">◈</div>
-          <h3>Lead Art Director</h3>
+          <h3 data-text-key="careers_role_artist_title">Lead Art Director</h3>
           <ul class="requirements">
-            <li>Know how to use Blender efficiently</li>
-            <li>Able to make smooth, low-triangle models</li>
-            <li>Able to make drawings &amp; graphics</li>
-            <li>Have a capable PC to run Blender or other apps</li>
+            <li data-text-key="careers_role_artist_req1">Know how to use Blender efficiently</li>
+            <li data-text-key="careers_role_artist_req2">Able to make smooth, low-triangle models</li>
+            <li data-text-key="careers_role_artist_req3">Able to make drawings &amp; graphics</li>
+            <li data-text-key="careers_role_artist_req4">Have a capable PC to run Blender or other apps</li>
           </ul>
         </div>
       </div>
 
       <div class="volunteer-note">
-        <span>⚑</span> These are volunteer positions. By applying you agree you are not promised payment of any kind.
+        <span>⚑</span> <span data-text-key="careers_volunteer_note">These are volunteer positions. By applying you agree you are not promised payment of any kind.</span>
       </div>
 
       <div class="apply-form-wrap" id="apply">
-        <h2 class="section-title">Apply</h2>
+        <h2 class="section-title" data-text-key="careers_apply_title">Apply</h2>
         <form class="apply-form" id="applyForm" onsubmit="handleSubmit(event)">
           <div class="form-row">
             <div class="form-group">
@@ -178,12 +178,12 @@
         <a href="careers.html">Hiring</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
-      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+      <p class="footer-copy" data-text-key="footer_copy">© 2026 BARKVR. All rights reserved.</p>
     </div>
   </footer>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js"></script>
-  <script src="editor.js?v=5"></script>
+  <script src="editor.js?v=7"></script>
 </body>
 </html>

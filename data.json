@@ -105,6 +105,10 @@
       "image": "media/1780376563369-IMG_8583.png"
     }
   ],
+  "siteText": {
+    "extrasForecastTitle": "Next Few Weathers",
+    "extrasForecastDisclaimer": "Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page."
+  },
   "slotDuration": 300,
   "seasons": [
     { "id": "1", "displayName": "Spring",         "color": "#9ef745", "allowedWeatherIds": ["1","2","3","4","6"], "forceOnly": false },

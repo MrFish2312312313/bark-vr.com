@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
@@ -40,8 +40,8 @@
       <div class="glow glow-2"></div>
     </div>
     <div class="page-hero-content">
-      <div class="section-label">// LIVE IN-GAME</div>
-      <h1>EXTRAS</h1>
+      <div class="section-label" data-text-key="extras_hero_label">// LIVE IN-GAME</div>
+      <h1 data-text-key="extras_hero_title">EXTRAS</h1>
     </div>
   </section>
 
@@ -51,7 +51,7 @@
 
         <!-- SEASON CARD -->
         <div class="extras-card season-card" id="seasonCard">
-          <div class="section-label">// CURRENT SEASON</div>
+          <div class="section-label" data-text-key="extras_season_label">// CURRENT SEASON</div>
           <div class="season-display">
             <div class="season-color-dot" id="seasonDot"></div>
             <h2 id="seasonName">Loading…</h2>
@@ -61,7 +61,7 @@
 
         <!-- WEATHER CARD -->
         <div class="extras-card weather-card" id="weatherCard">
-          <div class="section-label">// CURRENT WEATHER</div>
+          <div class="section-label" data-text-key="extras_weather_label">// CURRENT WEATHER</div>
           <div class="weather-display">
             <div class="weather-initial" id="weatherInitial">--</div>
             <div class="weather-body">
@@ -75,12 +75,12 @@
 
       <!-- FORECAST -->
       <div class="forecast-block">
-        <div class="section-label">// FORECAST</div>
-        <h3 class="forecast-title">Next Few Hours</h3>
+        <div class="section-label" data-text-key="extras_forecast_label">// FORECAST</div>
+        <h3 class="forecast-title" id="forecastTitle" data-text-key="extras_forecast_title">Next Few Weathers</h3>
         <div class="forecast-row" id="forecastRow">
           <!-- generated -->
         </div>
-        <p class="forecast-disclaimer">Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page.</p>
+        <p class="forecast-disclaimer" data-text-key="extras_forecast_disclaimer">Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page.</p>
       </div>
 
     </div>
@@ -99,12 +99,12 @@
         <a href="careers.html">Hiring</a>
         <a href="privacy.html">Privacy Policy</a>
       </div>
-      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+      <p class="footer-copy" data-text-key="footer_copy">© 2026 BARKVR. All rights reserved.</p>
     </div>
   </footer>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js"></script>
-  <script src="editor.js?v=5"></script>
+  <script src="editor.js?v=7"></script>
 </body>
 </html>
