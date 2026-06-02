@@ -3,11 +3,15 @@
    Title ID: 7BB14
 
    DEPLOYMENT (one-time, then again whenever you change DEV_EMAILS):
-     1. Open https://developer.playfab.com/en-US/7BB14/automation/cloud-script/revisions
-     2. Click "Upload New Revision"
-     3. Paste the entire contents of this file
-     4. Click "Save as Revision" then "Deploy"
-     5. Confirm "Currently Deployed Revision" updated
+     1. Paste your PlayFab developer secret into TITLE_SECRET_KEY below
+        (https://developer.playfab.com/en-US/7BB14/settings/secret-keys).
+        This file lives on PlayFab's servers only — it is NEVER sent to
+        browsers. The website calls these handlers via ExecuteCloudScript.
+     2. Open https://developer.playfab.com/en-US/7BB14/automation/cloud-script/revisions
+     3. Click "Upload New Revision"
+     4. Paste the entire contents of this file
+     5. Click "Save as Revision" then "Deploy"
+     6. Confirm "Currently Deployed Revision" updated
 
    HOW IT WORKS (security model):
      The website signs the dev into PlayFab as any regular player (Custom ID
@@ -25,6 +29,13 @@
    ============================================================================ */
 
 // 🍍 (one of these is hidden in every dev-panel file)
+
+// PASTE YOUR DEV SECRET HERE. Found at:
+//   https://developer.playfab.com/en-US/7BB14/settings/secret-keys
+// Needed because looking up a player by display name requires the Admin API,
+// which CloudScript Classic accesses via HTTP with the secret key in the header.
+var TITLE_SECRET_KEY = 'REPLACE_WITH_YOUR_PLAYFAB_DEV_SECRET';
+var TITLE_ID         = '7BB14';
 
 var GOOGLE_CLIENT_ID = '30694987707-f9vq4vafl2s4bpli7jr3lap98jskbcjq.apps.googleusercontent.com';
 
@@ -82,6 +93,39 @@ function apiErr(e) {
     return e.message || String(e);
 }
 
+// Call any PlayFab Admin API endpoint via HTTP. Server API methods are
+// exposed on the global `server` object, but Admin-only methods (we need
+// GetUserAccountInfo for display-name lookup) aren't — so we hit REST.
+function adminCall(endpoint, body) {
+    if (!TITLE_SECRET_KEY || TITLE_SECRET_KEY === 'REPLACE_WITH_YOUR_PLAYFAB_DEV_SECRET') {
+        throw { message: 'TITLE_SECRET_KEY not set in CloudScript — paste your PlayFab developer secret into dev-cloudscript.js and redeploy' };
+    }
+    var url = 'https://' + TITLE_ID + '.playfabapi.com/Admin/' + endpoint;
+    var raw = http.request(url, 'post', JSON.stringify(body || {}), 'application/json', {
+        'X-SecretKey': TITLE_SECRET_KEY
+    });
+    var parsed;
+    try { parsed = JSON.parse(raw); }
+    catch (e) { throw { message: 'Admin/' + endpoint + ' returned non-JSON' }; }
+    if (parsed.code !== 200 || !parsed.data) {
+        throw { message: 'Admin/' + endpoint + ': ' + (parsed.errorMessage || parsed.error || ('HTTP ' + parsed.code)) };
+    }
+    return parsed.data;
+}
+
+// Resolve one display name to a PlayFabId via Admin/GetUserAccountInfo.
+// Returns null if no match.
+function resolveDisplayName(displayName) {
+    if (!displayName) return null;
+    try {
+        var r = adminCall('GetUserAccountInfo', { TitleDisplayName: displayName });
+        return (r.UserInfo && r.UserInfo.PlayFabId) || null;
+    } catch (e) {
+        // PlayFab returns 404-style when display name doesn't match — treat as null
+        return null;
+    }
+}
+
 // ---------- Handlers ----------
 
 handlers.DevPing = function (args, context) {
@@ -89,23 +133,36 @@ handlers.DevPing = function (args, context) {
     return { success: auth.ok, email: auth.email || null, error: auth.error || null };
 };
 
+// Single-name resolver. Use this from the frontend when the dev clicks a
+// player — much cheaper and faster than batch.
+handlers.DevResolvePlayer = function (args, context) {
+    var auth = verifyDevToken(args && args.idToken);
+    if (!auth.ok) return { success: false, error: auth.error };
+    if (!args.displayName) return { success: false, error: 'Missing displayName' };
+
+    try {
+        var pfId = resolveDisplayName(args.displayName);
+        return { success: true, displayName: args.displayName, playFabId: pfId };
+    } catch (e) {
+        return { success: false, error: apiErr(e) };
+    }
+};
+
+// Batch resolver — iterates display names through Admin/GetUserAccountInfo.
+// Caps at 20 per call to stay well under CloudScript's 30s timeout.
 handlers.DevResolvePlayers = function (args, context) {
     var auth = verifyDevToken(args && args.idToken);
     if (!auth.ok) return { success: false, error: auth.error };
 
     var names = (args && args.displayNames) || [];
     if (!names.length) return { success: true, mapping: {} };
+    if (names.length > 20) names = names.slice(0, 20);
 
-    // PlayFab caps this at 100 per call — chunk to be safe.
     var mapping = {};
-    var chunkSize = 50;
     try {
-        for (var i = 0; i < names.length; i += chunkSize) {
-            var chunk = names.slice(i, i + chunkSize);
-            var r = server.GetPlayFabIDsFromTitleDisplayNames({ TitleDisplayNames: chunk });
-            (r.Data || []).forEach(function (d) {
-                if (d.PlayFabId) mapping[d.TitleDisplayName] = d.PlayFabId;
-            });
+        for (var i = 0; i < names.length; i++) {
+            var pf = resolveDisplayName(names[i]);
+            if (pf) mapping[names[i]] = pf;
         }
         return { success: true, mapping: mapping };
     } catch (e) {

@@ -168,22 +168,27 @@
       const j = await r.json();
       State.players = (j.profiles || []).filter(p => !p.hidden);
       renderPlayers();
-      await resolvePlayFabIds();
       setStatus(`PlayFab ✓  •  ${State.players.length} players loaded`, true);
     } catch (e) {
       setStatus('Failed to load players: ' + e.message, false);
     }
   }
 
-  async function resolvePlayFabIds() {
-    const names = State.players.map(p => p.displayName).filter(Boolean);
-    if (!names.length) return;
+  // Resolve a single display name → PlayFabId on demand (via Admin API in
+  // CloudScript). We do this when the dev clicks a player so we never burn
+  // CloudScript time on players the dev doesn't end up touching.
+  async function resolveOnePlayFabId(displayName) {
+    if (State.pfIdByName[displayName]) return State.pfIdByName[displayName];
     try {
-      const r = await callCloudScript('DevResolvePlayers', { displayNames: names });
-      State.pfIdByName = r.mapping || {};
-      renderPlayers(); // re-render with PlayFab IDs available
+      const r = await callCloudScript('DevResolvePlayer', { displayName });
+      if (r.playFabId) {
+        State.pfIdByName[displayName] = r.playFabId;
+        return r.playFabId;
+      }
+      return null;
     } catch (e) {
-      log('Could not resolve PlayFab IDs: ' + e.message, 'err');
+      log('Could not resolve PlayFab ID: ' + e.message, 'err');
+      return null;
     }
   }
 
@@ -198,23 +203,38 @@
     if (!matches.length) { list.innerHTML = '<p class="players-empty">No matches.</p>'; return; }
     list.innerHTML = matches.slice(0, 60).map(p => {
       const pf = State.pfIdByName[p.displayName] || '';
-      const ready = pf ? '' : ' dev-player-pending';
       return `
-        <button type="button" class="dev-player-row${ready}" data-name="${esc(p.displayName)}" data-discord="${esc(p.discordId)}">
+        <button type="button" class="dev-player-row" data-name="${esc(p.displayName)}" data-discord="${esc(p.discordId)}">
           <span class="dev-player-name">${esc(p.displayName)}</span>
           <span class="dev-player-sub">${esc(p.trelativeName || '')}</span>
-          <span class="dev-player-pfid">${esc(pf || 'looking up…')}</span>
+          <span class="dev-player-pfid">${esc(pf || '(click to look up)')}</span>
         </button>
       `;
     }).join('');
     list.querySelectorAll('.dev-player-row').forEach(btn => {
-      btn.addEventListener('click', () => selectPlayer(btn.dataset.name, btn.dataset.discord));
+      btn.addEventListener('click', () => selectPlayer(btn.dataset.name, btn.dataset.discord, btn));
     });
   }
 
-  function selectPlayer(displayName, discordId) {
-    const pf = State.pfIdByName[displayName];
-    if (!pf) { log('PlayFab ID not yet resolved for ' + displayName + ' — try again in a sec', 'err'); return; }
+  async function selectPlayer(displayName, discordId, btn) {
+    let pf = State.pfIdByName[displayName];
+    if (!pf) {
+      if (btn) {
+        const pfSpan = btn.querySelector('.dev-player-pfid');
+        if (pfSpan) pfSpan.textContent = 'looking up…';
+      }
+      pf = await resolveOnePlayFabId(displayName);
+      if (!pf) {
+        log(`No PlayFab account matches display name "${displayName}". They may not have logged in yet.`, 'err');
+        if (btn) {
+          const pfSpan = btn.querySelector('.dev-player-pfid');
+          if (pfSpan) pfSpan.textContent = '(no match)';
+        }
+        return;
+      }
+      // refresh list so the PlayFab ID shows on the row
+      renderPlayers();
+    }
     State.selected = { displayName, discordId, playFabId: pf };
     $('devSelectedBar').style.display = 'flex';
     $('devSelectedName').textContent = displayName;
