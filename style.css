@@ -1466,6 +1466,151 @@ body.editing .store-card.sold-out {
   cursor: pointer;
 }
 
+/* ============================
+   EXTRAS PAGE (season + weather)
+   ============================ */
+.extras-section {
+  padding: 60px 0 100px;
+}
+.extras-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 60px;
+}
+.extras-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.extras-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.extras-card .section-label { margin-bottom: 16px; }
+.extras-meta {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Season */
+.season-display {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.season-color-dot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+.season-card h2 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+/* Weather */
+.weather-display {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.weather-initial {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: rgba(0,229,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 18px;
+  min-width: 92px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.weather-body h2 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.weather-info {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Forecast */
+.forecast-block {
+  border-top: 1px solid var(--border);
+  padding-top: 36px;
+}
+.forecast-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+.forecast-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.forecast-cell {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.forecast-cell:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.forecast-time {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.forecast-initial {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.forecast-name {
+  font-size: 0.78rem;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+.forecast-disclaimer {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .extras-grid { grid-template-columns: 1fr; }
+  .weather-initial { font-size: 2.4rem; min-width: 72px; }
+  .season-card h2, .weather-body h2 { font-size: 1.8rem; }
+}
+
 /* Spinner overlay */
 .bark-spinner {
   position: fixed;

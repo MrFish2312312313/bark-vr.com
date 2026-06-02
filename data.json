@@ -104,5 +104,20 @@
       "soldOut": false,
       "image": "media/1780376563369-IMG_8583.png"
     }
+  ],
+  "slotDuration": 300,
+  "seasons": [
+    { "id": "1", "displayName": "Spring",         "color": "#9ef745", "allowedWeatherIds": ["1","2","3","4","6"], "forceOnly": false },
+    { "id": "2", "displayName": "Jungle Fantasy", "color": "#2e8a21", "allowedWeatherIds": ["1","2","3","4","6"], "forceOnly": false },
+    { "id": "3", "displayName": "Winter",         "color": "#aaddff", "allowedWeatherIds": ["1","4","5"],         "forceOnly": true  },
+    { "id": "4", "displayName": "Duck",           "color": "#fbff00", "allowedWeatherIds": ["1","2","3","4","6"], "forceOnly": true  }
+  ],
+  "weatherTypes": [
+    { "id": "1", "initial": "CR", "displayName": "Clear",       "info": "Yur",       "weight": 5,   "forceOnly": false },
+    { "id": "2", "initial": "RN", "displayName": "Rain",        "info": "yurrr",     "weight": 3,   "forceOnly": false },
+    { "id": "3", "initial": "SM", "displayName": "Storm",       "info": "yurrr",     "weight": 2,   "forceOnly": false },
+    { "id": "4", "initial": "UD", "displayName": "Upside Down", "info": "yurrrrr",   "weight": 0.1, "forceOnly": false },
+    { "id": "5", "initial": "SW", "displayName": "Snow",        "info": "yuuurrrrrr","weight": 4,   "forceOnly": false },
+    { "id": "6", "initial": "TD", "displayName": "Tornadic",    "info": "spinnnn",   "weight": 1,   "forceOnly": false }
   ]
 }

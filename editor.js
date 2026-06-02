@@ -418,6 +418,137 @@ async function getLocalCurrency() {
 }
 
 // ----------------------------------------------------------
+//  EXTRAS: SEASON + WEATHER (no overrides, ever)
+//  Same algorithm as bark-manager/manager.js, with override
+//  handling stripped out so visitors always see the natural
+//  rotation.
+// ----------------------------------------------------------
+function mulberry32(seed) {
+  let s = seed >>> 0;
+  return function () {
+    s += 0x6D2B79F5;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = t + Math.imul(t ^ (t >>> 7), 61 | t) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Weekly rotation through non-forceOnly seasons. No overrides.
+function computeSeasonAt(ms) {
+  const seasons = (BarkEditor.data.seasons || []).filter(s => !s.forceOnly);
+  if (!seasons.length) return null;
+  return seasons[Math.floor(ms / 604800000) % seasons.length];
+}
+
+function getSeasonFilteredTypes(slotMs) {
+  const allTypes = (BarkEditor.data.weatherTypes || []).filter(t => !t.forceOnly);
+  const season   = computeSeasonAt(slotMs);
+  if (!season || !season.allowedWeatherIds || !season.allowedWeatherIds.length) return allTypes;
+  const filtered = allTypes.filter(t => season.allowedWeatherIds.includes(t.id));
+  return filtered.length ? filtered : allTypes;
+}
+
+function pickWeather(types, slotIndex) {
+  if (!types.length) return null;
+  const rand  = mulberry32(slotIndex);
+  const total = types.reduce((s, t) => s + (t.weight || 1), 0);
+  let   roll  = rand() * total;
+  for (const t of types) { roll -= (t.weight || 1); if (roll <= 0) return t; }
+  return types[types.length - 1];
+}
+
+function nextWeeklyBoundary(nowMs) {
+  return (Math.floor(nowMs / 604800000) + 1) * 604800000;
+}
+function formatDuration(ms) {
+  if (ms < 0) ms = 0;
+  const total = Math.floor(ms / 1000);
+  const d = Math.floor(total / 86400);
+  const h = Math.floor((total % 86400) / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  if (d) return `${d}d ${h}h ${m}m`;
+  if (h) return `${h}h ${m}m`;
+  if (m) return `${m}m ${s}s`;
+  return `${s}s`;
+}
+
+function renderExtras() {
+  const seasonCard = document.getElementById('seasonCard');
+  if (!seasonCard) return; // not on extras page
+
+  const dur     = (BarkEditor.data.slotDuration) || 300;
+  const nowMs   = Date.now();
+  const slotIdx = Math.floor((nowMs / 1000) / dur);
+
+  // Season
+  const season = computeSeasonAt(nowMs);
+  const dot    = document.getElementById('seasonDot');
+  const name   = document.getElementById('seasonName');
+  const sMeta  = document.getElementById('seasonMeta');
+  if (season) {
+    dot.style.background = season.color;
+    dot.style.boxShadow  = `0 0 24px ${season.color}`;
+    name.textContent = season.displayName;
+    const untilNext = nextWeeklyBoundary(nowMs) - nowMs;
+    sMeta.textContent = `Rotates in ${formatDuration(untilNext)}`;
+  } else {
+    name.textContent = 'No seasons configured';
+    sMeta.textContent = '';
+  }
+
+  // Current weather
+  const types   = getSeasonFilteredTypes(nowMs);
+  const weather = pickWeather(types, slotIdx);
+  const wInit = document.getElementById('weatherInitial');
+  const wName = document.getElementById('weatherName');
+  const wInfo = document.getElementById('weatherInfo');
+  const wMeta = document.getElementById('weatherMeta');
+  if (weather) {
+    wInit.textContent = weather.initial || '--';
+    wName.textContent = weather.displayName;
+    wInfo.textContent = weather.info || '';
+    const slotEndMs = (slotIdx + 1) * dur * 1000;
+    wMeta.textContent = `Changes in ${formatDuration(slotEndMs - nowMs)}`;
+  } else {
+    wInit.textContent = '--';
+    wName.textContent = 'No weather configured';
+    wInfo.textContent = '';
+    wMeta.textContent = '';
+  }
+
+  // Forecast — next 12 slots
+  const row = document.getElementById('forecastRow');
+  if (row) {
+    const SLOTS_AHEAD = 12;
+    row.innerHTML = '';
+    for (let i = 1; i <= SLOTS_AHEAD; i++) {
+      const si = slotIdx + i;
+      const startMs = si * dur * 1000;
+      const w = pickWeather(getSeasonFilteredTypes(startMs), si);
+      const t = new Date(startMs);
+      const timeStr = t.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      const cell = document.createElement('div');
+      cell.className = 'forecast-cell';
+      cell.innerHTML = `
+        <div class="forecast-time">${timeStr}</div>
+        <div class="forecast-initial">${w ? escapeHtml(w.initial) : '--'}</div>
+        <div class="forecast-name">${w ? escapeHtml(w.displayName) : ''}</div>
+      `;
+      row.appendChild(cell);
+    }
+  }
+}
+
+// Keep the extras page ticking once a second so the countdowns are live.
+let _extrasTick = null;
+function startExtrasTick() {
+  if (_extrasTick) clearInterval(_extrasTick);
+  if (!document.getElementById('seasonCard')) return;
+  _extrasTick = setInterval(renderExtras, 1000);
+}
+
+// ----------------------------------------------------------
 //  RE-RENDER EVERYTHING ON CURRENT PAGE
 // ----------------------------------------------------------
 function rerenderPage() {
@@ -426,6 +557,8 @@ function rerenderPage() {
   renderGamesPage(document.querySelector('.games-page-target'));
   renderTeamMember(document.querySelector('.team-member-target'));
   renderStore(document.querySelector('.store-page-target'));
+  renderExtras();
+  startExtrasTick();
   updateEditorBar();
 }
 

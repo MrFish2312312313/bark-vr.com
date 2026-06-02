@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Team Member | BARKVR</title>
+  <title>Extras | BARKVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -17,10 +17,10 @@
       <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
     </a>
     <div class="nav-links">
-      <a href="index.html#about" class="active">ABOUT US</a>
+      <a href="index.html#about">ABOUT US</a>
       <a href="games.html">GAMES</a>
       <a href="store.html">STORE</a>
-      <a href="extras.html">EXTRAS</a>
+      <a href="extras.html" class="active">EXTRAS</a>
       <a href="careers.html">HIRING</a>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
@@ -37,16 +37,52 @@
     <div class="hero-bg">
       <div class="grid-overlay"></div>
       <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
     </div>
     <div class="page-hero-content">
-      <div class="section-label">// THE TEAM</div>
-      <h1>MEMBER</h1>
+      <div class="section-label">// LIVE IN-GAME</div>
+      <h1>EXTRAS</h1>
     </div>
   </section>
 
-  <section class="member-section">
-    <div class="team-member-target">
-      <!-- rendered by editor.js -->
+  <section class="extras-section">
+    <div class="container">
+      <div class="extras-grid">
+
+        <!-- SEASON CARD -->
+        <div class="extras-card season-card" id="seasonCard">
+          <div class="section-label">// CURRENT SEASON</div>
+          <div class="season-display">
+            <div class="season-color-dot" id="seasonDot"></div>
+            <h2 id="seasonName">Loading…</h2>
+          </div>
+          <p class="extras-meta" id="seasonMeta">&nbsp;</p>
+        </div>
+
+        <!-- WEATHER CARD -->
+        <div class="extras-card weather-card" id="weatherCard">
+          <div class="section-label">// CURRENT WEATHER</div>
+          <div class="weather-display">
+            <div class="weather-initial" id="weatherInitial">--</div>
+            <div class="weather-body">
+              <h2 id="weatherName">Loading…</h2>
+              <p class="weather-info" id="weatherInfo">&nbsp;</p>
+            </div>
+          </div>
+          <p class="extras-meta" id="weatherMeta">&nbsp;</p>
+        </div>
+      </div>
+
+      <!-- FORECAST -->
+      <div class="forecast-block">
+        <div class="section-label">// FORECAST</div>
+        <h3 class="forecast-title">Next Few Hours</h3>
+        <div class="forecast-row" id="forecastRow">
+          <!-- generated -->
+        </div>
+        <p class="forecast-disclaimer">Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page.</p>
+      </div>
+
     </div>
   </section>
 
