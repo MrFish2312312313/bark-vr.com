@@ -1533,15 +1533,59 @@ function startSignIn() {
     alert('Google Sign-In script did not load. Check your internet, then refresh.');
     return;
   }
+
   google.accounts.id.initialize({
     client_id: GOOGLE_CLIENT_ID,
     callback: onGoogleCredential,
     auto_select: false,
+    cancel_on_tap_outside: false,
   });
-  google.accounts.id.prompt(); // shows the One Tap / chooser
+
+  // First try the One Tap prompt. If Google silently suppresses it
+  // (exponential cooldown, user dismissed it too many times), fall back to
+  // rendering an actual Google sign-in button inside our own popup overlay.
+  google.accounts.id.prompt(notification => {
+    if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+      showGoogleButtonFallback();
+    }
+  });
+}
+
+function showGoogleButtonFallback() {
+  // Remove any prior fallback
+  document.getElementById('gsiFallback')?.remove();
+
+  const wrap = document.createElement('div');
+  wrap.id = 'gsiFallback';
+  wrap.className = 'bark-modal';
+  wrap.innerHTML = `
+    <div class="bark-modal-backdrop"></div>
+    <div class="bark-modal-card" style="max-width:380px;">
+      <div class="bark-modal-head">
+        <h3>Sign in with Google</h3>
+        <button class="bark-modal-close" type="button">✕</button>
+      </div>
+      <div class="bark-modal-body" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;">
+        <div id="gsiButtonHost"></div>
+        <p class="modal-hint" style="text-align:center;">Use one of the allow-listed editor emails.</p>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(wrap);
+
+  const close = () => wrap.remove();
+  wrap.querySelector('.bark-modal-close').onclick = close;
+  wrap.querySelector('.bark-modal-backdrop').onclick = close;
+
+  google.accounts.id.renderButton(
+    document.getElementById('gsiButtonHost'),
+    { theme: 'filled_blue', size: 'large', text: 'signin_with', shape: 'pill', logo_alignment: 'left' }
+  );
 }
 
 function onGoogleCredential(response) {
+  // Close the fallback modal if it was showing
+  document.getElementById('gsiFallback')?.remove();
   try {
     const payload = decodeJwt(response.credential);
     BarkEditor.user = {
