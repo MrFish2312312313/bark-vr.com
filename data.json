@@ -229,6 +229,13 @@
         "description": "*wham*",
         "image": "media/1780419931413-SampleScene_Custom..._02.06.2026_12-04-50.png",
         "effect": "Flings other players with extra power"
+      },
+      {
+        "id": "bamboo-bat",
+        "name": "Bamboo Bat",
+        "description": "*bink*",
+        "image": "media/1780420003272-SampleScene_Custom..._02.06.2026_12-06-13.png",
+        "effect": "flings other players"
       }
     ],
     "cosmetics": [],
