@@ -36,6 +36,19 @@ const ALLOWED_EMAILS = [
   'job.elliot.mason@gmail.com',
 ];
 
+// Developers can hit the in-game admin actions on /developer. Must match
+// DEV_EMAILS in dev-cloudscript.js (PlayFab CloudScript) for actions to work.
+const DEV_EMAILS = [
+  'mrfeesh456@gmail.com',
+];
+
+// PlayFab title — used by developer.js to call ExecuteCloudScript.
+const PLAYFAB_TITLE_ID = '7BB14';
+
+function isDev(email) {
+  return DEV_EMAILS.map(e => e.toLowerCase()).includes((email || '').toLowerCase());
+}
+
 const REPO_OWNER  = 'MrFish2312312313';
 const REPO_NAME   = 'bark-vr.com';
 const REPO_BRANCH = 'main';
@@ -1614,10 +1627,18 @@ function onGoogleCredential(response) {
       picture: payload.picture || '',
     };
     localStorage.setItem('bark.user', JSON.stringify(BarkEditor.user));
-    if (!isAllowed(BarkEditor.user.email)) {
+    // Persist the raw Google ID token + expiry so the developer panel can
+    // pass it to CloudScript (where it gets re-verified against Google).
+    // Tokens last ~1 hour; developer.js prompts a re-sign-in when expired.
+    try {
+      localStorage.setItem('bark.googleIdToken', response.credential);
+      localStorage.setItem('bark.googleIdTokenExp', String((payload.exp || 0) * 1000));
+    } catch {}
+    if (!isAllowed(BarkEditor.user.email) && !isDev(BarkEditor.user.email)) {
       alert(`${BarkEditor.user.email} isn't on the editor list. Ask Porter to add you.`);
     }
     updateEditorBar();
+    injectDevNavLink();
   } catch (e) {
     console.error('JWT decode failed', e);
     alert('Sign-in failed.');
@@ -1630,10 +1651,50 @@ function signOut() {
   document.body.classList.remove('editing');
   localStorage.removeItem('bark.user');
   localStorage.removeItem('bark.editing');
+  localStorage.removeItem('bark.googleIdToken');
+  localStorage.removeItem('bark.googleIdTokenExp');
   if (window.google && google.accounts && google.accounts.id) {
     google.accounts.id.disableAutoSelect();
   }
+  removeDevNavLink();
   rerenderPage();
+}
+
+// ----------------------------------------------------------
+//  DEV NAV LINK — injected into the nav for DEV_EMAILS users
+//  so they can reach /developer from any page.
+// ----------------------------------------------------------
+function injectDevNavLink() {
+  if (!BarkEditor.user || !isDev(BarkEditor.user.email)) return;
+  const here = (location.pathname || '').replace(/\/$/, '').toLowerCase();
+  const isHere = here === '/developer' || here.endsWith('/developer.html');
+
+  const navLinks = document.querySelector('nav .nav-links');
+  if (navLinks && !document.getElementById('devNavLink')) {
+    const a = document.createElement('a');
+    a.id = 'devNavLink';
+    a.href = '/developer';
+    a.textContent = 'DEVELOPER';
+    a.style.color = '#ff7e7e';
+    if (isHere) a.className = 'active';
+    navLinks.appendChild(a);
+  }
+
+  const mobile = document.getElementById('mobileMenu');
+  if (mobile && !document.getElementById('devNavLinkMobile')) {
+    const a = document.createElement('a');
+    a.id = 'devNavLinkMobile';
+    a.href = '/developer';
+    a.textContent = 'DEVELOPER';
+    a.style.color = '#ff7e7e';
+    a.setAttribute('onclick', 'toggleMenu()');
+    mobile.appendChild(a);
+  }
+}
+
+function removeDevNavLink() {
+  document.getElementById('devNavLink')?.remove();
+  document.getElementById('devNavLinkMobile')?.remove();
 }
 
 function isAllowed(email) {
@@ -2196,6 +2257,7 @@ async function bootEditor() {
 
   buildEditorBar();
   buildSecretWaffle();
+  injectDevNavLink();
   rerenderPage();
 
   // Warn before leaving with unsaved edits

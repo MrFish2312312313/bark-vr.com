@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Developer Panel | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css?v=22" />
+</head>
+<body>
+
+  <!-- pineapple inside a comment: 🍍 -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// INTERNAL TOOLS</div>
+      <h1>DEVELOPER PANEL</h1>
+      <p class="dev-hero-sub">PlayFab admin actions. Calls CloudScript with a re-verified Google ID token.</p>
+    </div>
+  </section>
+
+  <section class="dev-section">
+    <div class="container">
+
+      <!-- Locked state: anything that isn't a signed-in dev -->
+      <div id="devLocked" class="dev-locked" style="display:none;">
+        <div class="dev-locked-card">
+          <h2>🔒 Restricted</h2>
+          <p id="devLockedMsg">Sign in with a developer Google account.</p>
+          <button class="btn-primary" id="devSignInBtn">Sign in with Google</button>
+        </div>
+      </div>
+
+      <!-- Unlocked panel -->
+      <div id="devPanel" style="display:none;">
+        <div class="dev-status-row">
+          <div id="devStatus" class="dev-status">Connecting to PlayFab…</div>
+          <button id="devRefreshBtn" class="btn-ghost btn-small">↻ Refresh players</button>
+        </div>
+
+        <!-- 1. Player picker -->
+        <div class="dev-card">
+          <h3 class="dev-card-h">1. PICK A PLAYER</h3>
+          <input type="text" id="devPlayerSearch" class="players-search" placeholder="Search by display name or trelative name…" />
+          <div id="devPlayerList" class="dev-player-list">Loading…</div>
+          <div id="devSelectedBar" class="dev-selected-bar" style="display:none;">
+            <span>Selected:</span>
+            <strong id="devSelectedName">—</strong>
+            <code id="devSelectedPfId">—</code>
+            <button id="devDeselectBtn" class="btn-ghost btn-small">Clear</button>
+          </div>
+        </div>
+
+        <!-- 2. Inventory & currencies -->
+        <div class="dev-card">
+          <h3 class="dev-card-h">2. INVENTORY &amp; CURRENCIES</h3>
+          <p class="modal-hint">Click an item to revoke it. Currency edits below apply to the selected player.</p>
+          <div id="devInventory" class="dev-inventory">Pick a player above.</div>
+        </div>
+
+        <!-- 3. Give item -->
+        <div class="dev-card">
+          <h3 class="dev-card-h">3. GIVE ITEM</h3>
+          <div class="dev-grid">
+            <label>
+              Item
+              <select id="devItemSelect">
+                <option value="">(load catalog)</option>
+              </select>
+            </label>
+            <label>
+              Or paste Item ID
+              <input type="text" id="devItemIdManual" placeholder="e.g. bat" />
+            </label>
+            <label>
+              Quantity
+              <input type="number" id="devItemQty" value="1" min="1" max="100" />
+            </label>
+          </div>
+          <div class="dev-actions">
+            <button id="devGiveItemBtn" class="btn-primary">Give Item</button>
+            <button id="devReloadCatalogBtn" class="btn-ghost btn-small">Reload catalog</button>
+          </div>
+        </div>
+
+        <!-- 4. Currency -->
+        <div class="dev-card">
+          <h3 class="dev-card-h">4. CURRENCY</h3>
+          <div class="dev-grid">
+            <label>
+              Currency
+              <select id="devCurrencySelect">
+                <option value="PC">PC — Paper Coins</option>
+                <option value="AT">AT — Arcade Tokens</option>
+              </select>
+            </label>
+            <label>
+              Amount (negative = subtract)
+              <input type="number" id="devCurrencyAmount" value="100" />
+            </label>
+          </div>
+          <div class="dev-actions">
+            <button id="devCurrencyAddBtn" class="btn-primary">Add / Subtract</button>
+            <button id="devCurrencySetBtn" class="btn-ghost">Set to amount</button>
+          </div>
+        </div>
+
+        <!-- 5. Wood -->
+        <div class="dev-card">
+          <h3 class="dev-card-h">5. SET WOOD TYPE</h3>
+          <p class="modal-hint">Updates UserData.woodID. Takes effect on the player's next login (or wood reload).</p>
+          <div class="dev-grid">
+            <label>
+              Wood
+              <select id="devWoodSelect"><option value="">(loading wood types)</option></select>
+            </label>
+            <label>
+              Or paste woodID
+              <input type="text" id="devWoodManual" placeholder="e.g. Oak" />
+            </label>
+          </div>
+          <div class="dev-actions">
+            <button id="devSetWoodBtn" class="btn-primary">Set Wood</button>
+          </div>
+        </div>
+
+        <!-- 6. Activity log -->
+        <div class="dev-card">
+          <h3 class="dev-card-h">ACTIVITY LOG</h3>
+          <div id="devLog" class="dev-log">No actions yet.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="/#about">About</a>
+        <a href="/games">Games</a>
+        <a href="/store">Store</a>
+        <a href="/extras">Extras</a>
+        <a href="/database">Index</a>
+        <a href="/players">Players</a>
+        <a href="/careers">Hiring</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="main.js"></script>
+  <script src="editor.js?v=22"></script>
+  <script src="developer.js?v=1"></script>
+</body>
+</html>
