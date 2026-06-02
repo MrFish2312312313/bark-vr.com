@@ -291,6 +291,13 @@
         "description": "\"Rat Rat Rat Rat Rat Rat\"",
         "image": "media/1780426394438-SampleScene_Custom..._02.06.2026_13-52-05.png",
         "effect": "Grants access to songs Eternity, Coin Snatcher, S*icide, and Fancy Rats"
+      },
+      {
+        "id": "chicken_nugget",
+        "name": "Chicken Nugget",
+        "description": "Very Oval-Like",
+        "image": "media/1780426578441-SampleScene_Custom..._02.06.2026_13-55-23.png",
+        "effect": "it's just there, probably eatable in the future"
       }
     ],
     "cosmetics": [],
