@@ -236,6 +236,20 @@
         "description": "*bink*",
         "image": "media/1780420003272-SampleScene_Custom..._02.06.2026_12-06-13.png",
         "effect": "flings other players"
+      },
+      {
+        "id": "barket",
+        "name": "BARKet",
+        "description": "\"Trick or Treat?\"",
+        "image": "media/1780420538114-SampleScene_Custom..._02.06.2026_12-14-17.png",
+        "effect": "Looks Cool (Maybe Future Purpose)"
+      },
+      {
+        "id": "bean-trophie",
+        "name": "bean trophie'",
+        "description": "Obtained during the 2026 Bark To Beans update",
+        "image": "media/1780420678312-SampleScene_Custom..._02.06.2026_12-17-01.png",
+        "effect": "Looks cool"
       }
     ],
     "cosmetics": [],
