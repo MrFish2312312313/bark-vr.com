@@ -1238,6 +1238,155 @@ body.editing {
   .review-edit-row { grid-template-columns: 1fr; }
 }
 
+/* ============================
+   STORE PAGE
+   ============================ */
+.store-section {
+  padding: 60px 0 120px;
+}
+.store-currency-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 28px;
+}
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+}
+.store-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.store-card:hover:not(.sold-out) {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,229,255,0.15);
+}
+.store-card-img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--bg3);
+  overflow: hidden;
+}
+.store-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.store-card:hover:not(.sold-out) .store-card-img { transform: scale(1.05); }
+.store-card-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.store-card-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.store-card-price {
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Sold-out state */
+.store-card.sold-out {
+  cursor: not-allowed;
+  filter: grayscale(1) brightness(0.55);
+  pointer-events: none;
+  opacity: 0.85;
+}
+.store-card.sold-out .store-card-price { color: var(--text-muted); }
+.sold-out-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: var(--accent2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  filter: none;
+}
+
+/* Re-enable edit overlays on sold-out cards for editors */
+.store-card.sold-out .edit-overlay {
+  pointer-events: auto;
+  filter: none;
+}
+body.editing .store-card.sold-out {
+  pointer-events: auto;
+}
+
+/* + Add Item card */
+.store-card.add-card {
+  border-style: dashed;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+.store-card.add-card:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.store-empty {
+  text-align: center;
+  padding: 80px 20px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  grid-column: 1 / -1;
+}
+.store-empty h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+  margin: 14px 0 10px;
+}
+.store-empty p { color: var(--text-muted); }
+
+/* Checkbox row inside modal */
+.bark-modal-body .checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  letter-spacing: normal;
+  text-transform: none;
+  font-weight: 400;
+}
+.bark-modal-body .checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 /* Spinner overlay */
 .bark-spinner {
   position: fixed;

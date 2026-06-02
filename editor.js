@@ -230,12 +230,137 @@ function renderTeamMember(container) {
 //  EDIT CONTROL OVERLAY
 // ----------------------------------------------------------
 function editControls(kind, index) {
+  const editFn = kind === 'team' ? `openTeamModal(${index})`
+               : kind === 'game' ? `openGameModal(${index})`
+               : `openStoreModal(${index})`;
+  const delFn  = kind === 'team' ? `deleteTeam(${index})`
+               : kind === 'game' ? `deleteGame(${index})`
+               : `deleteStoreItem(${index})`;
   return `
     <div class="edit-overlay" onclick="event.preventDefault(); event.stopPropagation();">
-      <button class="edit-btn" onclick="${kind === 'team' ? `openTeamModal(${index})` : `openGameModal(${index})`}">✎ Edit</button>
-      <button class="edit-btn edit-btn-danger" onclick="${kind === 'team' ? `deleteTeam(${index})` : `deleteGame(${index})`}">✕</button>
+      <button class="edit-btn" onclick="${editFn}">✎ Edit</button>
+      <button class="edit-btn edit-btn-danger" onclick="${delFn}">✕</button>
     </div>
   `;
+}
+
+// ----------------------------------------------------------
+//  RENDER: STORE
+// ----------------------------------------------------------
+async function renderStore(container) {
+  if (!container) return;
+  const items = (BarkEditor.data.store) || [];
+  container.innerHTML = '';
+
+  // Localized currency banner
+  const note = document.getElementById('storeCurrencyNote');
+  const { currency, rate } = await getLocalCurrency();
+  if (note) {
+    note.textContent = currency === 'USD'
+      ? 'Prices in USD.'
+      : `Prices shown in ${currency} (converted from USD at ~${rate.toFixed(2)}).`;
+  }
+
+  if (items.length === 0 && !BarkEditor.editing) {
+    container.innerHTML = `
+      <div class="store-empty">
+        <p class="section-label">// COMING SOON</p>
+        <h3>The shelves are empty for now.</h3>
+        <p>Check back soon — we're cooking up merch.</p>
+      </div>
+    `;
+  }
+
+  items.forEach((it, i) => {
+    const soldOut = !!it.soldOut;
+    const price = formatLocalPrice(it.priceUSD, currency, rate);
+
+    const card = document.createElement(soldOut ? 'div' : 'a');
+    card.className = `store-card ${soldOut ? 'sold-out' : ''}`;
+    if (!soldOut) {
+      card.href = it.url || '#';
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+    }
+    card.innerHTML = `
+      <div class="store-card-img-wrap">
+        <img src="${escapeAttr(it.image || '')}" alt="${escapeAttr(it.name)}" class="store-card-img" />
+        ${soldOut ? `<div class="sold-out-badge">SOLD OUT</div>` : ''}
+      </div>
+      <div class="store-card-body">
+        <h3 class="store-card-name">${escapeHtml(it.name)}</h3>
+        <p class="store-card-price">${escapeHtml(price)}</p>
+      </div>
+      ${BarkEditor.editing ? editControls('store', i) : ''}
+    `;
+    container.appendChild(card);
+  });
+
+  if (BarkEditor.editing) {
+    const add = document.createElement('button');
+    add.className = 'store-card add-card';
+    add.type = 'button';
+    add.innerHTML = `<div class="add-plus">+</div><div class="add-label">Add Item</div>`;
+    add.onclick = () => openStoreModal(null);
+    container.appendChild(add);
+  }
+}
+
+// Synchronous helper since we already have rate
+function formatLocalPrice(usd, currency, rate) {
+  const amount = Number(usd) || 0;
+  const converted = amount * (rate || 1);
+  try {
+    return new Intl.NumberFormat(navigator.language || 'en-US', {
+      style: 'currency',
+      currency,
+    }).format(converted);
+  } catch {
+    return `${currency} ${converted.toFixed(2)}`;
+  }
+}
+
+// ----------------------------------------------------------
+//  CURRENCY LOCALIZATION (free API, cached for 12 h)
+// ----------------------------------------------------------
+const REGION_TO_CURRENCY = {
+  US: 'USD', CA: 'CAD', MX: 'MXN', BR: 'BRL', AR: 'ARS',
+  GB: 'GBP', IE: 'EUR', FR: 'EUR', DE: 'EUR', ES: 'EUR', IT: 'EUR',
+  NL: 'EUR', BE: 'EUR', PT: 'EUR', AT: 'EUR', FI: 'EUR', GR: 'EUR',
+  SE: 'SEK', NO: 'NOK', DK: 'DKK', CH: 'CHF', PL: 'PLN', CZ: 'CZK',
+  HU: 'HUF', RO: 'RON', BG: 'BGN', UA: 'UAH', RU: 'RUB', TR: 'TRY',
+  JP: 'JPY', KR: 'KRW', CN: 'CNY', HK: 'HKD', TW: 'TWD', SG: 'SGD',
+  TH: 'THB', VN: 'VND', PH: 'PHP', ID: 'IDR', MY: 'MYR', IN: 'INR',
+  PK: 'PKR', BD: 'BDT', AE: 'AED', SA: 'SAR', IL: 'ILS', EG: 'EGP',
+  ZA: 'ZAR', NG: 'NGN', KE: 'KES', AU: 'AUD', NZ: 'NZD',
+};
+
+async function getLocalCurrency() {
+  const region = (navigator.language || 'en-US').split('-')[1] || 'US';
+  const currency = REGION_TO_CURRENCY[region.toUpperCase()] || 'USD';
+  if (currency === 'USD') return { currency: 'USD', rate: 1 };
+
+  // Cache rates in sessionStorage (12h-ish, but session is fine)
+  const cacheKey = 'bark.rates.usd';
+  try {
+    const cached = JSON.parse(sessionStorage.getItem(cacheKey) || 'null');
+    if (cached && cached.rates && cached.rates[currency]) {
+      return { currency, rate: cached.rates[currency] };
+    }
+  } catch {}
+
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/USD');
+    if (!res.ok) throw new Error('rates fetch failed');
+    const j = await res.json();
+    if (j && j.rates) {
+      sessionStorage.setItem(cacheKey, JSON.stringify({ rates: j.rates, t: Date.now() }));
+      return { currency, rate: j.rates[currency] || 1 };
+    }
+  } catch (e) {
+    console.warn('Could not fetch exchange rates, falling back to USD', e);
+  }
+  return { currency: 'USD', rate: 1 };
 }
 
 // ----------------------------------------------------------
@@ -246,6 +371,7 @@ function rerenderPage() {
   renderGamesTeaser(document.querySelector('.games-teaser-target'));
   renderGamesPage(document.querySelector('.games-page-target'));
   renderTeamMember(document.querySelector('.team-member-target'));
+  renderStore(document.querySelector('.store-page-target'));
   updateEditorBar();
 }
 
@@ -699,6 +825,77 @@ function deleteGame(index) {
 }
 
 // ----------------------------------------------------------
+//  MODALS — STORE ITEM
+// ----------------------------------------------------------
+function openStoreModal(index) {
+  if (!BarkEditor.data.store) BarkEditor.data.store = [];
+  const isNew = index === null || index === undefined;
+  const it = isNew
+    ? { id: '', name: '', priceUSD: 0, image: '', url: '', soldOut: false }
+    : { ...BarkEditor.data.store[index] };
+
+  showModal(`${isNew ? 'Add' : 'Edit'} Store Item`, `
+    <label>Item image</label>
+    <div class="img-row">
+      <img id="modalItemPreview" src="${escapeAttr(it.image || '')}" class="img-preview" onerror="this.style.visibility='hidden'" />
+      <input type="file" id="modalItemFile" accept="image/*" />
+    </div>
+
+    <label>Name</label>
+    <input id="modalItemName" value="${escapeAttr(it.name)}" placeholder="BARK T-Shirt" />
+
+    <label>Price (USD) — auto-converts to visitor's currency</label>
+    <input id="modalItemPrice" type="number" step="0.01" min="0" value="${Number(it.priceUSD) || 0}" placeholder="19.99" />
+
+    <label>Click-through URL (where buyers go)</label>
+    <input id="modalItemUrl" value="${escapeAttr(it.url || '')}" placeholder="https://your-store.com/product/..." />
+
+    <label class="checkbox-row">
+      <input type="checkbox" id="modalItemSoldOut" ${it.soldOut ? 'checked' : ''} />
+      <span>Sold out (item still shown, but greyed out and unclickable)</span>
+    </label>
+
+    <label>URL slug (optional)</label>
+    <input id="modalItemId" value="${escapeAttr(it.id)}" placeholder="auto from name if blank" />
+  `, async () => {
+    const updated = {
+      id: (document.getElementById('modalItemId').value.trim() || slugify(document.getElementById('modalItemName').value)),
+      name: document.getElementById('modalItemName').value.trim(),
+      priceUSD: parseFloat(document.getElementById('modalItemPrice').value) || 0,
+      url: document.getElementById('modalItemUrl').value.trim(),
+      soldOut: document.getElementById('modalItemSoldOut').checked,
+      image: it.image || '',
+    };
+    if (!updated.name) { alert('Name required'); return false; }
+
+    const file = document.getElementById('modalItemFile').files[0];
+    if (file) {
+      try {
+        showSpinner('Uploading image...');
+        updated.image = await uploadImage(file);
+      } catch (e) {
+        alert('Image upload failed: ' + e.message); hideSpinner(); return false;
+      }
+      hideSpinner();
+    }
+
+    if (isNew) BarkEditor.data.store.push(updated);
+    else      BarkEditor.data.store[index] = updated;
+    BarkEditor.dirty = true;
+    rerenderPage();
+    return true;
+  });
+}
+
+function deleteStoreItem(index) {
+  const it = BarkEditor.data.store[index];
+  if (!confirm(`Delete store item "${it.name}"?`)) return;
+  BarkEditor.data.store.splice(index, 1);
+  BarkEditor.dirty = true;
+  rerenderPage();
+}
+
+// ----------------------------------------------------------
 //  GENERIC MODAL
 // ----------------------------------------------------------
 function showModal(title, bodyHtml, onSave, onMount) {
@@ -738,6 +935,8 @@ function showModal(title, bodyHtml, onSave, onMount) {
   if (photoFile) photoFile.addEventListener('change', e => previewInto('modalPhotoPreview', e.target.files[0]));
   const shotFile = m.querySelector('#modalShotFile');
   if (shotFile) shotFile.addEventListener('change', e => previewInto('modalShotPreview', e.target.files[0]));
+  const itemFile = m.querySelector('#modalItemFile');
+  if (itemFile) itemFile.addEventListener('change', e => previewInto('modalItemPreview', e.target.files[0]));
 
   if (onMount) onMount();
 }
@@ -786,8 +985,10 @@ function starRow(n) {
 // Expose handlers used by inline onclicks
 window.openTeamModal = openTeamModal;
 window.openGameModal = openGameModal;
+window.openStoreModal = openStoreModal;
 window.deleteTeam = deleteTeam;
 window.deleteGame = deleteGame;
+window.deleteStoreItem = deleteStoreItem;
 window.clearPat = clearPat;
 
 // ----------------------------------------------------------
