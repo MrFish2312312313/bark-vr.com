@@ -130,8 +130,15 @@
     "careers_role_artist_title": "Art Director"
   },
   "woodOverrides": {
-    "Bean":            { "cannotGet": true },
-    "easter special":  { "cannotGet": true }
+    "Bean": {
+      "cannotGet": true
+    },
+    "easter special": {
+      "cannotGet": true
+    },
+    "easter": {
+      "cannotGet": true
+    }
   },
   "slotDuration": 300,
   "seasons": [
