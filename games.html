@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">ABOUT US</a>
+      <a href="games.html" class="active">GAMES</a>
+      <a href="careers.html">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="games.html" onclick="toggleMenu()">GAMES</a>
+    <a href="careers.html" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// OUR TITLES</div>
+      <h1>GAMES</h1>
+    </div>
+  </section>
+
+  <section class="game-detail">
+    <div class="container">
+      <div class="game-detail-inner">
+        <div class="game-detail-text">
+          <span class="game-tag">VR · SOCIAL · FREE</span>
+          <h2>BARK</h2>
+          <p class="game-tagline">ONE BIG MAP, ONE SMALL COMMUNITY</p>
+          <p class="game-desc">Enter Bark, a world of the Treelatves. In Bark, you hang out with others, play at the new arcade, and enjoy the world of Bark!</p>
+          <div class="platform-section">
+            <p class="platform-label">AVAILABLE ON</p>
+            <a href="https://www.meta.com/experiences/bark/29216575844607934/" target="_blank" class="platform-btn">
+              <span class="platform-icon">◉</span>
+              META QUEST
+            </a>
+            <p class="more-platforms">More platforms coming soon...</p>
+          </div>
+        </div>
+
+        <div class="game-screenshots">
+          <img src="bark-screenshot1.png" alt="BARK gameplay - town square fountain" class="screenshot-real main-shot" />
+          <div class="screenshots-row">
+            <div class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <div class="review-author">King_chickennugget</div>
+              <div class="review-text">"Ohio"</div>
+            </div>
+            <div class="review-card">
+              <div class="review-stars">★★★★☆</div>
+              <div class="review-author">StarProgramPillow</div>
+              <div class="review-text">"Really good game! Can't wait for the rat DLC!"</div>
+            </div>
+            <div class="review-card review-card-wide">
+              <div class="review-stars">★★★★★</div>
+              <div class="review-author">llamaboi1</div>
+              <div class="review-text">"This game is so amazing 👍 if you don't like this, you're a stinky head"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="index.html#about">About</a>
+        <a href="games.html">Games</a>
+        <a href="careers.html">Hiring</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

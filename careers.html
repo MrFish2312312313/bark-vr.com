@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hiring | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">ABOUT US</a>
+      <a href="games.html">GAMES</a>
+      <a href="careers.html" class="active">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="games.html" onclick="toggleMenu()">GAMES</a>
+    <a href="careers.html" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// JOIN THE STUDIO</div>
+      <h1>JOIN THE TEAM</h1>
+    </div>
+  </section>
+
+  <section class="careers-section">
+    <div class="container">
+      <div class="section-label">// CURRENT OPENINGS</div>
+      <h2 class="section-title">Open Roles</h2>
+
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-icon">{ }</div>
+          <h3>Coder</h3>
+          <ul class="requirements">
+            <li>Know C#</li>
+            <li>Understanding of PlayFab, Photon, and Gorilla Locomotion</li>
+            <li>Know how to work as a team with GitHub Desktop</li>
+            <li>Have a capable PC</li>
+            <li>Know how to use Unity</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">♪</div>
+          <h3>Musician</h3>
+          <ul class="requirements">
+            <li>Know how to make looping tracks &amp; rhythms</li>
+            <li>Able to make songs as needed — no putting things off</li>
+            <li>Open to creative direction and feedback</li>
+            <li>Have all software/hardware you need (your choice)</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">◈</div>
+          <h3>Lead Art Director</h3>
+          <ul class="requirements">
+            <li>Know how to use Blender efficiently</li>
+            <li>Able to make smooth, low-triangle models</li>
+            <li>Able to make drawings &amp; graphics</li>
+            <li>Have a capable PC to run Blender or other apps</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="volunteer-note">
+        <span>⚑</span> These are volunteer positions. By applying you agree you are not promised payment of any kind.
+      </div>
+
+      <div class="apply-form-wrap" id="apply">
+        <h2 class="section-title">Apply</h2>
+        <form class="apply-form" id="applyForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">What should we call you? <span class="req">*</span></label>
+              <input type="text" id="name" name="name" required placeholder="Your name or handle" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pronouns">Pronouns (optional)</label>
+              <input type="text" id="pronouns" name="pronouns" placeholder="e.g. they/them" />
+            </div>
+            <div class="form-group">
+              <label for="position">Position applying for <span class="req">*</span></label>
+              <select id="position" name="position" required>
+                <option value="" disabled selected>Select a role</option>
+                <option value="Coder">Coder</option>
+                <option value="Musician">Musician</option>
+                <option value="Artist">Artist</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="hours">Hours available per day <span class="req">*</span></label>
+              <select id="hours" name="hours" required>
+                <option value="" disabled selected>Select range</option>
+                <option>0–1 hours</option>
+                <option>1–3 hours</option>
+                <option>4–7 hours</option>
+                <option>7–10 hours</option>
+                <option>All day</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="interview">Preferred interview date <span class="req">*</span></label>
+              <input type="date" id="interview" name="interview" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="platform">Interview platform <span class="req">*</span></label>
+              <input type="text" id="platform" name="platform" required placeholder="Discord, Zoom, etc." />
+            </div>
+            <div class="form-group">
+              <label for="username">Username on that platform <span class="req">*</span></label>
+              <input type="text" id="username" name="username" required placeholder="Your username" />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="extra">Anything you'd like to add?</label>
+            <textarea id="extra" name="extra" rows="4" placeholder="Tell us more about yourself, your work, links to portfolio..."></textarea>
+          </div>
+          <div class="form-agree">
+            <label class="checkbox-label">
+              <input type="checkbox" required />
+              <span>I understand I am volunteering and am not promised payment of any kind.</span>
+            </label>
+          </div>
+          <button type="submit" class="btn-primary submit-btn" id="submitBtn">Submit Application</button>
+          <p class="form-sending" id="formSending" style="display:none; color: var(--accent); font-size:0.9rem; letter-spacing:0.08em;">Sending...</p>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <span>✓</span> Application received! We'll be in touch soon.
+        </div>
+        <div class="form-error" id="formError">
+          <span>✕</span> Something went wrong. Please try again or reach out on Discord.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="index.html#about">About</a>
+        <a href="games.html">Games</a>
+        <a href="careers.html">Hiring</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

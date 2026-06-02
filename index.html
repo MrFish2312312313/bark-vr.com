@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">ABOUT US</a>
+      <a href="games.html">GAMES</a>
+      <a href="careers.html">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="games.html" onclick="toggleMenu()">GAMES</a>
+    <a href="careers.html" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="hero-content">
+      <img src="logo-wide.png" alt="BARK" class="hero-logo-img" />
+      <p class="hero-sub">Making <strong>REAL</strong> games with a <strong>REAL</strong> community</p>
+      <a href="games.html" class="btn-primary">Explore All Games</a>
+    </div>
+    <div class="hero-scroll">SCROLL ↓</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-label">// WHO WE ARE</div>
+      <h2 class="section-title">The Team</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="bumstronaut.webp" alt="Bumstronaut" />
+          </div>
+          <div class="team-info">
+            <h3>Bumstronaut</h3>
+            <p>Developer</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar fish-avatar">
+            <img src="mrfish.webp" alt="Mr.Fish" />
+          </div>
+          <div class="team-info">
+            <h3>Mr.Fish</h3>
+            <p>Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="join-cta">
+        <p>We're looking for passionate creators to join us</p>
+        <a href="careers.html" class="btn-secondary">Apply Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMES TEASER -->
+  <section class="games-teaser">
+    <div class="container">
+      <div class="section-label">// WHAT WE MAKE</div>
+      <h2 class="section-title">Our Games</h2>
+      <div class="game-card-home">
+        <div class="game-card-content">
+          <span class="game-tag">VR · SOCIAL · FREE</span>
+          <h3>BARK</h3>
+          <p>One big map, one small community. Enter Bark — a world of the Treelatves. Hang out with others, play at the arcade, and enjoy the world of Bark!</p>
+          <div class="game-links">
+            <a href="https://www.meta.com/experiences/bark/29216575844607934/" target="_blank" class="btn-primary">Download on Meta</a>
+            <a href="games.html" class="btn-ghost">View Details →</a>
+          </div>
+        </div>
+        <div class="game-card-visual">
+          <img src="bark-screenshot1.png" alt="BARK gameplay" class="game-screenshot-img" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="index.html#about">About</a>
+        <a href="games.html">Games</a>
+        <a href="careers.html">Hiring</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
