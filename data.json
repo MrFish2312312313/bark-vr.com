@@ -208,6 +208,13 @@
         "description": "Just a little guy!",
         "image": "media/1780419592219-image_2026-05-16_113608133-removebg-preview.png",
         "effect": "He quacks if you click your trigger while holding him!"
+      },
+      {
+        "id": "bark-boy",
+        "name": "Bark Boy",
+        "description": "\"Come on mom, just one more game?\"",
+        "image": "media/1780419706259-SampleScene_Custom..._02.06.2026_12-00-54.png",
+        "effect": "Let's you spy on the Electric Arcade"
       }
     ],
     "cosmetics": [],
