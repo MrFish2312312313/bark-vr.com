@@ -129,6 +129,10 @@
     "extrasForecastDisclaimer": "Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page.",
     "careers_role_artist_title": "Art Director"
   },
+  "woodOverrides": {
+    "Bean":            { "cannotGet": true },
+    "easter special":  { "cannotGet": true }
+  },
   "slotDuration": 300,
   "seasons": [
     {

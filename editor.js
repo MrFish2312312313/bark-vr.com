@@ -707,26 +707,91 @@ async function renderWoodSection() {
     return;
   }
 
-  const totalWeight = types.reduce((s, w) => s + (w.rarityWeight || 1), 0);
+  const overrides = (BarkEditor.data && BarkEditor.data.woodOverrides) || {};
+
+  // Rarity denominator: only obtainable woods. cannotGet are excluded so the
+  // displayed odds reflect what's actually in the rotation.
+  const obtainable = types.filter(w => !(overrides[w.woodID] && overrides[w.woodID].cannotGet));
+  const totalWeight = obtainable.reduce((s, w) => s + (w.rarityWeight || 1), 0) || 1;
 
   grid.innerHTML = types.map(w => {
-    const chance  = (w.rarityWeight || 1) / totalWeight;
-    const oneInX  = Math.round(1 / chance);
-    const players = counts[w.woodID] || 0;
+    const ov = overrides[w.woodID] || {};
+    const cantGet   = !!ov.cannotGet;
+    const isLimited = !!ov.isLimited;
+    const players   = counts[w.woodID] || 0;
+
+    let rarityText;
+    if (cantGet) {
+      rarityText = 'UNOBTAINABLE';
+    } else {
+      const chance = (w.rarityWeight || 1) / totalWeight;
+      const oneInX = Math.round(1 / chance);
+      rarityText = `1 in ${oneInX}`;
+    }
+
+    const classes = ['wood-card'];
+    if (w.isFancyWood) classes.push('wood-card-fancy');
+    if (cantGet)       classes.push('wood-card-cantget');
+    if (isLimited)     classes.push('wood-card-limited');
+
     return `
-      <div class="wood-card ${w.isFancyWood ? 'wood-card-fancy' : ''}">
+      <div class="${classes.join(' ')}">
+        <div class="wood-badges">
+          ${isLimited ? `<span class="badge badge-limited">LIMITED</span>` : ''}
+          ${cantGet   ? `<span class="badge badge-cantget">UNOBTAINABLE</span>` : ''}
+        </div>
         <div class="wood-card-head">
           <h4 class="wood-card-name">${escapeHtml(w.woodID)}${w.isFancyWood ? ' <span class="wood-fancy-star">★</span>' : ''}</h4>
-          <span class="wood-card-rarity">1 in ${oneInX}</span>
+          <span class="wood-card-rarity">${escapeHtml(rarityText)}</span>
         </div>
         <div class="wood-card-count">
           <span class="wood-card-count-num">${players}</span>
           <span class="wood-card-count-label">player${players === 1 ? '' : 's'}</span>
         </div>
+        ${BarkEditor.editing ? `
+          <div class="edit-overlay" onclick="event.stopPropagation()">
+            <button class="edit-btn" onclick="openWoodOverrideModal('${escapeAttr(w.woodID)}')">✎</button>
+          </div>
+        ` : ''}
       </div>
     `;
   }).join('');
 }
+
+function openWoodOverrideModal(woodID) {
+  if (!BarkEditor.data.woodOverrides) BarkEditor.data.woodOverrides = {};
+  const cur = BarkEditor.data.woodOverrides[woodID] || {};
+
+  showModal(`Wood: ${woodID}`, `
+    <p class="modal-hint" style="margin-bottom:14px;">
+      Visual-only flags. These don't change anything in the game — they only adjust how this wood is displayed on the site.
+    </p>
+    <label class="checkbox-row">
+      <input type="checkbox" id="modalWoodCantGet" ${cur.cannotGet ? 'checked' : ''} />
+      <span><strong>UNOBTAINABLE</strong> — show greyed out with a pink "UNOBTAINABLE" badge; exclude from the rarity-odds math</span>
+    </label>
+    <label class="checkbox-row">
+      <input type="checkbox" id="modalWoodLimited" ${cur.isLimited ? 'checked' : ''} />
+      <span><strong>LIMITED</strong> — show a magenta "LIMITED" badge</span>
+    </label>
+  `, async () => {
+    const next = {};
+    if (document.getElementById('modalWoodCantGet').checked) next.cannotGet = true;
+    if (document.getElementById('modalWoodLimited').checked) next.isLimited = true;
+
+    if (Object.keys(next).length === 0) {
+      delete BarkEditor.data.woodOverrides[woodID]; // clean up empty entries
+    } else {
+      BarkEditor.data.woodOverrides[woodID] = next;
+    }
+    BarkEditor.dirty = true;
+    renderWoodSection();
+    updateEditorBar();
+    return true;
+  });
+}
+
+window.openWoodOverrideModal = openWoodOverrideModal;
 
 // Refresh counts periodically while on the extras page
 let _woodTick = null;

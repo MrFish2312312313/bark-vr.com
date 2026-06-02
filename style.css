@@ -1664,6 +1664,48 @@ body.editing .inline-editable.inline-editing {
   background: linear-gradient(160deg, rgba(255,60,172,0.08), rgba(0,229,255,0.03));
 }
 .wood-card-fancy:hover { border-color: #ff7eb6; }
+
+/* Cannot-get woods — desaturated, dimmed, badge-overlaid */
+.wood-card-cantget {
+  filter: grayscale(0.85) brightness(0.7);
+  opacity: 0.78;
+}
+.wood-card-cantget .wood-card-rarity {
+  color: var(--accent2);
+  font-weight: 700;
+}
+.wood-card-cantget:hover {
+  filter: grayscale(0.7) brightness(0.8);
+  opacity: 1;
+}
+
+/* Editors can still see + click cards in cantget state */
+body.editing .wood-card-cantget { pointer-events: auto; }
+
+/* Stacked badges sit at the top-right of a wood card */
+.wood-card { position: relative; }
+.wood-badges {
+  position: absolute;
+  top: 8px; right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  z-index: 2;
+  filter: none;
+}
+.wood-card-cantget .wood-badges { filter: none; }
+.badge-cantget {
+  background: var(--accent2);
+  color: #fff;
+}
+
+/* Edit overlay on wood cards is bottom-right so it doesn't fight with badges */
+.wood-card .edit-overlay {
+  top: auto;
+  bottom: 8px;
+  right: 8px;
+}
 .wood-card-head {
   display: flex;
   justify-content: space-between;
