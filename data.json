@@ -312,6 +312,13 @@
         "description": "Comes with the Basement Boss Bundle",
         "image": "media/1780427039434-SampleScene_Custom..._02.06.2026_14-02-42.png",
         "effect": "If you click your trigger while holding the controller, it plays 8 bit game noises"
+      },
+      {
+        "id": "cow",
+        "name": "Cow",
+        "description": "Bumstronaut's favorite item, the sounds it makes is just Bumstronaut going \"moo\"",
+        "image": "media/1780427259838-SampleScene_Custom..._02.06.2026_14-06-00.png",
+        "effect": "Besides being an absolute adorable creature, it moos when you click your trigger while holding it."
       }
     ],
     "cosmetics": [],
