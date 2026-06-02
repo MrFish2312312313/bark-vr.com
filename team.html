@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy | BARKVR</title>
+  <title>Team Member | BARKVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <nav>
     <a href="index.html" class="nav-logo">
       <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
     </a>
     <div class="nav-links">
-      <a href="index.html#about">ABOUT US</a>
+      <a href="index.html#about" class="active">ABOUT US</a>
       <a href="games.html">GAMES</a>
       <a href="careers.html">HIRING</a>
     </div>
@@ -26,22 +27,24 @@
     <a href="games.html" onclick="toggleMenu()">GAMES</a>
     <a href="careers.html" onclick="toggleMenu()">HIRING</a>
   </div>
-  <section class="page-hero" style="min-height:30vh;">
-    <div class="hero-bg"><div class="grid-overlay"></div></div>
-    <div class="page-hero-content"><h1>Privacy Policy</h1></div>
-  </section>
-  <section class="privacy-section">
-    <div class="container prose">
-      <p><strong>Last updated: 2026</strong></p>
-      <p>BARKVR ("we", "us", or "our") operates this website. This page informs you of our policies regarding the collection, use, and disclosure of personal information.</p>
-      <h3>Information We Collect</h3>
-      <p>We collect information you provide directly to us, such as when you submit an application through our hiring form. This may include your name, email address, pronouns, and other contact information.</p>
-      <h3>How We Use Information</h3>
-      <p>We use the information we collect to review job applications, contact applicants, and improve our services. Application data is sent directly to our team via Discord.</p>
-      <h3>Contact</h3>
-      <p>If you have any questions about this privacy policy, please reach out through our games page or social channels.</p>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// THE TEAM</div>
+      <h1>MEMBER</h1>
     </div>
   </section>
+
+  <section class="member-section">
+    <div class="team-member-target">
+      <!-- rendered by editor.js -->
+    </div>
+  </section>
+
   <footer>
     <div class="container footer-inner">
       <a href="index.html" class="footer-logo">
@@ -56,6 +59,7 @@
       <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
     </div>
   </footer>
+
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js"></script>
   <script src="editor.js"></script>

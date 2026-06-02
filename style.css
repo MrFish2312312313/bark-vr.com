@@ -880,3 +880,391 @@ footer {
   letter-spacing: 0.05em;
 }
 .form-error.show { display: block; }
+
+/* ============================================================
+   EDITOR MODE  —  pineapple-flavored CMS for the BARK site
+   ============================================================ */
+
+/* Floating editor bar at the bottom of every page */
+.editor-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(8,11,16,0.96);
+  border-top: 1px solid var(--accent);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 -4px 20px rgba(0,229,255,0.15);
+}
+.editor-bar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.editor-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.editor-status strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.editor-status em {
+  color: var(--accent2);
+  font-style: normal;
+  font-weight: 600;
+}
+.editor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.editor-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.editor-actions .btn-primary,
+.editor-actions .btn-secondary,
+.editor-actions .btn-ghost {
+  padding: 8px 16px;
+  font-size: 0.75rem;
+}
+
+/* Push page content up only when the editor bar is mounted */
+body.has-editor-bar { padding-bottom: 60px; }
+
+/* When in EDITING mode, give a colored frame so it's obvious */
+body.editing {
+  outline: 3px solid var(--accent2);
+  outline-offset: -3px;
+}
+
+/* Per-card edit overlay */
+.edit-overlay {
+  position: absolute;
+  top: 8px; right: 8px;
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+.team-card, .game-card-home, .game-detail-inner {
+  position: relative;
+}
+.edit-btn {
+  background: rgba(0,0,0,0.85);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.15s, color 0.15s;
+}
+.edit-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+.edit-btn-danger {
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.edit-btn-danger:hover {
+  background: var(--accent2);
+  color: #000;
+}
+
+/* The "+ Add Member" card */
+.team-card.add-card {
+  border-style: dashed;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+.team-card.add-card:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.add-plus {
+  font-size: 3rem;
+  line-height: 1;
+  font-family: var(--font-display);
+}
+.add-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.add-game-btn {
+  display: block;
+  margin: 32px auto 0;
+}
+
+/* Team cards as links (clickable to detail page) */
+.team-card-link {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- TEAM DETAIL PAGE ---- */
+.member-detail {
+  padding: 40px 24px 80px;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 36px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+.member-detail-inner {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.member-photo {
+  width: 280px;
+  height: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+}
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.member-photo.fish-avatar img { object-position: center center; }
+.member-body h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 0.04em;
+  margin: 10px 0 24px;
+}
+.member-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 560px;
+  white-space: pre-wrap;
+}
+.member-edit-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-ghost.danger { color: var(--accent2); }
+.btn-ghost.danger:hover { color: #ff7fcb; }
+
+@media (max-width: 768px) {
+  .member-detail-inner { grid-template-columns: 1fr; gap: 28px; }
+  .member-photo { width: 100%; max-width: 320px; height: auto; aspect-ratio: 1; }
+}
+
+/* ---- MODAL ---- */
+.bark-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.bark-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+}
+.bark-modal-card {
+  position: relative;
+  background: var(--bg2);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  width: min(620px, 100%);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 60px rgba(0,229,255,0.2);
+}
+.bark-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.bark-modal-head h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+.bark-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.15s;
+}
+.bark-modal-close:hover { color: var(--accent2); }
+.bark-modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.bark-modal-body label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 14px 0 6px;
+}
+.bark-modal-body input,
+.bark-modal-body textarea,
+.bark-modal-body select {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.bark-modal-body input:focus,
+.bark-modal-body textarea:focus,
+.bark-modal-body select:focus { border-color: var(--accent); }
+.bark-modal-body textarea { resize: vertical; min-height: 80px; }
+.bark-modal-body input[type="file"] {
+  padding: 6px;
+  cursor: pointer;
+}
+.modal-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-style: italic;
+}
+.img-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.img-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.img-preview.wide {
+  width: 140px;
+  height: 80px;
+}
+.bark-modal-foot {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Review editor rows */
+.review-edit-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 2fr auto;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.review-edit-row select,
+.review-edit-row input { padding: 8px 10px; font-size: 0.85rem; }
+.remove-review-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.remove-review-btn:hover {
+  color: var(--accent2);
+  border-color: var(--accent2);
+}
+.add-review-btn {
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .review-edit-row { grid-template-columns: 1fr; }
+}
+
+/* Spinner overlay */
+.bark-spinner {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.bark-spinner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.bark-spin {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(0,229,255,0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: barkSpin 0.9s linear infinite;
+}
+@keyframes barkSpin {
+  to { transform: rotate(360deg); }
+}

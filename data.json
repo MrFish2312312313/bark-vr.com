@@ -1,0 +1,39 @@
+{
+  "team": [
+    {
+      "id": "bumstronaut",
+      "name": "Bumstronaut",
+      "role": "Developer",
+      "photo": "bumstronaut.webp",
+      "avatarClass": "",
+      "description": "Bark developer. Builds the stuff that makes the world tick."
+    },
+    {
+      "id": "mrfish",
+      "name": "Mr.Fish",
+      "role": "Developer",
+      "photo": "mrfish.webp",
+      "avatarClass": "fish-avatar",
+      "description": "Bark developer. Lover of small fish and big features."
+    }
+  ],
+  "games": [
+    {
+      "id": "bark",
+      "name": "BARK",
+      "tag": "VR · SOCIAL · FREE",
+      "tagline": "ONE BIG MAP, ONE SMALL COMMUNITY",
+      "shortDesc": "One big map, one small community. Enter Bark — a world of the Treelatves. Hang out with others, play at the arcade, and enjoy the world of Bark!",
+      "fullDesc": "Enter Bark, a world of the Treelatves. In Bark, you hang out with others, play at the new arcade, and enjoy the world of Bark!",
+      "downloadUrl": "https://www.meta.com/experiences/bark/29216575844607934/",
+      "downloadLabel": "META QUEST",
+      "screenshot": "bark-screenshot1.png",
+      "morePlatforms": "More platforms coming soon...",
+      "reviews": [
+        { "stars": 5, "author": "King_chickennugget", "text": "Ohio" },
+        { "stars": 4, "author": "StarProgramPillow", "text": "Really good game! Can't wait for the rat DLC!" },
+        { "stars": 5, "author": "llamaboi1", "text": "This game is so amazing 👍 if you don't like this, you're a stinky head" }
+      ]
+    }
+  ]
+}
