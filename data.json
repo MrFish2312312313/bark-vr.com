@@ -438,6 +438,13 @@
         "description": "\"I know where you stand. Silent in the trees.\"",
         "image": "media/1780510007804-SampleScene_Custom..._03.06.2026_13-04-53.png",
         "effect": "Grants songs Ode To Sleep, and Trees by Twenty One Pilots"
+      },
+      {
+        "id": "walkie-talkie",
+        "name": "Walkie Talkie",
+        "description": "\"Terry, you there?\"",
+        "image": "media/1780510109825-SampleScene_Custom..._03.06.2026_13-07-26.png",
+        "effect": "Nothing as of now, future plans"
       }
     ],
     "cosmetics": [],
