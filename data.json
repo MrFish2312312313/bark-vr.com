@@ -274,7 +274,7 @@
       {
         "id": "blurryface",
         "name": "Blurryface",
-        "description": "\"My name's Blurryface an i care what you think\"",
+        "description": "\"My name's Blurryface and i care what you think\"",
         "image": "media/1780421363611-SampleScene_Custom..._02.06.2026_12-28-23.png",
         "effect": "Grants access to Songs Stressed out and Message Man by Twenty One Pilots"
       },
@@ -382,11 +382,137 @@
         "description": "\"Fast food greasy taco i love\"",
         "image": "media/1780430096091-SampleScene_Custom..._02.06.2026_14-53-26.png",
         "effect": "Grants access to songs Hole In The Ground, and Taco Bell Saga by Tyler Joseph (Twenty One Pilots lead singer)"
+      },
+      {
+        "id": "paint",
+        "name": "Paint",
+        "description": "Very Glowy",
+        "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
+        "effect": "Does nothing, hopefully future feature"
+      },
+      {
+        "id": "puke",
+        "name": "Puke",
+        "description": "Puke is the best, CW: PukeWorld in yeeps",
+        "image": "media/1780508644394-SampleScene_Custom..._03.06.2026_12-43-05.png",
+        "effect": "Makes noises when you right click while holding him"
+      },
+      {
+        "id": "regional-at-best",
+        "name": "Regional At Best",
+        "description": "\"your an angel fallen down, won't you tell us of the clouds.\"",
+        "image": "media/1780508842064-SampleScene_Custom..._03.06.2026_12-44-59.png",
+        "effect": "Grants access to songs Ruby, Two, and Lovely (remastered) by Twenty One Pilots"
+      },
+      {
+        "id": "scaled-and-icy",
+        "name": "Scaled And Icy",
+        "description": "\"I know it's over, I was born a choker\"",
+        "image": "media/1780508968124-SampleScene_Custom..._03.06.2026_12-48-23.png",
+        "effect": "Grants access to songs Choker, and Formidable by Twenty One Pilots"
+      },
+      {
+        "id": "shroom",
+        "name": "Shroom",
+        "description": "\"Everything is huge????????\"",
+        "image": "media/1780509112823-SampleScene_Custom..._03.06.2026_12-51-12.png",
+        "effect": "Shrinks you when you click your trigger while holding it"
+      },
+      {
+        "id": "trench",
+        "name": "Trench",
+        "description": "\"Don't get me wrong the rise in awareness is beating a stigma that no longer scares us.\"",
+        "image": "media/1780509665809-SampleScene_Custom..._03.06.2026_12-56-08.png",
+        "effect": "Grants access to songs Neon Gravestones, and Nico and the Niners by Twenty One Pilots"
+      },
+      {
+        "id": "twenty-one-pilots-self-titled",
+        "name": "Twenty One Pilots (Self-Titled)",
+        "description": "\"I won't fall in love with falling.\"",
+        "image": "media/1780509861088-SampleScene_Custom..._03.06.2026_13-02-22.png",
+        "effect": "Grants access to songs Air Catcher, and Trapdoor by Twenty One Pilots"
+      },
+      {
+        "id": "vessel",
+        "name": "Vessel",
+        "description": "\"I know where you stand. Silent in the trees.\"",
+        "image": "media/1780510007804-SampleScene_Custom..._03.06.2026_13-04-53.png",
+        "effect": "Grants songs Ode To Sleep, and Trees by Twenty One Pilots"
+      },
+      {
+        "id": "walkie-talkie",
+        "name": "Walkie Talkie",
+        "description": "\"Terry, you there?\"",
+        "image": "media/1780510109825-SampleScene_Custom..._03.06.2026_13-07-26.png",
+        "effect": "Nothing as of now, future plans"
+      },
+      {
+        "id": "water-gun",
+        "name": "Water Gun",
+        "description": "*Pew Pew*",
+        "image": "media/1780510195829-SampleScene_Custom..._03.06.2026_13-08-54.png",
+        "effect": "Nothing yet, has future plans"
+      },
+      {
+        "id": "flash-on-my-light-till-i-illuminate-an-area",
+        "name": "Flash on my light till i illuminate an area",
+        "description": "LemonF1 named it that, take it up with him...",
+        "image": "media/1780510486876-SampleScene_Custom..._03.06.2026_13-11-56.png",
+        "effect": "Turns on the light when you click your trigger while holding it"
+      },
+      {
+        "id": "domino",
+        "name": "Domino",
+        "description": "\"So satisfying\"",
+        "image": "media/1780510630633-SampleScene_Custom..._03.06.2026_13-16-30.png",
+        "effect": "Does domino effect"
+      },
+      {
+        "id": "duck-sergeant",
+        "name": "Duck Sergeant",
+        "description": "\"HE'S GOT A GUN!\"",
+        "image": "media/1780511798307-SampleScene_Custom..._03.06.2026_13-35-10.png",
+        "effect": "Pulls out some crazy guns and quacks when you click your trigger"
+      },
+      {
+        "id": "bowling-pin",
+        "name": "Bowling Pin",
+        "description": "*clink*",
+        "image": "media/1780512145802-SampleScene_Custom..._03.06.2026_13-38-20.png",
+        "effect": "Bowling Pin Stuff"
+      },
+      {
+        "id": "bowling-ball",
+        "name": "Bowling Ball",
+        "description": "*Thunka*",
+        "image": "media/1780512365415-SampleScene_Custom..._03.06.2026_13-43-17.png",
+        "effect": "Bowling Ball Stuff"
+      },
+      {
+        "id": "wooden-rectangle",
+        "name": "Wooden Rectangle",
+        "description": "Yay..... wood",
+        "image": "media/1780512691408-SampleScene_Custom..._03.06.2026_13-50-33.png",
+        "effect": "Can be used for very buggy Jenga"
+      },
+      {
+        "id": "bark-chip",
+        "name": "Bark Chip",
+        "description": "17 Different chips, very tasty. Get them in the chip machine at the Electric Arcade",
+        "image": "media/1780512882440-SampleScene_Custom..._03.06.2026_13-52-58.png",
+        "effect": "Changes your woodtype for a session, you eat them, they're tasty."
       }
     ],
     "cosmetics": [],
     "maps": [],
-    "npcs": []
+    "npcs": [
+      {
+        "id": "phil",
+        "name": "Phil",
+        "description": "A tan cube that flops around, swaps cosmetics, and somehow controls the trelative's gravity?",
+        "image": "media/1780524275529-SampleScene_Custom..._03.06.2026_17-03-02.png"
+      }
+    ]
   },
   "slotDuration": 300,
   "seasons": [
