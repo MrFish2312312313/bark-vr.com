@@ -389,6 +389,13 @@
         "description": "Very Glowy",
         "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
         "effect": "Does nothing, hopefully future feature"
+      },
+      {
+        "id": "puke",
+        "name": "Puke",
+        "description": "Puke is the best, CW: PukeWorld in yeeps",
+        "image": "media/1780508644394-SampleScene_Custom..._03.06.2026_12-43-05.png",
+        "effect": "Makes noises when you right click while holding him"
       }
     ],
     "cosmetics": [],
