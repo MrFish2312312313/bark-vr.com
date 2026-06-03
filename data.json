@@ -403,6 +403,13 @@
         "description": "\"your an angel fallen down, won't you tell us of the clouds.\"",
         "image": "media/1780508842064-SampleScene_Custom..._03.06.2026_12-44-59.png",
         "effect": "Grants access to songs Ruby, Two, and Lovely (remastered) by Twenty One Pilots"
+      },
+      {
+        "id": "scaled-and-icy",
+        "name": "Scaled And Icy",
+        "description": "\"I know it's over, I was born a choker\"",
+        "image": "media/1780508968124-SampleScene_Custom..._03.06.2026_12-48-23.png",
+        "effect": "Grants access to songs Choker, and Formidable by Twenty One Pilots"
       }
     ],
     "cosmetics": [],
