@@ -396,6 +396,13 @@
         "description": "Puke is the best, CW: PukeWorld in yeeps",
         "image": "media/1780508644394-SampleScene_Custom..._03.06.2026_12-43-05.png",
         "effect": "Makes noises when you right click while holding him"
+      },
+      {
+        "id": "regional-at-best",
+        "name": "Regional At Best",
+        "description": "\"your an angel fallen down, won't you tell us of the clouds.\"",
+        "image": "media/1780508842064-SampleScene_Custom..._03.06.2026_12-44-59.png",
+        "effect": "Grants access to songs Ruby, Two, and Lovely (remastered) by Twenty One Pilots"
       }
     ],
     "cosmetics": [],
