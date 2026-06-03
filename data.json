@@ -382,6 +382,13 @@
         "description": "\"Fast food greasy taco i love\"",
         "image": "media/1780430096091-SampleScene_Custom..._02.06.2026_14-53-26.png",
         "effect": "Grants access to songs Hole In The Ground, and Taco Bell Saga by Tyler Joseph (Twenty One Pilots lead singer)"
+      },
+      {
+        "id": "paint",
+        "name": "Paint",
+        "description": "Very Glowy",
+        "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
+        "effect": "Does nothing, hopefully future feature"
       }
     ],
     "cosmetics": [],
