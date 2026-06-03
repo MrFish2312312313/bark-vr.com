@@ -494,6 +494,13 @@
         "description": "Yay..... wood",
         "image": "media/1780512691408-SampleScene_Custom..._03.06.2026_13-50-33.png",
         "effect": "Can be used for very buggy Jenga"
+      },
+      {
+        "id": "bark-chip",
+        "name": "Bark Chip",
+        "description": "17 Different chips, very tasty. Get them in the chip machine at the Electric Arcade",
+        "image": "media/1780512882440-SampleScene_Custom..._03.06.2026_13-52-58.png",
+        "effect": "Changes your woodtype for a session, you eat them, they're tasty."
       }
     ],
     "cosmetics": [],
