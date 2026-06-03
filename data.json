@@ -535,6 +535,18 @@
         "name": "Creaks",
         "description": "Owns the shirt shop, close friends with Twigs. Mangrove woodtype.",
         "image": "media/1780527356753-SampleScene_Custom..._03.06.2026_17-55-06.png"
+      },
+      {
+        "id": "marco",
+        "name": "Marco",
+        "description": "Displays information at the info booth. Still waiting for a response from Polo. Has a weird relationship with the sun??? Plank woodtype.",
+        "image": "media/1780527550136-SampleScene_Custom..._03.06.2026_17-57-33.png"
+      },
+      {
+        "id": "twigs",
+        "name": "Twigs",
+        "description": "Owns the face shop, close fiends with Creaks. Dark Oak woodtype.",
+        "image": "media/1780527719298-SampleScene_Custom..._03.06.2026_17-59-59.png"
       }
     ]
   },
