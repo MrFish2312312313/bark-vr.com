@@ -517,6 +517,12 @@
         "name": "Trader John",
         "description": "Works at the Event Shop, finds a lot of cool items. He has the OGOG woodtype.",
         "image": "media/1780526803353-SampleScene_Custom..._03.06.2026_17-44-56.png"
+      },
+      {
+        "id": "buggs",
+        "name": "Buggs",
+        "description": "Runs the Holdables Shop. Palm woodtype.",
+        "image": "media/1780526908404-SampleScene_Custom..._03.06.2026_17-47-45.png"
       }
     ]
   },
