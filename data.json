@@ -505,7 +505,14 @@
     ],
     "cosmetics": [],
     "maps": [],
-    "npcs": []
+    "npcs": [
+      {
+        "id": "phil",
+        "name": "Phil",
+        "description": "A tan cube that flops around, swaps cosmetics, and somehow controls the trelative's gravity?",
+        "image": "media/1780524275529-SampleScene_Custom..._03.06.2026_17-03-02.png"
+      }
+    ]
   },
   "slotDuration": 300,
   "seasons": [
