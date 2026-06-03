@@ -452,6 +452,13 @@
         "description": "*Pew Pew*",
         "image": "media/1780510195829-SampleScene_Custom..._03.06.2026_13-08-54.png",
         "effect": "Nothing yet, has future plans"
+      },
+      {
+        "id": "flash-on-my-light-till-i-illuminate-an-area",
+        "name": "Flash on my light till i illuminate an area",
+        "description": "LemonF1 named it that, take it up with him...",
+        "image": "media/1780510486876-SampleScene_Custom..._03.06.2026_13-11-56.png",
+        "effect": "Turns on the light when you click your trigger while holding it"
       }
     ],
     "cosmetics": [],
