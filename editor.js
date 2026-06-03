@@ -40,6 +40,9 @@ const ALLOWED_EMAILS = [
 // DEV_EMAILS in dev-cloudscript.js (PlayFab CloudScript) for actions to work.
 const DEV_EMAILS = [
   'mrfeesh456@gmail.com',
+  'bumstronaut52@gmail.com',
+  'portergrahamrussell@icloud.com',
+  'mrfeesh456@gmail.com',
 ];
 
 // PlayFab title — used by developer.js to call ExecuteCloudScript.
