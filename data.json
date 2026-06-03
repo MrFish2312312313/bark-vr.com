@@ -417,6 +417,13 @@
         "description": "\"Everything is huge????????\"",
         "image": "media/1780509112823-SampleScene_Custom..._03.06.2026_12-51-12.png",
         "effect": "Shrinks you when you click your trigger while holding it"
+      },
+      {
+        "id": "trench",
+        "name": "Trench",
+        "description": "\"Don't get me wrong the rise in awareness is beating a stigma that no longer scares us.\"",
+        "image": "media/1780509665809-SampleScene_Custom..._03.06.2026_12-56-08.png",
+        "effect": "Grants access to songs Neon Gravestones, and Nico and the Niners by Twenty One Pilots"
       }
     ],
     "cosmetics": [],
