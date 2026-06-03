@@ -487,6 +487,13 @@
         "description": "*Thunka*",
         "image": "media/1780512365415-SampleScene_Custom..._03.06.2026_13-43-17.png",
         "effect": "Bowling Ball Stuff"
+      },
+      {
+        "id": "wooden-rectangle",
+        "name": "Wooden Rectangle",
+        "description": "Yay..... wood",
+        "image": "media/1780512691408-SampleScene_Custom..._03.06.2026_13-50-33.png",
+        "effect": "Can be used for very buggy Jenga"
       }
     ],
     "cosmetics": [],
