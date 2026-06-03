@@ -473,6 +473,13 @@
         "description": "\"HE'S GOT A GUN!\"",
         "image": "media/1780511798307-SampleScene_Custom..._03.06.2026_13-35-10.png",
         "effect": "Pulls out some crazy guns and quacks when you click your trigger"
+      },
+      {
+        "id": "bowling-pin",
+        "name": "Bowling Pin",
+        "description": "*clink*",
+        "image": "media/1780512145802-SampleScene_Custom..._03.06.2026_13-38-20.png",
+        "effect": "Bowling Pin Stuff"
       }
     ],
     "cosmetics": [],
