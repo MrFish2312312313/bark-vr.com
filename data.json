@@ -547,6 +547,12 @@
         "name": "Twigs",
         "description": "Owns the face shop, close fiends with Creaks. Dark Oak woodtype.",
         "image": "media/1780527719298-SampleScene_Custom..._03.06.2026_17-59-59.png"
+      },
+      {
+        "id": "beaker",
+        "name": "Beaker",
+        "description": "Owns the extra shop, kind of an introvert. Birch woodtype.",
+        "image": "media/1780527806310-SampleScene_Custom..._03.06.2026_18-02-42.png"
       }
     ]
   },
