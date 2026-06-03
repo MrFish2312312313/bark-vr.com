@@ -410,6 +410,13 @@
         "description": "\"I know it's over, I was born a choker\"",
         "image": "media/1780508968124-SampleScene_Custom..._03.06.2026_12-48-23.png",
         "effect": "Grants access to songs Choker, and Formidable by Twenty One Pilots"
+      },
+      {
+        "id": "shroom",
+        "name": "Shroom",
+        "description": "\"Everything is huge????????\"",
+        "image": "media/1780509112823-SampleScene_Custom..._03.06.2026_12-51-12.png",
+        "effect": "Shrinks you when you click your trigger while holding it"
       }
     ],
     "cosmetics": [],
