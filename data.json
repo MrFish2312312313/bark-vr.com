@@ -459,6 +459,13 @@
         "description": "LemonF1 named it that, take it up with him...",
         "image": "media/1780510486876-SampleScene_Custom..._03.06.2026_13-11-56.png",
         "effect": "Turns on the light when you click your trigger while holding it"
+      },
+      {
+        "id": "domino",
+        "name": "Domino",
+        "description": "\"So satisfying\"",
+        "image": "media/1780510630633-SampleScene_Custom..._03.06.2026_13-16-30.png",
+        "effect": "Does domino effect"
       }
     ],
     "cosmetics": [],
