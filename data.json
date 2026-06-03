@@ -529,6 +529,12 @@
         "name": "Aero",
         "description": "Runs the Hat shop, oldest trelative in the town. Rock woodtype.",
         "image": "media/1780527200307-SampleScene_Custom..._03.06.2026_17-50-58.png"
+      },
+      {
+        "id": "creaks",
+        "name": "Creaks",
+        "description": "Owns the shirt shop, close friends with Twigs. Mangrove woodtype.",
+        "image": "media/1780527356753-SampleScene_Custom..._03.06.2026_17-55-06.png"
       }
     ]
   },
