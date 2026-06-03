@@ -511,6 +511,12 @@
         "name": "Phil",
         "description": "A tan cube that flops around, swaps cosmetics, and somehow controls the trelative's gravity?",
         "image": "media/1780524275529-SampleScene_Custom..._03.06.2026_17-03-02.png"
+      },
+      {
+        "id": "trader-john",
+        "name": "Trader John",
+        "description": "Works at the Event Shop, finds a lot of cool items. He has the OGOG woodtype.",
+        "image": "media/1780526803353-SampleScene_Custom..._03.06.2026_17-44-56.png"
       }
     ]
   },
