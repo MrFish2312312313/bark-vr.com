@@ -466,6 +466,13 @@
         "description": "\"So satisfying\"",
         "image": "media/1780510630633-SampleScene_Custom..._03.06.2026_13-16-30.png",
         "effect": "Does domino effect"
+      },
+      {
+        "id": "duck-sergeant",
+        "name": "Duck Sergeant",
+        "description": "\"HE'S GOT A GUN!\"",
+        "image": "media/1780511798307-SampleScene_Custom..._03.06.2026_13-35-10.png",
+        "effect": "Pulls out some crazy guns and quacks when you click your trigger"
       }
     ],
     "cosmetics": [],
