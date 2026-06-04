@@ -797,6 +797,12 @@
         "name": "Duck Backpack",
         "description": "Quackuh",
         "image": "media/1780613577560-SampleScene_Custom..._04.06.2026_17-52-18.png"
+      },
+      {
+        "id": "badge-beta",
+        "name": "Badge Beta",
+        "description": "Beta testers get this",
+        "image": "media/1780613620934-SampleScene_Custom..._04.06.2026_17-53-20.png"
       }
     ],
     "maps": [
