@@ -123,6 +123,25 @@
       "morePlatforms": "None lol",
       "screenshot": "media/1780426247450-IMG_8377.png",
       "reviews": []
+    },
+    {
+      "id": "prolg",
+      "name": "Prolg!",
+      "tag": "Parakeet",
+      "tagline": "Glorp, But Backwards!",
+      "shortDesc": "In This game, you play as birds! you can chill, mess around, and check out sick cosmetics!",
+      "fullDesc": "You play as a bird and chill, that's all I have to say.",
+      "downloadUrl": "https://www.meta.com/en-gb/experiences/prolg/9264227240262432/",
+      "downloadLabel": "STORE",
+      "morePlatforms": "None lol",
+      "screenshot": "media/1780614949158-473391933_844206974425165_3859909773160671494_n.png",
+      "reviews": [
+        {
+          "stars": 5,
+          "author": "Bumstronaut",
+          "text": "W game, Y’all need to become Birb"
+        }
+      ]
     }
   ],
   "store": [
