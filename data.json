@@ -545,6 +545,12 @@
         "name": "Fire",
         "description": "AHHHHHHHHH, I'M ON FIRE",
         "image": "media/1780608897324-SampleScene_Custom..._04.06.2026_16-33-39.png"
+      },
+      {
+        "id": "cookie",
+        "name": "Cookie",
+        "description": "Made for Cookzie, an og cosmetic",
+        "image": "media/1780608969677-SampleScene_Custom..._04.06.2026_16-35-44.png"
       }
     ],
     "maps": [
