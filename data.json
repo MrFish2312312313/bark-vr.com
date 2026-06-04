@@ -755,6 +755,12 @@
         "name": "Gyatt",
         "description": "\"why did we add this...\"",
         "image": "media/1780612619798-SampleScene_Custom..._04.06.2026_17-36-41.png"
+      },
+      {
+        "id": "kick-meh",
+        "name": "Kick Mehh'",
+        "description": "Ouch, why'd you do that?",
+        "image": "media/1780612945224-SampleScene_Custom..._04.06.2026_17-41-21.png"
       }
     ],
     "maps": [
