@@ -521,6 +521,18 @@
         "name": "Astronaut Helmet",
         "description": "Made for Bumstronaut, few people have this.",
         "image": "media/1780608455763-SampleScene_Custom..._04.06.2026_16-26-52.png"
+      },
+      {
+        "id": "beanie",
+        "name": "Beanie",
+        "description": "Made for Beanie, an absolute great hat btw",
+        "image": "media/1780608572962-SampleScene_Custom..._04.06.2026_16-28-58.png"
+      },
+      {
+        "id": "map-hat",
+        "name": "Map Hat",
+        "description": "A cosmetic for those who were there since the beginning.",
+        "image": "media/1780608653530-SampleScene_Custom..._04.06.2026_16-30-12.png"
       }
     ],
     "maps": [
