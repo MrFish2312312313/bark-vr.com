@@ -833,6 +833,18 @@
         "name": "Donor Badge",
         "description": "People who buy the trading cards get this",
         "image": "media/1780613861522-SampleScene_Custom..._04.06.2026_17-57-18.png"
+      },
+      {
+        "id": "discord-badge",
+        "name": "Discord Badge",
+        "description": "Players who link their account to discord get this",
+        "image": "media/1780613914108-SampleScene_Custom..._04.06.2026_17-58-00.png"
+      },
+      {
+        "id": "name-tag",
+        "name": "Name Tag",
+        "description": "Displays the player's trelative badge",
+        "image": "media/1780613989692-SampleScene_Custom..._04.06.2026_17-59-23.png"
       }
     ],
     "maps": [
