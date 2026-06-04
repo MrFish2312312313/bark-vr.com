@@ -719,6 +719,12 @@
         "name": "Jungle Ninja Cloak",
         "description": "Came in the Jungle Ninja Bundle",
         "image": "media/1780612288025-SampleScene_Custom..._04.06.2026_17-31-00.png"
+      },
+      {
+        "id": "explorer-shirt",
+        "name": "Explorer Shirt",
+        "description": "When in the jungle, you'll need this",
+        "image": "media/1780612355285-SampleScene_Custom..._04.06.2026_17-32-02.png"
       }
     ],
     "maps": [
