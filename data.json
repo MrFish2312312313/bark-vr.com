@@ -671,6 +671,12 @@
         "name": "Leaves",
         "description": "The original cosmetic, the best one.",
         "image": "media/1780611841835-SampleScene_Custom..._04.06.2026_17-23-32.png"
+      },
+      {
+        "id": "duck-leaves",
+        "name": "Duck Leaves",
+        "description": "Who's idea was this????????",
+        "image": "media/1780611885744-SampleScene_Custom..._04.06.2026_17-24-19.png"
       }
     ],
     "maps": [
