@@ -515,6 +515,12 @@
         "name": "Knight Helmet",
         "description": "One of the very first cosmetics in bark!",
         "image": "media/1780608390143-SampleScene_Custom..._04.06.2026_16-25-58.png"
+      },
+      {
+        "id": "astronaut-helmet",
+        "name": "Astronaut Helmet",
+        "description": "Made for Bumstronaut, few people have this.",
+        "image": "media/1780608455763-SampleScene_Custom..._04.06.2026_16-26-52.png"
       }
     ],
     "maps": [
