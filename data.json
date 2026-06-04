@@ -827,6 +827,12 @@
         "name": "Knawcheese Badge",
         "description": "People that played in the Knawcheese event got this",
         "image": "media/1780613807145-SampleScene_Custom..._04.06.2026_17-56-15.png"
+      },
+      {
+        "id": "donor-badge",
+        "name": "Donor Badge",
+        "description": "People who buy the trading cards get this",
+        "image": "media/1780613861522-SampleScene_Custom..._04.06.2026_17-57-18.png"
       }
     ],
     "maps": [
