@@ -665,6 +665,12 @@
         "name": "Bunny Ears",
         "description": "Are you sure those are from a bunny?",
         "image": "media/1780611795174-SampleScene_Custom..._04.06.2026_17-22-46.png"
+      },
+      {
+        "id": "leaves",
+        "name": "Leaves",
+        "description": "The original cosmetic, the best one.",
+        "image": "media/1780611841835-SampleScene_Custom..._04.06.2026_17-23-32.png"
       }
     ],
     "maps": [
