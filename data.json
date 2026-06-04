@@ -540,6 +540,12 @@
         "name": "OG Map",
         "description": "This is where it all begun,",
         "image": "media/1780608076177-SampleScene_Custom..._04.06.2026_16-20-52.png"
+      },
+      {
+        "id": "knawcheese-hideout",
+        "name": "Knawcheese Hideout",
+        "description": "Rat's and Geese gather here monthly to each cheese",
+        "image": "media/1780608158455-SampleScene_Custom..._04.06.2026_16-21-58.png"
       }
     ],
     "npcs": [
