@@ -683,6 +683,12 @@
         "name": "Bean Leaves",
         "description": "Beans",
         "image": "media/1780611943840-SampleScene_Custom..._04.06.2026_17-25-02.png"
+      },
+      {
+        "id": "tux",
+        "name": "Tux",
+        "description": "Made for Fence, then everybody",
+        "image": "media/1780612092642-SampleScene_Custom..._04.06.2026_17-27-51.png"
       }
     ],
     "maps": [
