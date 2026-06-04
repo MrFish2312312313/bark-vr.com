@@ -623,6 +623,12 @@
         "name": "Duck Hat",
         "description": "Turns you into a duck",
         "image": "media/1780611193193-SampleScene_Custom..._04.06.2026_17-12-52.png"
+      },
+      {
+        "id": "flagumble-hat",
+        "name": "Flagumble Hat",
+        "description": "HOW DARE YOU CALL YOURSELF THAT!!!!!!",
+        "image": "media/1780611249793-SampleScene_Custom..._04.06.2026_17-13-37.png"
       }
     ],
     "maps": [
