@@ -815,6 +815,12 @@
         "name": "Troy Badge",
         "description": "Only Troy has this",
         "image": "media/1780613704315-SampleScene_Custom..._04.06.2026_17-54-45.png"
+      },
+      {
+        "id": "scouter-badge",
+        "name": "Scouter Badge",
+        "description": "People that find us devs get this",
+        "image": "media/1780613743331-SampleScene_Custom..._04.06.2026_17-55-21.png"
       }
     ],
     "maps": [
