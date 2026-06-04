@@ -226,7 +226,8 @@
     "extrasForecastTitle": "Next Few Weathers",
     "extrasForecastDisclaimer": "Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page.",
     "careers_role_artist_title": "Art Director",
-    "games_hero_label": "// Crash Out Games'"
+    "games_hero_label": "// Crash Out Games'",
+    "extras_wood_title": "Trelative info"
   },
   "woodOverrides": {
     "Bean": {
