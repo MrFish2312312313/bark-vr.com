@@ -737,6 +737,12 @@
         "name": "Gamer Hoodie",
         "description": "Came in the Basement Boss Bundle. \"Eat Sleep Bark Repeat\"",
         "image": "media/1780612466382-SampleScene_Custom..._04.06.2026_17-33-45.png"
+      },
+      {
+        "id": "duck-shirt",
+        "name": "Duck Shirt",
+        "description": "Woah, even more duck!",
+        "image": "media/1780612506982-SampleScene_Custom..._04.06.2026_17-34-41.png"
       }
     ],
     "maps": [
