@@ -857,6 +857,12 @@
         "name": "Mod Badge But Better",
         "description": "It's better than before",
         "image": "media/1780614121550-SampleScene_Custom..._04.06.2026_18-01-16.png"
+      },
+      {
+        "id": "dev-badge",
+        "name": "Dev Badge",
+        "description": "Devs get this",
+        "image": "media/1780614196222-SampleScene_Custom..._04.06.2026_18-02-37.png"
       }
     ],
     "maps": [
