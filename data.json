@@ -809,6 +809,12 @@
         "name": "Mod Badge (OG)",
         "description": "OG mods get this",
         "image": "media/1780613666603-SampleScene_Custom..._04.06.2026_17-54-04.png"
+      },
+      {
+        "id": "troy-badge",
+        "name": "Troy Badge",
+        "description": "Only Troy has this",
+        "image": "media/1780613704315-SampleScene_Custom..._04.06.2026_17-54-45.png"
       }
     ],
     "maps": [
