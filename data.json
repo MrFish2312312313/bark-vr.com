@@ -677,6 +677,12 @@
         "name": "Duck Leaves",
         "description": "Who's idea was this????????",
         "image": "media/1780611885744-SampleScene_Custom..._04.06.2026_17-24-19.png"
+      },
+      {
+        "id": "bean-leaves",
+        "name": "Bean Leaves",
+        "description": "Beans",
+        "image": "media/1780611943840-SampleScene_Custom..._04.06.2026_17-25-02.png"
       }
     ],
     "maps": [
