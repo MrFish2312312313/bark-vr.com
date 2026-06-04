@@ -587,6 +587,18 @@
         "name": "Pot",
         "description": "Also made for Cornsquack",
         "image": "media/1780610289744-SampleScene_Custom..._04.06.2026_16-57-46.png"
+      },
+      {
+        "id": "explorer-hat",
+        "name": "Explorer Hat",
+        "description": "Out in the jungle, this hat is on your head",
+        "image": "media/1780610897235-SampleScene_Custom..._04.06.2026_17-07-42.png"
+      },
+      {
+        "id": "mushroom-hat",
+        "name": "Mushroom Hat",
+        "description": "Woahhhhh, Mushroom",
+        "image": "media/1780610938930-SampleScene_Custom..._04.06.2026_17-08-31.png"
       }
     ],
     "maps": [
