@@ -516,6 +516,12 @@
         "name": "Treehouse",
         "description": "Has a very long ladder to the top, which has both the name Badge machine, and the Paper Coin machine!",
         "image": "media/1780607769705-SampleScene_Custom..._04.06.2026_16-15-09.png"
+      },
+      {
+        "id": "electric-arcade",
+        "name": "Electric Arcade",
+        "description": "Gamble, buy fun prizes, and eat chips and this local hangout spot owned by Sparks!",
+        "image": "media/1780607859731-SampleScene_Custom..._04.06.2026_16-16-39.png"
       }
     ],
     "npcs": [
