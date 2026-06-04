@@ -791,6 +791,12 @@
         "name": "Pil the Backpack",
         "description": "Phil's 3rd cousin",
         "image": "media/1780613454148-SampleScene_Custom..._04.06.2026_17-50-30.png"
+      },
+      {
+        "id": "duck-backpack",
+        "name": "Duck Backpack",
+        "description": "Quackuh",
+        "image": "media/1780613577560-SampleScene_Custom..._04.06.2026_17-52-18.png"
       }
     ],
     "maps": [
