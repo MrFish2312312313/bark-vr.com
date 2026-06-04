@@ -155,6 +155,40 @@
       "morePlatforms": "None lol",
       "screenshot": "media/1780615383889-491828793_1235143434463344_6784687665786011564_n.png",
       "reviews": []
+    },
+    {
+      "id": "galaxy-war",
+      "name": "Galaxy War",
+      "tag": "Space",
+      "tagline": "By Starfish Games",
+      "shortDesc": "Galaxy War is currently a game where you can hang out with friends! Visit different planets, and have fun! \nGame Is still in development.",
+      "fullDesc": "Galaxy War is a game where you hang out with friends and visit different planets! The lobby is the station, where you can join lobbies and change you name, color, etc. There are many roles, like admin, owner, mod, Content Creator, and beta tester that all have their own badges or cosmetics.\nGame Is still in development.",
+      "downloadUrl": "https://www.meta.com/en-gb/experiences/galaxy-war/24132831529692223/",
+      "downloadLabel": "META QUEST",
+      "morePlatforms": "None lol",
+      "screenshot": "media/1780615725132-491822723_1507057846952290_5355702631908650620_n.webp",
+      "reviews": [
+        {
+          "stars": 5,
+          "author": "yixy.1",
+          "text": "GOATED This game may be small, but trust me. Its gonna be big"
+        },
+        {
+          "stars": 5,
+          "author": "thatyeepyfrog",
+          "text": "Cool i like making concept art"
+        },
+        {
+          "stars": 5,
+          "author": "StarProgramPillow",
+          "text": "Tuff ,Me like"
+        },
+        {
+          "stars": 5,
+          "author": "Mr._.Fish",
+          "text": "Goated, Very Good Game And Amazing Devs!"
+        }
+      ]
     }
   ],
   "store": [
