@@ -881,6 +881,12 @@
         "name": "1911 Gun",
         "description": "Pew PEw",
         "image": "media/1780614439282-SampleScene_Custom..._04.06.2026_18-06-52.png"
+      },
+      {
+        "id": "moustache",
+        "name": "Moustache",
+        "description": "Fua Fua hehehe",
+        "image": "media/1780614481064-SampleScene_Custom..._04.06.2026_18-07-42.png"
       }
     ],
     "maps": [
