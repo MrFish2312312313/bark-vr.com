@@ -617,6 +617,12 @@
         "name": "Bob The Frog",
         "description": "Hates when people look at his behind......",
         "image": "media/1780611139415-SampleScene_Custom..._04.06.2026_17-11-50.png"
+      },
+      {
+        "id": "duck-hat",
+        "name": "Duck Hat",
+        "description": "Turns you into a duck",
+        "image": "media/1780611193193-SampleScene_Custom..._04.06.2026_17-12-52.png"
       }
     ],
     "maps": [
