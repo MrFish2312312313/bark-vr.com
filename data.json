@@ -575,6 +575,12 @@
         "name": "Bryce's Sleepytime Hat",
         "description": "Snore",
         "image": "media/1780610072442-SampleScene_Custom..._04.06.2026_16-54-00.png"
+      },
+      {
+        "id": "corn-pot",
+        "name": "Corn Pot",
+        "description": "Made for Cornsquack",
+        "image": "media/1780610229369-SampleScene_Custom..._04.06.2026_16-55-11.png"
       }
     ],
     "maps": [
