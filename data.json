@@ -779,6 +779,12 @@
         "name": "Back Spear",
         "description": "Ouchie",
         "image": "media/1780613294127-SampleScene_Custom..._04.06.2026_17-47-57.png"
+      },
+      {
+        "id": "bag-pack",
+        "name": "Bag Pack",
+        "description": "How can you carry this?",
+        "image": "media/1780613381497-SampleScene_Custom..._04.06.2026_17-48-47.png"
       }
     ],
     "maps": [
