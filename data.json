@@ -863,6 +863,12 @@
         "name": "Dev Badge",
         "description": "Devs get this",
         "image": "media/1780614196222-SampleScene_Custom..._04.06.2026_18-02-37.png"
+      },
+      {
+        "id": "creator-badge",
+        "name": "Creator Badge",
+        "description": "People who get 5 cosmetics in the game get this",
+        "image": "media/1780614260029-SampleScene_Custom..._04.06.2026_18-03-31.png"
       }
     ],
     "maps": [
