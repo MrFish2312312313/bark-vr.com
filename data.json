@@ -503,7 +503,14 @@
         "effect": "Changes your woodtype for a session, you eat them, they're tasty."
       }
     ],
-    "cosmetics": [],
+    "cosmetics": [
+      {
+        "id": "top-hat",
+        "name": "Top Hat",
+        "description": "Oh so fancy",
+        "image": "media/1780608332839-SampleScene_Custom..._04.06.2026_16-25-11.png"
+      }
+    ],
     "maps": [
       {
         "id": "town-square",
