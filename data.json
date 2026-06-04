@@ -653,6 +653,12 @@
         "name": "Jungle Ninja Mask",
         "description": "Comes in the Jungle Ninja Bundle",
         "image": "media/1780611466215-SampleScene_Custom..._04.06.2026_17-17-20.png"
+      },
+      {
+        "id": "vr-headset",
+        "name": "VR Headset",
+        "description": "VR in VR? Weird.....",
+        "image": "media/1780611527349-SampleScene_Custom..._04.06.2026_17-18-17.png"
       }
     ],
     "maps": [
