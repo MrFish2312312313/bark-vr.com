@@ -749,6 +749,12 @@
         "name": "Ak",
         "description": "PEW PEW",
         "image": "media/1780612569931-SampleScene_Custom..._04.06.2026_17-35-50.png"
+      },
+      {
+        "id": "gyatt",
+        "name": "Gyatt",
+        "description": "\"why did we add this...\"",
+        "image": "media/1780612619798-SampleScene_Custom..._04.06.2026_17-36-41.png"
       }
     ],
     "maps": [
