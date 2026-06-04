@@ -571,6 +571,12 @@
         "name": "Sparks",
         "description": "Runs the Electric Arcade, he was truck by lighting when he was just a wee little twig, and it's infused into his dna!",
         "image": "media/1780607577066-SampleScene_Custom..._04.06.2026_16-12-01.png"
+      },
+      {
+        "id": "blue-bird",
+        "name": "Blue Bird",
+        "description": "He judges, silently.",
+        "image": "media/1780607623214-SampleScene_Custom..._04.06.2026_16-13-23.png"
       }
     ]
   },
