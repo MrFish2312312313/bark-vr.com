@@ -641,6 +641,12 @@
         "name": "Fraud Mod",
         "description": "Are you sure you're a moderator?",
         "image": "media/1780611371806-SampleScene_Custom..._04.06.2026_17-15-44.png"
+      },
+      {
+        "id": "bandana",
+        "name": "Bandana",
+        "description": "Woah, i'm so cool",
+        "image": "media/1780611414213-SampleScene_Custom..._04.06.2026_17-16-34.png"
       }
     ],
     "maps": [
