@@ -504,7 +504,14 @@
       }
     ],
     "cosmetics": [],
-    "maps": [],
+    "maps": [
+      {
+        "id": "town-square",
+        "name": "Town Square",
+        "description": "All the shops are here! Buy items, and have fun!",
+        "image": "media/1780607696583-SampleScene_Custom..._04.06.2026_16-14-02.png"
+      }
+    ],
     "npcs": [
       {
         "id": "phil",
