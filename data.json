@@ -611,6 +611,12 @@
         "name": "Headphones",
         "description": "Comes in the Basement Boss Bundle, gives you a mint condition headset dent.",
         "image": "media/1780611083366-SampleScene_Custom..._04.06.2026_17-10-39.png"
+      },
+      {
+        "id": "bob-the-frog",
+        "name": "Bob The Frog",
+        "description": "Hates when people look at his behind......",
+        "image": "media/1780611139415-SampleScene_Custom..._04.06.2026_17-11-50.png"
       }
     ],
     "maps": [
