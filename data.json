@@ -869,6 +869,12 @@
         "name": "Creator Badge",
         "description": "People who get 5 cosmetics in the game get this",
         "image": "media/1780614260029-SampleScene_Custom..._04.06.2026_18-03-31.png"
+      },
+      {
+        "id": "duck-badge",
+        "name": "Duck Badge",
+        "description": "Smol Duck",
+        "image": "media/1780614306433-SampleScene_Custom..._04.06.2026_18-04-48.png"
       }
     ],
     "maps": [
