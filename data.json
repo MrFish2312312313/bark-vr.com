@@ -599,6 +599,12 @@
         "name": "Mushroom Hat",
         "description": "Woahhhhh, Mushroom",
         "image": "media/1780610938930-SampleScene_Custom..._04.06.2026_17-08-31.png"
+      },
+      {
+        "id": "father-hat",
+        "name": "Father Hat",
+        "description": "The hat Bumstronaut's Father wears",
+        "image": "media/1780611002879-SampleScene_Custom..._04.06.2026_17-09-27.png"
       }
     ],
     "maps": [
