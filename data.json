@@ -701,6 +701,12 @@
         "name": "Bryce's Sleepytime Fit",
         "description": "Sleep Blue",
         "image": "media/1780612165237-SampleScene_Custom..._04.06.2026_17-28-57.png"
+      },
+      {
+        "id": "corn-s-sleepytime-fit",
+        "name": "Corn's Sleepytime Fit",
+        "description": "Sleep Yellow",
+        "image": "media/1780612205027-SampleScene_Custom..._04.06.2026_17-29-42.png"
       }
     ],
     "maps": [
