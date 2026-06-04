@@ -689,6 +689,12 @@
         "name": "Tux",
         "description": "Made for Fence, then everybody",
         "image": "media/1780612092642-SampleScene_Custom..._04.06.2026_17-27-51.png"
+      },
+      {
+        "id": "chicken-shirt",
+        "name": "Chicken Shirt",
+        "description": "Chicken",
+        "image": "media/1780612122461-SampleScene_Custom..._04.06.2026_17-28-27.png"
       }
     ],
     "maps": [
