@@ -803,6 +803,12 @@
         "name": "Badge Beta",
         "description": "Beta testers get this",
         "image": "media/1780613620934-SampleScene_Custom..._04.06.2026_17-53-20.png"
+      },
+      {
+        "id": "mod-badge-og",
+        "name": "Mod Badge (OG)",
+        "description": "OG mods get this",
+        "image": "media/1780613666603-SampleScene_Custom..._04.06.2026_17-54-04.png"
       }
     ],
     "maps": [
