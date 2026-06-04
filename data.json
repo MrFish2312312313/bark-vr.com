@@ -510,6 +510,12 @@
         "name": "Town Square",
         "description": "All the shops are here! Buy items, and have fun!",
         "image": "media/1780607696583-SampleScene_Custom..._04.06.2026_16-14-02.png"
+      },
+      {
+        "id": "treehouse",
+        "name": "Treehouse",
+        "description": "Has a very long ladder to the top, which has both the name Badge machine, and the Paper Coin machine!",
+        "image": "media/1780607769705-SampleScene_Custom..._04.06.2026_16-15-09.png"
       }
     ],
     "npcs": [
