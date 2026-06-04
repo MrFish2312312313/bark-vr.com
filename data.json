@@ -773,6 +773,12 @@
         "name": "Vines",
         "description": "\"How'd i get wrapped up in this?\"",
         "image": "media/1780613163108-SampleScene_Custom..._04.06.2026_17-45-38.png"
+      },
+      {
+        "id": "back-spear",
+        "name": "Back Spear",
+        "description": "Ouchie",
+        "image": "media/1780613294127-SampleScene_Custom..._04.06.2026_17-47-57.png"
       }
     ],
     "maps": [
