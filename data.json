@@ -581,6 +581,12 @@
         "name": "Corn Pot",
         "description": "Made for Cornsquack",
         "image": "media/1780610229369-SampleScene_Custom..._04.06.2026_16-55-11.png"
+      },
+      {
+        "id": "pot",
+        "name": "Pot",
+        "description": "Also made for Cornsquack",
+        "image": "media/1780610289744-SampleScene_Custom..._04.06.2026_16-57-46.png"
       }
     ],
     "maps": [
