@@ -743,6 +743,12 @@
         "name": "Duck Shirt",
         "description": "Woah, even more duck!",
         "image": "media/1780612506982-SampleScene_Custom..._04.06.2026_17-34-41.png"
+      },
+      {
+        "id": "ak",
+        "name": "Ak",
+        "description": "PEW PEW",
+        "image": "media/1780612569931-SampleScene_Custom..._04.06.2026_17-35-50.png"
       }
     ],
     "maps": [
