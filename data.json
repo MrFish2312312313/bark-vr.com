@@ -785,6 +785,12 @@
         "name": "Bag Pack",
         "description": "How can you carry this?",
         "image": "media/1780613381497-SampleScene_Custom..._04.06.2026_17-48-47.png"
+      },
+      {
+        "id": "pil-the-backpack",
+        "name": "Pil the Backpack",
+        "description": "Phil's 3rd cousin",
+        "image": "media/1780613454148-SampleScene_Custom..._04.06.2026_17-50-30.png"
       }
     ],
     "maps": [
