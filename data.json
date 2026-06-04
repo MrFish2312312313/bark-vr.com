@@ -875,6 +875,12 @@
         "name": "Duck Badge",
         "description": "Smol Duck",
         "image": "media/1780614306433-SampleScene_Custom..._04.06.2026_18-04-48.png"
+      },
+      {
+        "id": "1911-gun",
+        "name": "1911 Gun",
+        "description": "Pew PEw",
+        "image": "media/1780614439282-SampleScene_Custom..._04.06.2026_18-06-52.png"
       }
     ],
     "maps": [
