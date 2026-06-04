@@ -761,6 +761,18 @@
         "name": "Kick Mehh'",
         "description": "Ouch, why'd you do that?",
         "image": "media/1780612945224-SampleScene_Custom..._04.06.2026_17-41-21.png"
+      },
+      {
+        "id": "superbob",
+        "name": "Superbob",
+        "description": "He's everywhere, also grants access to song Superbob Theme",
+        "image": "media/1780613091210-SampleScene_Custom..._04.06.2026_17-44-14.png"
+      },
+      {
+        "id": "vines",
+        "name": "Vines",
+        "description": "\"How'd i get wrapped up in this?\"",
+        "image": "media/1780613163108-SampleScene_Custom..._04.06.2026_17-45-38.png"
       }
     ],
     "maps": [
