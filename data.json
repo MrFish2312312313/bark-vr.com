@@ -731,6 +731,12 @@
         "name": "Sweater",
         "description": "The first shirt made for everyone",
         "image": "media/1780612408415-SampleScene_Custom..._04.06.2026_17-33-03.png"
+      },
+      {
+        "id": "gamer-hoodie",
+        "name": "Gamer Hoodie",
+        "description": "Came in the Basement Boss Bundle. \"Eat Sleep Bark Repeat\"",
+        "image": "media/1780612466382-SampleScene_Custom..._04.06.2026_17-33-45.png"
       }
     ],
     "maps": [
