@@ -522,6 +522,12 @@
         "name": "Electric Arcade",
         "description": "Gamble, buy fun prizes, and eat chips and this local hangout spot owned by Sparks!",
         "image": "media/1780607859731-SampleScene_Custom..._04.06.2026_16-16-39.png"
+      },
+      {
+        "id": "homebase-station",
+        "name": "Homebase Station",
+        "description": "This is where you arrive in the map! has info boards and the LIV camera!",
+        "image": "media/1780607918930-SampleScene_Custom..._04.06.2026_16-17-54.png"
       }
     ],
     "npcs": [
