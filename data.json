@@ -565,6 +565,12 @@
         "name": "Fiesta Tree",
         "description": "Also just relaxes, wonder what's going on in his head,",
         "image": "media/1780607438266-SampleScene_Custom..._04.06.2026_16-09-05.png"
+      },
+      {
+        "id": "sparks",
+        "name": "Sparks",
+        "description": "Runs the Electric Arcade, he was truck by lighting when he was just a wee little twig, and it's infused into his dna!",
+        "image": "media/1780607577066-SampleScene_Custom..._04.06.2026_16-12-01.png"
       }
     ]
   },
