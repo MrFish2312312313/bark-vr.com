@@ -563,6 +563,18 @@
         "name": "Sunbrella",
         "description": "Blocks the sun out your eyes",
         "image": "media/1780609171730-SampleScene_Custom..._04.06.2026_16-39-05.png"
+      },
+      {
+        "id": "hair",
+        "name": "Hair",
+        "description": "Looks kinda familiar.....",
+        "image": "media/1780609217510-SampleScene_Custom..._04.06.2026_16-40-03.png"
+      },
+      {
+        "id": "bryce-s-sleepytime-hat",
+        "name": "Bryce's Sleepytime Hat",
+        "description": "Snore",
+        "image": "media/1780610072442-SampleScene_Custom..._04.06.2026_16-54-00.png"
       }
     ],
     "maps": [
