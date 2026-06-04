@@ -534,6 +534,12 @@
         "name": "Rundown Playground",
         "description": "A slide and a trampoline, that's all :b",
         "image": "media/1780607969998-SampleScene_Custom..._04.06.2026_16-18-57.png"
+      },
+      {
+        "id": "og-map",
+        "name": "OG Map",
+        "description": "This is where it all begun,",
+        "image": "media/1780608076177-SampleScene_Custom..._04.06.2026_16-20-52.png"
       }
     ],
     "npcs": [
