@@ -707,6 +707,12 @@
         "name": "Corn's Sleepytime Fit",
         "description": "Sleep Yellow",
         "image": "media/1780612205027-SampleScene_Custom..._04.06.2026_17-29-42.png"
+      },
+      {
+        "id": "day-1-shirt",
+        "name": "Day 1 Shirt",
+        "description": "\"I've been here since day 1\"",
+        "image": "media/1780612245315-SampleScene_Custom..._04.06.2026_17-30-17.png"
       }
     ],
     "maps": [
