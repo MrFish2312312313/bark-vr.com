@@ -551,6 +551,12 @@
         "name": "Cookie",
         "description": "Made for Cookzie, an og cosmetic",
         "image": "media/1780608969677-SampleScene_Custom..._04.06.2026_16-35-44.png"
+      },
+      {
+        "id": "bryce-s-eepy-pillow",
+        "name": "Bryce's Eepy Pillow",
+        "description": "Pillow",
+        "image": "media/1780609124309-SampleScene_Custom..._04.06.2026_16-38-21.png"
       }
     ],
     "maps": [
