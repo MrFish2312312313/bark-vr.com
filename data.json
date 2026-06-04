@@ -725,6 +725,12 @@
         "name": "Explorer Shirt",
         "description": "When in the jungle, you'll need this",
         "image": "media/1780612355285-SampleScene_Custom..._04.06.2026_17-32-02.png"
+      },
+      {
+        "id": "sweater",
+        "name": "Sweater",
+        "description": "The first shirt made for everyone",
+        "image": "media/1780612408415-SampleScene_Custom..._04.06.2026_17-33-03.png"
       }
     ],
     "maps": [
