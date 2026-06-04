@@ -553,6 +553,18 @@
         "name": "Beaker",
         "description": "Owns the extra shop, kind of an introvert. Birch woodtype.",
         "image": "media/1780527806310-SampleScene_Custom..._03.06.2026_18-02-42.png"
+      },
+      {
+        "id": "pablo-the-stick",
+        "name": "Pablo The Stick",
+        "description": "He just lays there, kinda exists",
+        "image": "media/1780607264811-SampleScene_Custom..._04.06.2026_16-07-09.png"
+      },
+      {
+        "id": "fiesta-tree",
+        "name": "Fiesta Tree",
+        "description": "Also just relaxes, wonder what's going on in his head,",
+        "image": "media/1780607438266-SampleScene_Custom..._04.06.2026_16-09-05.png"
       }
     ]
   },
