@@ -659,6 +659,12 @@
         "name": "VR Headset",
         "description": "VR in VR? Weird.....",
         "image": "media/1780611527349-SampleScene_Custom..._04.06.2026_17-18-17.png"
+      },
+      {
+        "id": "bunny-ears",
+        "name": "Bunny Ears",
+        "description": "Are you sure those are from a bunny?",
+        "image": "media/1780611795174-SampleScene_Custom..._04.06.2026_17-22-46.png"
       }
     ],
     "maps": [
