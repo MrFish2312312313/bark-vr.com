@@ -647,6 +647,12 @@
         "name": "Bandana",
         "description": "Woah, i'm so cool",
         "image": "media/1780611414213-SampleScene_Custom..._04.06.2026_17-16-34.png"
+      },
+      {
+        "id": "jungle-ninja-mask",
+        "name": "Jungle Ninja Mask",
+        "description": "Comes in the Jungle Ninja Bundle",
+        "image": "media/1780611466215-SampleScene_Custom..._04.06.2026_17-17-20.png"
       }
     ],
     "maps": [
