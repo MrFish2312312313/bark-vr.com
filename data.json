@@ -695,6 +695,12 @@
         "name": "Chicken Shirt",
         "description": "Chicken",
         "image": "media/1780612122461-SampleScene_Custom..._04.06.2026_17-28-27.png"
+      },
+      {
+        "id": "bryce-s-sleepytime-fit",
+        "name": "Bryce's Sleepytime Fit",
+        "description": "Sleep Blue",
+        "image": "media/1780612165237-SampleScene_Custom..._04.06.2026_17-28-57.png"
       }
     ],
     "maps": [
