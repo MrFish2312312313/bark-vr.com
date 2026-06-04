@@ -635,6 +635,12 @@
         "name": "Googly Eyes",
         "description": "Look into the eyes.",
         "image": "media/1780611317292-SampleScene_Custom..._04.06.2026_17-14-45.png"
+      },
+      {
+        "id": "fraud-mod",
+        "name": "Fraud Mod",
+        "description": "Are you sure you're a moderator?",
+        "image": "media/1780611371806-SampleScene_Custom..._04.06.2026_17-15-44.png"
       }
     ],
     "maps": [
