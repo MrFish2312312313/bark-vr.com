@@ -533,6 +533,18 @@
         "name": "Map Hat",
         "description": "A cosmetic for those who were there since the beginning.",
         "image": "media/1780608653530-SampleScene_Custom..._04.06.2026_16-30-12.png"
+      },
+      {
+        "id": "army-helmet",
+        "name": "Army Helmet",
+        "description": "Was originally going to be tan, but ended up green!",
+        "image": "media/1780608728201-SampleScene_Custom..._04.06.2026_16-31-27.png"
+      },
+      {
+        "id": "fire",
+        "name": "Fire",
+        "description": "AHHHHHHHHH, I'M ON FIRE",
+        "image": "media/1780608897324-SampleScene_Custom..._04.06.2026_16-33-39.png"
       }
     ],
     "maps": [
