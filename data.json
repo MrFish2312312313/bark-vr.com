@@ -528,6 +528,12 @@
         "name": "Homebase Station",
         "description": "This is where you arrive in the map! has info boards and the LIV camera!",
         "image": "media/1780607918930-SampleScene_Custom..._04.06.2026_16-17-54.png"
+      },
+      {
+        "id": "rundown-playground",
+        "name": "Rundown Playground",
+        "description": "A slide and a trampoline, that's all :b",
+        "image": "media/1780607969998-SampleScene_Custom..._04.06.2026_16-18-57.png"
       }
     ],
     "npcs": [
