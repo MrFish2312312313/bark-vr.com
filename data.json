@@ -227,7 +227,8 @@
     "extrasForecastDisclaimer": "Forecast uses the same algorithm as the in-game system. No manual overrides are shown on this page.",
     "careers_role_artist_title": "Art Director",
     "games_hero_label": "// Crash Out Games'",
-    "extras_wood_title": "Trelative info"
+    "extras_wood_title": "Trelative info",
+    "privacy_p_use": "We use the information we collect to review job applications, contact applicants, and improve our services. Application data is sent directly to our team via Discord. We use Meta's User Age Group API to determine whether you are a child, teen, or adult. We use this only to adjust the experience (for example, disabling voice chat for users under 13). The result is stored locally and is never transmitted to our servers."
   },
   "woodOverrides": {
     "Bean": {
