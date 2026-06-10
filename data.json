@@ -299,6 +299,10 @@
     "Jungle": {
       "rarity": "uncommon",
       "image": "media/1780419445048-jungle.png"
+    },
+    "Walnut": {
+      "rarity": "epic",
+      "image": "media/1781129870981-Walnut.png"
     }
   },
   "database": {
