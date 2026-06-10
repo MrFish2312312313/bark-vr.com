@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-08T12:33:59.776Z",
+  "updatedAt": "2026-06-10T01:04:28.072Z",
   "woodTypes": [
     {
       "woodID": "Oak",
@@ -84,6 +84,11 @@
     {
       "woodID": "Jungle",
       "rarityWeight": 15,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Walnut",
+      "rarityWeight": 5,
       "isFancyWood": true
     }
   ]
