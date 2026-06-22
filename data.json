@@ -634,6 +634,46 @@
         "image": "media/1780512882440-SampleScene_Custom..._03.06.2026_13-52-58.png",
         "effect": "Changes your woodtype for a session, you eat them, they're tasty.",
         "subcategory": "Useable"
+      },
+      {
+        "id": "corn",
+        "name": "Corn",
+        "description": "*Squeak Sqeak*",
+        "image": "media/1782171992724-SampleScene_Custom..._22.06.2026_18-45-43.png",
+        "effect": "Pet's will chase this when you throw it! In the rancher bundle.",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "capture-net",
+        "name": "Capture Net",
+        "description": "\"GOTCHA!\"",
+        "image": "media/1782172074841-SampleScene_Custom..._22.06.2026_18-47-03.png",
+        "effect": "Can be used to catch a wild pet and store them for later!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "leash",
+        "name": "Leash",
+        "description": "\"Come 'ere boy!\"",
+        "image": "media/1782172137479-SampleScene_Custom..._22.06.2026_18-48-23.png",
+        "effect": "Brings your pets to you!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "laser-pointer",
+        "name": "Laser Pointer",
+        "description": "Why don't pets follow it?",
+        "image": "media/1782172237621-SampleScene_Custom..._22.06.2026_18-49-14.png",
+        "effect": "Combined with the whistle, it can be used to command your pets with the commands Go To, Interact, and Select!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "whistle",
+        "name": "Whistle",
+        "description": "\"LISTEN UP!\"",
+        "image": "media/1782172337251-SampleScene_Custom..._22.06.2026_18-51-01.png",
+        "effect": "Used to command pets to follow, wander, go to, stop, interact, and select!",
+        "subcategory": "Pet Item"
       }
     ],
     "cosmetics": [
