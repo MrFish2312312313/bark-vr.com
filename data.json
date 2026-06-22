@@ -674,6 +674,14 @@
         "image": "media/1782172337251-SampleScene_Custom..._22.06.2026_18-51-01.png",
         "effect": "Used to command pets to follow, wander, go to, stop, interact, and select!",
         "subcategory": "Pet Item"
+      },
+      {
+        "id": "hoe",
+        "name": "Hoe",
+        "description": "\"What can i do with this???\"",
+        "image": "media/1782172420825-SampleScene_Custom..._22.06.2026_18-52-45.png",
+        "effect": "Nothing, does absolutely nothing, yet.",
+        "subcategory": "Fun"
       }
     ],
     "cosmetics": [
