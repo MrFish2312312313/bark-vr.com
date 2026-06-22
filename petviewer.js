@@ -468,13 +468,19 @@
       return true;
     });
 
-    // Remove-sound buttons mutate the modal's own copy (e.sounds); committed on Save.
-    const sl = document.getElementById('petSoundsList');
-    if (sl) sl.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => {
-      e.sounds.splice(+b.dataset.rm, 1);
-      sl.innerHTML = renderSoundRows(e.sounds);
-      sl.querySelectorAll('[data-rm]').forEach(b2 => b2.onclick = b.onclick); // re-wire (simple)
-    });
+    // Remove-sound buttons mutate the modal's own copy (e.sounds); committed on
+    // Save. Re-wire from scratch after each removal so every button closes over
+    // its own current index (not a stale one).
+    const wireSoundRemoves = () => {
+      const sl = document.getElementById('petSoundsList');
+      if (!sl) return;
+      sl.querySelectorAll('[data-rm]').forEach(btn => btn.onclick = () => {
+        e.sounds.splice(+btn.dataset.rm, 1);
+        sl.innerHTML = renderSoundRows(e.sounds);
+        wireSoundRemoves();
+      });
+    };
+    wireSoundRemoves();
   }
 
   function renderSoundRows(sounds) {
