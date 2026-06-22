@@ -1266,5 +1266,69 @@
       "weight": 1,
       "forceOnly": false
     }
-  ]
+  ],
+  "pets": [
+    {
+      "id": "sprout",
+      "name": "Sprout",
+      "description": "A tiny leaf-tailed starter pet. (Example — edit or delete me.)",
+      "hidden": false,
+      "image": "",
+      "model": "",
+      "modelScale": 1,
+      "sounds": [],
+      "normalColors": [
+        "#6abe30",
+        "#3a7d1e"
+      ],
+      "naturalColors": "random"
+    },
+    {
+      "id": "pebble",
+      "name": "Pebble",
+      "description": "A round little rock critter. (Example.)",
+      "hidden": false,
+      "image": "",
+      "model": "",
+      "modelScale": 1,
+      "sounds": [],
+      "normalColors": [
+        "#9aa0a6",
+        "#5f6368"
+      ],
+      "naturalColors": [
+        "#9aa0a6",
+        "#c0c0c0",
+        "#7a7a7a",
+        "#5f6368"
+      ]
+    },
+    {
+      "id": "mossling",
+      "name": "Mossling",
+      "description": "What you get when a Sprout and a Pebble breed. (Example mutation result.)",
+      "hidden": false,
+      "image": "",
+      "model": "",
+      "modelScale": 1,
+      "sounds": [],
+      "normalColors": [
+        "#2e8b57",
+        "#1f5f3a"
+      ],
+      "naturalColors": "random"
+    }
+  ],
+  "mutations": [
+    {
+      "id": "mut-mossling",
+      "parentA": "sprout",
+      "parentB": "pebble",
+      "result": "mossling",
+      "note": ""
+    }
+  ],
+  "petsConfig": {
+    "mutationsPublic": false
+  }
 }

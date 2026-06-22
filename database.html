@@ -70,13 +70,28 @@
         <button class="db-tab" data-tab="cosmetics">Cosmetics</button>
         <button class="db-tab" data-tab="maps">Maps</button>
         <button class="db-tab" data-tab="npcs">NPCs</button>
+        <button class="db-tab" data-tab="extra-info">Extra Info</button>
       </div>
-      <!-- subcategory + sub-subcategory filter chips (rendered by editor.js) -->
-      <div class="db-subfilter" id="dbSubFilter"></div>
-      <div class="db-subfilter db-subsubfilter" id="dbSubSubFilter"></div>
-      <input type="text" id="dbSearch" class="players-search" placeholder="Search…" style="margin-bottom:24px;" />
-      <div class="db-grid db-target">
-        <!-- rendered by editor.js -->
+
+      <!-- Standard entry tabs (items/cosmetics/maps/npcs) -->
+      <div id="dbStandard">
+        <!-- subcategory + sub-subcategory filter chips (rendered by editor.js) -->
+        <div class="db-subfilter" id="dbSubFilter"></div>
+        <div class="db-subfilter db-subsubfilter" id="dbSubSubFilter"></div>
+        <input type="text" id="dbSearch" class="players-search" placeholder="Search…" style="margin-bottom:24px;" />
+        <div class="db-grid db-target">
+          <!-- rendered by editor.js -->
+        </div>
+      </div>
+
+      <!-- Extra Info: container of tools/areas. Area #1 = Pet Viewer. -->
+      <div id="dbExtraInfo" style="display:none;">
+        <div class="extra-area-nav" id="extraAreaNav">
+          <button class="extra-area-btn active" data-area="pets">Pet Viewer</button>
+        </div>
+        <div id="petViewer" class="pet-viewer">
+          <!-- rendered by petviewer.js -->
+        </div>
       </div>
     </div>
   </section>
@@ -103,5 +118,10 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js"></script>
   <script src="editor.js?v=25"></script>
+  <!-- Three.js (r128 UMD) + loaders for the Pet Viewer's live 3D models -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="petviewer.js?v=25"></script>
 </body>
 </html>

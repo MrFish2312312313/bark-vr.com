@@ -1233,6 +1233,18 @@ function renderDatabase() {
     }
   });
 
+  // "Extra Info" is a special tab: instead of an entry grid it hosts tools
+  // (area #1 = the Pet Viewer, rendered by petviewer.js). Swap the containers.
+  const isExtra = BarkDB.activeTab === 'extra-info';
+  const stdWrap   = document.getElementById('dbStandard');
+  const extraWrap = document.getElementById('dbExtraInfo');
+  if (stdWrap)   stdWrap.style.display   = isExtra ? 'none' : '';
+  if (extraWrap) extraWrap.style.display = isExtra ? '' : 'none';
+  if (isExtra) {
+    if (window.BarkPets && typeof window.BarkPets.render === 'function') window.BarkPets.render();
+    return;
+  }
+
   // Search box
   const search = document.getElementById('dbSearch');
   if (search && !search.dataset.wired) {
