@@ -1937,6 +1937,113 @@ body.editing .wood-card-cantget { pointer-events: auto; }
   color: var(--accent);
 }
 
+/* Subcategory / sub-subcategory filter chips */
+.db-subfilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.db-subfilter.db-subsubfilter {
+  padding-left: 14px;
+  border-left: 2px solid var(--border);
+  margin-left: 2px;
+}
+.db-filter-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.db-filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+.db-filter-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+.db-filter-count {
+  background: rgba(0,0,0,0.25);
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.db-filter-btn.active .db-filter-count { background: rgba(0,0,0,0.35); }
+.db-filter-btn.db-filter-edit {
+  border-style: dashed;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Subcategory shown on a card + in the detail modal */
+.db-card-sub {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.85;
+}
+.db-detail-cat {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 2px 0 12px;
+}
+.db-detail-cat-sep { opacity: 0.5; }
+
+/* Taxonomy editor modal */
+.cat-hint { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 14px; }
+.cat-tree { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.cat-node {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--card-bg);
+}
+.cat-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cat-row-child { padding: 4px 0 4px 6px; }
+.cat-name { font-family: var(--font-body); font-weight: 600; }
+.cat-row-child .cat-name { color: var(--text-muted); font-weight: 400; }
+.cat-actions { display: inline-flex; gap: 6px; }
+.cat-children {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cat-add {
+  align-self: flex-start;
+  margin-top: 6px;
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  padding: 2px 0;
+}
+.cat-add:hover { text-decoration: underline; }
+.cat-add-top { margin-top: 4px; }
+
 /* Detail modal */
 .db-detail-img {
   width: 100%;

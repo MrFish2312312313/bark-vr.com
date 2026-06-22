@@ -1098,7 +1098,71 @@
         "description": "He judges, silently.",
         "image": "media/1780607623214-SampleScene_Custom..._04.06.2026_16-13-23.png"
       }
-    ]
+    ],
+    "taxonomy": {
+      "items": [
+        {
+          "name": "Music",
+          "subs": []
+        },
+        {
+          "name": "Useable",
+          "subs": []
+        },
+        {
+          "name": "Fun",
+          "subs": []
+        },
+        {
+          "name": "Pet Item",
+          "subs": []
+        },
+        {
+          "name": "Special",
+          "subs": []
+        },
+        {
+          "name": "Consumable",
+          "subs": []
+        }
+      ],
+      "cosmetics": [
+        {
+          "name": "Head",
+          "subs": []
+        },
+        {
+          "name": "Face",
+          "subs": []
+        },
+        {
+          "name": "Body",
+          "subs": []
+        },
+        {
+          "name": "Badge",
+          "subs": []
+        },
+        {
+          "name": "Nose",
+          "subs": []
+        },
+        {
+          "name": "Side",
+          "subs": []
+        },
+        {
+          "name": "Back",
+          "subs": []
+        },
+        {
+          "name": "Leaves",
+          "subs": []
+        }
+      ],
+      "maps": [],
+      "npcs": []
+    }
   },
   "slotDuration": 300,
   "seasons": [

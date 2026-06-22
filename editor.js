@@ -1182,7 +1182,31 @@ const DB_CATEGORIES = ['items', 'cosmetics', 'maps', 'npcs'];
 const BarkDB = {
   activeTab: 'items',
   filter: '',
+  activeSub: 'all',      // selected subcategory name, or 'all'
+  activeSubSub: 'all',   // selected sub-subcategory name, or 'all'
 };
+
+// ── Subcategory taxonomy (editable in edit mode) ───────────────────────────
+// Lives at data.database.taxonomy[tab] = [{ name, subs: [{ name }] }, …].
+// The website TAB is the top-level category (mirrors HandInventoryWheel:
+// category → subCategory), so a subcategory here == the wheel's subCategory,
+// and sub-subcategories add one more optional drill level. 🍍
+function dbTaxonomy(tab) {
+  const db = BarkEditor.data.database || (BarkEditor.data.database = {});
+  if (!db.taxonomy) db.taxonomy = {};
+  if (!Array.isArray(db.taxonomy[tab])) db.taxonomy[tab] = [];
+  // Normalise shape (a hand-edited entry might be a bare string or miss subs).
+  db.taxonomy[tab] = db.taxonomy[tab].map(s =>
+    typeof s === 'string'
+      ? { name: s, subs: [] }
+      : { name: s.name || '', subs: Array.isArray(s.subs) ? s.subs.map(x => (typeof x === 'string' ? { name: x } : x)) : [] }
+  ).filter(s => s.name);
+  return db.taxonomy[tab];
+}
+
+function dbSubcat(tab, name) {
+  return dbTaxonomy(tab).find(s => s.name === name) || null;
+}
 
 function renderDatabase() {
   const grid = document.querySelector('.db-target');
@@ -1202,6 +1226,8 @@ function renderDatabase() {
       t.dataset.wired = '1';
       t.onclick = () => {
         BarkDB.activeTab = t.dataset.tab;
+        BarkDB.activeSub = 'all';      // reset drill-down when changing tab
+        BarkDB.activeSubSub = 'all';
         renderDatabase();
       };
     }
@@ -1218,12 +1244,30 @@ function renderDatabase() {
   }
 
   const entries = BarkEditor.data.database[BarkDB.activeTab] || [];
+
+  // Subcategory + sub-subcategory filter chips
+  renderDbSubFilters(entries);
+
+  // Validate the current selection still exists (taxonomy may have changed)
+  const tax = dbTaxonomy(BarkDB.activeTab);
+  if (BarkDB.activeSub !== 'all' && !tax.some(s => s.name === BarkDB.activeSub)) {
+    BarkDB.activeSub = 'all'; BarkDB.activeSubSub = 'all';
+  }
+  const activeSubDef = dbSubcat(BarkDB.activeTab, BarkDB.activeSub);
+  if (BarkDB.activeSubSub !== 'all' &&
+      !(activeSubDef && activeSubDef.subs.some(s => s.name === BarkDB.activeSubSub))) {
+    BarkDB.activeSubSub = 'all';
+  }
+
   const filter  = (BarkDB.filter || '').toLowerCase().trim();
-  const filtered = !filter ? entries : entries.filter(e =>
-    (e.name || '').toLowerCase().includes(filter) ||
-    (e.description || '').toLowerCase().includes(filter) ||
-    (e.effect || '').toLowerCase().includes(filter)
-  );
+  const filtered = entries.filter(e => {
+    if (BarkDB.activeSub !== 'all' && (e.subcategory || '') !== BarkDB.activeSub) return false;
+    if (BarkDB.activeSubSub !== 'all' && (e.subsubcategory || '') !== BarkDB.activeSubSub) return false;
+    if (!filter) return true;
+    return (e.name || '').toLowerCase().includes(filter) ||
+           (e.description || '').toLowerCase().includes(filter) ||
+           (e.effect || '').toLowerCase().includes(filter);
+  });
 
   grid.innerHTML = '';
 
@@ -1239,6 +1283,7 @@ function renderDatabase() {
       </div>
       <div class="db-card-body">
         <h3 class="db-card-name">${escapeHtml(entry.name || 'Untitled')}</h3>
+        ${entry.subcategory ? `<span class="db-card-sub">${escapeHtml(entry.subcategory)}${entry.subsubcategory ? ' · ' + escapeHtml(entry.subsubcategory) : ''}</span>` : ''}
         ${entry.description ? `<p class="db-card-desc">${escapeHtml(entry.description)}</p>` : ''}
       </div>
       ${BarkEditor.editing ? `
@@ -1266,13 +1311,186 @@ function renderDatabase() {
   }
 }
 
+// Render the subcategory (row 1) + sub-subcategory (row 2) filter chips.
+function renderDbSubFilters(entries) {
+  const tab  = BarkDB.activeTab;
+  const tax  = dbTaxonomy(tab);
+  const row  = document.getElementById('dbSubFilter');
+  const row2 = document.getElementById('dbSubSubFilter');
+  if (!row) return;
+
+  const chip = (label, count, key, attr, active) =>
+    `<button type="button" class="db-filter-btn ${active ? 'active' : ''}" ${attr}="${escapeAttr(key)}">${escapeHtml(label)}<span class="db-filter-count">${count}</span></button>`;
+
+  // Row 1: All + subcategories
+  let chips = [chip('All', entries.length, 'all', 'data-sub', BarkDB.activeSub === 'all')];
+  for (const s of tax) {
+    const n = entries.filter(e => (e.subcategory || '') === s.name).length;
+    chips.push(chip(s.name, n, s.name, 'data-sub', BarkDB.activeSub === s.name));
+  }
+  if (BarkEditor.editing) {
+    chips.push(`<button type="button" class="db-filter-btn db-filter-edit" id="dbCatEditBtn">⚙ Categories</button>`);
+  }
+  row.innerHTML = chips.join('');
+  row.style.display = (tax.length || BarkEditor.editing) ? '' : 'none';
+  row.querySelectorAll('[data-sub]').forEach(btn => {
+    btn.onclick = () => {
+      BarkDB.activeSub = btn.dataset.sub;
+      BarkDB.activeSubSub = 'all';
+      renderDatabase();
+    };
+  });
+  const editBtn = document.getElementById('dbCatEditBtn');
+  if (editBtn) editBtn.onclick = () => openDbCategoriesModal(tab);
+
+  // Row 2: sub-subcategories of the active subcategory (only when it has any)
+  if (!row2) return;
+  const subDef = dbSubcat(tab, BarkDB.activeSub);
+  if (BarkDB.activeSub !== 'all' && subDef && subDef.subs.length) {
+    const base = entries.filter(e => (e.subcategory || '') === BarkDB.activeSub);
+    let c2 = [chip('All', base.length, 'all', 'data-subsub', BarkDB.activeSubSub === 'all')];
+    for (const ss of subDef.subs) {
+      const n = base.filter(e => (e.subsubcategory || '') === ss.name).length;
+      c2.push(chip(ss.name, n, ss.name, 'data-subsub', BarkDB.activeSubSub === ss.name));
+    }
+    row2.innerHTML = c2.join('');
+    row2.style.display = '';
+    row2.querySelectorAll('[data-subsub]').forEach(btn => {
+      btn.onclick = () => { BarkDB.activeSubSub = btn.dataset.subsub; renderDatabase(); };
+    });
+  } else {
+    row2.innerHTML = '';
+    row2.style.display = 'none';
+  }
+}
+
+// ── Taxonomy editor (edit mode → "⚙ Categories") ───────────────────────────
+function openDbCategoriesModal(tab) {
+  showModal(`Categories — ${tab}`, dbCatModalBody(tab), async () => true, () => dbWireCatModal(tab));
+  const foot = document.querySelector('#barkModal .bark-modal-foot');
+  if (foot) {
+    const save = foot.querySelector('#modalSave');   if (save) save.style.display = 'none';
+    const cancel = foot.querySelector('#modalCancel'); if (cancel) cancel.textContent = 'Done';
+  }
+}
+
+function dbCatModalBody(tab) {
+  const tax = dbTaxonomy(tab);
+  let html = `<p class="cat-hint">Filter chips visitors see on the <b>${escapeHtml(tab)}</b> tab. ` +
+             `Subcategories are the first row; sub-subcategories drill in further.</p><div class="cat-tree">`;
+  if (!tax.length) html += `<p class="players-empty" style="margin:6px 0 12px;">No subcategories yet — add one below.</p>`;
+  tax.forEach((s, i) => {
+    html += `<div class="cat-node">
+      <div class="cat-row">
+        <span class="cat-name">${escapeHtml(s.name)}</span>
+        <span class="cat-actions">
+          <button type="button" class="edit-btn" data-act="rename-sub" data-i="${i}">✎</button>
+          <button type="button" class="edit-btn edit-btn-danger" data-act="del-sub" data-i="${i}">✕</button>
+        </span>
+      </div>
+      <div class="cat-children">`;
+    s.subs.forEach((ss, j) => {
+      html += `<div class="cat-row cat-row-child">
+        <span class="cat-name">↳ ${escapeHtml(ss.name)}</span>
+        <span class="cat-actions">
+          <button type="button" class="edit-btn" data-act="rename-subsub" data-i="${i}" data-j="${j}">✎</button>
+          <button type="button" class="edit-btn edit-btn-danger" data-act="del-subsub" data-i="${i}" data-j="${j}">✕</button>
+        </span>
+      </div>`;
+    });
+    html += `<button type="button" class="cat-add" data-act="add-subsub" data-i="${i}">+ sub-subcategory</button>
+      </div></div>`;
+  });
+  html += `</div><button type="button" class="btn-secondary cat-add-top" data-act="add-sub">+ Add subcategory</button>`;
+  return html;
+}
+
+function dbCatRefresh(tab) {
+  const body = document.querySelector('#barkModal .bark-modal-body');
+  if (body) { body.innerHTML = dbCatModalBody(tab); dbWireCatModal(tab); }
+  BarkEditor.dirty = true;
+  updateEditorBar();
+  renderDatabase();
+}
+
+function dbWireCatModal(tab) {
+  const body = document.querySelector('#barkModal .bark-modal-body');
+  if (!body) return;
+  body.querySelectorAll('[data-act]').forEach(btn => {
+    btn.onclick = () => {
+      const tax = dbTaxonomy(tab);
+      const i = btn.dataset.i != null ? +btn.dataset.i : -1;
+      const j = btn.dataset.j != null ? +btn.dataset.j : -1;
+      switch (btn.dataset.act) {
+        case 'add-sub': {
+          const name = (prompt('New subcategory name:') || '').trim();
+          if (!name) return;
+          if (tax.some(s => s.name.toLowerCase() === name.toLowerCase())) return alert('That subcategory already exists.');
+          tax.push({ name, subs: [] });
+          break;
+        }
+        case 'rename-sub': {
+          const cur = tax[i]; if (!cur) return;
+          const name = (prompt('Rename subcategory:', cur.name) || '').trim();
+          if (!name || name === cur.name) return;
+          dbRetagEntries(tab, e => { if ((e.subcategory || '') === cur.name) e.subcategory = name; });
+          cur.name = name;
+          break;
+        }
+        case 'del-sub': {
+          const cur = tax[i]; if (!cur) return;
+          if (!confirm(`Delete subcategory "${cur.name}"? Entries keep the label but lose the filter.`)) return;
+          tax.splice(i, 1);
+          break;
+        }
+        case 'add-subsub': {
+          const cur = tax[i]; if (!cur) return;
+          const name = (prompt(`New sub-subcategory under "${cur.name}":`) || '').trim();
+          if (!name) return;
+          if (cur.subs.some(s => s.name.toLowerCase() === name.toLowerCase())) return alert('Already exists.');
+          cur.subs.push({ name });
+          break;
+        }
+        case 'rename-subsub': {
+          const ss = tax[i] && tax[i].subs[j]; if (!ss) return;
+          const name = (prompt('Rename sub-subcategory:', ss.name) || '').trim();
+          if (!name || name === ss.name) return;
+          dbRetagEntries(tab, e => { if ((e.subsubcategory || '') === ss.name) e.subsubcategory = name; });
+          ss.name = name;
+          break;
+        }
+        case 'del-subsub': {
+          const ss = tax[i] && tax[i].subs[j]; if (!ss) return;
+          if (!confirm(`Delete sub-subcategory "${ss.name}"?`)) return;
+          tax[i].subs.splice(j, 1);
+          break;
+        }
+      }
+      dbCatRefresh(tab);
+    };
+  });
+}
+
+// Apply a mutation to every entry in a tab (used to keep entry labels in sync
+// when a subcategory/sub-subcategory is renamed).
+function dbRetagEntries(tab, fn) {
+  (BarkEditor.data.database[tab] || []).forEach(fn);
+}
+
+window.openDbCategoriesModal = openDbCategoriesModal;
+
 function openDbEntryDetail(cat, idx) {
   const e = BarkEditor.data.database[cat][idx];
   if (!e) return;
   const isItem = cat === 'items';
 
+  const catTag = e.subcategory
+    ? `<div class="db-detail-cat">${escapeHtml(e.subcategory)}${e.subsubcategory ? ` <span class="db-detail-cat-sep">›</span> ${escapeHtml(e.subsubcategory)}` : ''}</div>`
+    : '';
+
   showModal(e.name || 'Untitled', `
     ${e.image ? `<img src="${escapeAttr(e.image)}" class="db-detail-img" />` : ''}
+    ${catTag}
     ${e.description ? `<p class="db-detail-desc">${escapeHtml(e.description)}</p>` : ''}
     ${isItem && e.effect ? `
       <div class="db-detail-effect">
@@ -1295,10 +1513,27 @@ function openDbEntryModal(cat, idx) {
   if (!Array.isArray(BarkEditor.data.database[cat])) BarkEditor.data.database[cat] = [];
 
   const isNew = idx === null || idx === undefined;
-  const e = isNew ? { id: '', name: '', description: '', effect: '', image: '' }
+  const e = isNew ? { id: '', name: '', description: '', effect: '', image: '', subcategory: '', subsubcategory: '' }
                   : { ...BarkEditor.data.database[cat][idx] };
   const isItem = cat === 'items';
   const single = cat.replace(/s$/, '');
+
+  // Category drop-downs (only when this tab has a taxonomy to choose from)
+  const tax = dbTaxonomy(cat);
+  const buildSubOpts = (sel) => ['<option value="">— none —</option>']
+    .concat(tax.map(s => `<option value="${escapeAttr(s.name)}"${s.name === sel ? ' selected' : ''}>${escapeHtml(s.name)}</option>`)).join('');
+  const buildSubSubOpts = (subName, sel) => {
+    const def = dbSubcat(cat, subName);
+    const subs = def ? def.subs : [];
+    return ['<option value="">— none —</option>']
+      .concat(subs.map(s => `<option value="${escapeAttr(s.name)}"${s.name === sel ? ' selected' : ''}>${escapeHtml(s.name)}</option>`)).join('');
+  };
+  const catFields = tax.length ? `
+    <label>Subcategory</label>
+    <select id="modalDbSub">${buildSubOpts(e.subcategory || '')}</select>
+    <label>Sub-subcategory</label>
+    <select id="modalDbSubSub">${buildSubSubOpts(e.subcategory || '', e.subsubcategory || '')}</select>
+  ` : '';
 
   showModal(`${isNew ? 'Add' : 'Edit'} ${single}`, `
     <label>Image (square recommended)</label>
@@ -1318,6 +1553,8 @@ function openDbEntryModal(cat, idx) {
       <textarea id="modalDbEffect" rows="3" placeholder="e.g. Heals 50% HP, drops a Wood ID, etc.">${escapeHtml(e.effect || '')}</textarea>
     ` : ''}
 
+    ${catFields}
+
     <label>URL slug (optional — auto-generated from name if blank)</label>
     <input id="modalDbId" value="${escapeAttr(e.id)}" />
   `, async () => {
@@ -1329,6 +1566,15 @@ function openDbEntryModal(cat, idx) {
     };
     if (!next.name) { alert('Name required'); return false; }
     if (isItem) next.effect = document.getElementById('modalDbEffect').value.trim();
+
+    // Category tags — keep `next` clean by only writing non-empty ones
+    let subVal = e.subcategory || '', ssVal = e.subsubcategory || '';
+    const subEl = document.getElementById('modalDbSub');
+    const ssEl  = document.getElementById('modalDbSubSub');
+    if (subEl) subVal = subEl.value;
+    if (ssEl)  ssVal  = ssEl.value;
+    if (subVal) next.subcategory = subVal;
+    if (ssVal)  next.subsubcategory = ssVal;
 
     const file = document.getElementById('modalDbImgFile').files[0];
     if (file) {
@@ -1351,6 +1597,13 @@ function openDbEntryModal(cat, idx) {
 
   const f = document.getElementById('modalDbImgFile');
   if (f) f.addEventListener('change', ev => previewInto('modalDbImgPreview', ev.target.files[0]));
+
+  // When the subcategory changes, repopulate the sub-subcategory options.
+  const subSel = document.getElementById('modalDbSub');
+  if (subSel) subSel.addEventListener('change', () => {
+    const ssEl = document.getElementById('modalDbSubSub');
+    if (ssEl) ssEl.innerHTML = buildSubSubOpts(subSel.value, '');
+  });
 }
 
 function deleteDbEntry(cat, idx) {
