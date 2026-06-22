@@ -312,287 +312,376 @@
         "name": "Duck",
         "description": "Just a little guy!",
         "image": "media/1780419841451-SampleScene_Custom..._02.06.2026_12-03-56.png",
-        "effect": "He quacks if you click your trigger while holding him!"
+        "effect": "He quacks if you click your trigger while holding him!",
+        "subcategory": "Useable"
       },
       {
         "id": "bark-boy",
         "name": "Bark Boy",
         "description": "\"Come on mom, just one more game?\"",
         "image": "media/1780419706259-SampleScene_Custom..._02.06.2026_12-00-54.png",
-        "effect": "Let's you spy on the Electric Arcade"
+        "effect": "Let's you spy on the Electric Arcade",
+        "subcategory": "Fun"
       },
       {
         "id": "baseball-bat",
         "name": "Baseball Bat",
         "description": "*bonk*",
         "image": "media/1780419806538-SampleScene_Custom..._02.06.2026_12-02-31.png",
-        "effect": "Let's you fling other players."
+        "effect": "Let's you fling other players.",
+        "subcategory": "Useable"
       },
       {
         "id": "toy-hammer",
         "name": "Toy Hammer",
         "description": "*wham*",
         "image": "media/1780419931413-SampleScene_Custom..._02.06.2026_12-04-50.png",
-        "effect": "Flings other players with extra power"
+        "effect": "Flings other players with extra power",
+        "subcategory": "Useable"
       },
       {
         "id": "bamboo-bat",
         "name": "Bamboo Bat",
         "description": "*bink*",
         "image": "media/1780420003272-SampleScene_Custom..._02.06.2026_12-06-13.png",
-        "effect": "flings other players"
+        "effect": "flings other players",
+        "subcategory": "Useable"
       },
       {
         "id": "barket",
         "name": "BARKet",
         "description": "\"Trick or Treat?\"",
         "image": "media/1780420538114-SampleScene_Custom..._02.06.2026_12-14-17.png",
-        "effect": "Looks Cool (Maybe Future Purpose)"
+        "effect": "Looks Cool (Maybe Future Purpose)",
+        "subcategory": "Fun"
       },
       {
         "id": "bean-trophie",
         "name": "bean trophie'",
         "description": "Obtained during the 2026 Bark To Beans update",
         "image": "media/1780420678312-SampleScene_Custom..._02.06.2026_12-17-01.png",
-        "effect": "Looks cool"
+        "effect": "Looks cool",
+        "subcategory": "Special"
       },
       {
         "id": "bean-gun",
         "name": "Bean Gun",
         "description": "\"BEANS EVERYWHERE!!!\"",
         "image": "media/1780421224868-SampleScene_Custom..._02.06.2026_12-26-20.png",
-        "effect": "Shoots Tons of Beans, Good Flying Method!"
+        "effect": "Shoots Tons of Beans, Good Flying Method!",
+        "subcategory": "Special"
       },
       {
         "id": "blurryface",
         "name": "Blurryface",
         "description": "\"My name's Blurryface and i care what you think\"",
         "image": "media/1780421363611-SampleScene_Custom..._02.06.2026_12-28-23.png",
-        "effect": "Grants access to Songs Stressed out and Message Man by Twenty One Pilots"
+        "effect": "Grants access to Songs Stressed out and Message Man by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "breach",
         "name": "Breach",
         "description": "\"Move it up, move it up, it's a breach\"",
         "image": "media/1780425759110-SampleScene_Custom..._02.06.2026_13-10-04.png",
-        "effect": "Grants access to Songs City Walls, and The Contract by Twenty One Pilots"
+        "effect": "Grants access to Songs City Walls, and The Contract by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "rat-world-ost-1",
         "name": "Rat World OST.1",
         "description": "\"Rat Rat Rat Rat Rat Rat\"",
         "image": "media/1780426394438-SampleScene_Custom..._02.06.2026_13-52-05.png",
-        "effect": "Grants access to songs Eternity, Coin Snatcher, S*icide, and Fancy Rats"
+        "effect": "Grants access to songs Eternity, Coin Snatcher, S*icide, and Fancy Rats",
+        "subcategory": "Music"
       },
       {
         "id": "chicken_nugget",
         "name": "Chicken Nugget",
         "description": "Very Oval-Like",
         "image": "media/1780426578441-SampleScene_Custom..._02.06.2026_13-55-23.png",
-        "effect": "it's just there, probably eatable in the future"
+        "effect": "it's just there, probably eatable in the future",
+        "subcategory": "Fun"
       },
       {
         "id": "clancy",
         "name": "Clancy",
         "description": "\"Can't change what you've done. Start fresh next semester\"",
         "image": "media/1780426926177-SampleScene_Custom..._02.06.2026_13-59-17.png",
-        "effect": "Grants access to Songs Next Semester, and Paladin Strait by Twenty One Pilots"
+        "effect": "Grants access to Songs Next Semester, and Paladin Strait by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "controller",
         "name": "Controller",
         "description": "Comes with the Basement Boss Bundle",
         "image": "media/1780427039434-SampleScene_Custom..._02.06.2026_14-02-42.png",
-        "effect": "If you click your trigger while holding the controller, it plays 8 bit game noises"
+        "effect": "If you click your trigger while holding the controller, it plays 8 bit game noises",
+        "subcategory": "Useable"
       },
       {
         "id": "cow",
         "name": "Cow",
         "description": "Bumstronaut's favorite item, the sounds it makes is just Bumstronaut going \"moo\"",
         "image": "media/1780427259838-SampleScene_Custom..._02.06.2026_14-06-00.png",
-        "effect": "Besides being an absolute adorable creature, it moos when you click your trigger while holding it."
+        "effect": "Besides being an absolute adorable creature, it moos when you click your trigger while holding it.",
+        "subcategory": "Useable"
       },
       {
         "id": "easter-trophy-variant",
         "name": "Easter Trophy Variant",
         "description": "Could get this trophy during the 2025 easter update",
         "image": "media/1780427409943-SampleScene_Custom..._02.06.2026_14-08-38.png",
-        "effect": "show's how og you are"
+        "effect": "show's how og you are",
+        "subcategory": "Special"
       },
       {
         "id": "forgotten-potential-entertainment",
         "name": "Forgotten Potential Entertainment",
         "description": "\"Wait, this isn't a real album???\"",
         "image": "media/1780428414063-SampleScene_Custom..._02.06.2026_14-24-50.png",
-        "effect": "Grant's access to songs Time To Say Goodbye, and Drag Path (Breach Digital Remains) by Twenty One Pilots"
+        "effect": "Grant's access to songs Time To Say Goodbye, and Drag Path (Breach Digital Remains) by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "greg",
         "name": "Greg",
         "description": "Phil's Goblin Cousin",
         "image": "media/1780428522832-SampleScene_Custom..._02.06.2026_14-28-02.png",
-        "effect": "Chills, helps you cheat in blinko"
+        "effect": "Chills, helps you cheat in blinko",
+        "subcategory": "Fun"
       },
       {
         "id": "hudson-s-bird",
         "name": "Hudson's Bird",
         "description": "Based off a drawing from a kid that goes to Bumstronaut's school",
         "image": "media/1780428631452-SampleScene_Custom..._02.06.2026_14-29-31.png",
-        "effect": "Stares into your soul."
+        "effect": "Stares into your soul.",
+        "subcategory": "Fun"
       },
       {
         "id": "kevin",
         "name": "Kevin",
         "description": "Suggested by JJTERRYVR, he a borb.",
         "image": "media/1780428768531-SampleScene_Custom..._02.06.2026_14-31-39.png",
-        "effect": "Is very fun to use as a bowling ball or chuck into tornados"
+        "effect": "Is very fun to use as a bowling ball or chuck into tornados",
+        "subcategory": "Fun"
       },
       {
         "id": "leaf-blade",
         "name": "Leaf Blade",
         "description": "Obtained with the Jungle Ninja Bundle",
         "image": "media/1780428889576-SampleScene_Custom..._02.06.2026_14-33-31.png",
-        "effect": "Cut's vines, when you slice with it, it LEAVES behind leaf particles (pun indented)"
+        "effect": "Cut's vines, when you slice with it, it LEAVES behind leaf particles (pun indented)",
+        "subcategory": "Useable"
       },
       {
         "id": "flying-cube",
         "name": "Flying Cube",
         "description": "Only members of the Cube Crew have access to this item. Fun Fact: It was originally going to move your arms down and make them legs",
         "image": "media/1780429044408-SampleScene_Custom..._02.06.2026_14-35-53.png",
-        "effect": "Let's you fly around, hard to master"
+        "effect": "Let's you fly around, hard to master",
+        "subcategory": "Special"
       },
       {
         "id": "mod-text",
         "name": "Mod Text",
         "description": "For Moderators Only",
         "image": "media/1780429675491-SampleScene_Custom..._02.06.2026_14-47-21.png",
-        "effect": "Show's proof of being a mod"
+        "effect": "Show's proof of being a mod",
+        "subcategory": "Special"
       },
       {
         "id": "no-phun-intended",
         "name": "No Phun Intended",
         "description": "\"Fast food greasy taco i love\"",
         "image": "media/1780430096091-SampleScene_Custom..._02.06.2026_14-53-26.png",
-        "effect": "Grants access to songs Hole In The Ground, and Taco Bell Saga by Tyler Joseph (Twenty One Pilots lead singer)"
+        "effect": "Grants access to songs Hole In The Ground, and Taco Bell Saga by Tyler Joseph (Twenty One Pilots lead singer)",
+        "subcategory": "Music"
       },
       {
         "id": "paint",
         "name": "Paint",
         "description": "Very Glowy",
         "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
-        "effect": "Does nothing, hopefully future feature"
+        "effect": "Does nothing, hopefully future feature",
+        "subcategory": "Fun"
       },
       {
         "id": "puke",
         "name": "Puke",
         "description": "Puke is the best, CW: PukeWorld in yeeps",
         "image": "media/1780508644394-SampleScene_Custom..._03.06.2026_12-43-05.png",
-        "effect": "Makes noises when you right click while holding him"
+        "effect": "Makes noises when you right click while holding him",
+        "subcategory": "Useable"
       },
       {
         "id": "regional-at-best",
         "name": "Regional At Best",
         "description": "\"your an angel fallen down, won't you tell us of the clouds.\"",
         "image": "media/1780508842064-SampleScene_Custom..._03.06.2026_12-44-59.png",
-        "effect": "Grants access to songs Ruby, Two, and Lovely (remastered) by Twenty One Pilots"
+        "effect": "Grants access to songs Ruby, Two, and Lovely (remastered) by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "scaled-and-icy",
         "name": "Scaled And Icy",
         "description": "\"I know it's over, I was born a choker\"",
         "image": "media/1780508968124-SampleScene_Custom..._03.06.2026_12-48-23.png",
-        "effect": "Grants access to songs Choker, and Formidable by Twenty One Pilots"
+        "effect": "Grants access to songs Choker, and Formidable by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "shroom",
         "name": "Shroom",
         "description": "\"Everything is huge????????\"",
         "image": "media/1780509112823-SampleScene_Custom..._03.06.2026_12-51-12.png",
-        "effect": "Shrinks you when you click your trigger while holding it"
+        "effect": "Shrinks you when you click your trigger while holding it",
+        "subcategory": "Special"
       },
       {
         "id": "trench",
         "name": "Trench",
         "description": "\"Don't get me wrong the rise in awareness is beating a stigma that no longer scares us.\"",
         "image": "media/1780509665809-SampleScene_Custom..._03.06.2026_12-56-08.png",
-        "effect": "Grants access to songs Neon Gravestones, and Nico and the Niners by Twenty One Pilots"
+        "effect": "Grants access to songs Neon Gravestones, and Nico and the Niners by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "twenty-one-pilots-self-titled",
         "name": "Twenty One Pilots (Self-Titled)",
         "description": "\"I won't fall in love with falling.\"",
         "image": "media/1780509861088-SampleScene_Custom..._03.06.2026_13-02-22.png",
-        "effect": "Grants access to songs Air Catcher, and Trapdoor by Twenty One Pilots"
+        "effect": "Grants access to songs Air Catcher, and Trapdoor by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "vessel",
         "name": "Vessel",
         "description": "\"I know where you stand. Silent in the trees.\"",
         "image": "media/1780510007804-SampleScene_Custom..._03.06.2026_13-04-53.png",
-        "effect": "Grants songs Ode To Sleep, and Trees by Twenty One Pilots"
+        "effect": "Grants songs Ode To Sleep, and Trees by Twenty One Pilots",
+        "subcategory": "Music"
       },
       {
         "id": "walkie-talkie",
         "name": "Walkie Talkie",
         "description": "\"Terry, you there?\"",
         "image": "media/1780510109825-SampleScene_Custom..._03.06.2026_13-07-26.png",
-        "effect": "Nothing as of now, future plans"
+        "effect": "Nothing as of now, future plans",
+        "subcategory": "Fun"
       },
       {
         "id": "water-gun",
         "name": "Water Gun",
         "description": "*Pew Pew*",
         "image": "media/1780510195829-SampleScene_Custom..._03.06.2026_13-08-54.png",
-        "effect": "Nothing yet, has future plans"
+        "effect": "Sprays water, which pets very much enjoy!",
+        "subcategory": "Pet Item"
       },
       {
         "id": "flash-on-my-light-till-i-illuminate-an-area",
         "name": "Flash on my light till i illuminate an area",
         "description": "LemonF1 named it that, take it up with him...",
         "image": "media/1780510486876-SampleScene_Custom..._03.06.2026_13-11-56.png",
-        "effect": "Turns on the light when you click your trigger while holding it"
+        "effect": "Turns on the light when you click your trigger while holding it",
+        "subcategory": "Useable"
       },
       {
         "id": "domino",
         "name": "Domino",
         "description": "\"So satisfying\"",
         "image": "media/1780510630633-SampleScene_Custom..._03.06.2026_13-16-30.png",
-        "effect": "Does domino effect"
+        "effect": "Does domino effect",
+        "subcategory": "Fun"
       },
       {
         "id": "duck-sergeant",
         "name": "Duck Sergeant",
         "description": "\"HE'S GOT A GUN!\"",
         "image": "media/1780511798307-SampleScene_Custom..._03.06.2026_13-35-10.png",
-        "effect": "Pulls out some crazy guns and quacks when you click your trigger"
+        "effect": "Pulls out some crazy guns and quacks when you click your trigger",
+        "subcategory": "Useable"
       },
       {
         "id": "bowling-pin",
         "name": "Bowling Pin",
         "description": "*clink*",
         "image": "media/1780512145802-SampleScene_Custom..._03.06.2026_13-38-20.png",
-        "effect": "Bowling Pin Stuff"
+        "effect": "Bowling Pin Stuff",
+        "subcategory": "Fun"
       },
       {
         "id": "bowling-ball",
         "name": "Bowling Ball",
         "description": "*Thunka*",
         "image": "media/1780512365415-SampleScene_Custom..._03.06.2026_13-43-17.png",
-        "effect": "Bowling Ball Stuff"
+        "effect": "Bowling Ball Stuff",
+        "subcategory": "Fun"
       },
       {
         "id": "wooden-rectangle",
         "name": "Wooden Rectangle",
         "description": "Yay..... wood",
         "image": "media/1780512691408-SampleScene_Custom..._03.06.2026_13-50-33.png",
-        "effect": "Can be used for very buggy Jenga"
+        "effect": "Can be used for very buggy Jenga",
+        "subcategory": "Fun"
       },
       {
         "id": "bark-chip",
         "name": "Bark Chip",
         "description": "17 Different chips, very tasty. Get them in the chip machine at the Electric Arcade",
         "image": "media/1780512882440-SampleScene_Custom..._03.06.2026_13-52-58.png",
-        "effect": "Changes your woodtype for a session, you eat them, they're tasty."
+        "effect": "Changes your woodtype for a session, you eat them, they're tasty.",
+        "subcategory": "Useable"
+      },
+      {
+        "id": "corn",
+        "name": "Corn",
+        "description": "*Squeak Sqeak*",
+        "image": "media/1782171992724-SampleScene_Custom..._22.06.2026_18-45-43.png",
+        "effect": "Pet's will chase this when you throw it! In the rancher bundle.",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "capture-net",
+        "name": "Capture Net",
+        "description": "\"GOTCHA!\"",
+        "image": "media/1782172074841-SampleScene_Custom..._22.06.2026_18-47-03.png",
+        "effect": "Can be used to catch a wild pet and store them for later!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "leash",
+        "name": "Leash",
+        "description": "\"Come 'ere boy!\"",
+        "image": "media/1782172137479-SampleScene_Custom..._22.06.2026_18-48-23.png",
+        "effect": "Brings your pets to you!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "laser-pointer",
+        "name": "Laser Pointer",
+        "description": "Why don't pets follow it?",
+        "image": "media/1782172237621-SampleScene_Custom..._22.06.2026_18-49-14.png",
+        "effect": "Combined with the whistle, it can be used to command your pets with the commands Go To, Interact, and Select!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "whistle",
+        "name": "Whistle",
+        "description": "\"LISTEN UP!\"",
+        "image": "media/1782172337251-SampleScene_Custom..._22.06.2026_18-51-01.png",
+        "effect": "Used to command pets to follow, wander, go to, stop, interact, and select!",
+        "subcategory": "Pet Item"
+      },
+      {
+        "id": "hoe",
+        "name": "Hoe",
+        "description": "\"What can i do with this???\"",
+        "image": "media/1782172420825-SampleScene_Custom..._22.06.2026_18-52-45.png",
+        "effect": "Nothing, does absolutely nothing, yet.",
+        "subcategory": "Fun"
       }
     ],
     "cosmetics": [
@@ -1322,7 +1411,7 @@
       "id": "cird",
       "name": "cird",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "media/pet-Icon_cird.png",
       "model": "",
       "modelScale": 1,
@@ -1599,7 +1688,7 @@
       "id": "itempet",
       "name": "ItemPet",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "",
       "model": "",
       "modelScale": 1,
