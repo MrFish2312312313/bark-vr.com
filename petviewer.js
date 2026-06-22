@@ -182,10 +182,55 @@
     return out;
   }
 
+  // Roll one color for a single exported color slot, mirroring the in-game
+  // PetColorRandomizer modes.
+  function rollSlotColor(slot) {
+    const mode = slot.mode || 'Palette';
+    if (mode === 'Normal') return slot.normal || '#cccccc';
+    if (mode === 'Random') return randHex();
+    const pal = (Array.isArray(slot.palette) && slot.palette.length)
+      ? slot.palette
+      : (slot.normal ? [slot.normal] : null);
+    return pal ? pal[Math.floor(Math.random() * pal.length)] : randHex();
+  }
+
+  // Tint each slot's rolled color onto the GLB material whose name matches the
+  // slot's exported `material`. Returns true if anything matched (false → no
+  // model / name mismatch, caller should fall back to cycling).
+  function applyByMaterial(rolled) {
+    const t = State.three;
+    if (!t || !t.materialsByName) return false;
+    let any = false;
+    rolled.forEach(r => {
+      const mats = r.material && t.materialsByName[r.material];
+      if (mats && mats.length) {
+        mats.forEach(m => { try { m.color.set(r.color); } catch (e) {} });
+        any = true;
+      }
+    });
+    return any;
+  }
+
   function simulateSpawn(pet) {
+    const el = document.getElementById('pvRolled');
+
+    // Preferred path: per-slot roll → recolor the exact submesh by material name.
+    // Supports any number of slots/colors.
+    if (Array.isArray(pet.colorSlots) && pet.colorSlots.length) {
+      const rolled = pet.colorSlots.map(s => ({
+        material: s.material || '',
+        name: s.name || '',
+        color: rollSlotColor(s),
+      }));
+      const matched = applyByMaterial(rolled);
+      if (!matched) applyColors(rolled.map(r => r.color)); // placeholder / unmatched → cycle
+      if (el) el.innerHTML = `<span class="pv-color-label">Rolled spawn</span>${swatches(rolled.map(r => r.color))}`;
+      return;
+    }
+
+    // Legacy pets (no colorSlots exported): cycle the natural/normal colors.
     const rolled = rollColors(pet);
     applyColors(rolled);
-    const el = document.getElementById('pvRolled');
     if (el) el.innerHTML = `<span class="pv-color-label">Rolled spawn</span>${swatches(rolled)}`;
   }
 
@@ -237,7 +282,7 @@
       controls.dampingFactor = 0.08;
     }
 
-    State.three = { wrap, renderer, scene, camera, controls, group, recolorables: [], raf: 0 };
+    State.three = { wrap, renderer, scene, camera, controls, group, recolorables: [], materialsByName: {}, raf: 0 };
     onResize();
 
     const loop = () => {
@@ -269,6 +314,7 @@
     const t = State.three; if (!t) return;
     while (t.group.children.length) t.group.remove(t.group.children[0]);
     t.recolorables = [];
+    t.materialsByName = {};
   }
 
   function loadModel(pet) {
@@ -311,15 +357,25 @@
     head.position.set(0, 0.6, 0.16);
     t.group.add(body); t.group.add(head);
     t.recolorables = [mat, headMat];
+    t.materialsByName = {}; // placeholder has no named submeshes → recolor cycles
   }
 
   function collectRecolorables(obj) {
     const t = State.three; if (!t) return;
     t.recolorables = [];
+    t.materialsByName = {};
     obj.traverse(n => {
       if (n.isMesh && n.material) {
         const mats = Array.isArray(n.material) ? n.material : [n.material];
-        mats.forEach(m => { if (m && m.color) t.recolorables.push(m); });
+        mats.forEach(m => {
+          if (!m || !m.color) return;
+          t.recolorables.push(m);
+          // Index by material name so a color SLOT (exported with its Unity
+          // material name) can recolor exactly its submesh — the glTF keeps
+          // material names from Unity.
+          const nm = (m.name || '').trim();
+          if (nm) (t.materialsByName[nm] = t.materialsByName[nm] || []).push(m);
+        });
       }
     });
   }
