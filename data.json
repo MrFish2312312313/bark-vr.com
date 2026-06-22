@@ -1272,7 +1272,7 @@
       "id": "sprout",
       "name": "Sprout",
       "description": "A tiny leaf-tailed starter pet. (Example — edit or delete me.)",
-      "hidden": false,
+      "hidden": true,
       "image": "",
       "model": "",
       "modelScale": 1,
@@ -1287,7 +1287,7 @@
       "id": "pebble",
       "name": "Pebble",
       "description": "A round little rock critter. (Example.)",
-      "hidden": false,
+      "hidden": true,
       "image": "",
       "model": "",
       "modelScale": 1,
@@ -1307,7 +1307,7 @@
       "id": "mossling",
       "name": "Mossling",
       "description": "What you get when a Sprout and a Pebble breed. (Example mutation result.)",
-      "hidden": false,
+      "hidden": true,
       "image": "",
       "model": "",
       "modelScale": 1,
@@ -1325,7 +1325,7 @@
       "hidden": false,
       "image": "media/pet-Icon_cird.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Recording_5.mp3",
         "media/pet-Record__online-voice-recorder.com_.mp3",
@@ -1366,7 +1366,7 @@
       "hidden": false,
       "image": "media/pet-Icon_cow.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Recording_5.mp3",
         "media/pet-Record__online-voice-recorder.com_.mp3",
@@ -1395,7 +1395,7 @@
       "hidden": false,
       "image": "media/pet-Icon_DuckP.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-duck-quack-realistic.mp3",
         "media/pet-freesound_community-075176_duck-quack-40345.mp3",
@@ -1414,7 +1414,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Dumba.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#ECECEC",
@@ -1427,10 +1427,10 @@
       "id": "durmite",
       "name": "Durmite",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "media/pet-Icon_Durmite.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Record__online-voice-recorder.com___3_.mp3",
         "media/pet-Record__online-voice-recorder.com___4_.mp3",
@@ -1453,7 +1453,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Foish.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Fish_Rhyme_Jam__mp3cut.net_.mp3",
         "media/pet-Fish_Rhyme_Jam__mp3cut.net___1_.mp3",
@@ -1480,7 +1480,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Glorp_Rat.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#A0F12E"
@@ -1495,7 +1495,7 @@
       "hidden": false,
       "image": "media/pet-Icon_GregP.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Monke_Sound__1_.mp3",
         "media/pet-Monke_Sound_2.mp3"
@@ -1511,10 +1511,10 @@
       "id": "gruke",
       "name": "Gruke",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "media/pet-Icon_Gruke.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Monke_Sound__1_.mp3",
         "media/pet-Monke_Sound_2.mp3",
@@ -1538,7 +1538,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Hudson_s_Borb.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-voice-message.ogg",
         "media/pet-voice-message__1_.ogg",
@@ -1564,10 +1564,10 @@
       "id": "hudsons-puke",
       "name": "Hudson's Puke",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "media/pet-Icon_Hudson_s_Puke.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-voice-message.ogg",
         "media/pet-voice-message__1_.ogg",
@@ -1602,7 +1602,7 @@
       "hidden": false,
       "image": "",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [],
       "naturalColors": [],
@@ -1615,7 +1615,7 @@
       "hidden": false,
       "image": "media/pet-Icon_KevinP.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#222222"
@@ -1635,10 +1635,10 @@
       "id": "klerp",
       "name": "Klerp",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "media/pet-Icon_Klerp.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#222222",
@@ -1654,7 +1654,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Lizard.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#54A527"
@@ -1671,10 +1671,10 @@
       "id": "piffard",
       "name": "Piffard",
       "description": "",
-      "hidden": false,
+      "hidden": true,
       "image": "media/pet-Icon_Piffard.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#54A527",
@@ -1709,7 +1709,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Pig.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Record__online-voice-recorder.com___9_.mp3",
         "media/pet-Record__online-voice-recorder.com___10_.mp3",
@@ -1734,7 +1734,7 @@
       "hidden": false,
       "image": "media/pet-Icon_PuffyP.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#E9551B",
@@ -1764,7 +1764,7 @@
       "hidden": false,
       "image": "media/pet-Icon_PukeP.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
         "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___1_.mp3",
@@ -1799,7 +1799,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Terry_Pet.png",
       "model": "",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-Record__online-voice-recorder.com___3_.mp3",
         "media/pet-Record__online-voice-recorder.com___4_.mp3",
