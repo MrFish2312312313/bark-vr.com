@@ -1317,6 +1317,505 @@
         "#1f5f3a"
       ],
       "naturalColors": "random"
+    },
+    {
+      "id": "cird",
+      "name": "cird",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_cird.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Recording_5.mp3",
+        "media/pet-Record__online-voice-recorder.com_.mp3",
+        "media/pet-Record__online-voice-recorder.com___1_.mp3",
+        "media/pet-Record__online-voice-recorder.com___2_.mp3",
+        "media/pet-voice-message.ogg",
+        "media/pet-voice-message__1_.ogg",
+        "media/pet-voice-message__2_.ogg",
+        "media/pet-voice-message__3_.ogg",
+        "media/pet-voice-message__4_.ogg"
+      ],
+      "normalColors": [
+        "#0F41A9",
+        "#141F2E"
+      ],
+      "naturalColors": [
+        "#222222",
+        "#D4D4D4",
+        "#6D2525",
+        "#8D6F32",
+        "#A9150F",
+        "#DA750D",
+        "#2FAC0C",
+        "#E1E705",
+        "#BF31B4",
+        "#6431BF",
+        "#2E2F3F",
+        "#FCECC7",
+        "#D4F7FF",
+        "#141F2E"
+      ],
+      "prefabResource": "cird"
+    },
+    {
+      "id": "cow",
+      "name": "cow",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_cow.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Recording_5.mp3",
+        "media/pet-Record__online-voice-recorder.com_.mp3",
+        "media/pet-Record__online-voice-recorder.com___1_.mp3",
+        "media/pet-Record__online-voice-recorder.com___2_.mp3"
+      ],
+      "normalColors": [
+        "#3D2A18",
+        "#FFFFFF"
+      ],
+      "naturalColors": [
+        "#222222",
+        "#D4D4D4",
+        "#6D2525",
+        "#8D6F32",
+        "#2E2F3F",
+        "#FCECC7",
+        "#D4F7FF"
+      ],
+      "prefabResource": "cow"
+    },
+    {
+      "id": "duck",
+      "name": "Duck",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_DuckP.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-duck-quack-realistic.mp3",
+        "media/pet-freesound_community-075176_duck-quack-40345.mp3",
+        "media/pet-quack-reverb.mp3"
+      ],
+      "normalColors": [
+        "#FFFF00"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "DuckP"
+    },
+    {
+      "id": "dumba",
+      "name": "Dumba",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Dumba.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#ECECEC",
+        "#030303"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "Dumba"
+    },
+    {
+      "id": "durmite",
+      "name": "Durmite",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Durmite.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Record__online-voice-recorder.com___3_.mp3",
+        "media/pet-Record__online-voice-recorder.com___4_.mp3",
+        "media/pet-Record__online-voice-recorder.com___5_.mp3",
+        "media/pet-Record__online-voice-recorder.com___6_.mp3",
+        "media/pet-duck-quack-realistic.mp3",
+        "media/pet-freesound_community-075176_duck-quack-40345.mp3",
+        "media/pet-quack-reverb.mp3"
+      ],
+      "normalColors": [
+        "#FFFC00"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "Durmite"
+    },
+    {
+      "id": "foish",
+      "name": "Foish",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Foish.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Fish_Rhyme_Jam__mp3cut.net_.mp3",
+        "media/pet-Fish_Rhyme_Jam__mp3cut.net___1_.mp3",
+        "media/pet-Fish_Rhyme_Jam__mp3cut.net___2_.mp3",
+        "media/pet-Fish_Rhyme_Jam__mp3cut.net___3_.mp3",
+        "media/pet-Fish_Rhyme_Jam__mp3cut.net___4_.mp3",
+        "media/pet-Fish_Rhyme_Jam__mp3cut.net___5_.mp3"
+      ],
+      "normalColors": [
+        "#FFFFFF"
+      ],
+      "naturalColors": [
+        "#E7FF73",
+        "#C57BFF",
+        "#FFFFFF",
+        "#FFA76B"
+      ],
+      "prefabResource": "Foish"
+    },
+    {
+      "id": "glorp-rat",
+      "name": "Glorp Rat",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Glorp_Rat.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#A0F12E"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "Glorp Rat"
+    },
+    {
+      "id": "greg",
+      "name": "Greg",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_GregP.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Monke_Sound__1_.mp3",
+        "media/pet-Monke_Sound_2.mp3"
+      ],
+      "normalColors": [
+        "#56D945",
+        "#1E7213"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "GregP"
+    },
+    {
+      "id": "gruke",
+      "name": "Gruke",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Gruke.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Monke_Sound__1_.mp3",
+        "media/pet-Monke_Sound_2.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___1_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___2_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___3_.mp3"
+      ],
+      "normalColors": [
+        "#5E3F7B",
+        "#1E7213",
+        "#279437"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "Gruke"
+    },
+    {
+      "id": "hudsons-bird",
+      "name": "Hudson's bird",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Hudson_s_Borb.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-voice-message.ogg",
+        "media/pet-voice-message__1_.ogg",
+        "media/pet-voice-message__2_.ogg",
+        "media/pet-voice-message__3_.ogg",
+        "media/pet-voice-message__4_.ogg"
+      ],
+      "normalColors": [
+        "#0F41A9"
+      ],
+      "naturalColors": [
+        "#0F41A9",
+        "#A9150F",
+        "#DA750D",
+        "#2FAC0C",
+        "#E1E705",
+        "#BF31B4",
+        "#6431BF"
+      ],
+      "prefabResource": "Hudson's Borb"
+    },
+    {
+      "id": "hudsons-puke",
+      "name": "Hudson's Puke",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Hudson_s_Puke.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-voice-message.ogg",
+        "media/pet-voice-message__1_.ogg",
+        "media/pet-voice-message__2_.ogg",
+        "media/pet-voice-message__3_.ogg",
+        "media/pet-voice-message__4_.ogg",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___1_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___2_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___3_.mp3"
+      ],
+      "normalColors": [
+        "#0F41A9",
+        "#279437"
+      ],
+      "naturalColors": [
+        "#0F41A9",
+        "#A9150F",
+        "#DA750D",
+        "#2FAC0C",
+        "#E1E705",
+        "#BF31B4",
+        "#6431BF",
+        "#279437"
+      ],
+      "prefabResource": "Hudson's Puke"
+    },
+    {
+      "id": "itempet",
+      "name": "ItemPet",
+      "description": "",
+      "hidden": false,
+      "image": "",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [],
+      "naturalColors": [],
+      "prefabResource": "ItemPetBase"
+    },
+    {
+      "id": "kevin",
+      "name": "Kevin",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_KevinP.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#222222"
+      ],
+      "naturalColors": [
+        "#222222",
+        "#9FA4A4",
+        "#AC3434",
+        "#525B8F",
+        "#A25B25",
+        "#B0A535",
+        "#2D5827"
+      ],
+      "prefabResource": "KevinP"
+    },
+    {
+      "id": "klerp",
+      "name": "Klerp",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Klerp.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#222222",
+        "#A0F12E"
+      ],
+      "naturalColors": "random",
+      "prefabResource": "Klerp"
+    },
+    {
+      "id": "lizard",
+      "name": "Lizard",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Lizard.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#54A527"
+      ],
+      "naturalColors": [
+        "#54A527",
+        "#BFB859",
+        "#BF6F0A",
+        "#2B201B"
+      ],
+      "prefabResource": "Lizard"
+    },
+    {
+      "id": "piffard",
+      "name": "Piffard",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Piffard.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#54A527",
+        "#E9551B",
+        "#0E0E0E"
+      ],
+      "naturalColors": [
+        "#54A527",
+        "#BFB859",
+        "#BF6F0A",
+        "#2B201B",
+        "#E9551B",
+        "#D42626",
+        "#FFF3B8",
+        "#D9C17F",
+        "#0E0E0E",
+        "#E3FBFF",
+        "#654825",
+        "#FFFFFF",
+        "#2900FF",
+        "#FF3600",
+        "#6BFF00",
+        "#FFFB00",
+        "#FF2300"
+      ],
+      "prefabResource": "Piffard"
+    },
+    {
+      "id": "pig",
+      "name": "Pig",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Pig.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Record__online-voice-recorder.com___9_.mp3",
+        "media/pet-Record__online-voice-recorder.com___10_.mp3",
+        "media/pet-Record__online-voice-recorder.com___11_.mp3",
+        "media/pet-Record__online-voice-recorder.com___12_.mp3"
+      ],
+      "normalColors": [
+        "#FF94F3"
+      ],
+      "naturalColors": [
+        "#FF95F3",
+        "#3D3B3B",
+        "#D0CA97",
+        "#8D6F32"
+      ],
+      "prefabResource": "Pig"
+    },
+    {
+      "id": "puffy",
+      "name": "Puffy",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_PuffyP.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#E9551B",
+        "#0E0E0E"
+      ],
+      "naturalColors": [
+        "#E9551B",
+        "#D42626",
+        "#FFF3B8",
+        "#D9C17F",
+        "#0E0E0E",
+        "#E3FBFF",
+        "#654825",
+        "#FFFFFF",
+        "#2900FF",
+        "#FF3600",
+        "#6BFF00",
+        "#FFFB00",
+        "#FF2400"
+      ],
+      "prefabResource": "PuffyP"
+    },
+    {
+      "id": "puke",
+      "name": "Puke",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_PukeP.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___1_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___2_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___3_.mp3"
+      ],
+      "normalColors": [
+        "#5E3F7B",
+        "#469740"
+      ],
+      "naturalColors": [
+        "#DF9E54",
+        "#36394C",
+        "#DF5454",
+        "#83BA45",
+        "#E1BB51",
+        "#82B9DF",
+        "#DF7054",
+        "#254374",
+        "#917669",
+        "#FF8622",
+        "#121212",
+        "#423732",
+        "#F5F5F5"
+      ],
+      "prefabResource": "PukeP"
+    },
+    {
+      "id": "termite",
+      "name": "Termite",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Terry_Pet.png",
+      "model": "",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-Record__online-voice-recorder.com___3_.mp3",
+        "media/pet-Record__online-voice-recorder.com___4_.mp3",
+        "media/pet-Record__online-voice-recorder.com___5_.mp3",
+        "media/pet-Record__online-voice-recorder.com___6_.mp3"
+      ],
+      "normalColors": [
+        "#D5701D"
+      ],
+      "naturalColors": [
+        "#D5701D",
+        "#683D19",
+        "#681A19",
+        "#221915"
+      ],
+      "prefabResource": "Terry Pet"
     }
   ],
   "mutations": [
@@ -1325,6 +1824,48 @@
       "parentA": "sprout",
       "parentB": "pebble",
       "result": "mossling",
+      "note": ""
+    },
+    {
+      "id": "mut-duck-termite-durmite",
+      "parentA": "duck",
+      "parentB": "termite",
+      "result": "durmite",
+      "note": ""
+    },
+    {
+      "id": "mut-cow-hudsons-bird-cird",
+      "parentA": "cow",
+      "parentB": "hudsons-bird",
+      "result": "cird",
+      "note": ""
+    },
+    {
+      "id": "mut-greg-puke-gruke",
+      "parentA": "greg",
+      "parentB": "puke",
+      "result": "gruke",
+      "note": ""
+    },
+    {
+      "id": "mut-kevin-glorp-rat-klerp",
+      "parentA": "kevin",
+      "parentB": "glorp-rat",
+      "result": "klerp",
+      "note": ""
+    },
+    {
+      "id": "mut-hudsons-bird-puke-hudsons-puke",
+      "parentA": "hudsons-bird",
+      "parentB": "puke",
+      "result": "hudsons-puke",
+      "note": ""
+    },
+    {
+      "id": "mut-lizard-puffy-piffard",
+      "parentA": "lizard",
+      "parentB": "puffy",
+      "result": "piffard",
       "note": ""
     }
   ],
