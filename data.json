@@ -1119,73 +1119,101 @@
         "id": "phil",
         "name": "Phil",
         "description": "A tan cube that flops around, swaps cosmetics, and somehow controls the trelative's gravity?",
-        "image": "media/1780524275529-SampleScene_Custom..._03.06.2026_17-03-02.png"
+        "image": "media/1780524275529-SampleScene_Custom..._03.06.2026_17-03-02.png",
+        "subcategory": "Critter Friends"
       },
       {
         "id": "trader-john",
         "name": "Trader John",
         "description": "Works at the Event Shop, finds a lot of cool items. He has the OGOG woodtype.",
-        "image": "media/1780526803353-SampleScene_Custom..._03.06.2026_17-44-56.png"
+        "image": "media/1780526803353-SampleScene_Custom..._03.06.2026_17-44-56.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "buggs",
         "name": "Buggs",
         "description": "Runs the Holdables Shop. Palm woodtype.",
-        "image": "media/1780526908404-SampleScene_Custom..._03.06.2026_17-47-45.png"
+        "image": "media/1780526908404-SampleScene_Custom..._03.06.2026_17-47-45.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "aero",
         "name": "Aero",
         "description": "Runs the Hat shop, oldest trelative in the town. Rock woodtype.",
-        "image": "media/1780527200307-SampleScene_Custom..._03.06.2026_17-50-58.png"
+        "image": "media/1780527200307-SampleScene_Custom..._03.06.2026_17-50-58.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "creaks",
         "name": "Creaks",
         "description": "Owns the shirt shop, close friends with Twigs. Mangrove woodtype.",
-        "image": "media/1780527356753-SampleScene_Custom..._03.06.2026_17-55-06.png"
+        "image": "media/1780527356753-SampleScene_Custom..._03.06.2026_17-55-06.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "marco",
         "name": "Marco",
         "description": "Displays information at the info booth. Still waiting for a response from Polo. Has a weird relationship with the sun??? Plank woodtype.",
-        "image": "media/1780527550136-SampleScene_Custom..._03.06.2026_17-57-33.png"
+        "image": "media/1780527550136-SampleScene_Custom..._03.06.2026_17-57-33.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "twigs",
         "name": "Twigs",
         "description": "Owns the face shop, close fiends with Creaks. Dark Oak woodtype.",
-        "image": "media/1780527719298-SampleScene_Custom..._03.06.2026_17-59-59.png"
+        "image": "media/1780527719298-SampleScene_Custom..._03.06.2026_17-59-59.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "beaker",
         "name": "Beaker",
         "description": "Owns the extra shop, kind of an introvert. Birch woodtype.",
-        "image": "media/1780527806310-SampleScene_Custom..._03.06.2026_18-02-42.png"
+        "image": "media/1780527806310-SampleScene_Custom..._03.06.2026_18-02-42.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "pablo-the-stick",
         "name": "Pablo The Stick",
         "description": "He just lays there, kinda exists",
-        "image": "media/1780607264811-SampleScene_Custom..._04.06.2026_16-07-09.png"
+        "image": "media/1780607264811-SampleScene_Custom..._04.06.2026_16-07-09.png",
+        "subcategory": "Critter Friends"
       },
       {
         "id": "fiesta-tree",
         "name": "Fiesta Tree",
         "description": "Also just relaxes, wonder what's going on in his head,",
-        "image": "media/1780607438266-SampleScene_Custom..._04.06.2026_16-09-05.png"
+        "image": "media/1780607438266-SampleScene_Custom..._04.06.2026_16-09-05.png",
+        "subcategory": "Critter Friends"
       },
       {
         "id": "sparks",
         "name": "Sparks",
         "description": "Runs the Electric Arcade, he was truck by lighting when he was just a wee little twig, and it's infused into his dna!",
-        "image": "media/1780607577066-SampleScene_Custom..._04.06.2026_16-12-01.png"
+        "image": "media/1780607577066-SampleScene_Custom..._04.06.2026_16-12-01.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       },
       {
         "id": "blue-bird",
         "name": "Blue Bird",
         "description": "He judges, silently.",
-        "image": "media/1780607623214-SampleScene_Custom..._04.06.2026_16-13-23.png"
+        "image": "media/1780607623214-SampleScene_Custom..._04.06.2026_16-13-23.png",
+        "subcategory": "Critter Friends"
+      },
+      {
+        "id": "wally",
+        "name": "Wally",
+        "description": "Owns Walnut Farms, caretaker, very trustworthy! Walnut Woodtype!",
+        "image": "media/1782172532369-SampleScene_Custom..._22.06.2026_18-54-37.png",
+        "subcategory": "Trelative",
+        "subsubcategory": "Shop-Owner"
       }
     ],
     "taxonomy": {
@@ -1250,7 +1278,20 @@
         }
       ],
       "maps": [],
-      "npcs": []
+      "npcs": [
+        {
+          "name": "Trelative",
+          "subs": [
+            {
+              "name": "Shop-Owner"
+            }
+          ]
+        },
+        {
+          "name": "Critter Friends",
+          "subs": []
+        }
+      ]
     }
   },
   "slotDuration": 300,
