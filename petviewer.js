@@ -942,5 +942,5 @@
   }
 
   // Expose for editor.js (called when the "Extra Info" tab is shown / on re-render).
-  window.BarkPets = { render };
+  window.BarkPets = { render, _state: State };
 })();
