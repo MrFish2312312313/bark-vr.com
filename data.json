@@ -1981,6 +1981,11 @@
       "image": "media/pet-Icon_GregP.png",
       "model": "media/models/pet-greg.glb",
       "modelScale": 1,
+      "modelRotation": [
+        0,
+        0,
+        0
+      ],
       "sounds": [
         "media/pet-Monke_Sound__1_.mp3",
         "media/pet-Monke_Sound_2.mp3"
@@ -1989,28 +1994,7 @@
         "#56D945",
         "#1E7213"
       ],
-      "naturalColors": "random",
-      "prefabResource": "GregP",
-      "colorSlots": [
-        {
-          "name": "Body",
-          "material": "Body_0",
-          "mode": "Random",
-          "normal": "#56D945",
-          "palette": [
-            "#FFFFFF"
-          ]
-        },
-        {
-          "name": "Pattern",
-          "material": "Pattern_1",
-          "mode": "Random",
-          "normal": "#1E7213",
-          "palette": [
-            "#FFFFFF"
-          ]
-        }
-      ]
+      "naturalColors": "random"
     },
     {
       "id": "gruke",
