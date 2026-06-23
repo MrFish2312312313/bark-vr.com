@@ -1172,6 +1172,41 @@
         "description": "Fua Fua hehehe",
         "image": "media/1780614481064-SampleScene_Custom..._04.06.2026_18-07-42.png",
         "subcategory": "Nose"
+      },
+      {
+        "id": "scarf",
+        "name": "Scarf",
+        "description": "Keeps you warm! From the Glorp memorial!",
+        "image": "media/1782173930130-SampleScene_Custom..._22.06.2026_19-11-55.png",
+        "subcategory": "Back"
+      },
+      {
+        "id": "clancy-mask",
+        "name": "Clancy Mask",
+        "description": "Very chunky, From the Glorp memorial!",
+        "image": "media/1782173966577-SampleScene_Custom..._22.06.2026_19-19-01.png",
+        "subcategory": "Head"
+      },
+      {
+        "id": "dealglasses",
+        "name": "DealGlasses",
+        "description": "Very cool looking, From the Glorp memorial!",
+        "image": "media/1782174213290-SampleScene_Custom..._22.06.2026_19-23-05.png",
+        "subcategory": "Face"
+      },
+      {
+        "id": "finglorpainter-badge",
+        "name": "Finglorpainter Badge",
+        "description": "It was given to Glorp content creators! From the Glorp memorial!",
+        "image": "media/1782174285347-SampleScene_Custom..._22.06.2026_19-24-08.png",
+        "subcategory": "Badge"
+      },
+      {
+        "id": "rat-teeth",
+        "name": "Rat Teeth",
+        "description": "They look funny, From the Glorp memorial!",
+        "image": "media/1782174328809-SampleScene_Custom..._22.06.2026_19-25-07.png",
+        "subcategory": "Nose"
       }
     ],
     "maps": [
