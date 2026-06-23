@@ -1713,7 +1713,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "barkslot_cird_0",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#0F41A9",
           "palette": [
@@ -1731,7 +1731,7 @@
         },
         {
           "name": "Pattern",
-          "material": "barkslot_cird_1",
+          "material": "Pattern_1",
           "mode": "Palette",
           "normal": "#141F2E",
           "palette": [
@@ -1775,7 +1775,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#3D2A18",
           "palette": [
@@ -1787,7 +1787,7 @@
         },
         {
           "name": "Pattern",
-          "material": "whitee",
+          "material": "Pattern_1",
           "mode": "Palette",
           "normal": "#FFFFFF",
           "palette": [
@@ -1820,7 +1820,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Random",
           "normal": "#FFFF00",
           "palette": [
@@ -1847,7 +1847,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "Material",
+          "material": "Body_0",
           "mode": "Random",
           "normal": "#ECECEC",
           "palette": [
@@ -1856,7 +1856,7 @@
         },
         {
           "name": "Pattern",
-          "material": "white2 1",
+          "material": "Pattern_1",
           "mode": "Random",
           "normal": "#030303",
           "palette": [
@@ -1890,7 +1890,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Random",
           "normal": "#FFFC00",
           "palette": [
@@ -1932,7 +1932,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "New Material 2",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#FFFFFF",
           "palette": [
@@ -1961,7 +1961,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Random",
           "normal": "#A0F12E",
           "palette": [
@@ -1994,7 +1994,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Random",
           "normal": "#56D945",
           "palette": [
@@ -2003,7 +2003,7 @@
         },
         {
           "name": "Pattern",
-          "material": "whitee",
+          "material": "Pattern_1",
           "mode": "Random",
           "normal": "#1E7213",
           "palette": [
@@ -2038,7 +2038,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Random",
           "normal": "#5E3F7B",
           "palette": [
@@ -2047,7 +2047,7 @@
         },
         {
           "name": "Pattern",
-          "material": "whitee",
+          "material": "Pattern_1",
           "mode": "Random",
           "normal": "#1E7213",
           "palette": [
@@ -2056,7 +2056,7 @@
         },
         {
           "name": "Top",
-          "material": "whitee",
+          "material": "Top_2",
           "mode": "Random",
           "normal": "#279437",
           "palette": [
@@ -2096,7 +2096,7 @@
       "colorSlots": [
         {
           "name": "body",
-          "material": "whitee",
+          "material": "body_0",
           "mode": "Palette",
           "normal": "#0F41A9",
           "palette": [
@@ -2148,7 +2148,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#0F41A9",
           "palette": [
@@ -2163,7 +2163,7 @@
         },
         {
           "name": "Top",
-          "material": "whitee",
+          "material": "Top_1",
           "mode": "Palette",
           "normal": "#279437",
           "palette": [
@@ -2179,7 +2179,7 @@
         },
         {
           "name": "Feet",
-          "material": "whitee",
+          "material": "Feet_2",
           "mode": "Palette",
           "normal": "#279437",
           "palette": [
@@ -2234,7 +2234,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#222222",
           "palette": [
@@ -2267,7 +2267,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#222222",
           "palette": [
@@ -2282,7 +2282,7 @@
         },
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_1",
           "mode": "Random",
           "normal": "#A0F12E",
           "palette": [
@@ -2313,7 +2313,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee 1",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#54A527",
           "palette": [
@@ -2362,7 +2362,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee 1",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#54A527",
           "palette": [
@@ -2374,7 +2374,7 @@
         },
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_1",
           "mode": "Palette",
           "normal": "#E9551B",
           "palette": [
@@ -2386,7 +2386,7 @@
         },
         {
           "name": "Top",
-          "material": "whitee",
+          "material": "Top_2",
           "mode": "Palette",
           "normal": "#0E0E0E",
           "palette": [
@@ -2397,7 +2397,7 @@
         },
         {
           "name": "Feet",
-          "material": "whitee",
+          "material": "Feet_3",
           "mode": "Palette",
           "normal": "#0E0E0E",
           "palette": [
@@ -2439,7 +2439,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#FF94F3",
           "palette": [
@@ -2483,7 +2483,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#E9551B",
           "palette": [
@@ -2495,7 +2495,7 @@
         },
         {
           "name": "Top",
-          "material": "whitee",
+          "material": "Top_1",
           "mode": "Palette",
           "normal": "#0E0E0E",
           "palette": [
@@ -2506,7 +2506,7 @@
         },
         {
           "name": "Feet",
-          "material": "whitee",
+          "material": "Feet_2",
           "mode": "Palette",
           "normal": "#0E0E0E",
           "palette": [
@@ -2558,7 +2558,7 @@
       "colorSlots": [
         {
           "name": "Head",
-          "material": "whitee",
+          "material": "Head_0",
           "mode": "Palette",
           "normal": "#5E3F7B",
           "palette": [
@@ -2574,7 +2574,7 @@
         },
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "Body_1",
           "mode": "Palette",
           "normal": "#469740",
           "palette": [
@@ -2583,7 +2583,7 @@
         },
         {
           "name": "Top",
-          "material": "whitee",
+          "material": "Top_2",
           "mode": "Palette",
           "normal": "#469740",
           "palette": [
@@ -2592,7 +2592,7 @@
         },
         {
           "name": "Feet",
-          "material": "whitee",
+          "material": "Feet_3",
           "mode": "Palette",
           "normal": "#469740",
           "palette": [
@@ -2634,7 +2634,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "Button Active 12",
+          "material": "Body_0",
           "mode": "Palette",
           "normal": "#D5701D",
           "palette": [
