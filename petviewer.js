@@ -362,6 +362,7 @@
           collectRecolorables(obj);
           t.group.add(obj);
           frameGroup(pet);
+          applyNormalColors(pet); // show the normal look on load (not the baked white)
           applyTextureState(pet, State.skinByPet[pet.id] || '__default');
         },
         undefined,
@@ -400,6 +401,9 @@
         const mats = Array.isArray(n.material) ? n.material : [n.material];
         mats.forEach(m => {
           if (!m || !m.color) return;
+          // Show single-sided meshes from both sides — fixes submeshes that
+          // vanished when viewed from the "inside" (backface culling).
+          m.side = THREE.DoubleSide;
           t.recolorables.push(m);
           // Remember the GLB's baked textures so a skin can revert to "Default".
           m.userData = m.userData || {};
@@ -424,6 +428,13 @@
     t.recolorables.forEach((m, i) => {
       try { m.color.set(colors[i % colors.length]); } catch (e) {}
     });
+  }
+
+  // Paint each slot's NORMAL color onto its submesh (used on load so the pet
+  // shows its normal look instead of the GLB's baked placeholder color).
+  function applyNormalColors(pet) {
+    if (!Array.isArray(pet.colorSlots) || !pet.colorSlots.length) return;
+    applyByMaterial(pet.colorSlots.map(s => ({ material: s.material || '', color: s.normal || '#cccccc' })));
   }
 
   // ── Textures & skins ───────────────────────────────────────────────────────
