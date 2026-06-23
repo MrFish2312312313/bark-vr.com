@@ -1228,6 +1228,62 @@
         "description": "Hehe, Ducks! From the Glorp memorial!",
         "image": "media/1782174457843-SampleScene_Custom..._22.06.2026_19-27-14.png",
         "subcategory": "Body"
+      },
+      {
+        "id": "bales",
+        "name": "Bales",
+        "description": "Very comfy for your ear stems!",
+        "image": "media/1782174670282-SampleScene_Custom..._22.06.2026_19-30-32.png",
+        "subcategory": "Leaves"
+      },
+      {
+        "id": "farmer-hat",
+        "name": "Farmer Hat",
+        "description": "Made from straw, from the Rancher Bundle!",
+        "image": "media/1782174733312-SampleScene_Custom..._22.06.2026_19-31-39.png",
+        "subcategory": "Head"
+      },
+      {
+        "id": "farmer-overalls",
+        "name": "Farmer Overalls",
+        "description": "Lookin very farmer! From the Rancher Bundle.",
+        "image": "media/1782174784850-SampleScene_Custom..._22.06.2026_19-32-30.png",
+        "subcategory": "Body"
+      },
+      {
+        "id": "fish-lips",
+        "name": "Fish Lips",
+        "description": "Very funny looking, moves when you speak!",
+        "image": "media/1782174833797-SampleScene_Custom..._22.06.2026_19-33-27.png",
+        "subcategory": "Nose"
+      },
+      {
+        "id": "golden-toilet-seat",
+        "name": "Golden Toilet Seat",
+        "description": "Wait a sec, unreleased cosmetic that will maybe be given to the winner of a future challenge???",
+        "image": "media/1782174902001-SampleScene_Custom..._22.06.2026_19-34-14.png",
+        "subcategory": "Back"
+      },
+      {
+        "id": "pitchfork",
+        "name": "Pitchfork",
+        "description": "Spiky!!",
+        "image": "media/1782174957826-SampleScene_Custom..._22.06.2026_19-35-35.png",
+        "subcategory": "Back"
+      },
+      {
+        "id": "tears",
+        "name": "Tears",
+        "description": "Wah Wah",
+        "image": "media/1782174997873-SampleScene_Custom..._22.06.2026_19-36-19.png",
+        "subcategory": "Nose"
+      },
+      {
+        "id": "wheat",
+        "name": "Wheat",
+        "description": "Tasty? From the Rancher Bundle!",
+        "image": "media/1782175047645-SampleScene_Custom..._22.06.2026_19-37-00.png",
+        "subcategory": "Nose"
       }
     ],
     "maps": [
