@@ -221,10 +221,19 @@
             ${canMod ? `<button class="cm-del" data-del="${escapeAttr(String(p.id))}" title="Delete (mod)">✕</button>` : ''}
           </div>
           ${p.text ? `<p class="cm-post-text">${linkify(escapeHtml(p.text))}</p>` : ''}
-          ${p.imageUrl ? `<img src="${escapeAttr(p.imageUrl)}" class="cm-post-img" loading="lazy" />` : ''}
+          ${p.imageUrl ? `<img src="${escapeAttr(mediaUrl(p.imageUrl))}" class="cm-post-img" loading="lazy" />` : ''}
         </div>`;
     }).join('');
     feed.querySelectorAll('[data-del]').forEach(b => b.onclick = () => deletePost(b.dataset.del));
+  }
+
+  // Backend returns relative "/media/…" image paths — resolve against the
+  // backend URL (Google avatar URLs are already absolute).
+  function mediaUrl(u) {
+    if (!u) return '';
+    if (/^https?:\/\//.test(u)) return u;
+    const base = (typeof BARK_BACKEND_URL !== 'undefined' && BARK_BACKEND_URL) ? BARK_BACKEND_URL.replace(/\/$/, '') : '';
+    return base + u;
   }
 
   function fileToDataUrl(file) {
