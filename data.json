@@ -682,6 +682,22 @@
         "image": "media/1782172420825-SampleScene_Custom..._22.06.2026_18-52-45.png",
         "effect": "Nothing, does absolutely nothing, yet.",
         "subcategory": "Fun"
+      },
+      {
+        "id": "cheerioat",
+        "name": "Cheerioat",
+        "description": "\"I think you spelled the name wro-\" IT'S SUPPOSED TO BE THAT!",
+        "image": "media/1782173157156-SampleScene_Custom..._22.06.2026_19-04-55.png",
+        "effect": "Looks tasty!",
+        "subcategory": "Fun"
+      },
+      {
+        "id": "connor-s-brain-for-dummies",
+        "name": "Connor's Brain For Dummies",
+        "description": "Still unable to decipher,",
+        "image": "media/1782173253787-SampleScene_Custom..._22.06.2026_19-06-28.png",
+        "effect": "Reminds Bum of the good 'ol Glorp days",
+        "subcategory": "Fun"
       }
     ],
     "cosmetics": [
