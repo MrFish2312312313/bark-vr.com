@@ -729,385 +729,449 @@
         "id": "top-hat",
         "name": "Top Hat",
         "description": "Oh so fancy",
-        "image": "media/1780608332839-SampleScene_Custom..._04.06.2026_16-25-11.png"
+        "image": "media/1780608332839-SampleScene_Custom..._04.06.2026_16-25-11.png",
+        "subcategory": "Head"
       },
       {
         "id": "knight-helmet",
         "name": "Knight Helmet",
         "description": "One of the very first cosmetics in bark!",
-        "image": "media/1780608390143-SampleScene_Custom..._04.06.2026_16-25-58.png"
+        "image": "media/1780608390143-SampleScene_Custom..._04.06.2026_16-25-58.png",
+        "subcategory": "Head"
       },
       {
         "id": "astronaut-helmet",
         "name": "Astronaut Helmet",
         "description": "Made for Bumstronaut, few people have this.",
-        "image": "media/1780608455763-SampleScene_Custom..._04.06.2026_16-26-52.png"
+        "image": "media/1780608455763-SampleScene_Custom..._04.06.2026_16-26-52.png",
+        "subcategory": "Head"
       },
       {
         "id": "beanie",
         "name": "Beanie",
         "description": "Made for Beanie, an absolute great hat btw",
-        "image": "media/1780608572962-SampleScene_Custom..._04.06.2026_16-28-58.png"
+        "image": "media/1780608572962-SampleScene_Custom..._04.06.2026_16-28-58.png",
+        "subcategory": "Head"
       },
       {
         "id": "map-hat",
         "name": "Map Hat",
         "description": "A cosmetic for those who were there since the beginning.",
-        "image": "media/1780608653530-SampleScene_Custom..._04.06.2026_16-30-12.png"
+        "image": "media/1780608653530-SampleScene_Custom..._04.06.2026_16-30-12.png",
+        "subcategory": "Head"
       },
       {
         "id": "army-helmet",
         "name": "Army Helmet",
         "description": "Was originally going to be tan, but ended up green!",
-        "image": "media/1780608728201-SampleScene_Custom..._04.06.2026_16-31-27.png"
+        "image": "media/1780608728201-SampleScene_Custom..._04.06.2026_16-31-27.png",
+        "subcategory": "Head"
       },
       {
         "id": "fire",
         "name": "Fire",
         "description": "AHHHHHHHHH, I'M ON FIRE",
-        "image": "media/1780608897324-SampleScene_Custom..._04.06.2026_16-33-39.png"
+        "image": "media/1780608897324-SampleScene_Custom..._04.06.2026_16-33-39.png",
+        "subcategory": "Head"
       },
       {
         "id": "cookie",
         "name": "Cookie",
         "description": "Made for Cookzie, an og cosmetic",
-        "image": "media/1780608969677-SampleScene_Custom..._04.06.2026_16-35-44.png"
+        "image": "media/1780608969677-SampleScene_Custom..._04.06.2026_16-35-44.png",
+        "subcategory": "Head"
       },
       {
         "id": "bryce-s-eepy-pillow",
         "name": "Bryce's Eepy Pillow",
         "description": "Pillow",
-        "image": "media/1780609124309-SampleScene_Custom..._04.06.2026_16-38-21.png"
+        "image": "media/1780609124309-SampleScene_Custom..._04.06.2026_16-38-21.png",
+        "subcategory": "Head"
       },
       {
         "id": "sunbrella",
         "name": "Sunbrella",
         "description": "Blocks the sun out your eyes",
-        "image": "media/1780609171730-SampleScene_Custom..._04.06.2026_16-39-05.png"
+        "image": "media/1780609171730-SampleScene_Custom..._04.06.2026_16-39-05.png",
+        "subcategory": "Head"
       },
       {
         "id": "hair",
         "name": "Hair",
         "description": "Looks kinda familiar.....",
-        "image": "media/1780609217510-SampleScene_Custom..._04.06.2026_16-40-03.png"
+        "image": "media/1780609217510-SampleScene_Custom..._04.06.2026_16-40-03.png",
+        "subcategory": "Head"
       },
       {
         "id": "bryce-s-sleepytime-hat",
         "name": "Bryce's Sleepytime Hat",
         "description": "Snore",
-        "image": "media/1780610072442-SampleScene_Custom..._04.06.2026_16-54-00.png"
+        "image": "media/1780610072442-SampleScene_Custom..._04.06.2026_16-54-00.png",
+        "subcategory": "Head"
       },
       {
         "id": "corn-pot",
         "name": "Corn Pot",
         "description": "Made for Cornsquack",
-        "image": "media/1780610229369-SampleScene_Custom..._04.06.2026_16-55-11.png"
+        "image": "media/1780610229369-SampleScene_Custom..._04.06.2026_16-55-11.png",
+        "subcategory": "Head"
       },
       {
         "id": "pot",
         "name": "Pot",
         "description": "Also made for Cornsquack",
-        "image": "media/1780610289744-SampleScene_Custom..._04.06.2026_16-57-46.png"
+        "image": "media/1780610289744-SampleScene_Custom..._04.06.2026_16-57-46.png",
+        "subcategory": "Head"
       },
       {
         "id": "explorer-hat",
         "name": "Explorer Hat",
         "description": "Out in the jungle, this hat is on your head",
-        "image": "media/1780610897235-SampleScene_Custom..._04.06.2026_17-07-42.png"
+        "image": "media/1780610897235-SampleScene_Custom..._04.06.2026_17-07-42.png",
+        "subcategory": "Head"
       },
       {
         "id": "mushroom-hat",
         "name": "Mushroom Hat",
         "description": "Woahhhhh, Mushroom",
-        "image": "media/1780610938930-SampleScene_Custom..._04.06.2026_17-08-31.png"
+        "image": "media/1780610938930-SampleScene_Custom..._04.06.2026_17-08-31.png",
+        "subcategory": "Head"
       },
       {
         "id": "father-hat",
         "name": "Father Hat",
         "description": "The hat Bumstronaut's Father wears",
-        "image": "media/1780611002879-SampleScene_Custom..._04.06.2026_17-09-27.png"
+        "image": "media/1780611002879-SampleScene_Custom..._04.06.2026_17-09-27.png",
+        "subcategory": "Head"
       },
       {
         "id": "headphones",
         "name": "Headphones",
         "description": "Comes in the Basement Boss Bundle, gives you a mint condition headset dent.",
-        "image": "media/1780611083366-SampleScene_Custom..._04.06.2026_17-10-39.png"
+        "image": "media/1780611083366-SampleScene_Custom..._04.06.2026_17-10-39.png",
+        "subcategory": "Head"
       },
       {
         "id": "bob-the-frog",
         "name": "Bob The Frog",
         "description": "Hates when people look at his behind......",
-        "image": "media/1780611139415-SampleScene_Custom..._04.06.2026_17-11-50.png"
+        "image": "media/1780611139415-SampleScene_Custom..._04.06.2026_17-11-50.png",
+        "subcategory": "Head"
       },
       {
         "id": "duck-hat",
         "name": "Duck Hat",
         "description": "Turns you into a duck",
-        "image": "media/1780611193193-SampleScene_Custom..._04.06.2026_17-12-52.png"
+        "image": "media/1780611193193-SampleScene_Custom..._04.06.2026_17-12-52.png",
+        "subcategory": "Head"
       },
       {
         "id": "flagumble-hat",
         "name": "Flagumble Hat",
         "description": "HOW DARE YOU CALL YOURSELF THAT!!!!!!",
-        "image": "media/1780611249793-SampleScene_Custom..._04.06.2026_17-13-37.png"
+        "image": "media/1780611249793-SampleScene_Custom..._04.06.2026_17-13-37.png",
+        "subcategory": "Head"
       },
       {
         "id": "googly-eyes",
         "name": "Googly Eyes",
         "description": "Look into the eyes.",
-        "image": "media/1780611317292-SampleScene_Custom..._04.06.2026_17-14-45.png"
+        "image": "media/1780611317292-SampleScene_Custom..._04.06.2026_17-14-45.png",
+        "subcategory": "Face"
       },
       {
         "id": "fraud-mod",
         "name": "Fraud Mod",
         "description": "Are you sure you're a moderator?",
-        "image": "media/1780611371806-SampleScene_Custom..._04.06.2026_17-15-44.png"
+        "image": "media/1780611371806-SampleScene_Custom..._04.06.2026_17-15-44.png",
+        "subcategory": "Face"
       },
       {
         "id": "bandana",
         "name": "Bandana",
         "description": "Woah, i'm so cool",
-        "image": "media/1780611414213-SampleScene_Custom..._04.06.2026_17-16-34.png"
+        "image": "media/1780611414213-SampleScene_Custom..._04.06.2026_17-16-34.png",
+        "subcategory": "Face"
       },
       {
         "id": "jungle-ninja-mask",
         "name": "Jungle Ninja Mask",
         "description": "Comes in the Jungle Ninja Bundle",
-        "image": "media/1780611466215-SampleScene_Custom..._04.06.2026_17-17-20.png"
+        "image": "media/1780611466215-SampleScene_Custom..._04.06.2026_17-17-20.png",
+        "subcategory": "Face"
       },
       {
         "id": "vr-headset",
         "name": "VR Headset",
         "description": "VR in VR? Weird.....",
-        "image": "media/1780611527349-SampleScene_Custom..._04.06.2026_17-18-17.png"
+        "image": "media/1780611527349-SampleScene_Custom..._04.06.2026_17-18-17.png",
+        "subcategory": "Face"
       },
       {
         "id": "bunny-ears",
         "name": "Bunny Ears",
         "description": "Are you sure those are from a bunny?",
-        "image": "media/1780611795174-SampleScene_Custom..._04.06.2026_17-22-46.png"
+        "image": "media/1780611795174-SampleScene_Custom..._04.06.2026_17-22-46.png",
+        "subcategory": "Leaves"
       },
       {
         "id": "leaves",
         "name": "Leaves",
         "description": "The original cosmetic, the best one.",
-        "image": "media/1780611841835-SampleScene_Custom..._04.06.2026_17-23-32.png"
+        "image": "media/1780611841835-SampleScene_Custom..._04.06.2026_17-23-32.png",
+        "subcategory": "Leaves"
       },
       {
         "id": "duck-leaves",
         "name": "Duck Leaves",
         "description": "Who's idea was this????????",
-        "image": "media/1780611885744-SampleScene_Custom..._04.06.2026_17-24-19.png"
+        "image": "media/1780611885744-SampleScene_Custom..._04.06.2026_17-24-19.png",
+        "subcategory": "Leaves"
       },
       {
         "id": "bean-leaves",
         "name": "Bean Leaves",
         "description": "Beans",
-        "image": "media/1780611943840-SampleScene_Custom..._04.06.2026_17-25-02.png"
+        "image": "media/1780611943840-SampleScene_Custom..._04.06.2026_17-25-02.png",
+        "subcategory": "Leaves"
       },
       {
         "id": "tux",
         "name": "Tux",
         "description": "Made for Fence, then everybody",
-        "image": "media/1780612092642-SampleScene_Custom..._04.06.2026_17-27-51.png"
+        "image": "media/1780612092642-SampleScene_Custom..._04.06.2026_17-27-51.png",
+        "subcategory": "Body"
       },
       {
         "id": "chicken-shirt",
         "name": "Chicken Shirt",
         "description": "Chicken",
-        "image": "media/1780612122461-SampleScene_Custom..._04.06.2026_17-28-27.png"
+        "image": "media/1780612122461-SampleScene_Custom..._04.06.2026_17-28-27.png",
+        "subcategory": "Body"
       },
       {
         "id": "bryce-s-sleepytime-fit",
         "name": "Bryce's Sleepytime Fit",
         "description": "Sleep Blue",
-        "image": "media/1780612165237-SampleScene_Custom..._04.06.2026_17-28-57.png"
+        "image": "media/1780612165237-SampleScene_Custom..._04.06.2026_17-28-57.png",
+        "subcategory": "Body"
       },
       {
         "id": "corn-s-sleepytime-fit",
         "name": "Corn's Sleepytime Fit",
         "description": "Sleep Yellow",
-        "image": "media/1780612205027-SampleScene_Custom..._04.06.2026_17-29-42.png"
+        "image": "media/1780612205027-SampleScene_Custom..._04.06.2026_17-29-42.png",
+        "subcategory": "Body"
       },
       {
         "id": "day-1-shirt",
         "name": "Day 1 Shirt",
         "description": "\"I've been here since day 1\"",
-        "image": "media/1780612245315-SampleScene_Custom..._04.06.2026_17-30-17.png"
+        "image": "media/1780612245315-SampleScene_Custom..._04.06.2026_17-30-17.png",
+        "subcategory": "Body"
       },
       {
         "id": "jungle-ninja-cloak",
         "name": "Jungle Ninja Cloak",
         "description": "Came in the Jungle Ninja Bundle",
-        "image": "media/1780612288025-SampleScene_Custom..._04.06.2026_17-31-00.png"
+        "image": "media/1780612288025-SampleScene_Custom..._04.06.2026_17-31-00.png",
+        "subcategory": "Body"
       },
       {
         "id": "explorer-shirt",
         "name": "Explorer Shirt",
         "description": "When in the jungle, you'll need this",
-        "image": "media/1780612355285-SampleScene_Custom..._04.06.2026_17-32-02.png"
+        "image": "media/1780612355285-SampleScene_Custom..._04.06.2026_17-32-02.png",
+        "subcategory": "Body"
       },
       {
         "id": "sweater",
         "name": "Sweater",
         "description": "The first shirt made for everyone",
-        "image": "media/1780612408415-SampleScene_Custom..._04.06.2026_17-33-03.png"
+        "image": "media/1780612408415-SampleScene_Custom..._04.06.2026_17-33-03.png",
+        "subcategory": "Body"
       },
       {
         "id": "gamer-hoodie",
         "name": "Gamer Hoodie",
         "description": "Came in the Basement Boss Bundle. \"Eat Sleep Bark Repeat\"",
-        "image": "media/1780612466382-SampleScene_Custom..._04.06.2026_17-33-45.png"
+        "image": "media/1780612466382-SampleScene_Custom..._04.06.2026_17-33-45.png",
+        "subcategory": "Body"
       },
       {
         "id": "duck-shirt",
         "name": "Duck Shirt",
         "description": "Woah, even more duck!",
-        "image": "media/1780612506982-SampleScene_Custom..._04.06.2026_17-34-41.png"
+        "image": "media/1780612506982-SampleScene_Custom..._04.06.2026_17-34-41.png",
+        "subcategory": "Body"
       },
       {
         "id": "ak",
         "name": "Ak",
         "description": "PEW PEW",
-        "image": "media/1780612569931-SampleScene_Custom..._04.06.2026_17-35-50.png"
+        "image": "media/1780612569931-SampleScene_Custom..._04.06.2026_17-35-50.png",
+        "subcategory": "Back"
       },
       {
         "id": "gyatt",
         "name": "Gyatt",
         "description": "\"why did we add this...\"",
-        "image": "media/1780612619798-SampleScene_Custom..._04.06.2026_17-36-41.png"
+        "image": "media/1780612619798-SampleScene_Custom..._04.06.2026_17-36-41.png",
+        "subcategory": "Back"
       },
       {
         "id": "kick-meh",
         "name": "Kick Mehh'",
         "description": "Ouch, why'd you do that?",
-        "image": "media/1780612945224-SampleScene_Custom..._04.06.2026_17-41-21.png"
+        "image": "media/1780612945224-SampleScene_Custom..._04.06.2026_17-41-21.png",
+        "subcategory": "Back"
       },
       {
         "id": "superbob",
         "name": "Superbob",
         "description": "He's everywhere, also grants access to song Superbob Theme",
-        "image": "media/1780613091210-SampleScene_Custom..._04.06.2026_17-44-14.png"
+        "image": "media/1780613091210-SampleScene_Custom..._04.06.2026_17-44-14.png",
+        "subcategory": "Back"
       },
       {
         "id": "vines",
         "name": "Vines",
         "description": "\"How'd i get wrapped up in this?\"",
-        "image": "media/1780613163108-SampleScene_Custom..._04.06.2026_17-45-38.png"
+        "image": "media/1780613163108-SampleScene_Custom..._04.06.2026_17-45-38.png",
+        "subcategory": "Back"
       },
       {
         "id": "back-spear",
         "name": "Back Spear",
         "description": "Ouchie",
-        "image": "media/1780613294127-SampleScene_Custom..._04.06.2026_17-47-57.png"
+        "image": "media/1780613294127-SampleScene_Custom..._04.06.2026_17-47-57.png",
+        "subcategory": "Back"
       },
       {
         "id": "bag-pack",
         "name": "Bag Pack",
         "description": "How can you carry this?",
-        "image": "media/1780613381497-SampleScene_Custom..._04.06.2026_17-48-47.png"
+        "image": "media/1780613381497-SampleScene_Custom..._04.06.2026_17-48-47.png",
+        "subcategory": "Back"
       },
       {
         "id": "pil-the-backpack",
         "name": "Pil the Backpack",
         "description": "Phil's 3rd cousin",
-        "image": "media/1780613454148-SampleScene_Custom..._04.06.2026_17-50-30.png"
+        "image": "media/1780613454148-SampleScene_Custom..._04.06.2026_17-50-30.png",
+        "subcategory": "Back"
       },
       {
         "id": "duck-backpack",
         "name": "Duck Backpack",
         "description": "Quackuh",
-        "image": "media/1780613577560-SampleScene_Custom..._04.06.2026_17-52-18.png"
+        "image": "media/1780613577560-SampleScene_Custom..._04.06.2026_17-52-18.png",
+        "subcategory": "Back"
       },
       {
         "id": "badge-beta",
         "name": "Badge Beta",
         "description": "Beta testers get this",
-        "image": "media/1780613620934-SampleScene_Custom..._04.06.2026_17-53-20.png"
+        "image": "media/1780613620934-SampleScene_Custom..._04.06.2026_17-53-20.png",
+        "subcategory": "Badge"
       },
       {
         "id": "mod-badge-og",
         "name": "Mod Badge (OG)",
         "description": "OG mods get this",
-        "image": "media/1780613666603-SampleScene_Custom..._04.06.2026_17-54-04.png"
+        "image": "media/1780613666603-SampleScene_Custom..._04.06.2026_17-54-04.png",
+        "subcategory": "Badge"
       },
       {
         "id": "troy-badge",
         "name": "Troy Badge",
         "description": "Only Troy has this",
-        "image": "media/1780613704315-SampleScene_Custom..._04.06.2026_17-54-45.png"
+        "image": "media/1780613704315-SampleScene_Custom..._04.06.2026_17-54-45.png",
+        "subcategory": "Badge"
       },
       {
         "id": "scouter-badge",
         "name": "Scouter Badge",
         "description": "People that find us devs get this",
-        "image": "media/1780613743331-SampleScene_Custom..._04.06.2026_17-55-21.png"
+        "image": "media/1780613743331-SampleScene_Custom..._04.06.2026_17-55-21.png",
+        "subcategory": "Badge"
       },
       {
         "id": "knawcheese-badge",
         "name": "Knawcheese Badge",
         "description": "People that played in the Knawcheese event got this",
-        "image": "media/1780613807145-SampleScene_Custom..._04.06.2026_17-56-15.png"
+        "image": "media/1780613807145-SampleScene_Custom..._04.06.2026_17-56-15.png",
+        "subcategory": "Badge"
       },
       {
         "id": "donor-badge",
         "name": "Donor Badge",
         "description": "People who buy the trading cards get this",
-        "image": "media/1780613861522-SampleScene_Custom..._04.06.2026_17-57-18.png"
+        "image": "media/1780613861522-SampleScene_Custom..._04.06.2026_17-57-18.png",
+        "subcategory": "Badge"
       },
       {
         "id": "discord-badge",
         "name": "Discord Badge",
         "description": "Players who link their account to discord get this",
-        "image": "media/1780613914108-SampleScene_Custom..._04.06.2026_17-58-00.png"
+        "image": "media/1780613914108-SampleScene_Custom..._04.06.2026_17-58-00.png",
+        "subcategory": "Badge"
       },
       {
         "id": "name-tag",
         "name": "Name Tag",
         "description": "Displays the player's trelative badge",
-        "image": "media/1780613989692-SampleScene_Custom..._04.06.2026_17-59-23.png"
+        "image": "media/1780613989692-SampleScene_Custom..._04.06.2026_17-59-23.png",
+        "subcategory": "Badge"
       },
       {
         "id": "lemons",
         "name": "Lemons",
-        "description": "Currently Unavailable",
-        "image": "media/1780614054713-SampleScene_Custom..._04.06.2026_18-00-29.png"
+        "description": "Secret, you can get it by using the Meta Quest store!",
+        "image": "media/1780614054713-SampleScene_Custom..._04.06.2026_18-00-29.png",
+        "subcategory": "Badge"
       },
       {
         "id": "mod-badge-but-better",
         "name": "Mod Badge But Better",
         "description": "It's better than before",
-        "image": "media/1780614121550-SampleScene_Custom..._04.06.2026_18-01-16.png"
+        "image": "media/1780614121550-SampleScene_Custom..._04.06.2026_18-01-16.png",
+        "subcategory": "Badge"
       },
       {
         "id": "dev-badge",
         "name": "Dev Badge",
         "description": "Devs get this",
-        "image": "media/1780614196222-SampleScene_Custom..._04.06.2026_18-02-37.png"
+        "image": "media/1780614196222-SampleScene_Custom..._04.06.2026_18-02-37.png",
+        "subcategory": "Badge"
       },
       {
         "id": "creator-badge",
         "name": "Creator Badge",
         "description": "People who get 5 cosmetics in the game get this",
-        "image": "media/1780614260029-SampleScene_Custom..._04.06.2026_18-03-31.png"
+        "image": "media/1780614260029-SampleScene_Custom..._04.06.2026_18-03-31.png",
+        "subcategory": "Badge"
       },
       {
         "id": "duck-badge",
         "name": "Duck Badge",
         "description": "Smol Duck",
-        "image": "media/1780614306433-SampleScene_Custom..._04.06.2026_18-04-48.png"
+        "image": "media/1780614306433-SampleScene_Custom..._04.06.2026_18-04-48.png",
+        "subcategory": "Badge"
       },
       {
         "id": "1911-gun",
         "name": "1911 Gun",
         "description": "Pew PEw",
-        "image": "media/1780614439282-SampleScene_Custom..._04.06.2026_18-06-52.png"
+        "image": "media/1780614439282-SampleScene_Custom..._04.06.2026_18-06-52.png",
+        "subcategory": "Side"
       },
       {
         "id": "moustache",
         "name": "Moustache",
         "description": "Fua Fua hehehe",
-        "image": "media/1780614481064-SampleScene_Custom..._04.06.2026_18-07-42.png"
+        "image": "media/1780614481064-SampleScene_Custom..._04.06.2026_18-07-42.png",
+        "subcategory": "Nose"
       }
     ],
     "maps": [
