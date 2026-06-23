@@ -23,6 +23,10 @@
   const PETS = () => (BarkEditor.data.pets = BarkEditor.data.pets || []);
   const MUTS = () => (BarkEditor.data.mutations = BarkEditor.data.mutations || []);
   const CFG  = () => (BarkEditor.data.petsConfig = BarkEditor.data.petsConfig || { mutationsPublic: false });
+  // Cache-buster for the network fetch: re-exported .glb models keep the SAME url,
+  // so without this the browser serves a stale model forever. modelsVersion is
+  // stamped into data.json by the Unity exporter on every export.
+  const modelUrl = (m) => m + (m.indexOf('?') < 0 ? '?' : '&') + 'v=' + (BarkEditor.data.modelsVersion || '0');
 
   const State = {
     activeId: null, three: null, audio: null, loadToken: 0, resizeHooked: false,
@@ -384,7 +388,7 @@
         const cached = State.modelCache.get(pet.model);
         if (cached) { showScene(pet, cached, key); return; }
         new THREE.GLTFLoader().load(
-          pet.model,
+          modelUrl(pet.model),
           (gltf) => {
             if (!State.three || token !== State.loadToken) return; // superseded
             const obj = gltf.scene || (gltf.scenes && gltf.scenes[0]);
