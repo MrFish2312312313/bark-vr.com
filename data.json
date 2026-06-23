@@ -1207,6 +1207,27 @@
         "description": "They look funny, From the Glorp memorial!",
         "image": "media/1782174328809-SampleScene_Custom..._22.06.2026_19-25-07.png",
         "subcategory": "Nose"
+      },
+      {
+        "id": "sunglasses",
+        "name": "Sunglasses",
+        "description": "Great for the beach! From the Glorp memorial!",
+        "image": "media/1782174374422-SampleScene_Custom..._22.06.2026_19-25-52.png",
+        "subcategory": "Face"
+      },
+      {
+        "id": "sweatband",
+        "name": "Sweatband",
+        "description": "Yes, it's from the monke game, but also, From the Glorp memorial!",
+        "image": "media/1782174419715-SampleScene_Custom..._22.06.2026_19-26-28.png",
+        "subcategory": "Head"
+      },
+      {
+        "id": "swimsuit",
+        "name": "Swimsuit",
+        "description": "Hehe, Ducks! From the Glorp memorial!",
+        "image": "media/1782174457843-SampleScene_Custom..._22.06.2026_19-27-14.png",
+        "subcategory": "Body"
       }
     ],
     "maps": [
