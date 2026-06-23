@@ -689,19 +689,36 @@
   // off far enough to fit the bounding sphere.
   function frameGroup(pet) {
     const t = State.three; if (!t) return;
-    t.group.scale.setScalar(pet.modelScale || 1);
-    const box = new THREE.Box3().setFromObject(t.group);
+    // NORMALIZE: scale every model so its largest dimension is the same (~2
+    // units). Pet prefabs vary in scale by 1000x, which — combined with the
+    // OrbitControls min/maxDistance clamps — made some pets appear tiny/far and
+    // others huge/too-close. After normalizing, one fixed framing works for all.
+    // Per-pet rotation override (degrees) for prefabs authored sideways.
+    const r = pet.modelRotation || [0, 0, 0];
+    t.group.rotation.set(r[0] * Math.PI / 180, r[1] * Math.PI / 180, r[2] * Math.PI / 180);
+    t.group.scale.setScalar(1);
+    let box = new THREE.Box3().setFromObject(t.group);
     if (box.isEmpty()) return;
-    const size = new THREE.Vector3(); box.getSize(size);
+    let size = new THREE.Vector3(); box.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    t.group.scale.setScalar((2 / maxDim) * (pet.modelScale || 1));
+
+    box = new THREE.Box3().setFromObject(t.group);
     const center = new THREE.Vector3(); box.getCenter(center);
+    box.getSize(size);
     const radius = Math.max(size.x, size.y, size.z) * 0.5 || 1;
     const fov = t.camera.fov * Math.PI / 180;
-    const dist = (radius / Math.sin(fov / 2)) * 1.4;
-    t.camera.near = Math.max(0.001, dist / 100);
+    const dist = (radius / Math.sin(fov / 2)) * 1.25;
+    t.camera.near = Math.max(0.01, dist / 100);
     t.camera.far = dist * 100;
-    t.camera.position.set(center.x, center.y + radius * 0.15, center.z + dist);
+    t.camera.position.set(center.x, center.y + radius * 0.1, center.z + dist);
     t.camera.updateProjectionMatrix();
-    if (t.controls) { t.controls.target.copy(center); t.controls.update(); }
+    if (t.controls) {
+      t.controls.target.copy(center);
+      t.controls.minDistance = dist * 0.25;   // scale clamps to THIS model
+      t.controls.maxDistance = dist * 4;
+      t.controls.update();
+    }
   }
 
   // ── Mutations (breeding brace graph) ─────────────────────────────────────
@@ -775,6 +792,9 @@
       <label>Model scale</label>
       <input id="petScale" type="number" step="0.1" value="${e.modelScale || 1}" />
 
+      <label>Model rotation (degrees: X Y Z) — fix sideways pets here</label>
+      <input id="petRot" value="${(e.modelRotation || [0,0,0]).join(' ')}" placeholder="0 0 0  (try '90 0 0' or '0 0 90')" />
+
       <label>Normal colors (comma-separated hex)</label>
       <input id="petNormal" value="${escapeAttr((e.normalColors || []).join(', '))}" placeholder="#6abe30, #3a7d1e" />
 
@@ -799,6 +819,7 @@
         image: e.image || '',
         model: e.model || '',
         modelScale: parseFloat(document.getElementById('petScale').value) || 1,
+        modelRotation: (document.getElementById('petRot').value || '0 0 0').trim().split(/[\s,]+/).map(function(n){return parseFloat(n)||0;}).slice(0,3),
         sounds: e.sounds.slice(),
         normalColors: parseHexList(document.getElementById('petNormal').value),
         naturalColors: document.getElementById('petNatRandom').checked
