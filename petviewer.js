@@ -24,7 +24,7 @@
   const MUTS = () => (BarkEditor.data.mutations = BarkEditor.data.mutations || []);
   const CFG  = () => (BarkEditor.data.petsConfig = BarkEditor.data.petsConfig || { mutationsPublic: false });
 
-  const State = { activeId: null, three: null, audio: null, loadToken: 0, resizeHooked: false };
+  const State = { activeId: null, three: null, audio: null, loadToken: 0, resizeHooked: false, skinByPet: {}, texCache: {} };
 
   const petById = (id) => PETS().find(p => p.id === id) || null;
   const visiblePets = () => PETS().filter(p => BarkEditor.editing || !p.hidden);
@@ -40,6 +40,10 @@
         (!editing && petById(State.activeId).hidden)) {
       State.activeId = pets.length ? pets[0].id : null;
     }
+
+    // Preserve the pet list's scroll position across a full re-render.
+    const prevList = root.querySelector('#pvList');
+    const prevScroll = prevList ? prevList.scrollLeft : 0;
 
     root.innerHTML = `
       <div class="pv-toolbar">
@@ -71,10 +75,14 @@
           <span class="pv-list-name">${escapeHtml(p.name || 'Unnamed')}</span>
           ${p.hidden ? '<span class="pv-hidden-badge">hidden</span>' : ''}
         `;
-        el.onclick = () => { State.activeId = p.id; render(); };
+        el.dataset.petId = p.id;
+        // Selecting a pet must NOT rebuild the list (that reset the horizontal
+        // scroll to the start on mobile every click). Just restyle + re-stage.
+        el.onclick = () => selectPet(p.id);
         list.appendChild(el);
       });
     }
+    if (list) list.scrollLeft = prevScroll;   // keep mobile scroll position across re-renders
 
     if (editing) {
       root.querySelector('#pvAddPet').onclick = () => openPetModal(null);
@@ -86,6 +94,18 @@
     }
 
     renderStage(root.querySelector('#pvStage'));
+  }
+
+  // Lightweight selection: restyle the list in place (no rebuild → no scroll
+  // jump) and re-render only the stage.
+  function selectPet(id) {
+    State.activeId = id;
+    const root = document.getElementById('petViewer');
+    if (!root) return;
+    root.querySelectorAll('.pv-list-item').forEach(el =>
+      el.classList.toggle('active', el.dataset.petId === id));
+    const stage = root.querySelector('#pvStage');
+    if (stage) renderStage(stage);
   }
 
   // ── Selected-pet stage ───────────────────────────────────────────────────
@@ -108,11 +128,15 @@
             ? `<div class="pv-no3d">3D viewer unavailable (couldn't load Three.js).</div>`
             : ''}
         </div>
+        ${(pet.skins && pet.skins.length)
+          ? `<div class="pv-skinrow"><label class="pv-color-label" style="margin:0;">Skin</label><select id="pvSkin">${skinOptions(pet)}</select></div>`
+          : ''}
         <div class="pv-controls">
           <button class="btn-secondary" id="pvSpawn">🎲 Simulate spawn</button>
           <button class="btn-secondary" id="pvSound" ${hasSound ? '' : 'disabled'}>🔊 Test sound</button>
           ${editing ? `
             <button class="btn-secondary" id="pvEdit">✎ Edit</button>
+            <button class="btn-secondary" id="pvTex">🎨 Textures…</button>
             <button class="btn-secondary" id="pvHide">${pet.hidden ? 'Show' : 'Hide'}</button>
             <button class="btn-secondary pv-danger" id="pvDel">Delete</button>` : ''}
         </div>
@@ -131,8 +155,14 @@
     stage.querySelector('#pvSpawn').onclick = () => simulateSpawn(pet);
     const sb = stage.querySelector('#pvSound');
     if (sb && hasSound) sb.onclick = () => testSound(pet);
+    const skinSel = stage.querySelector('#pvSkin');
+    if (skinSel) skinSel.onchange = () => {
+      State.skinByPet[pet.id] = skinSel.value;
+      applyTextureState(pet, skinSel.value);
+    };
     if (editing) {
       stage.querySelector('#pvEdit').onclick = () => openPetModal(pet.id);
+      stage.querySelector('#pvTex').onclick = () => openTexturesModal(pet.id);
       stage.querySelector('#pvHide').onclick = () => { pet.hidden = !pet.hidden; BarkEditor.dirty = true; updateEditorBar(); render(); };
       stage.querySelector('#pvDel').onclick = () => deletePet(pet.id);
     }
@@ -332,6 +362,7 @@
           collectRecolorables(obj);
           t.group.add(obj);
           frameGroup(pet);
+          applyTextureState(pet, State.skinByPet[pet.id] || '__default');
         },
         undefined,
         (err) => {
@@ -370,6 +401,13 @@
         mats.forEach(m => {
           if (!m || !m.color) return;
           t.recolorables.push(m);
+          // Remember the GLB's baked textures so a skin can revert to "Default".
+          m.userData = m.userData || {};
+          if (!m.userData._origCaptured) {
+            m.userData._origMap = m.map || null;
+            m.userData._origNormal = m.normalMap || null;
+            m.userData._origCaptured = true;
+          }
           // Index by material name so a color SLOT (exported with its Unity
           // material name) can recolor exactly its submesh — the glTF keeps
           // material names from Unity.
@@ -386,6 +424,174 @@
     t.recolorables.forEach((m, i) => {
       try { m.color.set(colors[i % colors.length]); } catch (e) {}
     });
+  }
+
+  // ── Textures & skins ───────────────────────────────────────────────────────
+  // A texture LAYER = { material, map, normal }. `material` targets a submesh by
+  // its (Unity) material name; blank/"(all)" tints every recolorable material.
+  // The color roll still multiplies over the texture, so textured pets recolor.
+  function loadTex(url) {
+    if (!url) return null;
+    if (State.texCache[url]) return State.texCache[url];
+    const tex = new THREE.TextureLoader().load(url);
+    State.texCache[url] = tex;
+    return tex;
+  }
+
+  function layerMaterials(layer) {
+    const t = State.three; if (!t) return [];
+    if (layer.material && layer.material !== '(all)') return t.materialsByName[layer.material] || [];
+    return t.recolorables; // blank / "(all)" → every submesh
+  }
+
+  function applyLayer(layer) {
+    const mats = layerMaterials(layer);
+    mats.forEach(m => {
+      if (layer.map) {
+        const tx = loadTex(layer.map);
+        if (tx) { if (THREE.sRGBEncoding !== undefined) tx.encoding = THREE.sRGBEncoding; m.map = tx; }
+      }
+      if (layer.normal) {
+        const tn = loadTex(layer.normal);
+        if (tn) m.normalMap = tn;
+      }
+      m.needsUpdate = true;
+    });
+  }
+
+  function revertTextures() {
+    const t = State.three; if (!t) return;
+    t.recolorables.forEach(m => {
+      if (!m.userData) return;
+      m.map = m.userData._origMap || null;
+      m.normalMap = m.userData._origNormal || null;
+      m.needsUpdate = true;
+    });
+  }
+
+  // Apply base texture slots, then the selected skin's layers on top.
+  function applyTextureState(pet, skinName) {
+    const t = State.three; if (!t || !t.recolorables.length) return;
+    revertTextures();
+    (pet.textureSlots || []).forEach(applyLayer);
+    if (skinName && skinName !== '__default') {
+      const sk = (pet.skins || []).find(s => s.name === skinName);
+      if (sk) {
+        if (Array.isArray(sk.layers)) sk.layers.forEach(applyLayer);
+        else applyLayer(sk); // single-material skin { material, map, normal }
+      }
+    }
+  }
+
+  function skinOptions(pet) {
+    const cur = State.skinByPet[pet.id] || '__default';
+    let html = `<option value="__default"${cur === '__default' ? ' selected' : ''}>Default</option>`;
+    (pet.skins || []).forEach(s => {
+      html += `<option value="${escapeAttr(s.name)}"${cur === s.name ? ' selected' : ''}>${escapeHtml(s.name)}</option>`;
+    });
+    return html;
+  }
+
+  // ── Editor: textures & skins ───────────────────────────────────────────────
+  function texMaterialOptions(pet, sel) {
+    const uniq = Array.from(new Set((pet.colorSlots || []).map(s => s.material).filter(Boolean)));
+    let html = `<option value="(all)"${(!sel || sel === '(all)') ? ' selected' : ''}>(all submeshes)</option>`;
+    uniq.forEach(n => html += `<option value="${escapeAttr(n)}"${sel === n ? ' selected' : ''}>${escapeHtml(n)}</option>`);
+    return html;
+  }
+
+  function openTexturesModal(id) {
+    const pet = petById(id); if (!pet) return;
+    pet.textureSlots = pet.textureSlots || [];
+    pet.skins = pet.skins || [];
+    showModal(`Textures & Skins — ${pet.name || pet.id}`, texModalBody(pet), async () => true, () => wireTexModal(pet));
+    const foot = document.querySelector('#barkModal .bark-modal-foot');
+    if (foot) {
+      const s = foot.querySelector('#modalSave'); if (s) s.style.display = 'none';
+      const c = foot.querySelector('#modalCancel'); if (c) c.textContent = 'Done';
+    }
+  }
+
+  function texModalBody(pet) {
+    const baseRows = (pet.textureSlots || []).map((ts, i) =>
+      `<div class="cat-row tex-row"><span class="cat-name">${escapeHtml(ts.material || '(all)')}${ts.map ? ' · map' : ''}${ts.normal ? ' · normal' : ''}</span>
+       <button type="button" class="edit-btn edit-btn-danger" data-rmbase="${i}">✕</button></div>`
+    ).join('') || `<p class="pv-random" style="margin:4px 0;">No base textures.</p>`;
+
+    const skinRows = (pet.skins || []).map((sk, i) =>
+      `<div class="cat-row tex-row"><span class="cat-name">${escapeHtml(sk.name || 'skin')} → ${escapeHtml(sk.material || '(all)')}${sk.map ? ' · map' : ''}${sk.normal ? ' · normal' : ''}</span>
+       <button type="button" class="edit-btn edit-btn-danger" data-rmskin="${i}">✕</button></div>`
+    ).join('') || `<p class="pv-random" style="margin:4px 0;">No skins.</p>`;
+
+    return `
+      <p class="cat-hint">Apply an albedo (color) texture and/or normal map to a submesh — the simulate-spawn color still tints over it. Skins are named alternate textures shown in a dropdown on the pet.</p>
+      <div class="cat-tree">
+        <div class="tex-section-title">Base textures</div>
+        ${baseRows}
+        <div class="tex-add">
+          <label>Submesh</label><select id="texBaseMat">${texMaterialOptions(pet, '(all)')}</select>
+          <label>Color / albedo texture</label><input type="file" id="texBaseMap" accept="image/*" />
+          <label>Normal map</label><input type="file" id="texBaseNormal" accept="image/*" />
+          <button type="button" class="btn-secondary" id="texBaseAdd">+ Add base texture</button>
+        </div>
+        <div class="tex-section-title" style="margin-top:18px;">Skins</div>
+        ${skinRows}
+        <div class="tex-add">
+          <label>Skin name</label><input id="texSkinName" placeholder="e.g. Galaxy" />
+          <label>Submesh</label><select id="texSkinMat">${texMaterialOptions(pet, '(all)')}</select>
+          <label>Color / albedo texture</label><input type="file" id="texSkinMap" accept="image/*" />
+          <label>Normal map</label><input type="file" id="texSkinNormal" accept="image/*" />
+          <button type="button" class="btn-secondary" id="texSkinAdd">+ Add skin</button>
+        </div>
+      </div>`;
+  }
+
+  function texRefresh(pet) {
+    const body = document.querySelector('#barkModal .bark-modal-body');
+    if (body) { body.innerHTML = texModalBody(pet); wireTexModal(pet); }
+    BarkEditor.dirty = true; updateEditorBar();
+    render(); // reloads the stage → re-applies textures + refreshes the skin dropdown
+  }
+
+  function wireTexModal(pet) {
+    const body = document.querySelector('#barkModal .bark-modal-body'); if (!body) return;
+    body.querySelectorAll('[data-rmbase]').forEach(b => b.onclick = () => { pet.textureSlots.splice(+b.dataset.rmbase, 1); texRefresh(pet); });
+    body.querySelectorAll('[data-rmskin]').forEach(b => b.onclick = () => { pet.skins.splice(+b.dataset.rmskin, 1); texRefresh(pet); });
+
+    const baseAdd = body.querySelector('#texBaseAdd');
+    if (baseAdd) baseAdd.onclick = async () => {
+      const mapF = body.querySelector('#texBaseMap').files[0];
+      const nrmF = body.querySelector('#texBaseNormal').files[0];
+      if (!mapF && !nrmF) return alert('Pick a texture and/or normal map.');
+      const layer = { material: body.querySelector('#texBaseMat').value };
+      try {
+        showSpinner('Uploading texture…');
+        if (mapF) layer.map = await uploadImage(mapF);
+        if (nrmF) layer.normal = await uploadImage(nrmF);
+      } catch (err) { alert('Upload failed: ' + err.message); hideSpinner(); return; }
+      hideSpinner();
+      pet.textureSlots.push(layer);
+      texRefresh(pet);
+    };
+
+    const skinAdd = body.querySelector('#texSkinAdd');
+    if (skinAdd) skinAdd.onclick = async () => {
+      const name = (body.querySelector('#texSkinName').value || '').trim();
+      const mapF = body.querySelector('#texSkinMap').files[0];
+      const nrmF = body.querySelector('#texSkinNormal').files[0];
+      if (!name) return alert('Name the skin.');
+      if ((pet.skins || []).some(s => (s.name || '').toLowerCase() === name.toLowerCase())) return alert('A skin with that name already exists.');
+      if (!mapF && !nrmF) return alert('Pick a texture and/or normal map for the skin.');
+      const sk = { name, material: body.querySelector('#texSkinMat').value };
+      try {
+        showSpinner('Uploading skin…');
+        if (mapF) sk.map = await uploadImage(mapF);
+        if (nrmF) sk.normal = await uploadImage(nrmF);
+      } catch (err) { alert('Upload failed: ' + err.message); hideSpinner(); return; }
+      hideSpinner();
+      pet.skins.push(sk);
+      texRefresh(pet);
+    };
   }
 
   // Center + frame the model: aim controls at its center and back the camera
@@ -409,8 +615,11 @@
 
   // ── Mutations (breeding brace graph) ─────────────────────────────────────
   function renderMutationsFor(pet) {
-    const asResult = MUTS().filter(m => m.result === pet.id);
-    const asParent = MUTS().filter(m => m.parentA === pet.id || m.parentB === pet.id);
+    // Per-mutation visibility: editors see everything (hidden ones marked);
+    // the public only sees mutations that aren't individually hidden.
+    const vis = m => BarkEditor.editing || !m.hidden;
+    const asResult = MUTS().filter(m => m.result === pet.id && vis(m));
+    const asParent = MUTS().filter(m => (m.parentA === pet.id || m.parentB === pet.id) && vis(m));
     if (!asResult.length && !asParent.length) {
       return `<div class="pv-muts"><div class="pv-color-label">Mutations</div><p class="pv-random">None known.</p></div>`;
     }
@@ -439,7 +648,7 @@
               <text x="${cx}" y="${cy + 5}" text-anchor="middle" class="pv-mg-ini">${escapeHtml(ini)}</text>
               <text x="${cx}" y="${cy + rad + 15}" text-anchor="middle" class="pv-mg-name">${escapeHtml(nm)}</text>`;
     };
-    return `<svg class="pv-mut-graph" viewBox="0 0 340 170" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    const svg = `<svg class="pv-mut-graph" viewBox="0 0 340 170" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
       <path d="M70,48 Q150,48 165,85 Q150,122 70,122" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.75"/>
       <path d="M165,85 H248" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.75"/>
       <text x="206" y="79" text-anchor="middle" class="pv-mg-arrow">▶</text>
@@ -447,6 +656,9 @@
       ${node(b, 70, 122, 26)}
       ${node(r, 282, 85, 32)}
     </svg>`;
+    // Editors see a marker on mutations that are hidden from the public.
+    const tag = m.hidden ? `<span class="pv-hidden-badge">hidden from public</span>` : '';
+    return `<div class="pv-mut-wrap">${tag}${svg}</div>`;
   }
 
   // ── Editor: add / edit / delete pet ──────────────────────────────────────
@@ -576,8 +788,11 @@
     if (!muts.length) html += `<p class="players-empty" style="margin:6px 0 10px;">No mutations yet.</p>`;
     muts.forEach((m, i) => {
       html += `<div class="cat-node"><div class="cat-row">
-        <span class="cat-name">${nm(m.parentA)} + ${nm(m.parentB)} → ${nm(m.result)}</span>
-        <span class="cat-actions"><button type="button" class="edit-btn edit-btn-danger" data-del="${i}">✕</button></span>
+        <span class="cat-name">${nm(m.parentA)} + ${nm(m.parentB)} → ${nm(m.result)}${m.hidden ? ' <span class="pv-hidden-badge">hidden</span>' : ''}</span>
+        <span class="cat-actions">
+          <button type="button" class="edit-btn" data-hide="${i}" title="${m.hidden ? 'Show to public' : 'Hide from public'}">${m.hidden ? '🙈' : '👁'}</button>
+          <button type="button" class="edit-btn edit-btn-danger" data-del="${i}">✕</button>
+        </span>
       </div></div>`;
     });
     html += `</div>
@@ -594,6 +809,9 @@
     const body = document.querySelector('#barkModal .bark-modal-body');
     if (!body) return;
     body.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { MUTS().splice(+b.dataset.del, 1); mutRefresh(); });
+    body.querySelectorAll('[data-hide]').forEach(b => b.onclick = () => {
+      const m = MUTS()[+b.dataset.hide]; if (m) m.hidden = !m.hidden; mutRefresh();
+    });
     const add = body.querySelector('#mutAdd');
     if (add) add.onclick = () => {
       const a = body.querySelector('#mutA').value;

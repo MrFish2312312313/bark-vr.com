@@ -1676,7 +1676,7 @@
       "description": "",
       "hidden": true,
       "image": "media/pet-Icon_cird.png",
-      "model": "",
+      "model": "media/models/pet-cird.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Recording_5.mp3",
@@ -1709,7 +1709,40 @@
         "#D4F7FF",
         "#141F2E"
       ],
-      "prefabResource": "cird"
+      "prefabResource": "cird",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0F41A9",
+          "palette": [
+            "#222222",
+            "#D4D4D4",
+            "#6D2525",
+            "#8D6F32",
+            "#A9150F",
+            "#DA750D",
+            "#2FAC0C",
+            "#E1E705",
+            "#BF31B4",
+            "#6431BF"
+          ]
+        },
+        {
+          "name": "Pattern",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#141F2E",
+          "palette": [
+            "#2E2F3F",
+            "#FCECC7",
+            "#222222",
+            "#D4F7FF",
+            "#141F2E"
+          ]
+        }
+      ]
     },
     {
       "id": "cow",
@@ -1717,7 +1750,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_cow.png",
-      "model": "",
+      "model": "media/models/pet-cow.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Recording_5.mp3",
@@ -1738,7 +1771,33 @@
         "#FCECC7",
         "#D4F7FF"
       ],
-      "prefabResource": "cow"
+      "prefabResource": "cow",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#3D2A18",
+          "palette": [
+            "#222222",
+            "#D4D4D4",
+            "#6D2525",
+            "#8D6F32"
+          ]
+        },
+        {
+          "name": "Pattern",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#FFFFFF",
+          "palette": [
+            "#2E2F3F",
+            "#FCECC7",
+            "#222222",
+            "#D4F7FF"
+          ]
+        }
+      ]
     },
     {
       "id": "duck",
@@ -1746,7 +1805,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_DuckP.png",
-      "model": "",
+      "model": "media/models/pet-duck.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-duck-quack-realistic.mp3",
@@ -1757,7 +1816,18 @@
         "#FFFF00"
       ],
       "naturalColors": "random",
-      "prefabResource": "DuckP"
+      "prefabResource": "DuckP",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#FFFF00",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ]
     },
     {
       "id": "dumba",
@@ -1765,7 +1835,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Dumba.png",
-      "model": "",
+      "model": "media/models/pet-dumba.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
@@ -1773,7 +1843,27 @@
         "#030303"
       ],
       "naturalColors": "random",
-      "prefabResource": "Dumba"
+      "prefabResource": "Dumba",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "Material",
+          "mode": "Random",
+          "normal": "#ECECEC",
+          "palette": [
+            "#FFFFFF"
+          ]
+        },
+        {
+          "name": "Pattern",
+          "material": "white2 1",
+          "mode": "Random",
+          "normal": "#030303",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ]
     },
     {
       "id": "durmite",
@@ -1781,7 +1871,7 @@
       "description": "",
       "hidden": true,
       "image": "media/pet-Icon_Durmite.png",
-      "model": "",
+      "model": "media/models/pet-durmite.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Record__online-voice-recorder.com___3_.mp3",
@@ -1796,7 +1886,22 @@
         "#FFFC00"
       ],
       "naturalColors": "random",
-      "prefabResource": "Durmite"
+      "prefabResource": "Durmite",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#FFFC00",
+          "palette": [
+            "#D5701D",
+            "#683D19",
+            "#681A19",
+            "#221915",
+            "#FFFC00"
+          ]
+        }
+      ]
     },
     {
       "id": "foish",
@@ -1804,7 +1909,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Foish.png",
-      "model": "",
+      "model": "media/models/pet-foish.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Fish_Rhyme_Jam__mp3cut.net_.mp3",
@@ -1823,7 +1928,21 @@
         "#FFFFFF",
         "#FFA76B"
       ],
-      "prefabResource": "Foish"
+      "prefabResource": "Foish",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "New Material 2",
+          "mode": "Palette",
+          "normal": "#FFFFFF",
+          "palette": [
+            "#E7FF73",
+            "#C57BFF",
+            "#FFFFFF",
+            "#FFA76B"
+          ]
+        }
+      ]
     },
     {
       "id": "glorp-rat",
@@ -1831,14 +1950,28 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Glorp_Rat.png",
-      "model": "",
+      "model": "media/models/pet-glorp-rat.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#A0F12E"
       ],
       "naturalColors": "random",
-      "prefabResource": "Glorp Rat"
+      "prefabResource": "Glorp Rat",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#A0F12E",
+          "palette": [
+            "#222222",
+            "#D4D4D4",
+            "#6D2525",
+            "#8D6F32"
+          ]
+        }
+      ]
     },
     {
       "id": "greg",
@@ -1846,7 +1979,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_GregP.png",
-      "model": "",
+      "model": "media/models/pet-greg.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Monke_Sound__1_.mp3",
@@ -1857,7 +1990,27 @@
         "#1E7213"
       ],
       "naturalColors": "random",
-      "prefabResource": "GregP"
+      "prefabResource": "GregP",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#56D945",
+          "palette": [
+            "#FFFFFF"
+          ]
+        },
+        {
+          "name": "Pattern",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#1E7213",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ]
     },
     {
       "id": "gruke",
@@ -1865,7 +2018,7 @@
       "description": "",
       "hidden": true,
       "image": "media/pet-Icon_Gruke.png",
-      "model": "",
+      "model": "media/models/pet-gruke.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Monke_Sound__1_.mp3",
@@ -1881,7 +2034,36 @@
         "#279437"
       ],
       "naturalColors": "random",
-      "prefabResource": "Gruke"
+      "prefabResource": "Gruke",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#5E3F7B",
+          "palette": [
+            "#FFFFFF"
+          ]
+        },
+        {
+          "name": "Pattern",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#1E7213",
+          "palette": [
+            "#FFFFFF"
+          ]
+        },
+        {
+          "name": "Top",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#279437",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ]
     },
     {
       "id": "hudsons-bird",
@@ -1889,7 +2071,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Hudson_s_Borb.png",
-      "model": "",
+      "model": "media/models/pet-hudsons-bird.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-voice-message.ogg",
@@ -1910,7 +2092,24 @@
         "#BF31B4",
         "#6431BF"
       ],
-      "prefabResource": "Hudson's Borb"
+      "prefabResource": "Hudson's Borb",
+      "colorSlots": [
+        {
+          "name": "body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0F41A9",
+          "palette": [
+            "#0F41A9",
+            "#A9150F",
+            "#DA750D",
+            "#2FAC0C",
+            "#E1E705",
+            "#BF31B4",
+            "#6431BF"
+          ]
+        }
+      ]
     },
     {
       "id": "hudsons-puke",
@@ -1918,7 +2117,7 @@
       "description": "",
       "hidden": true,
       "image": "media/pet-Icon_Hudson_s_Puke.png",
-      "model": "",
+      "model": "media/models/pet-hudsons-puke.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-voice-message.ogg",
@@ -1945,7 +2144,56 @@
         "#6431BF",
         "#279437"
       ],
-      "prefabResource": "Hudson's Puke"
+      "prefabResource": "Hudson's Puke",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0F41A9",
+          "palette": [
+            "#0F41A9",
+            "#A9150F",
+            "#DA750D",
+            "#2FAC0C",
+            "#E1E705",
+            "#BF31B4",
+            "#6431BF"
+          ]
+        },
+        {
+          "name": "Top",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#279437",
+          "palette": [
+            "#0F41A9",
+            "#A9150F",
+            "#DA750D",
+            "#2FAC0C",
+            "#E1E705",
+            "#BF31B4",
+            "#6431BF",
+            "#279437"
+          ]
+        },
+        {
+          "name": "Feet",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#279437",
+          "palette": [
+            "#0F41A9",
+            "#A9150F",
+            "#DA750D",
+            "#2FAC0C",
+            "#E1E705",
+            "#BF31B4",
+            "#6431BF",
+            "#279437"
+          ]
+        }
+      ]
     },
     {
       "id": "itempet",
@@ -1953,12 +2201,13 @@
       "description": "",
       "hidden": true,
       "image": "",
-      "model": "",
+      "model": "media/models/pet-itempet.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [],
       "naturalColors": [],
-      "prefabResource": "ItemPetBase"
+      "prefabResource": "ItemPetBase",
+      "colorSlots": []
     },
     {
       "id": "kevin",
@@ -1966,7 +2215,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_KevinP.png",
-      "model": "",
+      "model": "media/models/pet-kevin.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
@@ -1981,7 +2230,24 @@
         "#B0A535",
         "#2D5827"
       ],
-      "prefabResource": "KevinP"
+      "prefabResource": "KevinP",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#222222",
+          "palette": [
+            "#222222",
+            "#9FA4A4",
+            "#AC3434",
+            "#525B8F",
+            "#A25B25",
+            "#B0A535",
+            "#2D5827"
+          ]
+        }
+      ]
     },
     {
       "id": "klerp",
@@ -1989,7 +2255,7 @@
       "description": "",
       "hidden": true,
       "image": "media/pet-Icon_Klerp.png",
-      "model": "",
+      "model": "media/models/pet-klerp.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
@@ -1997,7 +2263,33 @@
         "#A0F12E"
       ],
       "naturalColors": "random",
-      "prefabResource": "Klerp"
+      "prefabResource": "Klerp",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#222222",
+          "palette": [
+            "#222222",
+            "#9FA4A4",
+            "#AC3434",
+            "#525B8F",
+            "#A25B25",
+            "#B0A535",
+            "#2D5827"
+          ]
+        },
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Random",
+          "normal": "#A0F12E",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ]
     },
     {
       "id": "lizard",
@@ -2005,7 +2297,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Lizard.png",
-      "model": "",
+      "model": "media/models/pet-lizard.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
@@ -2017,7 +2309,21 @@
         "#BF6F0A",
         "#2B201B"
       ],
-      "prefabResource": "Lizard"
+      "prefabResource": "Lizard",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee 1",
+          "mode": "Palette",
+          "normal": "#54A527",
+          "palette": [
+            "#54A527",
+            "#BFB859",
+            "#BF6F0A",
+            "#2B201B"
+          ]
+        }
+      ]
     },
     {
       "id": "piffard",
@@ -2025,7 +2331,7 @@
       "description": "",
       "hidden": true,
       "image": "media/pet-Icon_Piffard.png",
-      "model": "",
+      "model": "media/models/pet-piffard.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
@@ -2052,7 +2358,59 @@
         "#FFFB00",
         "#FF2300"
       ],
-      "prefabResource": "Piffard"
+      "prefabResource": "Piffard",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee 1",
+          "mode": "Palette",
+          "normal": "#54A527",
+          "palette": [
+            "#54A527",
+            "#BFB859",
+            "#BF6F0A",
+            "#2B201B"
+          ]
+        },
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#E9551B",
+          "palette": [
+            "#E9551B",
+            "#D42626",
+            "#FFF3B8",
+            "#D9C17F"
+          ]
+        },
+        {
+          "name": "Top",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0E0E0E",
+          "palette": [
+            "#0E0E0E",
+            "#E3FBFF",
+            "#654825"
+          ]
+        },
+        {
+          "name": "Feet",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0E0E0E",
+          "palette": [
+            "#0E0E0E",
+            "#FFFFFF",
+            "#2900FF",
+            "#FF3600",
+            "#6BFF00",
+            "#FFFB00",
+            "#FF2300"
+          ]
+        }
+      ]
     },
     {
       "id": "pig",
@@ -2060,7 +2418,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Pig.png",
-      "model": "",
+      "model": "media/models/pet-pig.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Record__online-voice-recorder.com___9_.mp3",
@@ -2077,7 +2435,21 @@
         "#D0CA97",
         "#8D6F32"
       ],
-      "prefabResource": "Pig"
+      "prefabResource": "Pig",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#FF94F3",
+          "palette": [
+            "#FF95F3",
+            "#3D3B3B",
+            "#D0CA97",
+            "#8D6F32"
+          ]
+        }
+      ]
     },
     {
       "id": "puffy",
@@ -2085,7 +2457,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_PuffyP.png",
-      "model": "",
+      "model": "media/models/pet-puffy.glb",
       "modelScale": 1,
       "sounds": [],
       "normalColors": [
@@ -2107,7 +2479,47 @@
         "#FFFB00",
         "#FF2400"
       ],
-      "prefabResource": "PuffyP"
+      "prefabResource": "PuffyP",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#E9551B",
+          "palette": [
+            "#E9551B",
+            "#D42626",
+            "#FFF3B8",
+            "#D9C17F"
+          ]
+        },
+        {
+          "name": "Top",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0E0E0E",
+          "palette": [
+            "#0E0E0E",
+            "#E3FBFF",
+            "#654825"
+          ]
+        },
+        {
+          "name": "Feet",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#0E0E0E",
+          "palette": [
+            "#0E0E0E",
+            "#FFFFFF",
+            "#2900FF",
+            "#FF3600",
+            "#6BFF00",
+            "#FFFB00",
+            "#FF2400"
+          ]
+        }
+      ]
     },
     {
       "id": "puke",
@@ -2115,7 +2527,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_PukeP.png",
-      "model": "",
+      "model": "media/models/pet-puke.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
@@ -2142,7 +2554,58 @@
         "#423732",
         "#F5F5F5"
       ],
-      "prefabResource": "PukeP"
+      "prefabResource": "PukeP",
+      "colorSlots": [
+        {
+          "name": "Head",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#5E3F7B",
+          "palette": [
+            "#DF9E54",
+            "#36394C",
+            "#DF5454",
+            "#83BA45",
+            "#E1BB51",
+            "#82B9DF",
+            "#DF7054",
+            "#254374"
+          ]
+        },
+        {
+          "name": "Body",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#469740",
+          "palette": [
+            "#917669"
+          ]
+        },
+        {
+          "name": "Top",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#469740",
+          "palette": [
+            "#DF5454"
+          ]
+        },
+        {
+          "name": "Feet",
+          "material": "whitee",
+          "mode": "Palette",
+          "normal": "#469740",
+          "palette": [
+            "#DF5454",
+            "#82B9DF",
+            "#E1BB51",
+            "#FF8622",
+            "#121212",
+            "#423732",
+            "#F5F5F5"
+          ]
+        }
+      ]
     },
     {
       "id": "termite",
@@ -2150,7 +2613,7 @@
       "description": "",
       "hidden": false,
       "image": "media/pet-Icon_Terry_Pet.png",
-      "model": "",
+      "model": "media/models/pet-termite.glb",
       "modelScale": 1,
       "sounds": [
         "media/pet-Record__online-voice-recorder.com___3_.mp3",
@@ -2167,7 +2630,21 @@
         "#681A19",
         "#221915"
       ],
-      "prefabResource": "Terry Pet"
+      "prefabResource": "Terry Pet",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "Button Active 12",
+          "mode": "Palette",
+          "normal": "#D5701D",
+          "palette": [
+            "#D5701D",
+            "#683D19",
+            "#681A19",
+            "#221915"
+          ]
+        }
+      ]
     }
   ],
   "mutations": [

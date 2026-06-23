@@ -4,21 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- BARK-SEO-START -->
-  <meta name="description" content="Database of items, cosmetics, maps, and NPCs in BARK." />
-  <link rel="canonical" href="https://bark-vr.com/database" />
+  <meta name="description" content="The BARK community — sign in with Google to post, share images, and discuss." />
+  <link rel="canonical" href="https://bark-vr.com/community" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bark-vr.com/database" />
-  <meta property="og:title" content="Index | BARKVR" />
-  <meta property="og:description" content="Database of items, cosmetics, maps, and NPCs in BARK." />
+  <meta property="og:url" content="https://bark-vr.com/community" />
+  <meta property="og:title" content="Community | BARKVR" />
+  <meta property="og:description" content="The BARK community — sign in with Google to post, share images, and discuss." />
   <meta property="og:image" content="https://bark-vr.com/logo-wide.png" />
   <meta property="og:site_name" content="BARKVR" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Index | BARKVR" />
-  <meta name="twitter:description" content="Database of items, cosmetics, maps, and NPCs in BARK." />
+  <meta name="twitter:title" content="Community | BARKVR" />
+  <meta name="twitter:description" content="The BARK community — sign in with Google to post, share images, and discuss." />
   <meta name="twitter:image" content="https://bark-vr.com/logo-wide.png" />
   <meta name="theme-color" content="#00e5ff" />
   <!-- BARK-SEO-END -->
-  <title>Index | BARKVR</title>
+  <title>Community | BARKVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -36,9 +36,9 @@
       <a href="/games">GAMES</a>
       <a href="/store">STORE</a>
       <a href="/extras">EXTRAS</a>
-      <a href="/database" class="active">INDEX</a>
+      <a href="/database">INDEX</a>
       <a href="/players">PLAYERS</a>
-      <a href="/community">COMMUNITY</a>
+      <a href="/community" class="active">COMMUNITY</a>
       <a href="/careers">HIRING</a>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
@@ -50,7 +50,7 @@
     <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
     <a href="/database" onclick="toggleMenu()">INDEX</a>
     <a href="/players" onclick="toggleMenu()">PLAYERS</a>
-      <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
+    <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
     <a href="/careers" onclick="toggleMenu()">HIRING</a>
   </div>
 
@@ -58,42 +58,18 @@
     <div class="hero-bg">
       <div class="grid-overlay"></div>
       <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
     </div>
     <div class="page-hero-content">
-      <div class="section-label" data-text-key="db_hero_label">// THE FIELD GUIDE</div>
-      <h1 data-text-key="db_hero_title">INDEX</h1>
+      <div class="section-label" data-text-key="community_hero_label">// THE GROVE</div>
+      <h1 data-text-key="community_hero_title">COMMUNITY</h1>
     </div>
   </section>
 
-  <section class="db-section">
+  <section class="community-section">
     <div class="container">
-      <div class="db-tabs" id="dbTabs">
-        <button class="db-tab active" data-tab="items">Items</button>
-        <button class="db-tab" data-tab="cosmetics">Cosmetics</button>
-        <button class="db-tab" data-tab="maps">Maps</button>
-        <button class="db-tab" data-tab="npcs">NPCs</button>
-        <button class="db-tab" data-tab="extra-info">Extra Info</button>
-      </div>
-
-      <!-- Standard entry tabs (items/cosmetics/maps/npcs) -->
-      <div id="dbStandard">
-        <!-- subcategory + sub-subcategory filter chips (rendered by editor.js) -->
-        <div class="db-subfilter" id="dbSubFilter"></div>
-        <div class="db-subfilter db-subsubfilter" id="dbSubSubFilter"></div>
-        <input type="text" id="dbSearch" class="players-search" placeholder="Search…" style="margin-bottom:24px;" />
-        <div class="db-grid db-target">
-          <!-- rendered by editor.js -->
-        </div>
-      </div>
-
-      <!-- Extra Info: container of tools/areas. Area #1 = Pet Viewer. -->
-      <div id="dbExtraInfo" style="display:none;">
-        <div class="extra-area-nav" id="extraAreaNav">
-          <button class="extra-area-btn active" data-area="pets">Pet Viewer</button>
-        </div>
-        <div id="petViewer" class="pet-viewer">
-          <!-- rendered by petviewer.js -->
-        </div>
+      <div id="communityRoot">
+        <!-- rendered by community.js -->
       </div>
     </div>
   </section>
@@ -110,6 +86,7 @@
         <a href="/extras">Extras</a>
         <a href="/database">Index</a>
         <a href="/players">Players</a>
+        <a href="/community">Community</a>
         <a href="/careers">Hiring</a>
         <a href="/privacy">Privacy Policy</a>
       </div>
@@ -120,10 +97,6 @@
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js"></script>
   <script src="editor.js?v=27"></script>
-  <!-- Three.js (r128 UMD) + loaders for the Pet Viewer's live 3D models -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="petviewer.js?v=27"></script>
+  <script src="community.js?v=27"></script>
 </body>
 </html>

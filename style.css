@@ -2189,6 +2189,96 @@ body.editing .wood-card-cantget { pointer-events: auto; }
 .pv-sound-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 4px 0; }
 .pv-sound-row code { font-size: 0.78rem; color: var(--text-muted); overflow-wrap: anywhere; }
 .pv-mut-add { margin-top: 6px; }
+.pv-mut-wrap { position: relative; }
+.pv-mut-wrap .pv-hidden-badge { position: absolute; top: 0; right: 0; }
+
+/* Skin selector on the pet stage */
+.pv-skinrow { display: flex; align-items: center; gap: 10px; }
+.pv-skinrow select {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-family: var(--font-body);
+}
+
+/* Textures & skins editor modal */
+.tex-section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 4px 0 8px;
+}
+.tex-row { padding: 6px 0; border-bottom: 1px dashed var(--border); }
+.tex-add { margin-top: 8px; }
+
+/* ── Community ────────────────────────────────────────────────────────────── */
+.community-section { padding: 60px 0 90px; }
+#communityRoot { max-width: 680px; margin: 0 auto; }
+.cm-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.cm-me { display: flex; align-items: center; gap: 10px; font-family: var(--font-body); font-weight: 600; }
+.cm-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+.cm-avatar-ph { background: var(--border); }
+.cm-mod-badge {
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #000; background: var(--accent); border-radius: 999px; padding: 2px 8px;
+}
+.cm-signedout-note { color: var(--text-muted); margin: 0 0 18px; }
+
+.cm-composer {
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 26px;
+}
+.cm-composer textarea {
+  width: 100%;
+  resize: vertical;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+}
+.cm-composer-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.cm-imgbtn {
+  cursor: pointer; color: var(--text-muted); font-family: var(--font-body); font-size: 0.85rem;
+  border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px;
+}
+.cm-imgbtn:hover { color: var(--accent); border-color: var(--accent); }
+.cm-imgname { flex: 1; color: var(--text-muted); font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.cm-feed { display: flex; flex-direction: column; gap: 16px; }
+.cm-post {
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 16px;
+}
+.cm-post-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.cm-post-meta { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+.cm-post-author { font-family: var(--font-body); font-weight: 700; }
+.cm-post-time { font-size: 0.72rem; color: var(--text-muted); }
+.cm-del {
+  background: none; border: 1px solid var(--border); color: #ff7a7a;
+  border-radius: 8px; width: 28px; height: 28px; cursor: pointer; flex: 0 0 auto;
+}
+.cm-del:hover { background: rgba(255,90,90,0.12); border-color: rgba(255,90,90,0.5); }
+.cm-post-text { margin: 0 0 8px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cm-post-text a { color: var(--accent); }
+.cm-post-img { width: 100%; border-radius: 10px; margin-top: 6px; display: block; }
 
 @media (max-width: 900px) {
   .pv-main { grid-template-columns: 1fr; }
