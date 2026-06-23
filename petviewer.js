@@ -252,8 +252,13 @@
         name: s.name || '',
         color: rollSlotColor(s),
       }));
-      const matched = applyByMaterial(rolled);
-      if (!matched) applyColors(rolled.map(r => r.color)); // placeholder / unmatched → cycle
+      applyByMaterial(rolled);
+      // NOTE: no cycle-fallback here. On a real model, a name mismatch must NOT
+      // repaint every submesh (that was painting non-slot parts like the duck's
+      // beak). Only the placeholder blob (handled below) ever cycles.
+      const t = State.three;
+      const isPlaceholder = !t || !t.materialsByName || Object.keys(t.materialsByName).length === 0;
+      if (isPlaceholder) applyColors(rolled.map(r => r.color));
       if (el) el.innerHTML = `<span class="pv-color-label">Rolled spawn</span>${swatches(rolled.map(r => r.color))}`;
       return;
     }

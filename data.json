@@ -1713,7 +1713,7 @@
       "colorSlots": [
         {
           "name": "Body",
-          "material": "whitee",
+          "material": "barkslot_cird_0",
           "mode": "Palette",
           "normal": "#0F41A9",
           "palette": [
@@ -1731,7 +1731,7 @@
         },
         {
           "name": "Pattern",
-          "material": "whitee",
+          "material": "barkslot_cird_1",
           "mode": "Palette",
           "normal": "#141F2E",
           "palette": [
