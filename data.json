@@ -698,6 +698,30 @@
         "image": "media/1782173253787-SampleScene_Custom..._22.06.2026_19-06-28.png",
         "effect": "Reminds Bum of the good 'ol Glorp days",
         "subcategory": "Fun"
+      },
+      {
+        "id": "goobie-bar",
+        "name": "Goobie Bar",
+        "description": "\"Halloween Update Confirmed???\"",
+        "image": "media/1782173320351-SampleScene_Custom..._22.06.2026_19-08-01.png",
+        "effect": "Also looks cool!",
+        "subcategory": "Fun"
+      },
+      {
+        "id": "healing-soap",
+        "name": "Healing Soap",
+        "description": "I don't feel any better....",
+        "image": "media/1782173382157-SampleScene_Custom..._22.06.2026_19-08-55.png",
+        "effect": "Sprays bubbles!",
+        "subcategory": "Useable"
+      },
+      {
+        "id": "popsicle",
+        "name": "Popsicle",
+        "description": "Straight from Sketchfab!",
+        "image": "media/1782173439502-SampleScene_Custom..._22.06.2026_19-09-56.png",
+        "effect": "Tastes yummy and cold!",
+        "subcategory": "Fun"
       }
     ],
     "cosmetics": [
