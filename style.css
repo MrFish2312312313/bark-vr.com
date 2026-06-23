@@ -2157,6 +2157,19 @@ body.editing .wood-card-cantget { pointer-events: auto; }
 .pv-hint { color: var(--text-muted); font-size: 0.74rem; margin: 0; }
 .pv-rolled { display: flex; align-items: center; gap: 10px; min-height: 22px; flex-wrap: wrap; }
 
+/* Live scale + rotate sliders (editor only) */
+.pv-transform {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px; margin: 4px 0;
+  border: 1px solid rgba(255,255,255,0.10); border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+}
+.pv-tf-row { display: flex; flex-direction: column; gap: 3px; }
+.pv-tf-row label { display: flex; justify-content: space-between; align-items: center; }
+.pv-tf-row label span { color: var(--accent, #00e5ff); font-variant-numeric: tabular-nums; }
+.pv-transform input[type="range"] { width: 100%; accent-color: var(--accent, #00e5ff); cursor: pointer; }
+.pv-tf-reset { align-self: flex-start; margin-top: 2px; }
+
 .pv-name { font-family: var(--font-display, var(--font-body)); margin: 0 0 8px; }
 .pv-desc { color: var(--text-muted); margin: 0 0 18px; line-height: 1.5; }
 .pv-colorblock { margin-bottom: 16px; }

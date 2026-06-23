@@ -151,6 +151,7 @@
             <button class="btn-secondary" id="pvHide">${pet.hidden ? 'Show' : 'Hide'}</button>
             <button class="btn-secondary pv-danger" id="pvDel">Delete</button>` : ''}
         </div>
+        ${editing ? transformControlsHtml(pet) : ''}
         <div class="pv-rolled" id="pvRolled"></div>
         <p class="pv-hint">Drag to rotate · scroll to zoom</p>
       </div>
@@ -163,6 +164,7 @@
       </div>
     `;
 
+    if (editing) wireTransformControls(pet, stage);
     stage.querySelector('#pvSpawn').onclick = () => simulateSpawn(pet);
     const sb = stage.querySelector('#pvSound');
     if (sb && hasSound) sb.onclick = () => testSound(pet);
@@ -229,10 +231,12 @@
     const mode = slot.mode || 'Palette';
     if (mode === 'Normal') return slot.normal || '#cccccc';
     if (mode === 'Random') return randHex();
-    const pal = (Array.isArray(slot.palette) && slot.palette.length)
-      ? slot.palette
-      : (slot.normal ? [slot.normal] : null);
-    return pal ? pal[Math.floor(Math.random() * pal.length)] : randHex();
+    // Palette mode: the NORMAL color is a valid spawn outcome too (in-game it can
+    // roll the default look), so include it in the pool — without this it could
+    // never come up when the palette didn't list it.
+    const pal = (Array.isArray(slot.palette) ? slot.palette.slice() : []);
+    if (slot.normal && !pal.some(c => (c || '').toLowerCase() === slot.normal.toLowerCase())) pal.push(slot.normal);
+    return pal.length ? pal[Math.floor(Math.random() * pal.length)] : randHex();
   }
 
   // Tint each slot's rolled color onto the GLB material whose name matches the
@@ -488,6 +492,10 @@
           // Show single-sided meshes from both sides — fixes submeshes that
           // vanished when viewed from the "inside" (backface culling).
           m.side = THREE.DoubleSide;
+          // A transparent submesh (alpha-blended mouth on puffy/piffard) writing
+          // depth punches a hole that hides the geometry BEHIND it. Don't write
+          // depth for transparent mats so the face shows through correctly.
+          if (m.transparent || (typeof m.opacity === 'number' && m.opacity < 1)) m.depthWrite = false;
           t.recolorables.push(m);
           // Remember the GLB's baked textures so a skin can revert to "Default".
           m.userData = m.userData || {};
@@ -686,6 +694,49 @@
       hideSpinner();
       pet.skins.push(sk);
       texRefresh(pet);
+    };
+  }
+
+  // Live scale + rotate sliders (editor only): adjust the model's base transform
+  // right in the viewer and persist to data.json — the easy way to right a
+  // sideways or oversized pet (lizard/piffard/glorp) without the edit modal.
+  function transformControlsHtml(pet) {
+    const r = pet.modelRotation || [0, 0, 0];
+    const s = pet.modelScale || 1;
+    const row = (id, label, min, max, step, val, suffix) =>
+      `<div class="pv-tf-row">
+         <label class="pv-color-label">${label} <span id="${id}Val">${val}${suffix || ''}</span></label>
+         <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}" />
+       </div>`;
+    return `<div class="pv-transform">
+      ${row('pvTfScale', 'Scale', 0.05, 5, 0.05, (+s).toFixed(2), '×')}
+      ${row('pvTfRotX', 'Rotate X', 0, 360, 5, (r[0] || 0), '°')}
+      ${row('pvTfRotY', 'Rotate Y', 0, 360, 5, (r[1] || 0), '°')}
+      ${row('pvTfRotZ', 'Rotate Z', 0, 360, 5, (r[2] || 0), '°')}
+      <button type="button" class="btn-secondary pv-tf-reset" id="pvTfReset">Reset transform</button>
+    </div>`;
+  }
+
+  function wireTransformControls(pet, stage) {
+    const scale = stage.querySelector('#pvTfScale');
+    const rx = stage.querySelector('#pvTfRotX');
+    const ry = stage.querySelector('#pvTfRotY');
+    const rz = stage.querySelector('#pvTfRotZ');
+    if (!scale || !rx || !ry || !rz) return;
+    const apply = () => {
+      pet.modelScale = parseFloat(scale.value) || 1;
+      pet.modelRotation = [parseFloat(rx.value) || 0, parseFloat(ry.value) || 0, parseFloat(rz.value) || 0];
+      stage.querySelector('#pvTfScaleVal').textContent = pet.modelScale.toFixed(2) + '×';
+      stage.querySelector('#pvTfRotXVal').textContent = pet.modelRotation[0] + '°';
+      stage.querySelector('#pvTfRotYVal').textContent = pet.modelRotation[1] + '°';
+      stage.querySelector('#pvTfRotZVal').textContent = pet.modelRotation[2] + '°';
+      frameGroup(pet);
+      BarkEditor.dirty = true; updateEditorBar();
+    };
+    [scale, rx, ry, rz].forEach(el => el.oninput = apply);
+    const reset = stage.querySelector('#pvTfReset');
+    if (reset) reset.onclick = () => {
+      scale.value = 1; rx.value = 0; ry.value = 0; rz.value = 0; apply();
     };
   }
 
