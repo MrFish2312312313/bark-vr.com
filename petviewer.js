@@ -24,7 +24,14 @@
   const MUTS = () => (BarkEditor.data.mutations = BarkEditor.data.mutations || []);
   const CFG  = () => (BarkEditor.data.petsConfig = BarkEditor.data.petsConfig || { mutationsPublic: false });
 
-  const State = { activeId: null, three: null, audio: null, loadToken: 0, resizeHooked: false, skinByPet: {}, texCache: {} };
+  const State = {
+    activeId: null, three: null, audio: null, loadToken: 0, resizeHooked: false,
+    skinByPet: {}, texCache: {},
+    modelCache: new Map(),   // url -> parsed gltf scene (reused, not re-parsed)
+    modelOrder: [],          // LRU order of cached urls
+    shownKey: null,          // key of the model currently in the scene
+  };
+  const MODEL_CACHE_MAX = 8;
 
   const petById = (id) => PETS().find(p => p.id === id) || null;
   const visiblePets = () => PETS().filter(p => BarkEditor.editing || !p.hidden);
@@ -345,45 +352,110 @@
     t.camera.updateProjectionMatrix();
   }
 
-  function clearGroup() {
+  // Remove whatever's currently shown. GLB scenes are CACHED (kept in memory,
+  // not disposed) so re-selecting a pet doesn't re-parse it — that re-parse,
+  // with textures + GPU uploads every click, was the freeze. Primitive blobs
+  // aren't cached, so they get disposed.
+  function detachCurrent() {
     const t = State.three; if (!t) return;
-    while (t.group.children.length) t.group.remove(t.group.children[0]);
+    while (t.group.children.length) {
+      const c = t.group.children[0];
+      t.group.remove(c);
+      if (c.userData && c.userData._isPrimitive) disposeObject(c);
+    }
     t.recolorables = [];
     t.materialsByName = {};
   }
 
   function loadModel(pet) {
     const t = State.three; if (!t) return;
-    clearGroup();
-    const token = ++State.loadToken;
+    try {
+      const key = pet.model || ('__prim_' + pet.id);
+      // Already showing this exact model → just re-apply colors, don't rebuild.
+      if (State.shownKey === key && t.group.children.length) {
+        applyNormalColors(pet);
+        applyTextureState(pet, State.skinByPet[pet.id] || '__default');
+        return;
+      }
+      detachCurrent();
+      const token = ++State.loadToken;
 
-    if (pet.model && THREE.GLTFLoader) {
-      new THREE.GLTFLoader().load(
-        pet.model,
-        (gltf) => {
-          if (!State.three || token !== State.loadToken) return; // superseded by a newer selection
-          const obj = gltf.scene || (gltf.scenes && gltf.scenes[0]);
-          if (!obj) { addPrimitive(pet); frameGroup(pet); return; }
-          collectRecolorables(obj);
-          t.group.add(obj);
-          frameGroup(pet);
-          applyNormalColors(pet); // show the normal look on load (not the baked white)
-          applyTextureState(pet, State.skinByPet[pet.id] || '__default');
-        },
-        undefined,
-        (err) => {
-          if (token !== State.loadToken) return;
-          console.warn('[petviewer] model load failed:', pet.model, err);
-          addPrimitive(pet); frameGroup(pet);
-        }
-      );
-    } else {
-      addPrimitive(pet);
-      frameGroup(pet);
+      if (pet.model && THREE.GLTFLoader) {
+        const cached = State.modelCache.get(pet.model);
+        if (cached) { showScene(pet, cached, key); return; }
+        new THREE.GLTFLoader().load(
+          pet.model,
+          (gltf) => {
+            if (!State.three || token !== State.loadToken) return; // superseded
+            const obj = gltf.scene || (gltf.scenes && gltf.scenes[0]);
+            if (!obj) { showPrimitive(pet, key); return; }
+            cacheScene(pet.model, obj);
+            showScene(pet, obj, key);
+          },
+          undefined,
+          (err) => {
+            if (token !== State.loadToken) return;
+            console.warn('[petviewer] model load failed:', pet.model, err);
+            showPrimitive(pet, key);
+          }
+        );
+      } else {
+        showPrimitive(pet, key);
+      }
+    } catch (e) {
+      console.warn('[petviewer] loadModel error:', e);
     }
   }
 
-  // Fallback recolorable blob for pets without a .glb yet (body + head).
+  function showScene(pet, obj, key) {
+    const t = State.three; if (!t) return;
+    try {
+      t.group.add(obj);
+      State.shownKey = key;
+      collectRecolorables(obj);
+      frameGroup(pet);
+      applyNormalColors(pet);
+      applyTextureState(pet, State.skinByPet[pet.id] || '__default');
+    } catch (e) { console.warn('[petviewer] showScene error:', e); }
+  }
+
+  function showPrimitive(pet, key) {
+    const t = State.three; if (!t) return;
+    addPrimitive(pet);
+    State.shownKey = key;
+    frameGroup(pet);
+  }
+
+  function cacheScene(url, obj) {
+    State.modelCache.set(url, obj);
+    State.modelOrder = State.modelOrder.filter(u => u !== url);
+    State.modelOrder.push(url);
+    // Evict least-recently-used (but never the one on screen).
+    while (State.modelOrder.length > MODEL_CACHE_MAX) {
+      const old = State.modelOrder[0];
+      if (old === State.shownKey) break;
+      State.modelOrder.shift();
+      const s = State.modelCache.get(old);
+      if (s) { disposeObject(s); State.modelCache.delete(old); }
+    }
+  }
+
+  function disposeObject(obj) {
+    obj.traverse(n => {
+      if (n.geometry) n.geometry.dispose();
+      if (n.material) {
+        const mats = Array.isArray(n.material) ? n.material : [n.material];
+        mats.forEach(m => {
+          if (m.map) m.map.dispose();
+          if (m.normalMap) m.normalMap.dispose();
+          m.dispose();
+        });
+      }
+    });
+  }
+
+  // Fallback recolorable blob for pets without a .glb (body + head), wrapped in
+  // a group marked _isPrimitive so detachCurrent disposes it.
   function addPrimitive(pet) {
     const t = State.three; if (!t) return;
     const col = (pet.normalColors && pet.normalColors[0]) || '#7ac74f';
@@ -392,7 +464,10 @@
     const headMat = mat.clone();
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.36, 32, 24), headMat);
     head.position.set(0, 0.6, 0.16);
-    t.group.add(body); t.group.add(head);
+    const wrap = new THREE.Group();
+    wrap.userData._isPrimitive = true;
+    wrap.add(body); wrap.add(head);
+    t.group.add(wrap);
     t.recolorables = [mat, headMat];
     t.materialsByName = {}; // placeholder has no named submeshes → recolor cycles
   }
