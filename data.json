@@ -2323,6 +2323,14 @@
             "#2B201B"
           ]
         }
+      ],
+      "textureSlots": [],
+      "skins": [
+        {
+          "name": "Prize Lizard",
+          "material": "Body_0",
+          "map": "media/1782236943253-Material_BaseColor.png"
+        }
       ]
     },
     {
