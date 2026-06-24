@@ -729,3 +729,55 @@ handlers.TradeStorePetItem = function (args, context) {
         receiverAlreadyOwned: receiverAlreadyOwns
     };
 };
+
+
+// ═════════════════════════════════════════════════════════════════════════════
+//  SECTION 4 — HOURLY PINEAPPLE  (one global winner per UTC hour, all lobbies)
+//  The CLIENT (HourlyPineapple.cs) computes WHERE / WHEN deterministically from
+//  the UTC hour, so no spawn data is networked — this only arbitrates WHO got it.
+//  First ClaimPineapple for a given hour wins; everyone else is told it's taken.
+//  State = Title Data "PineappleClaim" = { hour, by, playFabId, at }.
+//  (Title Data isn't transactional, so a same-millisecond double-claim can very
+//   rarely slip through — fine for a once-an-hour prize. Move to a shared-group
+//   lock if it ever matters.)
+// ═════════════════════════════════════════════════════════════════════════════
+
+function _readPineapple() {
+    try {
+        var res = server.GetTitleData({ Keys: ["PineappleClaim"] });
+        if (!res.Data || !res.Data.PineappleClaim) return null;
+        return JSON.parse(res.Data.PineappleClaim);
+    } catch (e) {
+        return null;
+    }
+}
+
+handlers.GetPineappleState = function (args, context) {
+    var hour = String((args && args.hour) || "");
+    var claim = _readPineapple();
+    var claimed = !!(claim && String(claim.hour) === hour);
+    return { claimed: claimed, by: claimed ? (claim.by || "") : "" };
+};
+
+handlers.ClaimPineapple = function (args, context) {
+    var hour = String((args && args.hour) || "");
+    if (!hour) return { success: false, error: "no hour" };
+
+    var claim = _readPineapple();
+    if (claim && String(claim.hour) === hour) {
+        return { success: false, alreadyClaimed: true, by: claim.by || "" };
+    }
+
+    var pid  = context.currentUserProfile.PlayerId;
+    var name = context.currentUserProfile.DisplayName || pid;
+    server.SetTitleData({
+        Key: "PineappleClaim",
+        Value: JSON.stringify({ hour: hour, by: name, playFabId: pid, at: Date.now() })
+    });
+
+    // OPTIONAL reward — uncomment + tune (AT = Arcade Token, PC = Paper Coin):
+    // server.AddUserVirtualCurrency({ PlayFabId: pid, VirtualCurrency: "AT", Amount: 100 });
+
+    log.info("Pineapple claimed | hour=" + hour + " by=" + name);
+    return { success: true, by: name };
+};
