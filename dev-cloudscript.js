@@ -1,5 +1,14 @@
 /* ============================================================================
-   BARK — Developer Panel CloudScript
+   ⚠️ DO NOT DEPLOY THIS FILE BY ITSELF — it is only PART of the CloudScript
+   (the dev-panel handlers). Deploying it ALONE wipes the wood-count and
+   IAP/trading handlers from PlayFab, which breaks the /extras wood counter and
+   in-game store/trading. Deploy the COMBINED file instead:  cloudscript.js
+   (it contains these dev handlers PLUS all the others). This file is kept only
+   as a readable reference for the dev-panel section.
+   ============================================================================ */
+
+/* ============================================================================
+   BARK — Developer Panel CloudScript  (reference copy — see cloudscript.js)
    Title ID: 7BB14
 
    DEPLOYMENT (one-time, then again whenever you change DEV_EMAILS):

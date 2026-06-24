@@ -1994,7 +1994,28 @@
         "#56D945",
         "#1E7213"
       ],
-      "naturalColors": "random"
+      "naturalColors": "random",
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "Body_0",
+          "mode": "Random",
+          "normal": "#56D945",
+          "palette": [
+            "#FFFFFF"
+          ]
+        },
+        {
+          "name": "Pattern",
+          "material": "Pattern_1",
+          "mode": "Random",
+          "normal": "#1E7213",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ],
+      "prefabResource": "GregP"
     },
     {
       "id": "gruke",
@@ -2637,6 +2658,24 @@
           ]
         }
       ]
+    },
+    {
+      "id": "shroombug",
+      "name": "ShroomBug",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_ShroomBug.png",
+      "model": "media/models/pet-shroombug.glb",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-duck-quack-realistic.mp3",
+        "media/pet-freesound_community-075176_duck-quack-40345.mp3",
+        "media/pet-quack-reverb.mp3"
+      ],
+      "normalColors": [],
+      "naturalColors": [],
+      "colorSlots": [],
+      "prefabResource": "ShroomBug"
     }
   ],
   "mutations": [
@@ -2693,5 +2732,5 @@
   "petsConfig": {
     "mutationsPublic": false
   },
-  "modelsVersion": "20260623225646"
+  "modelsVersion": "20260624190037"
 }
