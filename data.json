@@ -2696,46 +2696,52 @@
       "parentA": "duck",
       "parentB": "termite",
       "result": "durmite",
-      "note": ""
+      "note": "",
+      "hidden": true
     },
     {
       "id": "mut-cow-hudsons-bird-cird",
       "parentA": "cow",
       "parentB": "hudsons-bird",
       "result": "cird",
-      "note": ""
+      "note": "",
+      "hidden": true
     },
     {
       "id": "mut-greg-puke-gruke",
       "parentA": "greg",
       "parentB": "puke",
       "result": "gruke",
-      "note": ""
+      "note": "",
+      "hidden": true
     },
     {
       "id": "mut-kevin-glorp-rat-klerp",
       "parentA": "kevin",
       "parentB": "glorp-rat",
       "result": "klerp",
-      "note": ""
+      "note": "",
+      "hidden": true
     },
     {
       "id": "mut-hudsons-bird-puke-hudsons-puke",
       "parentA": "hudsons-bird",
       "parentB": "puke",
       "result": "hudsons-puke",
-      "note": ""
+      "note": "",
+      "hidden": true
     },
     {
       "id": "mut-lizard-puffy-piffard",
       "parentA": "lizard",
       "parentB": "puffy",
       "result": "piffard",
-      "note": ""
+      "note": "",
+      "hidden": true
     }
   ],
   "petsConfig": {
-    "mutationsPublic": false
+    "mutationsPublic": true
   },
   "modelsVersion": "20260625174711"
 }
