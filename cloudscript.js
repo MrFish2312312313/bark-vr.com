@@ -34,13 +34,15 @@
 //   https://developer.playfab.com/en-US/7BB14/settings/secret-keys
 // Needed because looking up a player by display name requires the Admin API,
 // which CloudScript Classic accesses via HTTP with the secret key in the header.
-var TITLE_SECRET_KEY = 'REPLACE_WITH_YOUR_PLAYFAB_DEV_SECRET';
+var TITLE_SECRET_KEY = 'W74FUQY8CYY9ZOUQFJASJR6E9MRORAXAF8HBDP1UICMGURXEWH';
 var TITLE_ID         = '7BB14';
 
 var GOOGLE_CLIENT_ID = '30694987707-f9vq4vafl2s4bpli7jr3lap98jskbcjq.apps.googleusercontent.com';
 
 var DEV_EMAILS = [
-    'mrfeesh456@gmail.com'
+    'mrfeesh456@gmail.com',
+    'portergrahamrussell@icloud.com',
+    'bumstronaut52@gmail.com'
     // add more dev emails here, comma-separated, lowercase
 ];
 
@@ -768,12 +770,32 @@ handlers.ClaimPineapple = function (args, context) {
         return { success: false, alreadyClaimed: true, by: claim.by || "" };
     }
 
-    var pid  = context.currentUserProfile.PlayerId;
-    var name = context.currentUserProfile.DisplayName || pid;
-    server.SetTitleData({
-        Key: "PineappleClaim",
-        Value: JSON.stringify({ hour: hour, by: name, playFabId: pid, at: Date.now() })
-    });
+    // currentPlayerId is the global that's ALWAYS set. Display name is best-effort
+    // via the Server profile API (falls back to the id if none is set).
+    var pid  = currentPlayerId;
+    var name = pid;
+    try {
+        var prof = server.GetPlayerProfile({
+            PlayFabId: pid,
+            ProfileConstraints: { ShowDisplayName: true }
+        });
+        if (prof && prof.PlayerProfile && prof.PlayerProfile.DisplayName) {
+            name = prof.PlayerProfile.DisplayName;
+        }
+    } catch (e) { /* no display name set — fall back to the PlayFab id */ }
+
+    // Writing Title Data is an ADMIN-only API: `server.SetTitleData` DOESN'T EXIST,
+    // so the original call threw a JavascriptException and the claim never recorded
+    // (that was the real bug). Write it through the Admin REST helper, which uses
+    // TITLE_SECRET_KEY — so this needs the secret key pasted in CONFIG above.
+    try {
+        adminCall('SetTitleData', {
+            Key: "PineappleClaim",
+            Value: JSON.stringify({ hour: hour, by: name, playFabId: pid, at: Date.now() })
+        });
+    } catch (e) {
+        return { success: false, error: 'SetTitleData failed: ' + ((e && e.message) || e) };
+    }
 
     // OPTIONAL reward — uncomment + tune (AT = Arcade Token, PC = Paper Coin):
     // server.AddUserVirtualCurrency({ PlayFabId: pid, VirtualCurrency: "AT", Amount: 100 });
