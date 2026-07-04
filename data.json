@@ -2125,7 +2125,7 @@
       "id": "hudsons-puke",
       "name": "Hudson's Puke",
       "description": "",
-      "hidden": true,
+      "hidden": false,
       "image": "media/pet-Icon_Hudson_s_Puke.png",
       "model": "media/models/pet-hudsons-puke.glb",
       "modelScale": 1,
@@ -2729,7 +2729,7 @@
       "parentB": "puke",
       "result": "hudsons-puke",
       "note": "",
-      "hidden": true
+      "hidden": false
     },
     {
       "id": "mut-lizard-puffy-piffard",
