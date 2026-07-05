@@ -2347,7 +2347,7 @@
       "id": "piffard",
       "name": "Piffard",
       "description": "",
-      "hidden": true,
+      "hidden": false,
       "image": "media/pet-Icon_Piffard.png",
       "model": "media/models/pet-piffard.glb",
       "modelScale": 1,
@@ -2737,7 +2737,7 @@
       "parentB": "puffy",
       "result": "piffard",
       "note": "",
-      "hidden": true
+      "hidden": false
     }
   ],
   "petsConfig": {
