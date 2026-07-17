@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Painting Moderation | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css?v=33" />
+  <style>
+    /* Page-local styles for the moderation grid (kept out of the global sheet). */
+    .mod-bar { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; }
+    .mod-bar input { padding:.6rem .8rem; border-radius:8px; border:1px solid #2a3340; background:#0e141b; color:#e6edf3; font-family:'Barlow',sans-serif; min-width:220px; }
+    .mod-bar button { padding:.6rem 1rem; border-radius:8px; border:none; cursor:pointer; font-weight:600; background:#00e5ff; color:#04121a; font-family:'Barlow',sans-serif; }
+    .mod-bar button.secondary { background:#1c2530; color:#e6edf3; }
+    .mod-status { margin-left:auto; opacity:.8; font-size:.95rem; }
+    .paint-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1.1rem; }
+    .paint-card { background:#0e141b; border:1px solid #202a36; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+    .paint-card.hidden { opacity:.5; outline:2px dashed #ff5470; }
+    .paint-img { width:100%; aspect-ratio:1/1; object-fit:contain; background:
+        repeating-conic-gradient(#141b23 0% 25%, #10161d 0% 50%) 50% / 22px 22px; }
+    .paint-meta { padding:.6rem .7rem; font-size:.8rem; line-height:1.35; color:#9fb0c0; word-break:break-all; }
+    .paint-actions { display:flex; gap:.4rem; padding:0 .7rem .7rem; }
+    .paint-actions button { flex:1; padding:.45rem; border-radius:7px; border:none; cursor:pointer; font-size:.8rem; font-weight:600; font-family:'Barlow',sans-serif; }
+    .btn-hide { background:#233; color:#ffd479; }
+    .btn-del  { background:#3a1620; color:#ff8098; }
+    .paint-badge { display:inline-block; font-size:.7rem; padding:.1rem .4rem; border-radius:5px; background:#ff5470; color:#1a0008; font-weight:700; margin-bottom:.3rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/community">COMMUNITY</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// MODERATION</div>
+      <h1>PAINTINGS</h1>
+    </div>
+  </section>
+
+  <section class="community-section">
+    <div class="container">
+      <div class="mod-bar">
+        <input id="modKey" type="password" placeholder="Moderator key" autocomplete="off" />
+        <button onclick="Paintings.load()">Load paintings</button>
+        <button class="secondary" onclick="Paintings.toggleHidden()" id="toggleHiddenBtn">Showing: all</button>
+        <span class="mod-status" id="modStatus">Enter the moderator key and load.</span>
+      </div>
+      <div class="paint-grid" id="paintGrid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="/#about">About</a>
+        <a href="/games">Games</a>
+        <a href="/store">Store</a>
+        <a href="/extras">Extras</a>
+        <a href="/database">Index</a>
+        <a href="/players">Players</a>
+        <a href="/community">Community</a>
+        <a href="/careers">Hiring</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="paintings.js?v=1"></script>
+</body>
+</html>
