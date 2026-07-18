@@ -69,6 +69,15 @@ const Paintings = (() => {
 
     for (const p of list) {
       const when = new Date(p.createdAt).toLocaleString();
+      const versions = p.versions || 1;
+      // Past versions: current is <id>.png; older ones archived as <id>.v1.png .. v(N-1).
+      let history = '';
+      if (versions > 1) {
+        const links = [];
+        for (let v = versions - 1; v >= 1; v--)
+          links.push(`<a href="${BACKEND}/paintings/${p.id}.v${v}.png" target="_blank" rel="noopener">v${v}</a>`);
+        history = `<br><b>History:</b> ${links.join(' ')}`;
+      }
       const card = document.createElement('div');
       card.className = 'paint-card' + (p.hidden ? ' hidden' : '');
       card.innerHTML = `
@@ -76,8 +85,10 @@ const Paintings = (() => {
              alt="painting" onerror="this.style.opacity=.2" />
         <div class="paint-meta">
           ${p.hidden ? '<span class="paint-badge">HIDDEN</span><br>' : ''}
+          ${p.artist ? `<b>Artist:</b> ${escapeHtml(p.artist)}<br>` : ''}
           <b>Player:</b> ${escapeHtml(p.playfabId || '—')}<br>
-          <b>When:</b> ${escapeHtml(when)}<br>
+          <b>When:</b> ${escapeHtml(when)}
+          ${versions > 1 ? ` &middot; <b>v${versions}</b>` : ''}${history}<br>
           <b>ID:</b> ${escapeHtml(p.id)}
         </div>
         <div class="paint-actions">
