@@ -2681,6 +2681,127 @@
       "naturalColors": [],
       "colorSlots": [],
       "prefabResource": "ShroomBug"
+    },
+    {
+      "id": "pablo-the-stick",
+      "name": "Pablo The Stick",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Pablo_The_Stick.png",
+      "model": "media/models/pet-pablo-the-stick.glb",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [
+        "#FFFFFF"
+      ],
+      "naturalColors": [
+        "#FFFFFF"
+      ],
+      "colorSlots": [
+        {
+          "name": "Body",
+          "material": "Body_0",
+          "mode": "Normal",
+          "normal": "#FFFFFF",
+          "palette": [
+            "#FFFFFF"
+          ]
+        }
+      ],
+      "prefabResource": "Pablo The Stick"
+    },
+    {
+      "id": "petalfly",
+      "name": "Petalfly",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_PetalFly.png",
+      "model": "media/models/pet-petalfly.glb",
+      "modelScale": 1.0,
+      "sounds": [],
+      "normalColors": [],
+      "naturalColors": [],
+      "colorSlots": [],
+      "prefabResource": "PetalFly"
+    },
+    {
+      "id": "puklian",
+      "name": "Puklian",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Puklian.png",
+      "model": "media/models/pet-puklian.glb",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___1_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___2_.mp3",
+        "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___3_.mp3"
+      ],
+      "normalColors": [
+        "#83E756",
+        "#469740"
+      ],
+      "naturalColors": [
+        "#83E756",
+        "#21FFA0",
+        "#737373",
+        "#D2A5DD",
+        "#5ED7FF",
+        "#82B9DF",
+        "#E1FF74",
+        "#254374",
+        "#026B05",
+        "#DF5454",
+        "#E1BB51",
+        "#FF8622",
+        "#121212",
+        "#423732",
+        "#F5F5F5"
+      ],
+      "colorSlots": [
+        {
+          "name": "Head",
+          "material": "Head_0",
+          "mode": "Palette",
+          "normal": "#83E756",
+          "palette": [
+            "#83E756",
+            "#21FFA0",
+            "#737373",
+            "#D2A5DD",
+            "#5ED7FF",
+            "#82B9DF",
+            "#E1FF74",
+            "#254374"
+          ]
+        },
+        {
+          "name": "Top",
+          "material": "Top_1",
+          "mode": "Palette",
+          "normal": "#83E756",
+          "palette": [
+            "#026B05"
+          ]
+        },
+        {
+          "name": "Feet",
+          "material": "Feet_2",
+          "mode": "Palette",
+          "normal": "#469740",
+          "palette": [
+            "#DF5454",
+            "#82B9DF",
+            "#E1BB51",
+            "#FF8622",
+            "#121212",
+            "#423732",
+            "#F5F5F5"
+          ]
+        }
+      ],
+      "prefabResource": "Puklian"
     }
   ],
   "mutations": [
@@ -2743,5 +2864,5 @@
   "petsConfig": {
     "mutationsPublic": true
   },
-  "modelsVersion": "20260625174711"
+  "modelsVersion": "20260727024048"
 }
