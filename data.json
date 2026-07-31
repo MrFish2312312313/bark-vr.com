@@ -11,7 +11,7 @@
     {
       "id": "mrfish",
       "name": "Mr.Fish",
-      "role": "Developer. Maybe?",
+      "role": "Developer",
       "description": "I like fishies🐟",
       "avatarClass": "fish-avatar",
       "photo": "mrfish.webp"
@@ -2689,7 +2689,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Pablo_The_Stick.png",
       "model": "media/models/pet-pablo-the-stick.glb",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [
         "#FFFFFF"
@@ -2717,7 +2717,7 @@
       "hidden": false,
       "image": "media/pet-Icon_PetalFly.png",
       "model": "media/models/pet-petalfly.glb",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [],
       "normalColors": [],
       "naturalColors": [],
@@ -2731,7 +2731,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Puklian.png",
       "model": "media/models/pet-puklian.glb",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net_.mp3",
         "media/pet-puke_lines-1920x1080-mp4a__mp3cut.net___1_.mp3",
