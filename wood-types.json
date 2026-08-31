@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-18T22:38:05.862Z",
+  "updatedAt": "2026-08-31T01:19:03.832Z",
   "woodTypes": [
     {
       "woodID": "Oak",
@@ -63,7 +63,7 @@
     },
     {
       "woodID": "easter",
-      "rarityWeight": 1,
+      "rarityWeight": 0,
       "isFancyWood": true
     },
     {
@@ -78,7 +78,7 @@
     },
     {
       "woodID": "Bean",
-      "rarityWeight": 1,
+      "rarityWeight": 0,
       "isFancyWood": true
     },
     {
@@ -89,6 +89,11 @@
     {
       "woodID": "Walnut",
       "rarityWeight": 5,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Sand",
+      "rarityWeight": 20,
       "isFancyWood": true
     }
   ]
