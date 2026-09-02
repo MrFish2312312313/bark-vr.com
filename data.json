@@ -303,6 +303,9 @@
     "Walnut": {
       "rarity": "epic",
       "image": "media/1781129870981-Walnut.png"
+    },
+    "Sand": {
+      "image": "media/1788139419945-sand.png"
     }
   },
   "database": {
