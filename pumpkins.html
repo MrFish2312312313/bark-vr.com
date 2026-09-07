@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carved Pumpkins | BARKVR</title>
+  <meta name="description" content="Pumpkins carved by BARK players, rebuilt in 3D from the cuts they actually made." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css?v=33" />
+  <style>
+    /* Page-local styles for the gallery grid (kept out of the global sheet). */
+    .pump-status { opacity:.8; font-size:.95rem; margin-bottom:1.25rem; }
+    .pump-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.1rem; }
+    .pump-card { background:#0e141b; border:1px solid #202a36; border-radius:12px; overflow:hidden;
+                 display:flex; flex-direction:column; }
+    .pump-canvas { width:100%; aspect-ratio:1/1; display:block; cursor:grab;
+                   background:radial-gradient(circle at 50% 40%, #1b2430 0%, #0b1016 70%); }
+    .pump-canvas:active { cursor:grabbing; }
+    .pump-meta { padding:.6rem .7rem; font-size:.82rem; line-height:1.4; color:#9fb0c0; }
+    .pump-meta strong { color:#e6edf3; }
+    .pump-note { margin-top:1.5rem; font-size:.85rem; opacity:.65; max-width:62ch; line-height:1.5; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/community">COMMUNITY</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// FALL HARVEST</div>
+      <h1>CARVED PUMPKINS</h1>
+    </div>
+  </section>
+
+  <section class="community-section">
+    <div class="container">
+      <div class="pump-status" id="pumpkin-status">Loading the patch&hellip;</div>
+      <div class="pump-grid" id="pumpkin-grid"></div>
+      <p class="pump-note">
+        Every pumpkin here is rebuilt from the cuts that were actually made to it &mdash; the shape it
+        grew with, and every point placed with the knife and the scraper. Nothing is a photograph, so
+        you can drag any of them around and see the inside.
+      </p>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="main.js?v=12"></script>
+  <script src="pumpkins.js?v=1"></script>
+</body>
+</html>
