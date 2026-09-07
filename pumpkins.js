@@ -194,7 +194,24 @@
 
   // ── Build the mesh — mirrors PumpkinCarveMesh ─────────────────────────────
 
-  const SKIN = [0.86, 0.42, 0.12];
+  // ── The pumpkin palette, mirrored from PumpkinGenerator.BodyColor ────────────────────────────
+  //
+  // The skin colour used to be one hardcoded orange, so every pumpkin in the gallery came out the
+  // same regardless of what was actually carved. A pale gourd and a deep orange pumpkin are the same
+  // fruit here, which rather undermines the point of a gallery.
+  //
+  // The carve file already carries shape.colorIndex — the game has always sent it, the website just
+  // was not reading it. These are the twelve entries the game generates, converted to sRGB.
+  const BODY_COLORS = [
+    [0.937, 0.651, 0.333], [0.898, 0.592, 0.294], [0.961, 0.714, 0.412],
+    [0.922, 0.694, 0.396], [0.953, 0.796, 0.486], [0.965, 0.867, 0.584],
+    [0.949, 0.906, 0.769], [0.965, 0.945, 0.886], [0.929, 0.918, 0.855],
+    [0.816, 0.831, 0.678], [0.694, 0.737, 0.565], [0.769, 0.565, 0.396],
+  ];
+  function bodyColor(carve) {
+    const i = carve && carve.shape ? (carve.shape.colorIndex | 0) : 0;
+    return BODY_COLORS[((i % BODY_COLORS.length) + BODY_COLORS.length) % BODY_COLORS.length];
+  }
   const FLESH = [0.95, 0.86, 0.55];
 
   function buildPumpkin(carve) {
@@ -206,6 +223,7 @@
     const wall = Math.min(0.09, Math.max(0.012, s.height * 0.11));
 
     const pos = [], nor = [], col = [];
+    const SKIN = bodyColor(carve);          // this pumpkin's own colour, not a fixed orange
 
     const push = (p, n, c) => {
       pos.push(p[0], p[1], p[2]); nor.push(n[0], n[1], n[2]); col.push(c[0], c[1], c[2]);
