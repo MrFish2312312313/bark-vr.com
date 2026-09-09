@@ -150,18 +150,9 @@
   function nearPolyline(st, uu, wrap, pu, pv, r) {
     const r2 = Math.max(1e-6, r * r);
     const n = Math.min(st.u.length, st.v.length);
-
-    // MEASURE IN A SQUARE SPACE. u wraps the whole circumference while v spans only the height, so
-    // a circle of radius r in UV is an ellipse on the fruit — three and a half times wider across
-    // than it is tall. Stretching u by the stroke's stored aspect makes a plain circular test here
-    // come out ROUND on the pumpkin, exactly as PumpkinCarveQuery does it. Strokes saved before
-    // aspect existed carry 0 and take the old isotropic path, so old pumpkins are untouched.
-    const k = st.aspect > 0.001 ? st.aspect : 1;
-    pu *= k;
-
     for (let i = 0; i + 1 < n; i++) {
-      const ax = (uu[i] + wrap) * k, ay = st.v[i];
-      const bx = (uu[i + 1] + wrap) * k, by = st.v[i + 1];
+      const ax = uu[i] + wrap, ay = st.v[i];
+      const bx = uu[i + 1] + wrap, by = st.v[i + 1];
       const abx = bx - ax, aby = by - ay;
       const len2 = abx * abx + aby * aby;
       let t = len2 < 1e-12 ? 0 : ((pu - ax) * abx + (pv - ay) * aby) / len2;
@@ -182,55 +173,22 @@
   }
 
   function prepStrokes(carve) {
-    const out = (carve.strokes || [])
+    return (carve.strokes || [])
       .filter((st) => st && st.u && st.v && Math.min(st.u.length, st.v.length) >= 2)
       .map((st) => ({ st, uu: unwrapU(st) }));
-    out.tape = hasTape(out);      // decided once, not per sampled point
-    return out;
-  }
-
-  // ── TOOL 2 IS PATCH TAPE, AND IT PUTS THE SKIN BACK ───────────────────────
-  //
-  // Ignoring it was not a cosmetic bug: a design made by cutting a big opening and taping most of it
-  // back rendered here as the raw opening, so a carefully built face came out as a pumpkin with its
-  // whole front missing. Measured on a real save: 9 tape strokes against 2 knife strokes.
-  //
-  // Tape means strokes have to be read IN ORDER — "cut then taped" and "taped then cut" are
-  // different answers — so the early-out only survives for carves that contain no tape, which is
-  // every pumpkin saved before it existed.
-  const KNIFE = 0, SCRAPER = 1, TAPE = 2;
-
-  function hasTape(prepped) {
-    for (const { st } of prepped) if (st.tool === TAPE) return true;
-    return false;
   }
 
   function isCut(prepped, pu, pv) {
-    if (!prepped.tape) {
-      for (const { st, uu } of prepped)
-        if (st.tool === KNIFE && strokeHits(st, uu, pu, pv)) return true;
-      return false;
-    }
-    let cut = false;
-    for (const { st, uu } of prepped) {
-      if (st.tool === KNIFE) { if (!cut && strokeHits(st, uu, pu, pv)) cut = true; }
-      else if (st.tool === TAPE) { if (cut && strokeHits(st, uu, pu, pv)) cut = false; }
-    }
-    return cut;
+    for (const { st, uu } of prepped)
+      if (st.tool === 0 && strokeHits(st, uu, pu, pv)) return true;
+    return false;
   }
 
   function scrapeDepth(prepped, pu, pv) {
     let best = 0;
-    for (const { st, uu } of prepped) {
-      if (st.tool === SCRAPER) {
-        if (strokeHits(st, uu, pu, pv))
-          best = Math.max(best, Math.min(1, Math.max(0, st.depth == null ? 0.6 : st.depth)));
-      } else if (st.tool === TAPE && best > 0 && strokeHits(st, uu, pu, pv)) {
-        // Deepest still wins BETWEEN scrapes — tape only resets what came before it, so two
-        // overlapping scrapes of different depths keep taking the deeper, as they always have.
-        best = 0;
-      }
-    }
+    for (const { st, uu } of prepped)
+      if (st.tool === 1 && strokeHits(st, uu, pu, pv))
+        best = Math.max(best, Math.min(1, Math.max(0, st.depth == null ? 0.6 : st.depth)));
     return best;
   }
 
