@@ -366,10 +366,34 @@
 
   const viewers = [];
 
+  // ── ONE RENDERER FOR THE WHOLE GALLERY ───────────────────────────────────
+  //
+  // THIS IS WHY THE GALLERY WENT BLANK. Every card used to build its own
+  // THREE.WebGLRenderer, and a browser only keeps 8-16 WebGL contexts alive at
+  // once — past that it silently kills the OLDEST to make room. So the gallery
+  // worked fine until there were more pumpkins than contexts, and from then on
+  // every card that scrolled in murdered an older one. The console said it
+  // outright, eighteen times: "Too many active WebGL contexts. Oldest context
+  // will be lost." The dead ones render nothing, which is the white tiles.
+  //
+  // It is not a bug that gets better on its own either — it gets worse with
+  // every pumpkin anybody saves.
+  //
+  // So: ONE renderer, off-screen, reused. Each card keeps a plain 2D canvas and
+  // the shared renderer's output is blitted into it. One context, any number of
+  // pumpkins. This is the arrangement three.js's own multiple-element example
+  // uses, for exactly this reason.
+  let shared = null;
+  function sharedRenderer() {
+    if (!shared) {
+      shared = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      shared.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    }
+    return shared;
+  }
+
   function makeViewer(canvas, carve) {
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    const ctx2d = canvas.getContext('2d');
 
     const scene = new THREE.Scene();
     const cam = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
@@ -397,16 +421,27 @@
     canvas.addEventListener('pointerup',   (e) => { dragging = false; try { canvas.releasePointerCapture(e.pointerId); } catch (_) {} });
 
     return {
+      canvas,
+      visible: true,          // set by the observer below
       tick(dt) {
+        const w = canvas.clientWidth | 0, h = canvas.clientHeight | 0;
+        if (w < 2 || h < 2) return;
+
         if (auto) spin += dt * 0.35;
         mesh.rotation.y = spin;
-        const w = canvas.clientWidth, h = canvas.clientHeight;
-        if (canvas.width !== w || canvas.height !== h) {
-          renderer.setSize(w, h, false);
-          cam.aspect = w / Math.max(1, h);
-          cam.updateProjectionMatrix();
-        }
-        renderer.render(scene, cam);
+
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+
+        // Render into the SHARED context at this card's size, then copy the
+        // pixels across. drawImage from a WebGL canvas is a GPU-side blit.
+        const r = sharedRenderer();
+        r.setSize(w, h, false);
+        cam.aspect = w / Math.max(1, h);
+        cam.updateProjectionMatrix();
+        r.render(scene, cam);
+
+        ctx2d.clearRect(0, 0, w, h);
+        ctx2d.drawImage(r.domElement, 0, 0, w, h);
       },
     };
   }
@@ -416,7 +451,10 @@
     const now = performance.now();
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
-    for (const v of viewers) v.tick(dt);
+    // OFF-SCREEN CARDS ARE NOT DRAWN. Sixty spinning pumpkins is sixty draws a
+    // frame for the ones you cannot see; with a single shared context they would
+    // also all queue behind each other.
+    for (const v of viewers) if (v.visible) v.tick(dt);
     requestAnimationFrame(animate);
   }
 
@@ -424,6 +462,16 @@
     return String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
+
+  // Only the cards on screen get drawn. Falls back to drawing everything if the
+  // browser has no IntersectionObserver, which is correct rather than blank.
+  const cardObserver = typeof IntersectionObserver === 'undefined' ? null
+    : new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          const v = viewers.find((x) => x.canvas === e.target);
+          if (v) v.visible = e.isIntersecting;
+        }
+      }, { rootMargin: '200px' });
 
   async function load() {
     const grid = document.getElementById('pumpkin-grid');
@@ -467,7 +515,9 @@
         const cr = await fetch(`${BACKEND}/pumpkins/${rec.id}.json`);
         const carve = await cr.json();
         if (!carve || !carve.shape) throw new Error('bad carve');
-        viewers.push(makeViewer(card.querySelector('.pump-canvas'), carve));
+        const v = makeViewer(card.querySelector('.pump-canvas'), carve);
+        viewers.push(v);
+        if (cardObserver) { v.visible = false; cardObserver.observe(v.canvas); }
       } catch (e) {
         card.querySelector('.pump-meta').innerHTML += '<br><em>could not load</em>';
       }
