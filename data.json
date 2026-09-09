@@ -220,6 +220,16 @@
       "isLimited": true,
       "soldOut": false,
       "image": "media/1780376563369-IMG_8583.png"
+    },
+    {
+      "id": "bark-beach-bum-hawaiian-shirt",
+      "name": "Bark Beach Bum Hawaiian Shirt",
+      "priceUSD": 55.99,
+      "url": "https://www.ebay.com/itm/800632453669",
+      "isNew": true,
+      "isLimited": false,
+      "soldOut": false,
+      "image": "media/1788898285229-Untitled_design__29_.png"
     }
   ],
   "siteText": {
