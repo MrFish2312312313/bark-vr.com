@@ -184,20 +184,10 @@
   }
 
   // u wraps: a stroke round the back straddles 0 and 1, so all three offsets are tried.
-  function strokeHits(e, pu, pv) {
-    const st = e.st, uu = e.uu;
-    const r = st.closed ? 0 : (st.width || 0.02) * 0.5;
-
-    // v does not wrap, so one test covers all three passes. Outside the box is
-    // outside the shape for a filled polygon too: a point left of the whole
-    // outline has its +x ray crossing an even number of times.
-    if (pv < e.minV - r || pv > e.maxV + r) return false;
-
+  function strokeHits(st, uu, pu, pv) {
     for (let wrap = -1; wrap <= 1; wrap++) {
-      const x = pu - wrap;
-      if (x < e.minU - r || x > e.maxU + r) continue;
       if (st.closed) { if (insidePolygon(st, uu, wrap, pu, pv)) return true; }
-      else if (nearPolyline(st, uu, wrap, pu, pv, r)) return true;
+      else if (nearPolyline(st, uu, wrap, pu, pv, (st.width || 0.02) * 0.5)) return true;
     }
     return false;
   }
@@ -205,21 +195,7 @@
   function prepStrokes(carve) {
     const out = (carve.strokes || [])
       .filter((st) => st && st.u && st.v && Math.min(st.u.length, st.v.length) >= 2)
-      .map((st) => {
-        // A BOX TO REJECT AGAINST. Without it every "is this point cut" query
-        // walked all seventy-odd segments of every stroke just to conclude it was
-        // nowhere near — and that query runs for four corners of every cell. It
-        // is what made a finer grid unaffordable here.
-        const uu = unwrapU(st);
-        let minU = Infinity, maxU = -Infinity, minV = Infinity, maxV = -Infinity;
-        for (let i = 0; i < uu.length; i++) {
-          if (uu[i] < minU) minU = uu[i];
-          if (uu[i] > maxU) maxU = uu[i];
-          if (st.v[i] < minV) minV = st.v[i];
-          if (st.v[i] > maxV) maxV = st.v[i];
-        }
-        return { st, uu, minU, maxU, minV, maxV };
-      });
+      .map((st) => ({ st, uu: unwrapU(st) }));
     out.tape = hasTape(out);      // decided once, not per sampled point
     return out;
   }
@@ -242,26 +218,25 @@
 
   function isCut(prepped, pu, pv) {
     if (!prepped.tape) {
-      for (const e of prepped)
-        if (e.st.tool === KNIFE && strokeHits(e, pu, pv)) return true;
+      for (const { st, uu } of prepped)
+        if (st.tool === KNIFE && strokeHits(st, uu, pu, pv)) return true;
       return false;
     }
     let cut = false;
-    for (const e of prepped) {
-      if (e.st.tool === KNIFE) { if (!cut && strokeHits(e, pu, pv)) cut = true; }
-      else if (e.st.tool === TAPE) { if (cut && strokeHits(e, pu, pv)) cut = false; }
+    for (const { st, uu } of prepped) {
+      if (st.tool === KNIFE) { if (!cut && strokeHits(st, uu, pu, pv)) cut = true; }
+      else if (st.tool === TAPE) { if (cut && strokeHits(st, uu, pu, pv)) cut = false; }
     }
     return cut;
   }
 
   function scrapeDepth(prepped, pu, pv) {
     let best = 0;
-    for (const e of prepped) {
-      const st = e.st;
+    for (const { st, uu } of prepped) {
       if (st.tool === SCRAPER) {
-        if (strokeHits(e, pu, pv))
+        if (strokeHits(st, uu, pu, pv))
           best = Math.max(best, Math.min(1, Math.max(0, st.depth == null ? 0.6 : st.depth)));
-      } else if (st.tool === TAPE && best > 0 && strokeHits(e, pu, pv)) {
+      } else if (st.tool === TAPE && best > 0 && strokeHits(st, uu, pu, pv)) {
         // Deepest still wins BETWEEN scrapes — tape only resets what came before it, so two
         // overlapping scrapes of different depths keep taking the deeper, as they always have.
         best = 0;
@@ -297,238 +272,19 @@
   }
   const FLESH = [0.93, 0.82, 0.55];      // PumpkinFlesh's _BaseColor, linear
 
-  // ── THE SKIN TEXTURE ───────────────────────────────────────────────────────
-  //
-  // Ported from PumpkinCarveSkin, not approximated: the same value noise, the
-  // same two octaves at the same frequencies, the same "paler patches drift
-  // yellow" tweak. A flat vertex colour is why the gallery pumpkins looked like
-  // plastic next to the game's.
-  //
-  // The SCRAPE is baked in here too, exactly as the game does it. A scrape is a
-  // colour change, and resolving it in the texture rather than the mesh is what
-  // makes a shaved letter come out with a clean edge instead of a staircase.
-
-  function hash2(x, y) {
-    let h = (Math.imul(x, 374761393) + Math.imul(y, 668265263)) | 0;
-    h = Math.imul(h ^ (h >> 13), 1274126177) | 0;
-    return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
-  }
-  const wrapI = (v, p) => ((v % p) + p) % p;
-
-  function valueNoise(x, y, period) {
-    const xi = Math.floor(x), yi = Math.floor(y);
-    const xf = x - xi, yf = y - yi;
-    const sx = xf * xf * (3 - 2 * xf), sy = yf * yf * (3 - 2 * yf);
-    const n00 = hash2(wrapI(xi, period), wrapI(yi, period));
-    const n10 = hash2(wrapI(xi + 1, period), wrapI(yi, period));
-    const n01 = hash2(wrapI(xi, period), wrapI(yi + 1, period));
-    const n11 = hash2(wrapI(xi + 1, period), wrapI(yi + 1, period));
-    const a = n00 + (n10 - n00) * sx, b = n01 + (n11 - n01) * sx;
-    return a + (b - a) * sy;
-  }
-
-  function fbm(u, v, freq, octaves) {
-    let sum = 0, amp = 1, norm = 0, p = Math.max(1, Math.round(freq));
-    for (let o = 0; o < octaves; o++) {
-      sum += valueNoise(u * p, v * p, p) * amp;
-      norm += amp; amp *= 0.5; p *= 2;
-    }
-    return (sum / Math.max(1e-4, norm)) * 2 - 1;
-  }
-
-  // linear -> sRGB. The palette and FLESH are LINEAR (they are Unity's raw
-  // values); a canvas holds display bytes, so they have to be encoded on the way
-  // in and the texture told it is sRGB so three decodes it back for lighting.
-  function toSRGB(x) {
-    x = Math.min(1, Math.max(0, x));
-    return x <= 0.0031308 ? x * 12.92 : 1.055 * Math.pow(x, 1 / 2.4) - 0.055;
-  }
-
-  const SKIN_TEX = 256;
-
-  // ── THE MOTTLE IS CACHED, NOT RECOMPUTED PER PUMPKIN ───────────────────────
-  //
-  // Same trick PumpkinCarveSkin uses, and for the same reason: the field is low
-  // frequency and depends only on the pumpkin's ASPECT, so it is generated once
-  // at a quarter resolution and shared by every fruit with that shape ratio.
-  //
-  // Computing it per texel per pumpkin was 25 x 65k texels x four noise lookups —
-  // several seconds of blocked main thread, which is why the gallery sat empty
-  // even though nothing had thrown.
-  const MOTTLE = 256;
-  const mottleCache = new Map();
-
-  function mottleField(aspect) {
-    let f = mottleCache.get(aspect);
-    if (f) return f;
-    f = new Float32Array(MOTTLE * MOTTLE);
-    for (let y = 0; y < MOTTLE; y++) {
-      const v = (y + 0.5) / MOTTLE;
-      for (let x = 0; x < MOTTLE; x++) {
-        const u = (x + 0.5) / MOTTLE;
-        f[y * MOTTLE + x] = fbm(u * aspect, v, 3, 2) * 0.045 + fbm(u * aspect, v, 24, 2) * 0.022;
-      }
-    }
-    mottleCache.set(aspect, f);
-    return f;
-  }
-
-  function makeSkinTexture(carve, prepped) {
-    const s = carve.shape;
-    const cv = document.createElement('canvas');
-    cv.width = cv.height = SKIN_TEX;
-    const ctx = cv.getContext('2d');
-    const img = ctx.createImageData(SKIN_TEX, SKIN_TEX);
-    const d = img.data;
-
-    const SKIN = bodyColor(carve);
-
-    // The mottle repeats around u, so the lattice period has to be a whole
-    // number or the noise does not meet itself at the seam.
-    const circumference = Math.PI * Math.max(0.01, s.width);
-    const aspect = Math.max(1, Math.round(circumference / Math.max(0.01, s.height)));
-
-    // Only bother asking about scrapes where a stroke actually is.
-    let sLo = 1, sHi = 0;
-    for (const { st } of prepped)
-      if (st.tool === SCRAPER)
-        for (const vv of st.v) { if (vv < sLo) sLo = vv; if (vv > sHi) sHi = vv; }
-    sLo -= 0.08; sHi += 0.08;
-
-    const mottle = mottleField(aspect);
-
-    for (let y = 0; y < SKIN_TEX; y++) {
-      const v = (y + 0.5) / SKIN_TEX;
-      const rowScrape = sHi >= sLo && v >= sLo && v <= sHi;
-      const mrow = (((y * MOTTLE) / SKIN_TEX) | 0) * MOTTLE;
-      for (let x = 0; x < SKIN_TEX; x++) {
-        const u = (x + 0.5) / SKIN_TEX;
-        const m = mottle[mrow + (((x * MOTTLE) / SKIN_TEX) | 0)];
-
-        let r = SKIN[0] * (1 + m);
-        let g = SKIN[1] * (1 + m) * (1 + m * 0.45);   // paler patches drift yellow
-        let b = SKIN[2] * (1 + m);
-
-        if (rowScrape) {
-          const dep = scrapeDepth(prepped, u, v);
-          if (dep > 0) {
-            const t = smoothstep01((dep - 0.04) / 0.18);
-            r += (FLESH[0] - r) * t; g += (FLESH[1] - g) * t; b += (FLESH[2] - b) * t;
-          }
-        }
-
-        const i = (y * SKIN_TEX + x) * 4;
-        d[i]     = toSRGB(r) * 255;
-        d[i + 1] = toSRGB(g) * 255;
-        d[i + 2] = toSRGB(b) * 255;
-        d[i + 3] = 255;
-      }
-    }
-    ctx.putImageData(img, 0, 0);
-
-    const tex = new THREE.CanvasTexture(cv);
-    tex.wrapS = THREE.RepeatWrapping;    // u goes around
-    tex.wrapT = THREE.ClampToEdgeWrapping;
-    tex.anisotropy = 4;
-    if (THREE.sRGBEncoding !== undefined) tex.encoding = THREE.sRGBEncoding;
-    tex.needsUpdate = true;
-    return tex;
-  }
-
-  // ── THE STEM ───────────────────────────────────────────────────────────────
-  //
-  // The site had NONE. What looked like "bugged stems" was the bare crown of the
-  // body mesh with nothing sitting on it. Ported from PumpkinGenerator.BuildStem,
-  // including the seating: the base starts BELOW the top and is swallowed by the
-  // shoulder, or every pumpkin gets a stem hovering over a hole.
-  const STEM_COLORS = [[0.60, 0.50, 0.32], [0.55, 0.46, 0.28], [0.64, 0.55, 0.36]];
-
-  function buildStem(s, colorIndex, push) {
-    const rings = 14;
-    const sides = Math.max(4, Math.round(s.stemSides || 6));
-    const col = STEM_COLORS[((colorIndex % 3) + 3) % 3];
-
-    const bendRad = (s.stemCurveDirection || 0) * Math.PI / 180;
-    const bendDir = [Math.cos(bendRad), 0, -Math.sin(bendRad)];   // -sin: same mirror as the body
-    const thick = s.stemThickness || 0.02;
-    const baseY = s.height * 0.5 - (s.topDimple || 0) * s.height * 1.25 - thick * 0.6;
-    const sunk  = (s.topDimple || 0) * s.height * 0.25 + thick * 0.6;
-    const len   = s.stemLength || 0.06;
-    const curve = s.stemCurve || 0;
-
-    const ringAt = (t) => {
-      const flare = (s.stemFlare || 1) + (1 - (s.stemFlare || 1)) * smoothstep01(Math.min(1, t * 3));
-      const rad = thick * flare * (1 + ((s.stemTaper || 0.6) - 1) * t * t);
-      const cy = baseY + (len + sunk) * t;
-      const out = [];
-      for (let c = 0; c <= sides; c++) {
-        const theta = (c / sides) * Math.PI * 2;
-        const ridge = 1 + 0.12 * Math.cos(theta * sides);
-        out.push([Math.cos(theta) * rad * ridge + bendDir[0] * curve * t * t,
-                  cy,
-                  -Math.sin(theta) * rad * ridge + bendDir[2] * curve * t * t]);
-      }
-      return out;
-    };
-
-    let prev = ringAt(0);
-    for (let r = 1; r <= rings; r++) {
-      const cur = ringAt(r / rings);
-      for (let c = 0; c < sides; c++) {
-        const a = prev[c], b = prev[c + 1], dd = cur[c], e = cur[c + 1];
-        for (const tri of [[a, dd, b], [b, dd, e]]) {
-          const n = triNormal(tri[0], tri[1], tri[2], [0, baseY, 0]);
-          for (const q of tri) push(q, n, col);
-        }
-      }
-      prev = cur;
-    }
-    // Cap the tip, or you can see down the inside of the stem.
-    const tip = [bendDir[0] * curve, baseY + len + sunk, bendDir[2] * curve];
-    for (let c = 0; c < sides; c++) {
-      const tri = [prev[c], tip, prev[c + 1]];
-      const n = triNormal(tri[0], tri[1], tri[2], [0, baseY, 0]);
-      for (const q of tri) push(q, n, col);
-    }
-  }
-
-  // Face normal, forced to point away from a reference point inside the solid.
-  function triNormal(a, b, c, inside) {
-    const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
-    const e2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
-    let n = norm3([e1[1] * e2[2] - e1[2] * e2[1],
-                   e1[2] * e2[0] - e1[0] * e2[2],
-                   e1[0] * e2[1] - e1[1] * e2[0]]);
-    const away = [a[0] - inside[0], a[1] - inside[1], a[2] - inside[2]];
-    if (n[0] * away[0] + n[1] * away[1] + n[2] * away[2] < 0) n = [-n[0], -n[1], -n[2]];
-    return n;
-  }
-
   function buildPumpkin(carve) {
     const s = carve.shape;
     const prepped = prepStrokes(carve);
     const anyCut = prepped.some((p) => p.st.tool === 0);
 
-    // MUCH FINER THAN THE GAME'S, on purpose. In VR this grid is rebuilt every
-    // time you cut and has to fit in a frame; here it is built ONCE per card on a
-    // desktop GPU and then only spun. The game buys detail back with adaptive
-    // subdivision around the cuts; the cheaper way to match it off-line is simply
-    // to afford a finer grid everywhere.
-    const rings = 80, segs = Math.max(132, Math.round(s.lobes * 14));
+    const rings = 44, segs = Math.max(72, Math.round(s.lobes * 8));
     const wall = Math.min(0.09, Math.max(0.012, s.height * 0.11));
 
-    // TWO STREAMS, because the skin and the flesh are shaded differently: the skin
-    // wears the baked texture, the cut walls and cavity and stem are flat colour.
-    // Same split the game makes with its two submeshes, and for the same reason —
-    // one material cannot be both a mottled rind and a wet inner wall.
-    const sPos = [], sNor = [], sUv = [];
-    const fPos = [], fNor = [], fCol = [];
+    const pos = [], nor = [], col = [];
+    const SKIN = bodyColor(carve);          // this pumpkin's own colour, not a fixed orange
 
-    const pushSkin  = (p, n, uv) => {
-      sPos.push(p[0], p[1], p[2]); sNor.push(n[0], n[1], n[2]); sUv.push(uv[0], uv[1]);
-    };
-    const push = (p, n, c) => {      // flesh + stem
-      fPos.push(p[0], p[1], p[2]); fNor.push(n[0], n[1], n[2]); fCol.push(c[0], c[1], c[2]);
+    const push = (p, n, c) => {
+      pos.push(p[0], p[1], p[2]); nor.push(n[0], n[1], n[2]); col.push(c[0], c[1], c[2]);
     };
 
     const skinAt = (u, v) => {
@@ -539,9 +295,13 @@
       // pumpkin does not get a crater and a small one is not hollowed out.
       // See PumpkinCarveMesh.ScrapeRecess.
       const inset = Math.min(d * 0.45 * wall, 0.012);
-      // The scrape's COLOUR lives in the baked texture now (crisper than any mesh
-      // could resolve it); what stays here is the recess, which is geometry.
-      return { p: [p[0] - n[0] * inset, p[1] - n[1] * inset, p[2] - n[2] * inset], n, uv: [u, v] };
+      const t = smoothstep01((d - 0.04) / 0.18);
+      const c = [
+        SKIN[0] + (FLESH[0] - SKIN[0]) * t,
+        SKIN[1] + (FLESH[1] - SKIN[1]) * t,
+        SKIN[2] + (FLESH[2] - SKIN[2]) * t,
+      ];
+      return { p: [p[0] - n[0] * inset, p[1] - n[1] * inset, p[2] - n[2] * inset], n, c };
     };
 
     // Bisect to the cut edge, exactly as the game does, so the hole follows the
@@ -591,9 +351,9 @@
         // reverses handedness, so fanning in walk order faces inward.
         const vs = poly.map((q) => skinAt(q[0], q[1]));
         for (let i = 1; i + 1 < vs.length; i++) {
-          pushSkin(vs[0].p, vs[0].n, vs[0].uv);
-          pushSkin(vs[i + 1].p, vs[i + 1].n, vs[i + 1].uv);
-          pushSkin(vs[i].p, vs[i].n, vs[i].uv);
+          push(vs[0].p, vs[0].n, vs[0].c);
+          push(vs[i + 1].p, vs[i + 1].n, vs[i + 1].c);
+          push(vs[i].p, vs[i].n, vs[i].c);
         }
       }
     }
@@ -613,47 +373,10 @@
       }
     }
 
-    buildStem(s, (s.colorIndex | 0), push);
-
-    // Concatenated skin-first, so the two groups are contiguous ranges. Every
-    // vertex carries both a uv and a colour; each material only reads the one it
-    // cares about, which is cheaper than two geometries and keeps it one draw
-    // call per material.
-    // ── THE MIRROR FLIPPED THE WINDING, SO FLIP IT BACK ──────────────────────
-    //
-    // Negating Z to convert Unity's handedness mirrors the surface, and a mirrored
-    // triangle is wound the other way round. Every face that should be front is
-    // now back — which is invisible under DoubleSide right up until you put a
-    // light INSIDE the pumpkin: three flips the shading normal on back faces, so
-    // the rind's normal ended up pointing inward and the candle lit the OUTSIDE
-    // of the fruit. Lighting one up made the whole thing glow like a paper lamp
-    // instead of showing a face.
-    //
-    // Swapping the 2nd and 3rd vertex of every triangle restores the winding
-    // without touching positions or normals.
-    const flipWinding = (arr, stride) => {
-      for (let i = 0; i + 3 * stride <= arr.length; i += 3 * stride)
-        for (let k = 0; k < stride; k++) {
-          const a = i + stride + k, b = i + 2 * stride + k;
-          const t = arr[a]; arr[a] = arr[b]; arr[b] = t;
-        }
-    };
-    for (const [arr, stride] of [[sPos, 3], [sNor, 3], [sUv, 2],
-                                 [fPos, 3], [fNor, 3], [fCol, 3]]) flipWinding(arr, stride);
-
-    const skinCount = sPos.length / 3, fleshCount = fPos.length / 3;
-    const pos = sPos.concat(fPos);
-    const nor = sNor.concat(fNor);
-    const uv  = sUv.concat(new Array(fleshCount * 2).fill(0));
-    const col = new Array(skinCount * 3).fill(1).concat(fCol);
-
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
     g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
-    g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
     g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
-    g.addGroup(0, skinCount, 0);                 // skin  -> textured material
-    g.addGroup(skinCount, fleshCount, 1);        // flesh + stem -> vertex colours
     g.computeBoundingSphere();
     return g;
   }
@@ -701,32 +424,16 @@
     const cam = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
 
     const geo = buildPumpkin(carve);
-    const skinTex = makeSkinTexture(carve, prepStrokes(carve));
-    const skinMat = new THREE.MeshStandardMaterial({
-      map: skinTex, roughness: 0.78, metalness: 0.0, side: THREE.DoubleSide });
-    const fleshMat = new THREE.MeshStandardMaterial({
-      vertexColors: true, roughness: 0.85, metalness: 0.0, side: THREE.DoubleSide,
-      // The inside is what a candle lights, so it is the part that glows. Driven
-      // by setLit below rather than baked in, so an unlit pumpkin looks unlit.
-      emissive: new THREE.Color(0xff6a1a), emissiveIntensity: 0.0 });
-    const mesh = new THREE.Mesh(geo, [skinMat, fleshMat]);
+    const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.72, metalness: 0.0, side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(geo, mat);
     scene.add(mesh);
 
-    const amb = new THREE.AmbientLight(0xfff2e4, 0.42);   // warm, so it cannot grey the rind
+    const amb = new THREE.AmbientLight(0xffffff, 0.55);
     scene.add(amb);
-    const key = new THREE.DirectionalLight(0xfff4e6, 1.45);
+    const key = new THREE.DirectionalLight(0xfff0dd, 1.15);
     key.position.set(2, 3, 2.5);
     scene.add(key);
-
-    // ── A NEUTRAL FILL, NOT A BLUE ONE ───────────────────────────────────────
-    //
-    // This was 0x88aaff at 0.35, which is a lovely studio rim on a grey model and
-    // poison on a pumpkin. Measured against the palette: the pale gourds came back
-    // a uniform 0.62-0.66 of their albedo (just lit, fine), but classic orange —
-    // (0.86, 0.38, 0.09), almost no blue in it — rendered with 2.76x too much
-    // blue. A blue fill on a surface with nothing to reflect it lands entirely as
-    // desaturation, so the most orange pumpkins came out the palest.
-    const rim = new THREE.DirectionalLight(0xffe9d2, 0.22);
+    const rim = new THREE.DirectionalLight(0x88aaff, 0.35);
     rim.position.set(-2, 1, -2);
     scene.add(rim);
 
@@ -757,27 +464,10 @@
       canvas,
       visible: true,          // set by the observer below
       setLit(on) {
-        // ── WHAT MAKES A LIT PUMPKIN READ ────────────────────────────────────
-        //
-        // Not "turn the lights down and put a lamp in it". A point light alone
-        // barely touches the cut walls, because they face sideways into a hole,
-        // so the first version just made everything dim and muddy.
-        //
-        // What actually sells it is the FLESH glowing — the walls and cavity are
-        // the surfaces a candle lights, and they are what you see through the
-        // cuts. So the inside emits, the rind keeps a little warm bounce so the
-        // fruit does not go to silhouette, and the point light supplies falloff
-        // on top of that rather than doing the whole job.
-        // THE RIND MUST STAY DARK. Making it emissive too turned the whole fruit
-        // into a lamp — you lose the carving entirely, because a face only reads
-        // when the holes are brighter than what surrounds them. So only the
-        // INSIDE emits, and the rind is left to a dim warm ambient plus whatever
-        // the candle throws on it. Contrast is the effect; brightness is not.
-        candle.intensity = on ? 2.2 : 0.0;
-        amb.intensity    = on ? 0.13 : 0.42;
-        key.intensity    = on ? 0.20 : 1.45;
-        rim.intensity    = on ? 0.05 : 0.22;
-        fleshMat.emissiveIntensity = on ? 0.85 : 0.0;
+        candle.intensity = on ? 2.6 : 0.0;
+        amb.intensity    = on ? 0.10 : 0.55;
+        key.intensity    = on ? 0.18 : 1.15;
+        rim.intensity    = on ? 0.06 : 0.35;
       },
       tick(dt) {
         const w = canvas.clientWidth | 0, h = canvas.clientHeight | 0;
