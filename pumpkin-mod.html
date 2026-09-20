@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Painting Moderation | BARKVR</title>
+  <title>Pumpkin Moderation | BARKVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -68,7 +68,7 @@
     </div>
     <div class="page-hero-content">
       <div class="section-label">// MODERATION</div>
-      <h1>PAINTINGS</h1>
+      <h1>PUMPKIN MODERATION</h1>
     </div>
   </section>
 
@@ -76,11 +76,20 @@
     <div class="container">
       <div class="mod-bar">
         <input id="modKey" type="password" placeholder="Moderator key" autocomplete="off" />
-        <button onclick="Paintings.load()">Load paintings</button>
-        <button class="secondary" onclick="Paintings.toggleHidden()" id="toggleHiddenBtn">Showing: all</button>
+        <button onclick="PumpkinMod.load()">Load</button>
+        <button class="secondary" onclick="PumpkinMod.toggleHidden()" id="toggleHiddenBtn">Showing: all</button>
         <span class="mod-status" id="modStatus">Enter the moderator key and load.</span>
       </div>
-      <div class="paint-grid" id="paintGrid"></div>
+
+      <h2 style="margin-top:1.4rem">On display at the festival</h2>
+      <p style="opacity:.7;margin-top:-.4rem">
+        Clearing a pedestal takes the pumpkin off it in every lobby. The carve itself survives &mdash;
+        use <b>Delete</b> below to destroy it outright.
+      </p>
+      <div id="festivalList"></div>
+
+      <h2 style="margin-top:2rem">Every carved pumpkin</h2>
+      <div class="paint-grid" id="pumpkinGrid"></div>
     </div>
   </section>
 
@@ -104,7 +113,9 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="main.js"></script>
-  <script src="paintings.js?v=1"></script>
+  <script src="pumpkins.js?v=5"></script>
+  <script src="pumpkin-mod.js?v=1"></script>
 </body>
 </html>

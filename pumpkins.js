@@ -899,6 +899,17 @@
     animate();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load);
-  else load();
+  // ── SHARED WITH THE MODERATION PAGE ─────────────────────────────────────────
+  //
+  // The viewer is the only honest way to judge a carve: a moderator needs to SEE
+  // the pumpkin, and the website already rebuilds it from the same numbers the
+  // game does. Exposing the builder is far better than a second renderer that
+  // could drift out of step with this one.
+  window.PumpkinViewer = makeViewer;
+
+  // Only run the public gallery when the public gallery is actually on the page.
+  // The moderation page loads this file purely for the viewer above.
+  function boot() { if (document.getElementById('pumpkin-grid')) load(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
