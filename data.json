@@ -339,7 +339,11 @@
         "description": "Just a little guy!",
         "image": "media/1780419841451-SampleScene_Custom..._02.06.2026_12-03-56.png",
         "effect": "He quacks if you click your trigger while holding him!",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Duck",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-duck.glb",
+        "autoEffect": "Pull the trigger to make it play a sound."
       },
       {
         "id": "bark-boy",
@@ -347,7 +351,10 @@
         "description": "\"Come on mom, just one more game?\"",
         "image": "media/1780419706259-SampleScene_Custom..._02.06.2026_12-00-54.png",
         "effect": "Let's you spy on the Electric Arcade",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Bark Boy",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-bark-boy.glb"
       },
       {
         "id": "baseball-bat",
@@ -355,7 +362,11 @@
         "description": "*bonk*",
         "image": "media/1780419806538-SampleScene_Custom..._02.06.2026_12-02-31.png",
         "effect": "Let's you fling other players.",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "bat",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-bat.glb",
+        "autoEffect": "Swing it to bonk people."
       },
       {
         "id": "toy-hammer",
@@ -363,7 +374,11 @@
         "description": "*wham*",
         "image": "media/1780419931413-SampleScene_Custom..._02.06.2026_12-04-50.png",
         "effect": "Flings other players with extra power",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Toy Hammer",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-toy-hammer.glb",
+        "autoEffect": "Swing it to bonk people."
       },
       {
         "id": "bamboo-bat",
@@ -371,7 +386,11 @@
         "description": "*bink*",
         "image": "media/1780420003272-SampleScene_Custom..._02.06.2026_12-06-13.png",
         "effect": "flings other players",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Bamboo Bat",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-bamboo-bat.glb",
+        "autoEffect": "Swing it to bonk people."
       },
       {
         "id": "barket",
@@ -379,7 +398,10 @@
         "description": "\"Trick or Treat?\"",
         "image": "media/1780420538114-SampleScene_Custom..._02.06.2026_12-14-17.png",
         "effect": "Looks Cool (Maybe Future Purpose)",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "BARKet",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-barket.glb"
       },
       {
         "id": "bean-trophie",
@@ -387,7 +409,10 @@
         "description": "Obtained during the 2026 Bark To Beans update",
         "image": "media/1780420678312-SampleScene_Custom..._02.06.2026_12-17-01.png",
         "effect": "Looks cool",
-        "subcategory": "Special"
+        "subcategory": "Special",
+        "itemId": "bean trophie'",
+        "wheel": "Items/Special",
+        "model": "media/models/item-bean-trophie.glb"
       },
       {
         "id": "bean-gun",
@@ -395,7 +420,11 @@
         "description": "\"BEANS EVERYWHERE!!!\"",
         "image": "media/1780421224868-SampleScene_Custom..._02.06.2026_12-26-20.png",
         "effect": "Shoots Tons of Beans, Good Flying Method!",
-        "subcategory": "Special"
+        "subcategory": "Special",
+        "itemId": "beangun",
+        "wheel": "Items/Special",
+        "model": "media/models/item-beangun.glb",
+        "autoEffect": "Pull the trigger to shoot beans. Everywhere."
       },
       {
         "id": "blurryface",
@@ -403,7 +432,11 @@
         "description": "\"My name's Blurryface and i care what you think\"",
         "image": "media/1780421363611-SampleScene_Custom..._02.06.2026_12-28-23.png",
         "effect": "Grants access to Songs Stressed out and Message Man by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Blurryface",
+        "wheel": "Items/Music",
+        "model": "media/models/item-blurryface.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "breach",
@@ -411,7 +444,11 @@
         "description": "\"Move it up, move it up, it's a breach\"",
         "image": "media/1780425759110-SampleScene_Custom..._02.06.2026_13-10-04.png",
         "effect": "Grants access to Songs City Walls, and The Contract by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Breach",
+        "wheel": "Items/Music",
+        "model": "media/models/item-breach.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "rat-world-ost-1",
@@ -419,7 +456,11 @@
         "description": "\"Rat Rat Rat Rat Rat Rat\"",
         "image": "media/1780426394438-SampleScene_Custom..._02.06.2026_13-52-05.png",
         "effect": "Grants access to songs Eternity, Coin Snatcher, S*icide, and Fancy Rats",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "CDCase",
+        "wheel": "Items/Music",
+        "model": "media/models/item-cdcase.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "chicken_nugget",
@@ -427,7 +468,11 @@
         "description": "Very Oval-Like",
         "image": "media/1780426578441-SampleScene_Custom..._02.06.2026_13-55-23.png",
         "effect": "it's just there, probably eatable in the future",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "chicken nugget",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-chicken-nugget.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
       },
       {
         "id": "clancy",
@@ -435,7 +480,11 @@
         "description": "\"Can't change what you've done. Start fresh next semester\"",
         "image": "media/1780426926177-SampleScene_Custom..._02.06.2026_13-59-17.png",
         "effect": "Grants access to Songs Next Semester, and Paladin Strait by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Clancy",
+        "wheel": "Items/Music",
+        "model": "media/models/item-clancy.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "controller",
@@ -443,7 +492,11 @@
         "description": "Comes with the Basement Boss Bundle",
         "image": "media/1780427039434-SampleScene_Custom..._02.06.2026_14-02-42.png",
         "effect": "If you click your trigger while holding the controller, it plays 8 bit game noises",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Controller",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-controller.glb",
+        "autoEffect": "Pull the trigger to make it play a sound."
       },
       {
         "id": "cow",
@@ -451,7 +504,11 @@
         "description": "Bumstronaut's favorite item, the sounds it makes is just Bumstronaut going \"moo\"",
         "image": "media/1780427259838-SampleScene_Custom..._02.06.2026_14-06-00.png",
         "effect": "Besides being an absolute adorable creature, it moos when you click your trigger while holding it.",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "cow",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-cow.glb",
+        "autoEffect": "Pull the trigger to make it play a sound."
       },
       {
         "id": "easter-trophy-variant",
@@ -459,7 +516,10 @@
         "description": "Could get this trophy during the 2025 easter update",
         "image": "media/1780427409943-SampleScene_Custom..._02.06.2026_14-08-38.png",
         "effect": "show's how og you are",
-        "subcategory": "Special"
+        "subcategory": "Special",
+        "itemId": "Easter trophy Variant",
+        "wheel": "Items/Special",
+        "model": "media/models/item-easter-trophy-variant.glb"
       },
       {
         "id": "forgotten-potential-entertainment",
@@ -467,7 +527,11 @@
         "description": "\"Wait, this isn't a real album???\"",
         "image": "media/1780428414063-SampleScene_Custom..._02.06.2026_14-24-50.png",
         "effect": "Grant's access to songs Time To Say Goodbye, and Drag Path (Breach Digital Remains) by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Forgotten Potential Entertainment",
+        "wheel": "Items/Music",
+        "model": "media/models/item-forgotten-potential-entertainment.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "greg",
@@ -475,7 +539,10 @@
         "description": "Phil's Goblin Cousin",
         "image": "media/1780428522832-SampleScene_Custom..._02.06.2026_14-28-02.png",
         "effect": "Chills, helps you cheat in blinko",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Greg",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-greg.glb"
       },
       {
         "id": "hudson-s-bird",
@@ -483,7 +550,10 @@
         "description": "Based off a drawing from a kid that goes to Bumstronaut's school",
         "image": "media/1780428631452-SampleScene_Custom..._02.06.2026_14-29-31.png",
         "effect": "Stares into your soul.",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Hudson's bird",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-hudsons-bird.glb"
       },
       {
         "id": "kevin",
@@ -491,7 +561,10 @@
         "description": "Suggested by JJTERRYVR, he a borb.",
         "image": "media/1780428768531-SampleScene_Custom..._02.06.2026_14-31-39.png",
         "effect": "Is very fun to use as a bowling ball or chuck into tornados",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Kevin",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-kevin.glb"
       },
       {
         "id": "leaf-blade",
@@ -499,7 +572,11 @@
         "description": "Obtained with the Jungle Ninja Bundle",
         "image": "media/1780428889576-SampleScene_Custom..._02.06.2026_14-33-31.png",
         "effect": "Cut's vines, when you slice with it, it LEAVES behind leaf particles (pun indented)",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Leaf Blade",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-leaf-blade.glb",
+        "autoEffect": "Swing it to slash."
       },
       {
         "id": "flying-cube",
@@ -515,7 +592,9 @@
         "description": "For Moderators Only",
         "image": "media/1780429675491-SampleScene_Custom..._02.06.2026_14-47-21.png",
         "effect": "Show's proof of being a mod",
-        "subcategory": "Special"
+        "subcategory": "Special",
+        "itemId": "Mod Text",
+        "wheel": "Items/Special"
       },
       {
         "id": "no-phun-intended",
@@ -523,7 +602,11 @@
         "description": "\"Fast food greasy taco i love\"",
         "image": "media/1780430096091-SampleScene_Custom..._02.06.2026_14-53-26.png",
         "effect": "Grants access to songs Hole In The Ground, and Taco Bell Saga by Tyler Joseph (Twenty One Pilots lead singer)",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "No Phun Intended",
+        "wheel": "Items/Music",
+        "model": "media/models/item-no-phun-intended.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "paint",
@@ -531,7 +614,11 @@
         "description": "Very Glowy",
         "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
         "effect": "Does nothing, hopefully future feature",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Paint",
+        "wheel": "Creations/Paintings",
+        "model": "media/models/item-paint.glb",
+        "autoEffect": "Paint on whiteboards and easels."
       },
       {
         "id": "puke",
@@ -539,7 +626,10 @@
         "description": "Puke is the best, CW: PukeWorld in yeeps",
         "image": "media/1780508644394-SampleScene_Custom..._03.06.2026_12-43-05.png",
         "effect": "Makes noises when you right click while holding him",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Puke",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-puke.glb"
       },
       {
         "id": "regional-at-best",
@@ -547,7 +637,11 @@
         "description": "\"your an angel fallen down, won't you tell us of the clouds.\"",
         "image": "media/1780508842064-SampleScene_Custom..._03.06.2026_12-44-59.png",
         "effect": "Grants access to songs Ruby, Two, and Lovely (remastered) by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Regional At Best",
+        "wheel": "Items/Music",
+        "model": "media/models/item-regional-at-best.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "scaled-and-icy",
@@ -555,7 +649,11 @@
         "description": "\"I know it's over, I was born a choker\"",
         "image": "media/1780508968124-SampleScene_Custom..._03.06.2026_12-48-23.png",
         "effect": "Grants access to songs Choker, and Formidable by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Scaled And Icy",
+        "wheel": "Items/Music",
+        "model": "media/models/item-scaled-and-icy.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "shroom",
@@ -563,7 +661,11 @@
         "description": "\"Everything is huge????????\"",
         "image": "media/1780509112823-SampleScene_Custom..._03.06.2026_12-51-12.png",
         "effect": "Shrinks you when you click your trigger while holding it",
-        "subcategory": "Special"
+        "subcategory": "Special",
+        "itemId": "Shroom",
+        "wheel": "Items/Special",
+        "model": "media/models/item-shroom.glb",
+        "autoEffect": "Pull the trigger to shrink yourself - and again to grow back."
       },
       {
         "id": "trench",
@@ -571,7 +673,11 @@
         "description": "\"Don't get me wrong the rise in awareness is beating a stigma that no longer scares us.\"",
         "image": "media/1780509665809-SampleScene_Custom..._03.06.2026_12-56-08.png",
         "effect": "Grants access to songs Neon Gravestones, and Nico and the Niners by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Trench",
+        "wheel": "Items/Music",
+        "model": "media/models/item-trench.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "twenty-one-pilots-self-titled",
@@ -579,7 +685,11 @@
         "description": "\"I won't fall in love with falling.\"",
         "image": "media/1780509861088-SampleScene_Custom..._03.06.2026_13-02-22.png",
         "effect": "Grants access to songs Air Catcher, and Trapdoor by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Twenty One Pilots",
+        "wheel": "Items/Music",
+        "model": "media/models/item-twenty-one-pilots.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "vessel",
@@ -587,7 +697,11 @@
         "description": "\"I know where you stand. Silent in the trees.\"",
         "image": "media/1780510007804-SampleScene_Custom..._03.06.2026_13-04-53.png",
         "effect": "Grants songs Ode To Sleep, and Trees by Twenty One Pilots",
-        "subcategory": "Music"
+        "subcategory": "Music",
+        "itemId": "Vessel",
+        "wheel": "Items/Music",
+        "model": "media/models/item-vessel.glb",
+        "autoEffect": "A music album."
       },
       {
         "id": "walkie-talkie",
@@ -595,7 +709,11 @@
         "description": "\"Terry, you there?\"",
         "image": "media/1780510109825-SampleScene_Custom..._03.06.2026_13-07-26.png",
         "effect": "Nothing as of now, future plans",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "walkie talkie",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-walkie-talkie.glb",
+        "autoEffect": "Talk to anyone else holding a walkie-talkie, from anywhere on the map."
       },
       {
         "id": "water-gun",
@@ -603,7 +721,11 @@
         "description": "*Pew Pew*",
         "image": "media/1780510195829-SampleScene_Custom..._03.06.2026_13-08-54.png",
         "effect": "Sprays water, which pets very much enjoy!",
-        "subcategory": "Pet Item"
+        "subcategory": "Pet Item",
+        "itemId": "Watergun",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-watergun.glb",
+        "autoEffect": "Squirts water. Pets can use it too."
       },
       {
         "id": "flash-on-my-light-till-i-illuminate-an-area",
@@ -611,7 +733,11 @@
         "description": "LemonF1 named it that, take it up with him...",
         "image": "media/1780510486876-SampleScene_Custom..._03.06.2026_13-11-56.png",
         "effect": "Turns on the light when you click your trigger while holding it",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Flash on my light till i illuminate an area",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-flash-on-my-light-till-i-illuminate-an-area.glb",
+        "autoEffect": "Pull the trigger to switch it on and off."
       },
       {
         "id": "domino",
@@ -619,7 +745,10 @@
         "description": "\"So satisfying\"",
         "image": "media/1780510630633-SampleScene_Custom..._03.06.2026_13-16-30.png",
         "effect": "Does domino effect",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Domino",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-domino.glb"
       },
       {
         "id": "duck-sergeant",
@@ -627,7 +756,11 @@
         "description": "\"HE'S GOT A GUN!\"",
         "image": "media/1780511798307-SampleScene_Custom..._03.06.2026_13-35-10.png",
         "effect": "Pulls out some crazy guns and quacks when you click your trigger",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "Duck Sergeant",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-duck-sergeant.glb",
+        "autoEffect": "Pull the trigger and it does its thing."
       },
       {
         "id": "bowling-pin",
@@ -635,7 +768,10 @@
         "description": "*clink*",
         "image": "media/1780512145802-SampleScene_Custom..._03.06.2026_13-38-20.png",
         "effect": "Bowling Pin Stuff",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Bowling Pin",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-bowling-pin.glb"
       },
       {
         "id": "bowling-ball",
@@ -643,7 +779,10 @@
         "description": "*Thunka*",
         "image": "media/1780512365415-SampleScene_Custom..._03.06.2026_13-43-17.png",
         "effect": "Bowling Ball Stuff",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Bowling Ball",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-bowling-ball.glb"
       },
       {
         "id": "wooden-rectangle",
@@ -651,7 +790,10 @@
         "description": "Yay..... wood",
         "image": "media/1780512691408-SampleScene_Custom..._03.06.2026_13-50-33.png",
         "effect": "Can be used for very buggy Jenga",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Wood Rectangle",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-wood-rectangle.glb"
       },
       {
         "id": "bark-chip",
@@ -667,7 +809,11 @@
         "description": "*Squeak Sqeak*",
         "image": "media/1782171992724-SampleScene_Custom..._22.06.2026_18-45-43.png",
         "effect": "Pet's will chase this when you throw it! In the rancher bundle.",
-        "subcategory": "Pet Item"
+        "subcategory": "Pet Item",
+        "itemId": "Corn",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-corn.glb",
+        "autoEffect": "A squeaky toy. Pets love it."
       },
       {
         "id": "capture-net",
@@ -675,7 +821,11 @@
         "description": "\"GOTCHA!\"",
         "image": "media/1782172074841-SampleScene_Custom..._22.06.2026_18-47-03.png",
         "effect": "Can be used to catch a wild pet and store them for later!",
-        "subcategory": "Pet Item"
+        "subcategory": "Pet Item",
+        "itemId": "Capture Net",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-capture-net.glb",
+        "autoEffect": "Swing it over a wild pet to catch it."
       },
       {
         "id": "leash",
@@ -683,7 +833,11 @@
         "description": "\"Come 'ere boy!\"",
         "image": "media/1782172137479-SampleScene_Custom..._22.06.2026_18-48-23.png",
         "effect": "Brings your pets to you!",
-        "subcategory": "Pet Item"
+        "subcategory": "Pet Item",
+        "itemId": "Leash",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-leash.glb",
+        "autoEffect": "Clip it to a pet to take it for a walk."
       },
       {
         "id": "laser-pointer",
@@ -691,7 +845,11 @@
         "description": "Why don't pets follow it?",
         "image": "media/1782172237621-SampleScene_Custom..._22.06.2026_18-49-14.png",
         "effect": "Combined with the whistle, it can be used to command your pets with the commands Go To, Interact, and Select!",
-        "subcategory": "Pet Item"
+        "subcategory": "Pet Item",
+        "itemId": "Laser Pointer",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-laser-pointer.glb",
+        "autoEffect": "Pull the trigger and pets chase the dot."
       },
       {
         "id": "whistle",
@@ -699,7 +857,11 @@
         "description": "\"LISTEN UP!\"",
         "image": "media/1782172337251-SampleScene_Custom..._22.06.2026_18-51-01.png",
         "effect": "Used to command pets to follow, wander, go to, stop, interact, and select!",
-        "subcategory": "Pet Item"
+        "subcategory": "Pet Item",
+        "itemId": "Whistle",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-whistle.glb",
+        "autoEffect": "Blow it to call your pets over."
       },
       {
         "id": "hoe",
@@ -707,7 +869,10 @@
         "description": "\"What can i do with this???\"",
         "image": "media/1782172420825-SampleScene_Custom..._22.06.2026_18-52-45.png",
         "effect": "Nothing, does absolutely nothing, yet.",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Hoe",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-hoe.glb"
       },
       {
         "id": "cheerioat",
@@ -715,7 +880,11 @@
         "description": "\"I think you spelled the name wro-\" IT'S SUPPOSED TO BE THAT!",
         "image": "media/1782173157156-SampleScene_Custom..._22.06.2026_19-04-55.png",
         "effect": "Looks tasty!",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "cheerioat",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-cheerioat.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
       },
       {
         "id": "connor-s-brain-for-dummies",
@@ -723,7 +892,10 @@
         "description": "Still unable to decipher,",
         "image": "media/1782173253787-SampleScene_Custom..._22.06.2026_19-06-28.png",
         "effect": "Reminds Bum of the good 'ol Glorp days",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "Connor's Book For Dummies",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-connors-book-for-dummies.glb"
       },
       {
         "id": "goobie-bar",
@@ -731,7 +903,11 @@
         "description": "\"Halloween Update Confirmed???\"",
         "image": "media/1782173320351-SampleScene_Custom..._22.06.2026_19-08-01.png",
         "effect": "Also looks cool!",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "GoobieBar",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-goobiebar.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
       },
       {
         "id": "healing-soap",
@@ -739,7 +915,11 @@
         "description": "I don't feel any better....",
         "image": "media/1782173382157-SampleScene_Custom..._22.06.2026_19-08-55.png",
         "effect": "Sprays bubbles!",
-        "subcategory": "Useable"
+        "subcategory": "Useable",
+        "itemId": "healing soap",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-healing-soap.glb",
+        "autoEffect": "Pull the trigger to switch it on and off."
       },
       {
         "id": "popsicle",
@@ -747,7 +927,1066 @@
         "description": "Straight from Sketchfab!",
         "image": "media/1782173439502-SampleScene_Custom..._22.06.2026_19-09-56.png",
         "effect": "Tastes yummy and cold!",
-        "subcategory": "Fun"
+        "subcategory": "Fun",
+        "itemId": "POPSICLE",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-popsicle.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
+      },
+      {
+        "id": "gold-ore-bark",
+        "name": "Gold Ore Bark",
+        "description": "Shiny bark. Somebody has been mining.",
+        "subcategory": "Consumable",
+        "auto": true,
+        "itemId": "goldnugget",
+        "wheel": "Consumables/Ore",
+        "model": "media/models/item-goldnugget.glb"
+      },
+      {
+        "id": "leg-1",
+        "name": "Leg",
+        "description": "Trelatives don't have legs. So... whose is this?",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Leg",
+        "wheel": "Items/Special",
+        "model": "media/models/item-leg.glb"
+      },
+      {
+        "id": "flower-green",
+        "name": "Green Flower",
+        "description": "Tastes like grass. Because it basically is.",
+        "subcategory": "Consumable",
+        "auto": true,
+        "itemId": "flower Green",
+        "wheel": "Consumables/Natural",
+        "model": "media/models/item-flower-green.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
+      },
+      {
+        "id": "flower-white",
+        "name": "White Flower",
+        "description": "Pretty enough to pick. Tasty enough to eat.",
+        "subcategory": "Consumable",
+        "auto": true,
+        "itemId": "flower White",
+        "wheel": "Consumables/Natural",
+        "model": "media/models/item-flower-white.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
+      },
+      {
+        "id": "flower-orange",
+        "name": "Orange Flower",
+        "description": "The autumn flavour.",
+        "subcategory": "Consumable",
+        "auto": true,
+        "itemId": "flower Orange",
+        "wheel": "Consumables/Natural",
+        "model": "media/models/item-flower-orange.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
+      },
+      {
+        "id": "flower-glow",
+        "name": "Glow Flower",
+        "description": "Don't eat it right before bed.",
+        "subcategory": "Consumable",
+        "auto": true,
+        "itemId": "flower Glow",
+        "wheel": "Consumables/Natural",
+        "autoEffect": "You can eat it - hold it to your mouth.",
+        "model": "media/models/item-flower-glow.glb"
+      },
+      {
+        "id": "hover-flower",
+        "name": "Hover Flower",
+        "description": "It floats. Nobody knows why. It's still a snack.",
+        "subcategory": "Consumable",
+        "auto": true,
+        "itemId": "hover flower",
+        "wheel": "Consumables/Natural",
+        "model": "media/models/item-hover-flower.glb",
+        "autoEffect": "You can eat it - hold it to your mouth."
+      },
+      {
+        "id": "bark-chip-mangrove",
+        "name": "Mangrove Bark Chip",
+        "description": "Salty, swampy, and very good at standing in water.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Mangrove",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-mangrove.glb",
+        "autoEffect": "Hold it to your mouth to turn into Mangrove wood for a while."
+      },
+      {
+        "id": "bark-chip-oak",
+        "name": "Oak Bark Chip",
+        "description": "A classic. Tastes like a Tuesday.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Oak",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-oak.glb",
+        "autoEffect": "Hold it to your mouth to turn into Oak wood for a while."
+      },
+      {
+        "id": "bark-chip-birch",
+        "name": "Birch Bark Chip",
+        "description": "Pale, smooth and misunderstood. Beaker approves.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Birch",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-birch.glb",
+        "autoEffect": "Hold it to your mouth to turn into Birch wood for a while."
+      },
+      {
+        "id": "bark-chip-plank",
+        "name": "Plank Bark Chip",
+        "description": "Pre-sanded for your convenience.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Plank",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-plank.glb",
+        "autoEffect": "Hold it to your mouth to turn into Plank wood for a while."
+      },
+      {
+        "id": "bark-chip-dark-oak",
+        "name": "Dark Oak Bark Chip",
+        "description": "Oak, but moody.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Dark Oak",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-dark-oak.glb",
+        "autoEffect": "Hold it to your mouth to turn into Dark Oak wood for a while."
+      },
+      {
+        "id": "bark-chip-rust",
+        "name": "Rust Bark Chip",
+        "description": "Crunchy. Possibly tetanus.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Rust",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-rust.glb",
+        "autoEffect": "Hold it to your mouth to turn into Rust wood for a while."
+      },
+      {
+        "id": "bark-chip-ghost",
+        "name": "Ghost Bark Chip",
+        "description": "You can almost see through it. Boo.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Ghost",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-ghost.glb",
+        "autoEffect": "Hold it to your mouth to turn into Ghost wood for a while."
+      },
+      {
+        "id": "bark-chip-nugget",
+        "name": "Nugget Bark Chip",
+        "description": "Golden brown. Suspiciously crispy.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Nugget",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-nugget.glb",
+        "autoEffect": "Hold it to your mouth to turn into Nugget wood for a while."
+      },
+      {
+        "id": "bark-chip-rock",
+        "name": "Rock Bark Chip",
+        "description": "Not technically bark. Don't tell anyone.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Rock",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-rock.glb",
+        "autoEffect": "Hold it to your mouth to turn into Rock wood for a while."
+      },
+      {
+        "id": "bark-chip-carpet",
+        "name": "Carpet Bark Chip",
+        "description": "Straight off the floor. Five second rule.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Carpet",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-carpet.glb",
+        "autoEffect": "Hold it to your mouth to turn into Carpet wood for a while."
+      },
+      {
+        "id": "bark-chip-ogog",
+        "name": "OGOG Bark Chip",
+        "description": "The original original.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip OGOG",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-ogog.glb",
+        "autoEffect": "Hold it to your mouth to turn into OGOG wood for a while."
+      },
+      {
+        "id": "bark-chip-realistic",
+        "name": "Realistic Bark Chip",
+        "description": "Too real. Way too real.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Realistic",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-realistic.glb",
+        "autoEffect": "Hold it to your mouth to turn into Realistic wood for a while."
+      },
+      {
+        "id": "bark-chip-palm",
+        "name": "Palm Bark Chip",
+        "description": "Buggs' palm brothers would like a word.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Palm",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-palm.glb",
+        "autoEffect": "Hold it to your mouth to turn into Palm wood for a while."
+      },
+      {
+        "id": "bark-chip-jungle",
+        "name": "Jungle Bark Chip",
+        "description": "Grown somewhere loud and leafy.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Jungle",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-jungle.glb",
+        "autoEffect": "Hold it to your mouth to turn into Jungle wood for a while."
+      },
+      {
+        "id": "bark-chip-glow",
+        "name": "Glow Bark Chip",
+        "description": "Lights up your whole trunk.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Glow",
+        "wheel": "Items/Bark Chip",
+        "autoEffect": "Hold it to your mouth to turn into Glow wood for a while.",
+        "model": "media/models/item-bark-chip-glow.glb"
+      },
+      {
+        "id": "bark-chip-bean",
+        "name": "Bean Bark Chip",
+        "description": "Beans. But as a tree.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Bean",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-bean.glb",
+        "autoEffect": "Hold it to your mouth to turn into Bean wood for a while."
+      },
+      {
+        "id": "bark-chip-easter",
+        "name": "Easter Bark Chip",
+        "description": "Hidden in an egg, once upon a time.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Easter",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-easter.glb",
+        "autoEffect": "Hold it to your mouth to turn into Easter Special wood for a while."
+      },
+      {
+        "id": "bark-chip-walnut",
+        "name": "Walnut Bark Chip",
+        "description": "Wally's favourite. Obviously.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Walnut",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-walnut.glb",
+        "autoEffect": "Hold it to your mouth to turn into Walnut wood for a while."
+      },
+      {
+        "id": "bark-chip-gold",
+        "name": "Gold Bark Chip",
+        "description": "Fancy trees only.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Gold",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-gold.glb",
+        "autoEffect": "Hold it to your mouth to turn into Gold wood for a while."
+      },
+      {
+        "id": "bark-chip-red",
+        "name": "Red Bark Chip",
+        "description": "Red all over.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Red",
+        "wheel": "Items/Bark Chip",
+        "autoEffect": "Hold it to your mouth to turn into Red wood for a while.",
+        "model": "media/models/item-bark-chip-red.glb"
+      },
+      {
+        "id": "earbuds",
+        "name": "Earbuds",
+        "description": "\"Sorry, can't hear you.\"",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Earbuds",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-earbuds.glb",
+        "autoEffect": "Drop them on your head to muffle everything around you."
+      },
+      {
+        "id": "firework",
+        "name": "Firework",
+        "description": "Point away from face.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Firework",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-firework.glb",
+        "autoEffect": "Light it and launch a firework."
+      },
+      {
+        "id": "roman-candle",
+        "name": "Roman Candle",
+        "description": "Pew. Pew. Pew. Pretty.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Roman Candle",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-roman-candle.glb",
+        "autoEffect": "Fires glowing shots into the sky."
+      },
+      {
+        "id": "pineapple",
+        "name": "Pineapple",
+        "description": "One an hour, hidden somewhere on the map. Finders keepers.",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Pineapple",
+        "wheel": "Consumables/Special",
+        "model": "media/models/item-pineapple.glb"
+      },
+      {
+        "id": "eepple-juse",
+        "name": "Eepple Juse",
+        "description": "Zoom.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "eepple juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-eepple-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You get FAST - run and jump further. Lasts about 30 seconds."
+      },
+      {
+        "id": "eepple-juse-2",
+        "name": "Eepple Cider Juse",
+        "description": "Pressed eepples. Even more zoom.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "eepple cider juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-eepple-cider-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Tart! Colours pop and you go even faster than Eepple. Lasts about 30 seconds."
+      },
+      {
+        "id": "noir-juse",
+        "name": "Noir Juse",
+        "description": "It's always raining in black and white.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "noir juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-noir-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. The world goes black and white. Lasts about 45 seconds."
+      },
+      {
+        "id": "shroom-juse",
+        "name": "Shroom Juse",
+        "description": "Whoa.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "shroom juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-shroom-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Everything goes wobbly and rainbow. Lasts about 60 seconds."
+      },
+      {
+        "id": "nite-juse",
+        "name": "Nite Juse",
+        "description": "Lights out.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "nite juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-nite-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. It turns night, just for you. Lasts about 60 seconds."
+      },
+      {
+        "id": "burd-juse",
+        "name": "Burd Juse",
+        "description": "Tweet.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "burd juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-burd-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You fall slowly, like a feather. Lasts about 45 seconds."
+      },
+      {
+        "id": "nanner-juse",
+        "name": "Nanner Juse",
+        "description": "Watch your step.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "nanner juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-nanner-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Everything gets slippery. Lasts about 40 seconds."
+      },
+      {
+        "id": "gamer-juse",
+        "name": "Gamer Juse",
+        "description": "Heavy. Like your eyelids at 3am.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "gamer juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-gamer-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You get heavy. Lasts about 40 seconds."
+      },
+      {
+        "id": "boonce-juse",
+        "name": "Boonce Juse",
+        "description": "Boing.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "boonce juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-boonce-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You get bouncy. Lasts about 45 seconds."
+      },
+      {
+        "id": "glo-juse",
+        "name": "Glo Juse",
+        "description": "Night light, but it's you.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "glo juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-glo-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You glow in the dark. Lasts about 2 minutes."
+      },
+      {
+        "id": "big-or-teenie-juse",
+        "name": "Big Or Teenie Juse",
+        "description": "Big or teenie? Yes.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "size juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-size-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You go big... or teeny. You don't get to pick. Lasts about 30 seconds."
+      },
+      {
+        "id": "burbur-juse",
+        "name": "Burbur Juse",
+        "description": "Everyone is a burger now. Sorry.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "burbur juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-burbur-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Burger world: everyone looks like a burger. Lasts about 30 seconds."
+      },
+      {
+        "id": "spatula",
+        "name": "Spatula",
+        "description": "Flip burgers. Flip people.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "Spatula",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-spatula.glb",
+        "autoEffect": "Swing it to bonk people."
+      },
+      {
+        "id": "crashout-juse",
+        "name": "Crashout Juse",
+        "description": "Bleep. Bleep bleep.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "crashout juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-crashout-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Every time you talk, you get censored. Lasts about 30 seconds."
+      },
+      {
+        "id": "gert-the-weather-pebble",
+        "name": "Gert The Weather Pebble",
+        "description": "Gert knows. Gert always knows.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Gert The Weather Pebble",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-gert-the-weather-pebble.glb",
+        "autoEffect": "Tells you what weather is coming."
+      },
+      {
+        "id": "magnet",
+        "name": "Magnet",
+        "description": "Come here, item.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Magnet",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-magnet.glb",
+        "autoEffect": "Point it at a dropped item and hold the trigger to pull it to you."
+      },
+      {
+        "id": "rake",
+        "name": "Rake",
+        "description": "Make a pile. Jump in. Repeat.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Rake",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-rake.glb",
+        "autoEffect": "Rake fallen leaves into piles. Then jump in."
+      },
+      {
+        "id": "easel",
+        "name": "Easel",
+        "description": "Every artist needs one.",
+        "subcategory": "Creations",
+        "subsubcategory": "Paintings",
+        "auto": true,
+        "itemId": "Easel",
+        "wheel": "Creations/Paintings",
+        "model": "media/models/item-easel.glb",
+        "autoEffect": "Set it down and paint on it, then print your painting to keep it."
+      },
+      {
+        "id": "fence-gun",
+        "name": "Fence Gun",
+        "description": "A fox that shoots fences. A tribute to FENCE.",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "FenceGun",
+        "wheel": "Items/Special",
+        "model": "media/models/item-fencegun.glb",
+        "autoEffect": "Hold the trigger to charge, let go to shoot a fence that walls people in."
+      },
+      {
+        "id": "puke-juse",
+        "name": "Puke Juse",
+        "description": "\"Puke, Puke, King of the rubber moooon!\"",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "puke juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-puke-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Dazed, green ground, muffled voices... and things that aren't really there. Lasts about 60 seconds."
+      },
+      {
+        "id": "puke-trophy",
+        "name": "Puke Trophy",
+        "description": "For the true Puke fans.",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Puke Trophy",
+        "wheel": "Items/Special",
+        "model": "media/models/item-puke-trophy.glb"
+      },
+      {
+        "id": "bark-chip-puke-skin",
+        "name": "Puke Skin Bark Chip",
+        "description": "Become Puke. Everyone's dream.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Puke Skin",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-puke-skin.glb",
+        "autoEffect": "Hold it to your mouth to turn into Puke Skin wood for a while."
+      },
+      {
+        "id": "frag-grenade",
+        "name": "Frag Grenade",
+        "description": "Pull. Throw. Run.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "FragGrenade",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-fraggrenade.glb",
+        "autoEffect": "Throw it - it explodes. Tree V Tree."
+      },
+      {
+        "id": "molotov",
+        "name": "Molotov",
+        "description": "Spicy.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "Molotov",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-molotov.glb",
+        "autoEffect": "Throw it and everything it lands on goes up in flames. Tree V Tree."
+      },
+      {
+        "id": "landmine",
+        "name": "Landmine",
+        "description": "Watch your step.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "Landmine",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-landmine.glb",
+        "autoEffect": "Put it on the ground. Whoever steps on it goes boom. Tree V Tree."
+      },
+      {
+        "id": "health-pack",
+        "name": "Health Pack",
+        "description": "Eat your health.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "HealthPack",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-healthpack.glb",
+        "autoEffect": "Hold it to your mouth to heal 25% in Tree V Tree."
+      },
+      {
+        "id": "throwable-spear",
+        "name": "Throwable Spear",
+        "description": "Yeet.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "Throwable Spear",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-throwable-spear.glb",
+        "autoEffect": "Throw it at people. Tree V Tree."
+      },
+      {
+        "id": "ammo-box",
+        "name": "Ammo Box",
+        "description": "More bullets, more problems.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "AmmoBox",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-ammobox.glb",
+        "autoEffect": "Refills your ammo in Tree V Tree."
+      },
+      {
+        "id": "throwable-pitchfork",
+        "name": "Throwable Pitchfork",
+        "description": "Farm tool? Weapon? Both.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "Throwable Pitchfork",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-throwable-pitchfork.glb",
+        "autoEffect": "Throw it at people. Tree V Tree."
+      },
+      {
+        "id": "gun-ak",
+        "name": "AK Rifle",
+        "description": "Pew pew.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "GunAK",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-gunak.glb",
+        "autoEffect": "A Tree V Tree gun - pull the trigger to shoot."
+      },
+      {
+        "id": "holy-hand-grenade",
+        "name": "Holy Hand Grenade",
+        "description": "Count to three. Not four. Not two.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "HolyHandGrenade",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-holyhandgrenade.glb",
+        "autoEffect": "Throw it. Holy explosion. Tree V Tree."
+      },
+      {
+        "id": "puke-nuke",
+        "name": "Puke Nuke",
+        "description": "Nobody wins. Everybody pukes.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "PUKE NUKE",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-puke-nuke.glb",
+        "autoEffect": "Pull the trigger and it rockets into the sky, then dives onto a random player and wipes out the WHOLE lobby. You included. Tree V Tree."
+      },
+      {
+        "id": "flash-grenade",
+        "name": "Flash Grenade",
+        "description": "Close your eyes.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "FlashGrenade",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-flashgrenade.glb",
+        "autoEffect": "Throw it to blind everyone nearby. Tree V Tree."
+      },
+      {
+        "id": "smoke-grenade",
+        "name": "Smoke Grenade",
+        "description": "Now you see me...",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "SmokeGrenade",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-smokegrenade.glb",
+        "autoEffect": "Throw it for a smoke screen. Tree V Tree."
+      },
+      {
+        "id": "piano",
+        "name": "Piano",
+        "description": "Look up.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "Piano",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-piano.glb",
+        "autoEffect": "Pull the trigger and it rockets into the sky... then comes crashing down on a random player. Tree V Tree."
+      },
+      {
+        "id": "fence-juse",
+        "name": "Fence Juse",
+        "description": "\"...juse.\" - FENCE",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "fence juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-fence-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Fence guns rain from the sky. Lasts about 30 seconds."
+      },
+      {
+        "id": "paralyze-juse",
+        "name": "Paralyze Juse",
+        "description": "Legs are overrated.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "paralyze juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-paralyze-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. Your legs give out - flop around and hop. Lasts about 30 seconds."
+      },
+      {
+        "id": "br15",
+        "name": "BR15",
+        "description": "The battle rifle.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "BR15",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-br15.glb",
+        "autoEffect": "A Tree V Tree gun - pull the trigger to shoot."
+      },
+      {
+        "id": "bark-flag",
+        "name": "Bark Flag",
+        "description": "Wave it proud.",
+        "subcategory": "Fun",
+        "auto": true,
+        "itemId": "Bark Flag",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-bark-flag.glb"
+      },
+      {
+        "id": "mre",
+        "name": "MRE",
+        "description": "Meal, Ready to Eat. Mostly.",
+        "subcategory": "Weapons",
+        "auto": true,
+        "itemId": "MRE",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-mre.glb",
+        "autoEffect": "Pull the trigger: full heal, more ammo and a burst of speed. Tree V Tree rations."
+      },
+      {
+        "id": "paddle",
+        "name": "Paddle",
+        "description": "Row, row, row your boat.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Paddle",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-paddle.glb",
+        "autoEffect": "Paddle a boat."
+      },
+      {
+        "id": "sand-dollar",
+        "name": "Sand Dollar",
+        "description": "Can't spend it. Sell it.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Sand Dollar",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-sand-dollar.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "ancient-pukifact",
+        "name": "Ancient Pukifact",
+        "description": "Puke has been here longer than any of us.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Ancient Pukifact",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-ancient-pukifact.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "diamond",
+        "name": "Diamond",
+        "description": "Shiny. VERY shiny.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Diamond",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-diamond.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "gold-ingot",
+        "name": "Gold Ingot",
+        "description": "Somebody sank a fortune.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Gold Ingot",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-gold-ingot.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "gold-nugget",
+        "name": "Gold Nugget",
+        "description": "A little bit of treasure.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Gold_Nugget",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-gold-nugget.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "metal-scrap",
+        "name": "Metal Scrap",
+        "description": "One tree's trash...",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Metal Scrap",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-metal-scrap.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "ring-with-metal",
+        "name": "Old Ring",
+        "description": "Somebody lost this. A long, long time ago.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Ring with Metal",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-ring-with-metal.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "sticks-or-bones",
+        "name": "Sticks Or Bones",
+        "description": "Sticks. Or bones. Let's not check.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "Sticks or bones",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-sticks-or-bones.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "broken-helm",
+        "name": "Broken Helm",
+        "description": "It didn't work out for whoever wore this.",
+        "subcategory": "Artifacts",
+        "auto": true,
+        "itemId": "broken helm",
+        "wheel": "Consumables/Artifacts",
+        "model": "media/models/item-broken-helm.glb",
+        "autoEffect": "An artifact from the sea floor. Sell it for shells."
+      },
+      {
+        "id": "journal",
+        "name": "Sea Journal",
+        "description": "Every find, every note, every price.",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "journal",
+        "wheel": "Items/Special",
+        "model": "media/models/item-journal.glb",
+        "autoEffect": "Keeps track of every artifact you've found on the sea floor."
+      },
+      {
+        "id": "bluh-stick",
+        "name": "Bluh Stick",
+        "description": "Bluh.",
+        "subcategory": "Fun",
+        "auto": true,
+        "itemId": "Bluh Stick",
+        "wheel": "Items/Fun",
+        "model": "media/models/item-bluh-stick.glb"
+      },
+      {
+        "id": "basic-fishing-rod",
+        "name": "Fishing Rod",
+        "description": "Patience not included.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Basic Fishing Rod",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-basic-fishing-rod.glb",
+        "autoEffect": "Cast it into the water and see what bites."
+      },
+      {
+        "id": "anchor",
+        "name": "Anchor",
+        "description": "Sink with style.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Anchor",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-anchor.glb",
+        "autoEffect": "Wear it round your waist and sink like a stone."
+      },
+      {
+        "id": "swim-tube",
+        "name": "Swim Tube",
+        "description": "Floaty!",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Swim Tube",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-swim-tube.glb",
+        "autoEffect": "Wear it round your waist and float. Or just stand on it."
+      },
+      {
+        "id": "bark-chip-sand",
+        "name": "Sand Bark Chip",
+        "description": "Gets everywhere. Especially in your bark.",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Sand",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-sand.glb",
+        "autoEffect": "Hold it to your mouth to turn into Sand wood for a while."
+      },
+      {
+        "id": "water-juse",
+        "name": "Water Juse",
+        "description": "Earned the hard way: drown ten times.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "water juse",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-water-juse.glb",
+        "autoEffect": "Drink it by holding it to your mouth. You can swim through the air. Lasts about 20 seconds."
+      },
+      {
+        "id": "easter-is-canceled",
+        "name": "Easter Is Canceled",
+        "description": "An album. Easter is canceled, apparently.",
+        "subcategory": "Music",
+        "auto": true,
+        "itemId": "Easter Is Canceled",
+        "wheel": "Items/Music",
+        "model": "media/models/item-easter-is-canceled.glb",
+        "autoEffect": "A music album."
+      },
+      {
+        "id": "beach-drink",
+        "name": "Beach Drink",
+        "description": "Golden hour in a glass.",
+        "subcategory": "Juse",
+        "auto": true,
+        "itemId": "Beach Drink",
+        "wheel": "Consumables/Juse",
+        "model": "media/models/item-beach-drink.glb",
+        "autoEffect": "An open drink with real liquid in it - tip it and it pours. Hold it to your mouth to sip."
+      },
+      {
+        "id": "small-candle",
+        "name": "Small Candle",
+        "description": "Light up your pumpkin's face.",
+        "subcategory": "Creations",
+        "subsubcategory": "Pumpkins",
+        "auto": true,
+        "itemId": "Small Candle",
+        "wheel": "Creations/Pumpkins",
+        "model": "media/models/item-small-candle.glb",
+        "autoEffect": "Put it inside a carved pumpkin and the face lights up."
+      },
+      {
+        "id": "pumpkin-knife",
+        "name": "Pumpkin Knife",
+        "description": "Made by Trader John. Still sharp.",
+        "subcategory": "Creations",
+        "subsubcategory": "Pumpkins",
+        "auto": true,
+        "itemId": "Pumpkin Knife",
+        "wheel": "Creations/Pumpkins",
+        "model": "media/models/item-pumpkin-knife.glb",
+        "autoEffect": "Carves holes in a pumpkin at the carving bench. Tap to place points, or hold and draw."
+      },
+      {
+        "id": "pumpkin-scraper",
+        "name": "Pumpkin Scraper",
+        "description": "For the fine details.",
+        "subcategory": "Creations",
+        "subsubcategory": "Pumpkins",
+        "auto": true,
+        "itemId": "Pumpkin Scraper",
+        "wheel": "Creations/Pumpkins",
+        "model": "media/models/item-pumpkin-scraper.glb",
+        "autoEffect": "Scrapes the skin off a pumpkin at the carving bench, for shading and detail."
+      },
+      {
+        "id": "pumpkin-patch-tape",
+        "name": "Pumpkin Patch Tape",
+        "description": "Oops insurance.",
+        "subcategory": "Creations",
+        "subsubcategory": "Pumpkins",
+        "auto": true,
+        "itemId": "PumpkinPatchTape",
+        "wheel": "Creations/Pumpkins",
+        "model": "media/models/item-pumpkinpatchtape.glb",
+        "autoEffect": "Tape over a cut you didn't mean to make - it puts the skin back."
+      },
+      {
+        "id": "burd-seed",
+        "name": "Burd Seed",
+        "description": "The crows say thank you.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "Burd Seed",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-burd-seed.glb",
+        "autoEffect": "Pull the tab and scatter seed for the crows."
+      },
+      {
+        "id": "leaf-blower",
+        "name": "Leaf Blower",
+        "description": "The rake's loud cousin.",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "LeafBlower",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-leafblower.glb",
+        "autoEffect": "Blows leaves everywhere."
       }
     ],
     "cosmetics": [
@@ -756,560 +1995,1352 @@
         "name": "Top Hat",
         "description": "Oh so fancy",
         "image": "media/1780608332839-SampleScene_Custom..._04.06.2026_16-25-11.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Top Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-top-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "knight-helmet",
         "name": "Knight Helmet",
         "description": "One of the very first cosmetics in bark!",
         "image": "media/1780608390143-SampleScene_Custom..._04.06.2026_16-25-58.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Helmet top",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-helmet-top.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "astronaut-helmet",
         "name": "Astronaut Helmet",
         "description": "Made for Bumstronaut, few people have this.",
         "image": "media/1780608455763-SampleScene_Custom..._04.06.2026_16-26-52.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "astrohat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-astrohat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "beanie",
         "name": "Beanie",
         "description": "Made for Beanie, an absolute great hat btw",
         "image": "media/1780608572962-SampleScene_Custom..._04.06.2026_16-28-58.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "beanie",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-beanie.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "map-hat",
         "name": "Map Hat",
         "description": "A cosmetic for those who were there since the beginning.",
         "image": "media/1780608653530-SampleScene_Custom..._04.06.2026_16-30-12.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "maphat",
+        "wheel": "Cosmetics/Head",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on.",
+        "model": "media/models/item-maphat.glb"
       },
       {
         "id": "army-helmet",
         "name": "Army Helmet",
         "description": "Was originally going to be tan, but ended up green!",
         "image": "media/1780608728201-SampleScene_Custom..._04.06.2026_16-31-27.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "army helmet",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-army-helmet.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "fire",
         "name": "Fire",
         "description": "AHHHHHHHHH, I'M ON FIRE",
         "image": "media/1780608897324-SampleScene_Custom..._04.06.2026_16-33-39.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "fire",
+        "wheel": "Cosmetics/Head",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "cookie",
         "name": "Cookie",
         "description": "Made for Cookzie, an og cosmetic",
         "image": "media/1780608969677-SampleScene_Custom..._04.06.2026_16-35-44.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Cookie",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-cookie.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on. And yes, you can eat it."
       },
       {
         "id": "bryce-s-eepy-pillow",
         "name": "Bryce's Eepy Pillow",
         "description": "Pillow",
         "image": "media/1780609124309-SampleScene_Custom..._04.06.2026_16-38-21.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "bryce",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-bryce.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "sunbrella",
         "name": "Sunbrella",
         "description": "Blocks the sun out your eyes",
         "image": "media/1780609171730-SampleScene_Custom..._04.06.2026_16-39-05.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "sunbrella",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-sunbrella.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "hair",
         "name": "Hair",
         "description": "Looks kinda familiar.....",
         "image": "media/1780609217510-SampleScene_Custom..._04.06.2026_16-40-03.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "hair",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-hair.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bryce-s-sleepytime-hat",
         "name": "Bryce's Sleepytime Hat",
         "description": "Snore",
         "image": "media/1780610072442-SampleScene_Custom..._04.06.2026_16-54-00.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Bryce's Sleepytime Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-bryces-sleepytime-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "corn-pot",
         "name": "Corn Pot",
         "description": "Made for Cornsquack",
         "image": "media/1780610229369-SampleScene_Custom..._04.06.2026_16-55-11.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Corn Pot",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-corn-pot.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "pot",
         "name": "Pot",
         "description": "Also made for Cornsquack",
         "image": "media/1780610289744-SampleScene_Custom..._04.06.2026_16-57-46.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Pot",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-pot.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "explorer-hat",
         "name": "Explorer Hat",
         "description": "Out in the jungle, this hat is on your head",
         "image": "media/1780610897235-SampleScene_Custom..._04.06.2026_17-07-42.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Explorer Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-explorer-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "mushroom-hat",
         "name": "Mushroom Hat",
         "description": "Woahhhhh, Mushroom",
         "image": "media/1780610938930-SampleScene_Custom..._04.06.2026_17-08-31.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Mushroom_Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-mushroom-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "father-hat",
         "name": "Father Hat",
         "description": "The hat Bumstronaut's Father wears",
         "image": "media/1780611002879-SampleScene_Custom..._04.06.2026_17-09-27.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Father Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-father-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "headphones",
         "name": "Headphones",
         "description": "Comes in the Basement Boss Bundle, gives you a mint condition headset dent.",
         "image": "media/1780611083366-SampleScene_Custom..._04.06.2026_17-10-39.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Headphones",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-headphones.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bob-the-frog",
         "name": "Bob The Frog",
         "description": "Hates when people look at his behind......",
         "image": "media/1780611139415-SampleScene_Custom..._04.06.2026_17-11-50.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Bob The Frog",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-bob-the-frog.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "duck-hat",
         "name": "Duck Hat",
         "description": "Turns you into a duck",
         "image": "media/1780611193193-SampleScene_Custom..._04.06.2026_17-12-52.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "duckhat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-duckhat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "flagumble-hat",
         "name": "Flagumble Hat",
         "description": "HOW DARE YOU CALL YOURSELF THAT!!!!!!",
         "image": "media/1780611249793-SampleScene_Custom..._04.06.2026_17-13-37.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Flagumble Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-flagumble-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "googly-eyes",
         "name": "Googly Eyes",
         "description": "Look into the eyes.",
         "image": "media/1780611317292-SampleScene_Custom..._04.06.2026_17-14-45.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "GooglyEyes",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-googlyeyes.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "fraud-mod",
         "name": "Fraud Mod",
         "description": "Are you sure you're a moderator?",
         "image": "media/1780611371806-SampleScene_Custom..._04.06.2026_17-15-44.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "Fraud Mod",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-fraud-mod.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bandana",
         "name": "Bandana",
         "description": "Woah, i'm so cool",
         "image": "media/1780611414213-SampleScene_Custom..._04.06.2026_17-16-34.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "bandana",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-bandana.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "jungle-ninja-mask",
         "name": "Jungle Ninja Mask",
         "description": "Comes in the Jungle Ninja Bundle",
         "image": "media/1780611466215-SampleScene_Custom..._04.06.2026_17-17-20.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "Jungle Ninja Mask",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-jungle-ninja-mask.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "vr-headset",
         "name": "VR Headset",
         "description": "VR in VR? Weird.....",
         "image": "media/1780611527349-SampleScene_Custom..._04.06.2026_17-18-17.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "Vr Headset",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-vr-headset.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bunny-ears",
         "name": "Bunny Ears",
         "description": "Are you sure those are from a bunny?",
         "image": "media/1780611795174-SampleScene_Custom..._04.06.2026_17-22-46.png",
-        "subcategory": "Leaves"
+        "subcategory": "Leaves",
+        "itemId": "Bunny Ears",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-bunny-ears.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "leaves",
         "name": "Leaves",
         "description": "The original cosmetic, the best one.",
         "image": "media/1780611841835-SampleScene_Custom..._04.06.2026_17-23-32.png",
-        "subcategory": "Leaves"
+        "subcategory": "Leaves",
+        "itemId": "Leaves",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-leaves.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "duck-leaves",
         "name": "Duck Leaves",
         "description": "Who's idea was this????????",
         "image": "media/1780611885744-SampleScene_Custom..._04.06.2026_17-24-19.png",
-        "subcategory": "Leaves"
+        "subcategory": "Leaves",
+        "itemId": "duckleaves",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-duckleaves.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bean-leaves",
         "name": "Bean Leaves",
         "description": "Beans",
         "image": "media/1780611943840-SampleScene_Custom..._04.06.2026_17-25-02.png",
-        "subcategory": "Leaves"
+        "subcategory": "Leaves",
+        "itemId": "Bean Leaves",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-bean-leaves.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on. And yes, you can eat it."
       },
       {
         "id": "tux",
         "name": "Tux",
         "description": "Made for Fence, then everybody",
         "image": "media/1780612092642-SampleScene_Custom..._04.06.2026_17-27-51.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "tux",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-tux.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "chicken-shirt",
         "name": "Chicken Shirt",
         "description": "Chicken",
         "image": "media/1780612122461-SampleScene_Custom..._04.06.2026_17-28-27.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Chicken Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-chicken-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bryce-s-sleepytime-fit",
         "name": "Bryce's Sleepytime Fit",
         "description": "Sleep Blue",
         "image": "media/1780612165237-SampleScene_Custom..._04.06.2026_17-28-57.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Bryce's Sleepytime Fit",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-bryces-sleepytime-fit.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "corn-s-sleepytime-fit",
         "name": "Corn's Sleepytime Fit",
         "description": "Sleep Yellow",
         "image": "media/1780612205027-SampleScene_Custom..._04.06.2026_17-29-42.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Corn's sleepytime fit",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-corns-sleepytime-fit.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "day-1-shirt",
         "name": "Day 1 Shirt",
         "description": "\"I've been here since day 1\"",
         "image": "media/1780612245315-SampleScene_Custom..._04.06.2026_17-30-17.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "day one shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-day-one-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "jungle-ninja-cloak",
         "name": "Jungle Ninja Cloak",
         "description": "Came in the Jungle Ninja Bundle",
         "image": "media/1780612288025-SampleScene_Custom..._04.06.2026_17-31-00.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Jungle Ninja Cloak",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-jungle-ninja-cloak.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "explorer-shirt",
         "name": "Explorer Shirt",
         "description": "When in the jungle, you'll need this",
         "image": "media/1780612355285-SampleScene_Custom..._04.06.2026_17-32-02.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Explorer Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-explorer-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "sweater",
         "name": "Sweater",
         "description": "The first shirt made for everyone",
         "image": "media/1780612408415-SampleScene_Custom..._04.06.2026_17-33-03.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "sweater",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-sweater.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "gamer-hoodie",
         "name": "Gamer Hoodie",
         "description": "Came in the Basement Boss Bundle. \"Eat Sleep Bark Repeat\"",
         "image": "media/1780612466382-SampleScene_Custom..._04.06.2026_17-33-45.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Gamer Hoodie",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-gamer-hoodie.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "duck-shirt",
         "name": "Duck Shirt",
         "description": "Woah, even more duck!",
         "image": "media/1780612506982-SampleScene_Custom..._04.06.2026_17-34-41.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Duck Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-duck-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "ak",
         "name": "Ak",
         "description": "PEW PEW",
         "image": "media/1780612569931-SampleScene_Custom..._04.06.2026_17-35-50.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Ak",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-ak.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "gyatt",
         "name": "Gyatt",
         "description": "\"why did we add this...\"",
         "image": "media/1780612619798-SampleScene_Custom..._04.06.2026_17-36-41.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "gyatt",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-gyatt.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "kick-meh",
         "name": "Kick Mehh'",
         "description": "Ouch, why'd you do that?",
         "image": "media/1780612945224-SampleScene_Custom..._04.06.2026_17-41-21.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "kick mehh'",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-kick-mehh.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "superbob",
         "name": "Superbob",
         "description": "He's everywhere, also grants access to song Superbob Theme",
         "image": "media/1780613091210-SampleScene_Custom..._04.06.2026_17-44-14.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Superbob",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-superbob.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "vines",
         "name": "Vines",
         "description": "\"How'd i get wrapped up in this?\"",
         "image": "media/1780613163108-SampleScene_Custom..._04.06.2026_17-45-38.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Vines",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-vines.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "back-spear",
         "name": "Back Spear",
         "description": "Ouchie",
         "image": "media/1780613294127-SampleScene_Custom..._04.06.2026_17-47-57.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Back Spear",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-back-spear.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bag-pack",
         "name": "Bag Pack",
         "description": "How can you carry this?",
         "image": "media/1780613381497-SampleScene_Custom..._04.06.2026_17-48-47.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "BagPAck",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-bagpack.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "pil-the-backpack",
         "name": "Pil the Backpack",
         "description": "Phil's 3rd cousin",
         "image": "media/1780613454148-SampleScene_Custom..._04.06.2026_17-50-30.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "PiL the backpack",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-pil-the-backpack.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "duck-backpack",
         "name": "Duck Backpack",
         "description": "Quackuh",
         "image": "media/1780613577560-SampleScene_Custom..._04.06.2026_17-52-18.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Duck Backpack",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-duck-backpack.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "badge-beta",
         "name": "Badge Beta",
         "description": "Beta testers get this",
         "image": "media/1780613620934-SampleScene_Custom..._04.06.2026_17-53-20.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "badgebeta",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-badgebeta.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "mod-badge-og",
         "name": "Mod Badge (OG)",
         "description": "OG mods get this",
         "image": "media/1780613666603-SampleScene_Custom..._04.06.2026_17-54-04.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "modbadge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-modbadge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "troy-badge",
         "name": "Troy Badge",
         "description": "Only Troy has this",
         "image": "media/1780613704315-SampleScene_Custom..._04.06.2026_17-54-45.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "troy badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-troy-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "scouter-badge",
         "name": "Scouter Badge",
         "description": "People that find us devs get this",
         "image": "media/1780613743331-SampleScene_Custom..._04.06.2026_17-55-21.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "scouter badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-scouter-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "knawcheese-badge",
         "name": "Knawcheese Badge",
         "description": "People that played in the Knawcheese event got this",
         "image": "media/1780613807145-SampleScene_Custom..._04.06.2026_17-56-15.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "Knawcheese Badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-knawcheese-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "donor-badge",
         "name": "Donor Badge",
         "description": "People who buy the trading cards get this",
         "image": "media/1780613861522-SampleScene_Custom..._04.06.2026_17-57-18.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "donor badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-donor-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "discord-badge",
         "name": "Discord Badge",
         "description": "Players who link their account to discord get this",
         "image": "media/1780613914108-SampleScene_Custom..._04.06.2026_17-58-00.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "Discord",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-discord.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "name-tag",
         "name": "Name Tag",
         "description": "Displays the player's trelative badge",
         "image": "media/1780613989692-SampleScene_Custom..._04.06.2026_17-59-23.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "NameTag",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-nametag.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "lemons",
         "name": "Lemons",
         "description": "Secret, you can get it by using the Meta Quest store!",
         "image": "media/1780614054713-SampleScene_Custom..._04.06.2026_18-00-29.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "LEMONS",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-lemons.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on. And yes, you can eat it."
       },
       {
         "id": "mod-badge-but-better",
         "name": "Mod Badge But Better",
         "description": "It's better than before",
         "image": "media/1780614121550-SampleScene_Custom..._04.06.2026_18-01-16.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "Mod Badge But Better",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-mod-badge-but-better.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "dev-badge",
         "name": "Dev Badge",
         "description": "Devs get this",
         "image": "media/1780614196222-SampleScene_Custom..._04.06.2026_18-02-37.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "Dev Badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-dev-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "creator-badge",
         "name": "Creator Badge",
         "description": "People who get 5 cosmetics in the game get this",
         "image": "media/1780614260029-SampleScene_Custom..._04.06.2026_18-03-31.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "Creator Badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-creator-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "duck-badge",
         "name": "Duck Badge",
         "description": "Smol Duck",
         "image": "media/1780614306433-SampleScene_Custom..._04.06.2026_18-04-48.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "Duck Badge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-duck-badge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "1911-gun",
         "name": "1911 Gun",
         "description": "Pew PEw",
         "image": "media/1780614439282-SampleScene_Custom..._04.06.2026_18-06-52.png",
-        "subcategory": "Side"
+        "subcategory": "Side",
+        "itemId": "1911gun",
+        "wheel": "Items/Weapons",
+        "model": "media/models/item-1911gun.glb",
+        "autoEffect": "A Tree V Tree gun - pull the trigger to shoot."
       },
       {
         "id": "moustache",
         "name": "Moustache",
         "description": "Fua Fua hehehe",
         "image": "media/1780614481064-SampleScene_Custom..._04.06.2026_18-07-42.png",
-        "subcategory": "Nose"
+        "subcategory": "Nose",
+        "itemId": "moustache",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-moustache.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "scarf",
         "name": "Scarf",
         "description": "Keeps you warm! From the Glorp memorial!",
         "image": "media/1782173930130-SampleScene_Custom..._22.06.2026_19-11-55.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "basicscarf",
+        "wheel": "Cosmetics/Neck",
+        "model": "media/models/item-basicscarf.glb",
+        "autoEffect": "A cosmetic you wear round your neck. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "clancy-mask",
         "name": "Clancy Mask",
         "description": "Very chunky, From the Glorp memorial!",
         "image": "media/1782173966577-SampleScene_Custom..._22.06.2026_19-19-01.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "ClancyMask",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-clancymask.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "dealglasses",
         "name": "DealGlasses",
         "description": "Very cool looking, From the Glorp memorial!",
         "image": "media/1782174213290-SampleScene_Custom..._22.06.2026_19-23-05.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "DealGlasses",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-dealglasses.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "finglorpainter-badge",
         "name": "Finglorpainter Badge",
         "description": "It was given to Glorp content creators! From the Glorp memorial!",
         "image": "media/1782174285347-SampleScene_Custom..._22.06.2026_19-24-08.png",
-        "subcategory": "Badge"
+        "subcategory": "Badge",
+        "itemId": "finglorpainter",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-finglorpainter.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "rat-teeth",
         "name": "Rat Teeth",
         "description": "They look funny, From the Glorp memorial!",
         "image": "media/1782174328809-SampleScene_Custom..._22.06.2026_19-25-07.png",
-        "subcategory": "Nose"
+        "subcategory": "Nose",
+        "itemId": "RatTeeth",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-ratteeth.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "sunglasses",
         "name": "Sunglasses",
         "description": "Great for the beach! From the Glorp memorial!",
         "image": "media/1782174374422-SampleScene_Custom..._22.06.2026_19-25-52.png",
-        "subcategory": "Face"
+        "subcategory": "Face",
+        "itemId": "Sunglasses_4",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-sunglasses-4.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "sweatband",
         "name": "Sweatband",
         "description": "Yes, it's from the monke game, but also, From the Glorp memorial!",
         "image": "media/1782174419715-SampleScene_Custom..._22.06.2026_19-26-28.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Sweatband",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-sweatband.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "swimsuit",
         "name": "Swimsuit",
         "description": "Hehe, Ducks! From the Glorp memorial!",
         "image": "media/1782174457843-SampleScene_Custom..._22.06.2026_19-27-14.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Swimsuit",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-swimsuit.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "bales",
         "name": "Bales",
         "description": "Very comfy for your ear stems!",
         "image": "media/1782174670282-SampleScene_Custom..._22.06.2026_19-30-32.png",
-        "subcategory": "Leaves"
+        "subcategory": "Leaves",
+        "itemId": "Bales",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-bales.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "farmer-hat",
         "name": "Farmer Hat",
         "description": "Made from straw, from the Rancher Bundle!",
         "image": "media/1782174733312-SampleScene_Custom..._22.06.2026_19-31-39.png",
-        "subcategory": "Head"
+        "subcategory": "Head",
+        "itemId": "Farmer Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-farmer-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "farmer-overalls",
         "name": "Farmer Overalls",
         "description": "Lookin very farmer! From the Rancher Bundle.",
         "image": "media/1782174784850-SampleScene_Custom..._22.06.2026_19-32-30.png",
-        "subcategory": "Body"
+        "subcategory": "Body",
+        "itemId": "Farmer Overalls",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-farmer-overalls.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "fish-lips",
         "name": "Fish Lips",
         "description": "Very funny looking, moves when you speak!",
         "image": "media/1782174833797-SampleScene_Custom..._22.06.2026_19-33-27.png",
-        "subcategory": "Nose"
+        "subcategory": "Nose",
+        "itemId": "Fish Lips",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-fish-lips.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "golden-toilet-seat",
         "name": "Golden Toilet Seat",
         "description": "Wait a sec, unreleased cosmetic that will maybe be given to the winner of a future challenge???",
         "image": "media/1782174902001-SampleScene_Custom..._22.06.2026_19-34-14.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Golden Toilet Seat",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-golden-toilet-seat.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
       },
       {
         "id": "pitchfork",
         "name": "Pitchfork",
         "description": "Spiky!!",
         "image": "media/1782174957826-SampleScene_Custom..._22.06.2026_19-35-35.png",
-        "subcategory": "Back"
+        "subcategory": "Back",
+        "itemId": "Pitchfork",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-pitchfork.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on. And yes, you can eat it."
       },
       {
         "id": "tears",
         "name": "Tears",
         "description": "Wah Wah",
         "image": "media/1782174997873-SampleScene_Custom..._22.06.2026_19-36-19.png",
-        "subcategory": "Nose"
+        "subcategory": "Nose",
+        "itemId": "Tears",
+        "wheel": "Cosmetics/Nose",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on.",
+        "model": "media/models/item-tears.glb"
       },
       {
         "id": "wheat",
         "name": "Wheat",
         "description": "Tasty? From the Rancher Bundle!",
         "image": "media/1782175047645-SampleScene_Custom..._22.06.2026_19-37-00.png",
-        "subcategory": "Nose"
+        "subcategory": "Nose",
+        "itemId": "Wheat",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-wheat.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "uncie-sam-het",
+        "name": "Uncie Sam Het",
+        "description": "It's spelled like that on purpose. Probably.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "uncie sam het",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-uncie-sam-het.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "vrsunglasses",
+        "name": "VR Sunglasses",
+        "description": "Sunglasses for your headset for your... never mind.",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "VRSunglasses",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-vrsunglasses.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "cosmetic-mirror",
+        "name": "Cosmetic Mirror",
+        "description": "Looking good.",
+        "subcategory": "Tools",
+        "auto": true,
+        "itemId": "Cosmetic Mirror",
+        "wheel": "Cosmetics/Tools",
+        "model": "media/models/item-cosmetic-mirror.glb",
+        "autoEffect": "Look at yourself and see what you're wearing."
+      },
+      {
+        "id": "grass-hedgehog",
+        "name": "Grass Hedgehog",
+        "description": "He lives on your head now.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "grass hedgehog",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-grass-hedgehog.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "mc-dronkles-visor",
+        "name": "McDronkles Visor",
+        "description": "Would you like fries with that?",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "McDronkles Visor",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-mcdronkles-visor.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "mc-dronkles-uniform",
+        "name": "McDronkles Uniform",
+        "description": "Now hiring. Comes with a name tag.",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "McDronkles Uniform",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-mcdronkles-uniform.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "moon-hat",
+        "name": "Moon Hat",
+        "description": "For night owls.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Moon Hat",
+        "wheel": "Cosmetics/Head",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on.",
+        "model": "media/models/item-moon-hat.glb"
+      },
+      {
+        "id": "sun-hat",
+        "name": "Sun Hat",
+        "description": "For morning people.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Sun Hat",
+        "wheel": "Cosmetics/Head",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on.",
+        "model": "media/models/item-sun-hat.glb"
+      },
+      {
+        "id": "flannel",
+        "name": "Flannel",
+        "description": "Cozy lumberjack vibes. Ironic, for a tree.",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "flannel",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-flannel.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "puke-glasses",
+        "name": "Puke Glasses",
+        "description": "See the world the way Puke does.",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "Puke Glasses",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-puke-glasses.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "puke-leaves",
+        "name": "Puke Leaves",
+        "description": "Puke-green, all the way up.",
+        "subcategory": "Leaves",
+        "auto": true,
+        "itemId": "Puke Leaves",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-puke-leaves.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "puke-lips",
+        "name": "Puke Lips",
+        "description": "Pucker up.",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Puke lips",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-puke-lips.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "puke-shoes",
+        "name": "Puke Shoes",
+        "description": "Walk a mile in Puke's shoes.",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "Puke Shoes",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-puke-shoes.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "puke-top",
+        "name": "Puke Top",
+        "description": "Top it off, Puke style.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Puke Top",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-puke-top.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "cross-necklace",
+        "name": "Cross Necklace",
+        "description": "Simple and shiny.",
+        "subcategory": "Neck",
+        "auto": true,
+        "itemId": "Cross Necklace",
+        "wheel": "Cosmetics/Neck",
+        "model": "media/models/item-cross-necklace.glb",
+        "autoEffect": "A cosmetic you wear round your neck. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "war-hat",
+        "name": "War Hat",
+        "description": "Suit up for Tree V Tree.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "War Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-war-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "war-shirt",
+        "name": "War Shirt",
+        "description": "Your name, on the battlefield.",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "War Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-war-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "axe-in-head",
+        "name": "Axe In Head",
+        "description": "It's fine. It's fine.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "AxeInHead",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-axeinhead.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "tan-army-hat",
+        "name": "Tan Army Hat",
+        "description": "The Army Helmet was meant to be tan. Here it is.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Tan Army Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-tan-army-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "twin-tanks",
+        "name": "Twin Tanks",
+        "description": "Carries 210 seconds of air.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "tank_twin",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-tank-twin.glb",
+        "autoEffect": "Dive gear (tank). Bring it up to your face to put it on. +210 seconds of air, 1x swim speed."
+      },
+      {
+        "id": "basic-tank",
+        "name": "Basic Tank",
+        "description": "Carries 45 seconds of air.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "tank_basic",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-tank-basic.glb",
+        "autoEffect": "Dive gear (tank). Bring it up to your face to put it on. +45 seconds of air."
+      },
+      {
+        "id": "large-tank",
+        "name": "Large Tank",
+        "description": "Carries 110 seconds of air.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "tank_large",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-tank-large.glb",
+        "autoEffect": "Dive gear (tank). Bring it up to your face to put it on. +110 seconds of air."
+      },
+      {
+        "id": "dive-mask",
+        "name": "Dive Mask",
+        "description": "Carries 8 seconds of air.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "mask_basic",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-mask-basic.glb",
+        "autoEffect": "Dive gear (mask). Bring it up to your face to put it on. +8 seconds of air, clears the water 29%."
+      },
+      {
+        "id": "pro-mask",
+        "name": "Pro Mask",
+        "description": "Clears Up your vision, and helps you hold your breath!",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "mask_pro",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-mask-pro.glb",
+        "autoEffect": "Dive gear (mask). Bring it up to your face to put it on. +25 seconds of air, clears the water 68%."
+      },
+      {
+        "id": "swim-fins",
+        "name": "Swim Fins",
+        "description": "Moves you through the water faster.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "fins_basic",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-fins-basic.glb",
+        "autoEffect": "Dive gear (fins). Bring it up to your face to put it on. 1.5x swim speed."
+      },
+      {
+        "id": "racing-fins",
+        "name": "Racing Fins",
+        "description": "Moves you through the water even faster.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "fins_pro",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-fins-pro.glb",
+        "autoEffect": "Dive gear (fins). Bring it up to your face to put it on. 2.3x swim speed."
+      },
+      {
+        "id": "deep-suit",
+        "name": "Deep Suit",
+        "description": "Rated to 95m.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "suit_deep",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-suit-deep.glb",
+        "autoEffect": "Dive gear (suit). Bring it up to your face to put it on. +30 seconds of air, 0.9x swim speed, safe down to 95 m."
+      },
+      {
+        "id": "pressure-suit",
+        "name": "Pressure Suit",
+        "description": "Rated to 45m.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "suit_pressure",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-suit-pressure.glb",
+        "autoEffect": "Dive gear (suit). Bring it up to your face to put it on. +15 seconds of air, safe down to 45 m."
+      },
+      {
+        "id": "wetsuit",
+        "name": "Wetsuit",
+        "description": "Rated to 22m.",
+        "subcategory": "Scuba",
+        "auto": true,
+        "itemId": "suit_wet",
+        "wheel": "Cosmetics/Scuba",
+        "model": "media/models/item-suit-wet.glb",
+        "autoEffect": "Dive gear (suit). Bring it up to your face to put it on. 1.1x swim speed, safe down to 25 m."
+      },
+      {
+        "id": "tropic-shirt",
+        "name": "Tropic Shirt",
+        "description": "Island time.",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "Tropic Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-tropic-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "beach-glasses",
+        "name": "Beach Glasses",
+        "description": "Shades for the sand.",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "Beach Glasses",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-beach-glasses.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "beach-hat",
+        "name": "Beach Hat",
+        "description": "Sun's out.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Beach Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-beach-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "back-surfboard",
+        "name": "Back Surfboard",
+        "description": "Mustard approves, duuude.",
+        "subcategory": "Back",
+        "auto": true,
+        "itemId": "Back Surfboard",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-back-surfboard.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "shark-necklace",
+        "name": "Shark Necklace",
+        "description": "A real tooth. Probably.",
+        "subcategory": "Neck",
+        "auto": true,
+        "itemId": "Shark Necklace",
+        "wheel": "Cosmetics/Neck",
+        "model": "media/models/item-shark-necklace.glb",
+        "autoEffect": "A cosmetic you wear round your neck. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "shark-teeth",
+        "name": "Shark Teeth",
+        "description": "Chomp.",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Shark Teeth",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-shark-teeth.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "fin-back",
+        "name": "Fin Back",
+        "description": "Dun dun. Dun dun.",
+        "subcategory": "Back",
+        "auto": true,
+        "itemId": "Fin Back",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-fin-back.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "fin-head",
+        "name": "Fin Head",
+        "description": "Now YOU'RE the shark.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Fin Head",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-fin-head.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "stone-reporter-badge",
+        "name": "Stone Reporter Badge",
+        "description": "For the Stone Reporters.",
+        "subcategory": "Badge",
+        "auto": true,
+        "itemId": "StoneReporterBadge",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-stonereporterbadge.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "fall-leaves",
+        "name": "Fall Leaves",
+        "description": "Autumn, on your head.",
+        "subcategory": "Leaves",
+        "auto": true,
+        "itemId": "Fall Leaves",
+        "wheel": "Cosmetics/Leaves",
+        "model": "media/models/item-fall-leaves.glb",
+        "autoEffect": "A cosmetic you wear instead of your leaves. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "scarecrow-hat",
+        "name": "Scarecrow Hat",
+        "description": "Scare the crows. Or befriend them.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Scarecrow Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-scarecrow-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "scarecrow-mask",
+        "name": "Scarecrow Mask",
+        "description": "Stuffed with straw.",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "Scarecrow Mask",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-scarecrow-mask.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "scarecrow-shirt",
+        "name": "Scarecrow Shirt",
+        "description": "Stitched together from the harvest.",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "Scarecrow Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-scarecrow-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "acorn-hat",
+        "name": "Acorn Hat",
+        "description": "A tiny hat from a tiny nut. For a big tree.",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "AcornHat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-acornhat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       }
     ],
     "maps": [
@@ -1489,6 +3520,33 @@
         {
           "name": "Consumable",
           "subs": []
+        },
+        {
+          "name": "Bark Chip",
+          "subs": []
+        },
+        {
+          "name": "Juse",
+          "subs": []
+        },
+        {
+          "name": "Weapons",
+          "subs": []
+        },
+        {
+          "name": "Creations",
+          "subs": [
+            {
+              "name": "Paintings"
+            },
+            {
+              "name": "Pumpkins"
+            }
+          ]
+        },
+        {
+          "name": "Artifacts",
+          "subs": []
         }
       ],
       "cosmetics": [
@@ -1522,6 +3580,18 @@
         },
         {
           "name": "Leaves",
+          "subs": []
+        },
+        {
+          "name": "Tools",
+          "subs": []
+        },
+        {
+          "name": "Neck",
+          "subs": []
+        },
+        {
+          "name": "Scuba",
           "subs": []
         }
       ],
@@ -2890,5 +4960,5 @@
   "petsConfig": {
     "mutationsPublic": true
   },
-  "modelsVersion": "20260727024048"
+  "modelsVersion": "20260926170642"
 }

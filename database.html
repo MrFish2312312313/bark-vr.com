@@ -26,6 +26,21 @@
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="stylesheet" href="style.css?v=35" />
   <link rel="stylesheet" href="halloween.css?v=1" />
+  <style>
+    /* Index 3D models (indexviewer.js). Page-local: nothing else draws them. */
+    .db-card-model { width: 100%; height: 100%; display: block;
+      background: radial-gradient(circle at 50% 42%, rgba(255,255,255,0.06), transparent 68%); }
+    .db-card-model:not(.db-model-ready) { animation: dbModelWait 1.6s ease-in-out infinite; }
+    .db-card-model.db-model-failed { animation: none; opacity: 0.3; }
+    @keyframes dbModelWait { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.7; } }
+    .db-card-desc.db-card-does { font-style: italic; }
+    .db-detail-model { width: 100%; max-width: 420px; aspect-ratio: 1 / 1; display: block; margin: 0 auto 4px;
+      border-radius: 10px; border: 1px solid var(--border); cursor: grab; touch-action: none;
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.07), transparent 70%), var(--bg3); }
+    .db-detail-model:active { cursor: grabbing; }
+    .db-detail-hint { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin: 0 0 14px; }
+    @media (prefers-reduced-motion: reduce) { .db-card-model:not(.db-model-ready) { animation: none; opacity: 0.5; } }
+  </style>
 </head>
 <body>
 
@@ -124,11 +139,12 @@
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js"></script>
-  <script src="editor.js?v=33"></script>
+  <script src="editor.js?v=34"></script>
   <!-- Three.js (r128 UMD) + loaders for the Pet Viewer's live 3D models -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="petviewer.js?v=35"></script>
+  <script src="indexviewer.js?v=1"></script>
 </body>
 </html>

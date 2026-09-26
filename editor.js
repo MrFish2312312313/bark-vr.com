@@ -1273,12 +1273,14 @@ function renderDatabase() {
 
   const filter  = (BarkDB.filter || '').toLowerCase().trim();
   const filtered = entries.filter(e => {
+    if (e.hidden && !BarkEditor.editing) return false;
     if (BarkDB.activeSub !== 'all' && (e.subcategory || '') !== BarkDB.activeSub) return false;
     if (BarkDB.activeSubSub !== 'all' && (e.subsubcategory || '') !== BarkDB.activeSubSub) return false;
     if (!filter) return true;
     return (e.name || '').toLowerCase().includes(filter) ||
            (e.description || '').toLowerCase().includes(filter) ||
-           (e.effect || '').toLowerCase().includes(filter);
+           (e.effect || '').toLowerCase().includes(filter) ||
+           (e.autoEffect || '').toLowerCase().includes(filter);
   });
 
   grid.innerHTML = '';
@@ -1289,14 +1291,17 @@ function renderDatabase() {
     card.className = 'db-card';
     card.innerHTML = `
       <div class="db-card-img-wrap">
-        ${entry.image
+        ${entry.model
+          ? `<canvas class="db-card-model" data-model="${escapeAttr(entry.model)}" role="img" aria-label="${escapeAttr(entry.name)}"></canvas>`
+          : entry.image
           ? `<img src="${escapeAttr(entry.image)}" alt="${escapeAttr(entry.name)}" class="db-card-img" onerror="this.style.display='none'" />`
           : `<div class="db-card-img placeholder">${escapeHtml((entry.name || '?')[0].toUpperCase())}</div>`}
       </div>
       <div class="db-card-body">
         <h3 class="db-card-name">${escapeHtml(entry.name || 'Untitled')}</h3>
         ${entry.subcategory ? `<span class="db-card-sub">${escapeHtml(entry.subcategory)}${entry.subsubcategory ? ' · ' + escapeHtml(entry.subsubcategory) : ''}</span>` : ''}
-        ${entry.description ? `<p class="db-card-desc">${escapeHtml(entry.description)}</p>` : ''}
+        ${entry.description ? `<p class="db-card-desc">${escapeHtml(entry.description)}</p>`
+          : (entry.effect || entry.autoEffect) ? `<p class="db-card-desc db-card-does">${escapeHtml(entry.effect || entry.autoEffect)}</p>` : ''}
       </div>
       ${BarkEditor.editing ? `
         <div class="edit-overlay" onclick="event.stopPropagation()">
@@ -1494,21 +1499,28 @@ window.openDbCategoriesModal = openDbCategoriesModal;
 function openDbEntryDetail(cat, idx) {
   const e = BarkEditor.data.database[cat][idx];
   if (!e) return;
-  const isItem = cat === 'items';
+  // What it does: whatever a person wrote, else what the exporter read off the item in Unity.
+  const does = e.effect || e.autoEffect || '';
 
   const catTag = e.subcategory
     ? `<div class="db-detail-cat">${escapeHtml(e.subcategory)}${e.subsubcategory ? ` <span class="db-detail-cat-sep">›</span> ${escapeHtml(e.subsubcategory)}` : ''}</div>`
     : '';
 
   showModal(e.name || 'Untitled', `
-    ${e.image ? `<img src="${escapeAttr(e.image)}" class="db-detail-img" />` : ''}
+    ${e.model
+      ? `<canvas class="db-detail-model" data-model="${escapeAttr(e.model)}" role="img" aria-label="${escapeAttr(e.name || '')} - drag to turn it"></canvas>
+         <p class="db-detail-hint">Drag to turn it</p>`
+      : e.image ? `<img src="${escapeAttr(e.image)}" class="db-detail-img" />` : ''}
     ${catTag}
     ${e.description ? `<p class="db-detail-desc">${escapeHtml(e.description)}</p>` : ''}
-    ${isItem && e.effect ? `
+    ${does ? `
       <div class="db-detail-effect">
         <div class="section-label" style="margin-top:18px;">// WHAT IT DOES</div>
-        <p>${escapeHtml(e.effect)}</p>
+        <p>${escapeHtml(does)}</p>
       </div>` : ''}
+    ${e.model && e.image ? `
+      <div class="section-label" style="margin-top:18px;">// IN GAME</div>
+      <img src="${escapeAttr(e.image)}" class="db-detail-img" alt="" />` : ''}
     ${BarkEditor.editing ? `
       <div class="member-edit-actions" style="margin-top:24px;">
         <button class="btn-secondary" onclick="document.querySelector('.bark-modal-close').click(); openDbEntryModal('${cat}', ${idx});">✎ Edit</button>
@@ -1570,12 +1582,15 @@ function openDbEntryModal(cat, idx) {
     <label>URL slug (optional — auto-generated from name if blank)</label>
     <input id="modalDbId" value="${escapeAttr(e.id)}" />
   `, async () => {
-    const next = {
+    // Start from the entry as it is, so fields this form does not show - the 3D model, the game
+    // item id and the automatic "what it does" from Unity's Index export - survive an edit.
+    const next = Object.assign({}, isNew ? {} : BarkEditor.data.database[cat][idx], {
       id: (document.getElementById('modalDbId').value.trim() || slugify(document.getElementById('modalDbName').value)),
       name: document.getElementById('modalDbName').value.trim(),
       description: document.getElementById('modalDbDesc').value.trim(),
       image: e.image || '',
-    };
+    });
+    delete next.subcategory; delete next.subsubcategory;   // re-added below when set
     if (!next.name) { alert('Name required'); return false; }
     if (isItem) next.effect = document.getElementById('modalDbEffect').value.trim();
 
