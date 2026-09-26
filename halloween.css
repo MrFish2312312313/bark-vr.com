@@ -1,0 +1,222 @@
+/* ============================
+   BARKVR — halloween.css
+   The Halloween dress, layered over style.css. Pumpkin orange on near-black, a harvest moon,
+   bats, cobwebs. Take it off by deleting the halloween.css <link> from the pages (or this file).
+
+   The middle section is every rule of style.css that used the site's cyan or pink, copied with
+   the colours re-tinted (cyan -> pumpkin #ff7a1a, pink -> purple #9d4edd). A new style.css rule
+   that hardcodes cyan will stay cyan until its twin is added there. 🍍
+   ============================ */
+
+:root {
+  --bg:        #0a0604;
+  --bg2:       #110a06;
+  --bg3:       #170e08;
+  --accent:    #ff7a1a;
+  --accent2:   #9d4edd;
+  --text:      #f5ece2;
+  --text-muted:#a8917d;
+  --border:    rgba(255,122,26,0.18);
+  --card-bg:   rgba(255,160,90,0.035);
+
+  /* Creations page palette (creations.html reads these, falling back to the normal cool one). */
+  --cr-card:        #140c07;
+  --cr-line:        #3a1f0e;
+  --cr-line-strong: #5a2f12;
+  --cr-raised:      #1f120a;
+  --cr-raised-hover:#2a180c;
+  --cr-meta:        #bba58f;
+  --cr-strong:      #f5ece2;
+  --cr-on-accent:   #140800;
+  --cr-canvas-hi:   #2a1608;
+  --cr-canvas-lo:   #0b0604;
+  --cr-check-a:     #1c120a;
+  --cr-check-b:     #140c07;
+}
+
+/* ── Re-tinted from style.css (generated) ──────────────────────────────────────────────────── */
+
+.btn-primary:hover { background: #ff9d4d; box-shadow: 0 0 20px rgba(255,122,26,0.4); }
+nav { background: rgba(10,6,4,0.85); }
+.nav-logo { text-shadow: 0 0 12px rgba(255,122,26,0.5); }
+.mobile-menu { background: rgba(10,6,4,0.98); }
+.grid-overlay { background-image:
+    linear-gradient(rgba(255,122,26,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,122,26,0.04) 1px, transparent 1px); }
+.hero-title { text-shadow: 0 0 60px rgba(255,122,26,0.2); }
+.game-screen-placeholder { background: linear-gradient(135deg, #1a0f08, #241106); color: rgba(255,122,26,0.15); }
+.game-screen-placeholder::before { background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,122,26,0.03) 2px,
+    rgba(255,122,26,0.03) 4px
+  ); }
+.game-detail-inner + .game-detail-inner::before { box-shadow: 0 0 12px rgba(255,122,26,0.5); }
+.platform-btn:hover { background: #ff9d4d; box-shadow: 0 0 20px rgba(255,122,26,0.4); }
+.screenshot-placeholder { background: linear-gradient(135deg, #1a0f08, #241106); }
+.screenshot-placeholder::before { background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(255,122,26,0.025) 3px, rgba(255,122,26,0.025) 4px
+  ); }
+.shot-label { color: rgba(255,122,26,0.5); }
+.volunteer-note { background: rgba(157,78,221,0.08); border: 1px solid rgba(157,78,221,0.25); }
+.form-success { background: rgba(255,122,26,0.08); border: 1px solid rgba(255,122,26,0.3); }
+.form-error { background: rgba(157,78,221,0.08); border: 1px solid rgba(157,78,221,0.3); }
+.editor-bar { background: rgba(10,6,4,0.96); box-shadow: 0 -4px 20px rgba(255,122,26,0.15); }
+.bark-modal-card { box-shadow: 0 0 60px rgba(255,122,26,0.2); }
+.store-card:hover:not(.sold-out) { box-shadow: 0 8px 24px rgba(255,122,26,0.15); }
+.badge-limited { background: linear-gradient(135deg, #9d4edd, #ff7eb6); }
+body.editing .inline-editable { outline: 1px dashed rgba(255,122,26,0.35); }
+body.editing .inline-editable:hover { background: rgba(255,122,26,0.04); }
+body.editing .inline-editable.inline-editing { background: rgba(255,122,26,0.08); }
+.weather-initial { background: rgba(255,122,26,0.08); }
+.wood-card-fancy { background: linear-gradient(160deg, rgba(157,78,221,0.08), rgba(255,122,26,0.03)); }
+.db-tab.active::after { box-shadow: 0 0 8px rgba(255,122,26,0.5); }
+.db-card:hover { box-shadow: 0 8px 22px rgba(255,122,26,0.15); }
+.db-card-img.placeholder { background: linear-gradient(135deg, rgba(255,122,26,0.1), rgba(157,78,221,0.1)); }
+.pv-list-item.active { background: rgba(255,122,26, 0.08); }
+.pv-canvas-wrap { background: radial-gradient(circle at 50% 30%, rgba(255,122,26,0.06), transparent 70%), var(--card-bg); }
+.pv-tf-row label span { color: var(--accent, #ff7a1a); }
+.pv-transform input[type="range"] { accent-color: var(--accent, #ff7a1a); }
+.players-meta code { background: rgba(255,122,26,0.08); }
+.player-card:hover { box-shadow: 0 8px 22px rgba(255,122,26,0.15); }
+.player-card-img.placeholder { background: linear-gradient(135deg, rgba(255,122,26,0.1), rgba(157,78,221,0.1)); }
+.player-detail-img.placeholder { background: linear-gradient(135deg, rgba(255,122,26,0.15), rgba(157,78,221,0.15)); }
+.secret-waffle-firing { background: rgba(255,122,26,0.2) !important; }
+@media (max-width: 720px) {
+  body.editing .inline-editable { outline-color: rgba(255,122,26,0.5); }
+  body.editing .inline-editable:active { background: rgba(255,122,26,0.12); }
+}
+.bark-spin { border: 3px solid rgba(255,122,26,0.2); }
+.dev-selected-bar { background: rgba(255,122,26,0.06); }
+
+/* ── The night itself ─────────────────────────────────────────────────────────────────────── */
+
+body {
+  background:
+    radial-gradient(ellipse 90% 45% at 50% 118%, rgba(255,106,0,0.11), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+}
+::selection { background: #ff7a1a; color: #0a0604; }
+html { scrollbar-color: #5a2a0c var(--bg); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #4a230b; border-radius: 6px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: #ff7a1a; }
+
+nav { border-bottom-color: rgba(255,122,26,0.28); box-shadow: 0 1px 26px rgba(255,90,0,0.10); }
+.nav-logo-img { filter: drop-shadow(0 0 10px rgba(255,122,26,0.35)); }
+
+/* Titles glow like the inside of a carved pumpkin, and the candle breathes a little. Slow and
+   low-contrast on purpose - a flicker, never a flash. */
+.page-hero-content h1,
+.hero-title {
+  color: #ffb45e;
+  text-shadow: 0 0 18px rgba(255,120,20,0.55), 0 0 60px rgba(255,70,0,0.30), 0 3px 0 #3a1400;
+}
+.page-hero-content h1 { animation: candle 5.5s ease-in-out infinite; }
+.hero-title { animation: fadeUp 0.8s ease both, candle 5.5s 0.8s ease-in-out infinite; }
+@keyframes candle {
+  0%, 100% { text-shadow: 0 0 18px rgba(255,120,20,0.55), 0 0 60px rgba(255,70,0,0.30), 0 3px 0 #3a1400; }
+  30%      { text-shadow: 0 0 22px rgba(255,135,30,0.66), 0 0 72px rgba(255,80,0,0.36), 0 3px 0 #3a1400; }
+  55%      { text-shadow: 0 0 15px rgba(255,110,20,0.47), 0 0 52px rgba(255,60,0,0.25), 0 3px 0 #3a1400; }
+  80%      { text-shadow: 0 0 20px rgba(255,125,25,0.60), 0 0 64px rgba(255,75,0,0.32), 0 3px 0 #3a1400; }
+}
+
+.page-hero-content .section-label::before { content: '\1F383\00A0'; }
+
+/* ── The harvest moon ─────────────────────────────────────────────────────────────────────── */
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 16%; right: 9%;
+  width: 118px; height: 118px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 63% 37%, rgba(150,80,20,0.26) 0 9%, transparent 10%),
+    radial-gradient(circle at 35% 63%, rgba(150,80,20,0.20) 0 7%, transparent 8%),
+    radial-gradient(circle at 56% 73%, rgba(150,80,20,0.16) 0 5%, transparent 6%),
+    radial-gradient(circle at 38% 34%, #fff3d6, #ffd27a 55%, #ef932c 100%);
+  box-shadow: 0 0 50px rgba(255,190,90,0.42), 0 0 150px rgba(255,120,30,0.26);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ── Bats ──────────────────────────────────────────────────────────────────────────────────── */
+/* Black silhouettes with an ember rim, so they read against the dark and cross the moon. */
+
+.grid-overlay::before,
+.grid-overlay::after {
+  content: '';
+  position: absolute;
+  top: 18%; left: 0;
+  width: 54px; height: 27px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'%3E%3Cpath fill='%230b0503' d='M50 20 C47 13 42 12 39 15 C35 8 26 5 14 7 C6 8 2 11 0 14 C7 14 11 18 12 24 C17 20 23 20 27 25 C31 21 37 22 40 28 C43 25 47 26 50 31 C53 26 57 25 60 28 C63 22 69 21 73 25 C77 20 83 20 88 24 C89 18 93 14 100 14 C98 11 94 8 86 7 C74 5 65 8 61 15 C58 12 53 13 50 20 Z M46 16 L45 9 L49 14 Z M54 16 L55 9 L51 14 Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 0 3px rgba(255,140,40,0.55));
+  translate: 110vw 0;
+  animation: batFly 17s linear infinite, batFlap 0.27s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.grid-overlay::after {
+  top: 30%;
+  width: 36px; height: 18px;
+  animation-duration: 23s, 0.23s;
+  animation-delay: -10s, 0s;
+}
+@keyframes batFly {
+  0%   { translate: 108vw 30px; }
+  25%  { translate: 76vw -12px; }
+  50%  { translate: 46vw 26px; }
+  75%  { translate: 16vw -14px; }
+  100% { translate: -14vw 12px; }
+}
+@keyframes batFlap {
+  from { scale: 1 1; }
+  to   { scale: 1 0.42; }
+}
+
+/* ── Cobwebs, and a little mist ─────────────────────────────────────────────────────────────── */
+
+.page-hero::after,
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 58px; left: 0;
+  width: 170px; height: 170px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23ffe2c4' stroke-opacity='.22' stroke-width='1'%3E%3Cpath d='M0 0 L170 14'/%3E%3Cpath d='M0 0 L158 70'/%3E%3Cpath d='M0 0 L118 122'/%3E%3Cpath d='M0 0 L66 156'/%3E%3Cpath d='M0 0 L14 170'/%3E%3Cpath d='M47.6 3.9 Q39.5 10.1 44.2 19.6 Q33.2 23.1 33.0 34.2 Q22.2 33.5 18.5 43.7 Q9.6 39.3 3.9 47.6'/%3E%3Cpath d='M85.0 7.0 Q70.5 18.1 79.0 35.0 Q59.3 41.3 59.0 61.0 Q39.6 59.8 33.0 78.0 Q17.2 70.1 7.0 85.0'/%3E%3Cpath d='M122.4 10.1 Q101.5 26.0 113.8 50.4 Q85.4 59.4 85.0 87.8 Q57.0 86.1 47.5 112.3 Q24.8 100.9 10.1 122.4'/%3E%3Cpath d='M158.1 13.0 Q131.2 33.6 146.9 65.1 Q110.4 76.8 109.7 113.5 Q73.6 111.2 61.4 145.1 Q32.0 130.4 13.0 158.1'/%3E%3C/g%3E%3C/svg%3E") top left / contain no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  left: -10%; right: -10%; bottom: -40px;
+  height: 130px;
+  background: radial-gradient(ellipse at center, rgba(255,150,80,0.09), transparent 70%);
+  filter: blur(12px);
+  animation: fogDrift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes fogDrift {
+  from { transform: translateX(-4%); }
+  to   { transform: translateX(4%); }
+}
+
+footer { border-top-color: rgba(255,122,26,0.22); }
+.footer-copy::after { content: '  \00B7  Happy Halloween \1F383'; }
+
+@media (max-width: 768px) {
+  .hero-bg::before { width: 72px; height: 72px; top: 20%; right: 6%; }
+  .page-hero::after, .hero::after { width: 110px; height: 110px; }
+}
+
+/* Motion off: no bats, no flicker, no drifting mist - the colours stay. */
+@media (prefers-reduced-motion: reduce) {
+  .grid-overlay::before, .grid-overlay::after { display: none; }
+  .page-hero-content h1, .page-hero::before { animation: none; }
+  .hero-title { animation: fadeUp 0.8s ease both; }
+}

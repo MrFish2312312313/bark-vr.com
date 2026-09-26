@@ -791,6 +791,18 @@ footer {
 }
 
 /* ---- RESPONSIVE ---- */
+/* Nine links do not fit at 36px gaps below ~1200px: tighten them first, then hand over to the
+   hamburger before they start wrapping and pushing the logo off the bar. */
+@media (max-width: 1200px) {
+  .nav-links { gap: 20px; }
+  .nav-links a { letter-spacing: 0.08em; white-space: nowrap; }
+}
+@media (max-width: 980px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+}
+
 @media (max-width: 768px) {
   nav { padding: 14px 20px; }
   .nav-links { display: none; }

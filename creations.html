@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- BARK-SEO-START -->
+  <meta name="description" content="Pumpkins carved and paintings painted by BARK players, straight from the game." />
+  <link rel="canonical" href="https://bark-vr.com/creations" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bark-vr.com/creations" />
+  <meta property="og:title" content="Creations | BARKVR" />
+  <meta property="og:description" content="Pumpkins carved and paintings painted by BARK players, straight from the game." />
+  <meta property="og:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta property="og:site_name" content="BARKVR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Creations | BARKVR" />
+  <meta name="twitter:description" content="Pumpkins carved and paintings painted by BARK players, straight from the game." />
+  <meta name="twitter:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta name="theme-color" content="#ff7a1a" />
+  <!-- BARK-SEO-END -->
+  <title>Creations | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="stylesheet" href="style.css?v=35" />
+  <link rel="stylesheet" href="halloween.css?v=1" />
+  <style>
+    /* Page-local styles for the creations gallery (kept out of the global sheet). */
+    .cr-tabs { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.25rem; }
+    .cr-tab { padding:.55rem 1.1rem; border-radius:999px; border:1px solid var(--cr-line-strong, #2b3a49); background:var(--cr-card, #0e141b);
+              color:var(--cr-meta, #9fb0c0); font:inherit; font-weight:600; letter-spacing:.04em; cursor:pointer; }
+    .cr-tab:hover { border-color:var(--accent, #3a4d60); color:var(--cr-strong, #e6edf3); }
+    .cr-tab[aria-selected="true"] { background:var(--accent, #00e5ff); border-color:var(--accent, #00e5ff); color:var(--cr-on-accent, #04121a); }
+    .cr-tab[hidden] { display:none; }
+
+    .cr-bar { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; margin-bottom:1.1rem; }
+    .cr-status { opacity:.8; font-size:.95rem; }
+    .cr-lights { padding:.45rem .95rem; background:var(--cr-raised, #16202b); color:var(--cr-strong, #e6edf3); border:1px solid var(--cr-line-strong, #2b3a49);
+                 border-radius:999px; font:inherit; font-size:.85rem; cursor:pointer; }
+    .cr-lights:hover { background:var(--cr-raised-hover, #1d2a37); border-color:var(--accent, #3a4d60); }
+    .cr-lights[aria-pressed="true"] { background:#3a2a12; border-color:#7a5a24; color:#ffcf8a; }
+    .cr-lights[hidden] { display:none; }
+
+    .cr-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1.1rem; min-height:120px; }
+    .cr-card { background:var(--cr-card, #0e141b); border:1px solid var(--cr-line, #202a36); border-radius:12px; overflow:hidden;
+               display:flex; flex-direction:column; }
+    .cr-card.is-hidden { opacity:.55; outline:2px dashed #ff5470; }
+    .cr-canvas { width:100%; aspect-ratio:1/1; display:block; cursor:grab;
+                 background:radial-gradient(circle at 50% 40%, var(--cr-canvas-hi, #1b2430) 0%, var(--cr-canvas-lo, #0b1016) 70%); }
+    .cr-canvas:active { cursor:grabbing; }
+    .cr-img { width:100%; aspect-ratio:1/1; object-fit:contain; display:block;
+              background:repeating-conic-gradient(var(--cr-check-a, #141b23) 0% 25%, var(--cr-check-b, #10161d) 0% 50%) 50% / 22px 22px; }
+    .cr-meta { padding:.6rem .7rem; font-size:.82rem; line-height:1.4; color:var(--cr-meta, #9fb0c0); word-break:break-word; }
+    .cr-meta strong { color:var(--cr-strong, #e6edf3); }
+    .cr-badge { display:inline-block; font-size:.7rem; padding:.1rem .4rem; border-radius:5px;
+                background:#ff5470; color:#1a0008; font-weight:700; margin-bottom:.3rem; }
+    .cr-actions { display:flex; gap:.4rem; padding:0 .7rem .7rem; }
+    .cr-actions button { flex:1; padding:.45rem; border-radius:7px; border:none; cursor:pointer;
+                         font-size:.8rem; font-weight:600; font-family:'Barlow',sans-serif; }
+    .cr-hide { background:#233; color:#ffd479; }
+    .cr-del  { background:#3a1620; color:#ff8098; }
+
+    .cr-pager { display:flex; gap:.35rem; flex-wrap:wrap; align-items:center; justify-content:center; margin:1.4rem 0 .4rem; }
+    .cr-pager button { min-width:2.3rem; padding:.4rem .65rem; border-radius:8px; border:1px solid var(--cr-line-strong, #2b3a49);
+                       background:var(--cr-card, #0e141b); color:var(--cr-strong, #e6edf3); font:inherit; font-size:.9rem; cursor:pointer; }
+    .cr-pager button:hover:not(:disabled) { border-color:var(--accent, #3a4d60); background:var(--cr-raised, #16202b); }
+    .cr-pager button[aria-current="page"] { background:var(--accent, #00e5ff); border-color:var(--accent, #00e5ff); color:var(--cr-on-accent, #04121a); font-weight:700; }
+    .cr-pager button:disabled { opacity:.35; cursor:default; }
+    .cr-pager .gap { opacity:.5; padding:0 .2rem; }
+    .cr-pager[hidden] { display:none; }
+
+    .cr-note { margin-top:1.5rem; font-size:.85rem; opacity:.65; max-width:62ch; line-height:1.5; }
+
+    .cr-mod { margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid var(--cr-raised, #1c2530); }
+    .cr-mod summary { cursor:pointer; opacity:.55; font-size:.85rem; }
+    .cr-mod-row { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-top:.8rem; }
+    .cr-mod-row input { padding:.55rem .8rem; border-radius:8px; border:1px solid var(--cr-line-strong, #2a3340); background:var(--cr-card, #0e141b);
+                        color:var(--cr-strong, #e6edf3); font-family:'Barlow',sans-serif; min-width:220px; }
+    .cr-mod-row button { padding:.55rem 1rem; border-radius:8px; border:none; cursor:pointer; font-weight:600;
+                         background:var(--accent, #00e5ff); color:var(--cr-on-accent, #04121a); font-family:'Barlow',sans-serif; }
+    .cr-mod-row button.secondary { background:var(--cr-raised, #1c2530); color:var(--cr-strong, #e6edf3); }
+    .cr-mod-status { opacity:.8; font-size:.9rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/community">COMMUNITY</a>
+      <a href="/creations" class="active">CREATIONS</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
+    <a href="/creations" onclick="toggleMenu()">CREATIONS</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// MADE IN BARK</div>
+      <h1>CREATIONS</h1>
+    </div>
+  </section>
+
+  <section class="community-section">
+    <div class="container">
+      <div class="cr-tabs" role="tablist">
+        <button class="cr-tab" role="tab" id="tab-pumpkins" data-tab="pumpkins" aria-selected="false" hidden>PUMPKINS</button>
+        <button class="cr-tab" role="tab" id="tab-paintings" data-tab="paintings" aria-selected="false">PAINTINGS</button>
+      </div>
+
+      <div class="cr-bar">
+        <span class="cr-status" id="crStatus">Loading&hellip;</span>
+        <button type="button" class="cr-lights" id="crLights" aria-pressed="false" hidden>Light them up</button>
+      </div>
+
+      <div class="cr-pager" id="crPagerTop" hidden></div>
+      <div class="cr-grid" id="crGrid"></div>
+      <div class="cr-pager" id="crPagerBottom" hidden></div>
+
+      <p class="cr-note" id="crNote"></p>
+
+      <details class="cr-mod" id="crMod">
+        <summary>Moderator</summary>
+        <div class="cr-mod-row">
+          <input id="crModKey" type="password" placeholder="Moderator key" autocomplete="off" />
+          <button type="button" id="crModUnlock">Unlock</button>
+          <button type="button" class="secondary" id="crModLock" hidden>Lock</button>
+          <span class="cr-mod-status" id="crModStatus">Hide and delete need the moderator key.</span>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="/#about">About</a>
+        <a href="/games">Games</a>
+        <a href="/store">Store</a>
+        <a href="/extras">Extras</a>
+        <a href="/database">Index</a>
+        <a href="/players">Players</a>
+        <a href="/community">Community</a>
+        <a href="/creations">Creations</a>
+        <a href="/careers">Hiring</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="main.js?v=12"></script>
+  <script src="pumpkins.js?v=5"></script>
+  <script src="creations.js?v=1"></script>
+</body>
+</html>

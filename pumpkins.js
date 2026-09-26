@@ -427,6 +427,13 @@
     ctx.putImageData(img, 0, 0);
 
     const tex = new THREE.CanvasTexture(cv);
+    // ── NOT FLIPPED, OR EVERY SCRAPE COMES OUT UPSIDE DOWN ────────────────────
+    //
+    // Row y of the canvas above is written as v = y / SKIN_TEX, so row 0 is the BOTTOM of the
+    // pumpkin. three.js flips a canvas on upload by default (image top -> v = 1), which put row 0
+    // at the TOP: a scraped smile came out as a frown above the mouth, while its recess - which is
+    // geometry, not texture - stayed where it was carved.
+    tex.flipY = false;
     tex.wrapS = THREE.RepeatWrapping;    // u goes around
     tex.wrapT = THREE.ClampToEdgeWrapping;
     tex.anisotropy = 4;
@@ -756,6 +763,11 @@
     return {
       canvas,
       visible: true,          // set by the observer below
+      // A paged gallery throws cards away every page turn. The GPU-side geometry and the skin
+      // texture outlive their canvas unless they are released here.
+      dispose() {
+        geo.dispose(); skinTex.dispose(); skinMat.dispose(); fleshMat.dispose();
+      },
       setLit(on) {
         // ── WHAT MAKES A LIT PUMPKIN READ ────────────────────────────────────
         //
