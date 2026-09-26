@@ -44,7 +44,7 @@
       "downloadUrl": "https://www.meta.com/experiences/bark/29216575844607934/",
       "downloadLabel": "META QUEST",
       "morePlatforms": "More platforms coming soon...",
-      "screenshot": "media/1780375076900-IMG_8505.png",
+      "screenshot": "media/1790440433325-26620F71-507E-4CBD-AB4C-8369492751EE.png",
       "reviews": [
         {
           "stars": 5,
@@ -208,6 +208,19 @@
           "text": "THIS IS SO AMAZING I LOVE IT!!!!!111!!"
         }
       ]
+    },
+    {
+      "id": "bungo",
+      "name": "Bungo",
+      "tag": "Swingada Swing",
+      "tagline": "Crap, missed my shot..",
+      "shortDesc": "Bungo is a fungo where you fight while using grappling hooks!",
+      "fullDesc": "Bungo is a fungo where you fight while using grappling hooks! Customize your character, and low-key just have fun...",
+      "downloadUrl": "https://www.meta.com/en-gb/experiences/bungo/1132573406616888/?require_login=true",
+      "downloadLabel": "META QUEST",
+      "morePlatforms": "None lol",
+      "screenshot": "media/1790440635954-Untitled_design__21_.png",
+      "reviews": []
     }
   ],
   "store": [
