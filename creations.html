@@ -73,15 +73,58 @@
 
     .cr-note { margin-top:1.5rem; font-size:.85rem; opacity:.65; max-width:62ch; line-height:1.5; }
 
-    .cr-mod { margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid var(--cr-raised, #1c2530); }
-    .cr-mod summary { cursor:pointer; opacity:.55; font-size:.85rem; }
-    .cr-mod-row { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-top:.8rem; }
-    .cr-mod-row input { padding:.55rem .8rem; border-radius:8px; border:1px solid var(--cr-line-strong, #2a3340); background:var(--cr-card, #0e141b);
-                        color:var(--cr-strong, #e6edf3); font-family:'Barlow',sans-serif; min-width:220px; }
-    .cr-mod-row button { padding:.55rem 1rem; border-radius:8px; border:none; cursor:pointer; font-weight:600;
-                         background:var(--accent, #00e5ff); color:var(--cr-on-accent, #04121a); font-family:'Barlow',sans-serif; }
-    .cr-mod-row button.secondary { background:var(--cr-raised, #1c2530); color:var(--cr-strong, #e6edf3); }
-    .cr-mod-status { opacity:.8; font-size:.9rem; }
+    .cr-mod-line { margin: -.4rem 0 1.1rem; font-size: .85rem; color: var(--accent, #00e5ff); opacity: .9; }
+    .cr-mod-line[hidden] { display: none; }
+
+    .cr-meta-top { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+    .cr-report { flex: none; padding: .15rem .55rem; border-radius: 999px; border: 1px solid var(--cr-line-strong, #2b3a49);
+                 background: transparent; color: var(--cr-meta, #9fb0c0); font: inherit; font-size: .72rem; cursor: pointer;
+                 opacity: .75; transition: opacity .15s, color .15s, border-color .15s; }
+    .cr-report:hover:not(:disabled) { opacity: 1; color: #ff8098; border-color: #ff8098; }
+    .cr-report:disabled { cursor: default; opacity: .45; }
+    .cr-card.cr-focus { outline: 2px solid var(--accent, #00e5ff); outline-offset: 2px;
+                        box-shadow: 0 0 28px rgba(255,122,26,.35); }
+
+    /* The report dialog */
+    body.cr-modal-open { overflow: hidden; }
+    .cr-dialog[hidden] { display: none; }
+    .cr-dialog { position: fixed; inset: 0; z-index: 400; display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .cr-dialog-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.66); backdrop-filter: blur(3px); }
+    .cr-dialog-card { position: relative; width: 100%; max-width: 420px; max-height: calc(100vh - 32px); overflow: auto;
+                      background: var(--cr-card, #0e141b); border: 1px solid var(--cr-line-strong, #2b3a49); border-radius: 14px;
+                      padding: 1.3rem 1.3rem 1.1rem; box-shadow: 0 18px 60px rgba(0,0,0,.55); }
+    .cr-dialog-card h2 { font-family: var(--font-display, 'Bebas Neue', sans-serif); letter-spacing: .05em; font-size: 1.7rem;
+                         line-height: 1; margin: 0 2rem .25rem 0; color: var(--cr-strong, #e6edf3); }
+    .cr-dialog-who { font-size: .85rem; color: var(--cr-meta, #9fb0c0); margin: 0 0 1rem; min-height: 1em; }
+    .cr-dialog-x { position: absolute; top: .8rem; right: .8rem; width: 2rem; height: 2rem; border-radius: 50%; border: none;
+                   background: transparent; color: var(--cr-meta, #9fb0c0); font-size: 1.1rem; cursor: pointer; }
+    .cr-dialog-x:hover { background: var(--cr-raised, #16202b); color: var(--cr-strong, #e6edf3); }
+    .cr-reasons { display: flex; flex-direction: column; gap: .45rem; border: none; margin: 0; padding: 0; }
+    .cr-reason { display: flex; align-items: center; gap: .7rem; padding: .6rem .8rem; border-radius: 10px; cursor: pointer;
+                 border: 1px solid var(--cr-line, #202a36); background: var(--cr-raised, #16202b); color: var(--cr-strong, #e6edf3);
+                 font-size: .92rem; transition: border-color .15s, background .15s; }
+    .cr-reason:hover { border-color: var(--cr-line-strong, #2b3a49); }
+    .cr-reason input { accent-color: var(--accent, #00e5ff); width: 1rem; height: 1rem; margin: 0; }
+    .cr-reason:has(input:checked) { border-color: var(--accent, #00e5ff); background: var(--cr-raised-hover, #1d2a37); }
+    .cr-other { margin-top: .7rem; }
+    .cr-other[hidden] { display: none; }
+    .cr-other textarea { width: 100%; min-height: 84px; resize: vertical; padding: .6rem .7rem; border-radius: 10px;
+                         border: 1px solid var(--cr-line-strong, #2b3a49); background: var(--cr-canvas-lo, #0b1016);
+                         color: var(--cr-strong, #e6edf3); font: inherit; font-size: .9rem; }
+    .cr-other small { display: block; margin-top: .3rem; font-size: .75rem; color: var(--cr-meta, #9fb0c0); }
+    .cr-dialog-msg { min-height: 1.2em; margin: .8rem 0 0; font-size: .85rem; color: #ff8098; }
+    .cr-dialog-foot { display: flex; justify-content: flex-end; gap: .5rem; margin-top: .6rem; }
+    .cr-dialog-foot button { padding: .6rem 1.1rem; border-radius: 999px; border: 1px solid var(--cr-line-strong, #2b3a49);
+                             font: inherit; font-weight: 600; font-size: .9rem; cursor: pointer;
+                             background: transparent; color: var(--cr-strong, #e6edf3); }
+    .cr-dialog-foot .cr-send { background: #d8394f; border-color: #d8394f; color: #fff; }
+    .cr-dialog-foot .cr-send:disabled { opacity: .4; cursor: default; }
+
+    .cr-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 410;
+                padding: .7rem 1.1rem; border-radius: 999px; background: var(--cr-raised-hover, #1d2a37);
+                border: 1px solid var(--accent, #00e5ff); color: var(--cr-strong, #e6edf3); font-size: .9rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,.45); max-width: calc(100vw - 32px); }
+    .cr-toast[hidden] { display: none; }
   </style>
 </head>
 <body>
@@ -138,6 +181,7 @@
         <span class="cr-status" id="crStatus">Loading&hellip;</span>
         <button type="button" class="cr-lights" id="crLights" aria-pressed="false" hidden>Light them up</button>
       </div>
+      <p class="cr-mod-line" id="crModLine" role="status" hidden></p>
 
       <div class="cr-pager" id="crPagerTop" hidden></div>
       <div class="cr-grid" id="crGrid"></div>
@@ -145,17 +189,30 @@
 
       <p class="cr-note" id="crNote"></p>
 
-      <details class="cr-mod" id="crMod">
-        <summary>Moderator</summary>
-        <div class="cr-mod-row">
-          <input id="crModKey" type="password" placeholder="Moderator key" autocomplete="off" />
-          <button type="button" id="crModUnlock">Unlock</button>
-          <button type="button" class="secondary" id="crModLock" hidden>Lock</button>
-          <span class="cr-mod-status" id="crModStatus">Hide and delete need the moderator key.</span>
-        </div>
-      </details>
     </div>
   </section>
+
+  <div class="cr-dialog" id="crReport" role="dialog" aria-modal="true" aria-labelledby="crReportTitle" hidden>
+    <div class="cr-dialog-backdrop" id="crReportBackdrop"></div>
+    <div class="cr-dialog-card">
+      <button type="button" class="cr-dialog-x" id="crReportClose" aria-label="Close">✕</button>
+      <h2 id="crReportTitle">Report this</h2>
+      <p class="cr-dialog-who" id="crReportWho"></p>
+      <fieldset class="cr-reasons" id="crReportReasons">
+        <legend class="sr-only" style="position:absolute;left:-9999px;">Why are you reporting it?</legend>
+      </fieldset>
+      <div class="cr-other" id="crReportOtherWrap" hidden>
+        <textarea id="crReportOther" maxlength="500" placeholder="What's wrong with it?"></textarea>
+        <small>Up to 500 characters. Only the Bark team sees this.</small>
+      </div>
+      <p class="cr-dialog-msg" id="crReportMsg" role="alert"></p>
+      <div class="cr-dialog-foot">
+        <button type="button" id="crReportCancel">Cancel</button>
+        <button type="button" class="cr-send" id="crReportSend" disabled>Send report</button>
+      </div>
+    </div>
+  </div>
+  <div class="cr-toast" id="crToast" role="status" hidden></div>
 
   <footer>
     <div class="container footer-inner">
@@ -179,8 +236,10 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js?v=12"></script>
+  <script src="editor.js?v=35"></script>
   <script src="pumpkins.js?v=5"></script>
-  <script src="creations.js?v=1"></script>
+  <script src="creations.js?v=2"></script>
 </body>
 </html>

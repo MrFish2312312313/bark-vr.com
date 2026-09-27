@@ -1922,6 +1922,8 @@ function onGoogleCredential(response) {
     }
     updateEditorBar();
     injectDevNavLink();
+    // Pages that change with who is signed in (Creations moderation) listen for this.
+    window.dispatchEvent(new CustomEvent('bark:auth'));
   } catch (e) {
     console.error('JWT decode failed', e);
     alert('Sign-in failed.');
@@ -1941,6 +1943,7 @@ function signOut() {
   }
   removeDevNavLink();
   rerenderPage();
+  window.dispatchEvent(new CustomEvent('bark:auth'));
 }
 
 // ----------------------------------------------------------
