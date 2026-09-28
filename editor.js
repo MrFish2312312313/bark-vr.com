@@ -474,10 +474,16 @@ async function getLocalCurrency() {
 }
 
 // ----------------------------------------------------------
-//  EXTRAS: SEASON + WEATHER (no overrides, ever)
-//  Same algorithm as bark-manager/manager.js, with override
-//  handling stripped out so visitors always see the natural
-//  rotation.
+//  EXTRAS: SEASON + WEATHER
+//  The season is the game's REAL one, asked of the backend's
+//  /season/current (overrides, calendar and all) - the same
+//  answer the game and the Creations page get. It used to be
+//  worked out here from the weekly rotation with overrides
+//  stripped out, which can never produce a force-only season:
+//  Autumn is one, so the site said "Spring" all through autumn.
+//  The weekly rotation is now only the fallback for when the
+//  backend can't be reached, and for forecast slots after the
+//  live season ends.
 // ----------------------------------------------------------
 function mulberry32(seed) {
   let s = seed >>> 0;
@@ -489,8 +495,29 @@ function mulberry32(seed) {
   };
 }
 
-// Weekly rotation through non-forceOnly seasons. No overrides.
+// The live season, from the backend. { season, endsAtMs }, or null until it answers.
+let _liveSeason = null;
+let _liveSeasonAskedAt = 0;
+
+// Ask at most once a minute; renderExtras calls this every second.
+async function refreshLiveSeason() {
+  if (Date.now() - _liveSeasonAskedAt < 60000) return;
+  _liveSeasonAskedAt = Date.now();
+  try {
+    if (!BARK_BACKEND_URL) await loadBackendUrl();
+    if (!BARK_BACKEND_URL) return;
+    const r = await fetch(`${BARK_BACKEND_URL}/season/current?t=${Date.now()}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    if (j && j.season) _liveSeason = { season: j.season, endsAtMs: Date.now() + (j.secsLeft || 0) * 1000 };
+  } catch (e) {
+    console.warn('[season] Live season unavailable, showing the weekly rotation:', e.message);
+  }
+}
+
+// The season at a moment: the live one while it lasts, otherwise the weekly rotation.
 function computeSeasonAt(ms) {
+  if (_liveSeason && ms < _liveSeason.endsAtMs) return _liveSeason.season;
   const seasons = (BarkEditor.data.seasons || []).filter(s => !s.forceOnly);
   if (!seasons.length) return null;
   return seasons[Math.floor(ms / 604800000) % seasons.length];
@@ -629,6 +656,7 @@ function renderExtras() {
   const slotIdx = Math.floor((nowMs / 1000) / dur);
 
   // Season
+  refreshLiveSeason();
   const season = computeSeasonAt(nowMs);
   const dot    = document.getElementById('seasonDot');
   const name   = document.getElementById('seasonName');
@@ -637,8 +665,9 @@ function renderExtras() {
     dot.style.background = season.color;
     dot.style.boxShadow  = `0 0 24px ${season.color}`;
     name.textContent = season.displayName;
-    const untilNext = nextWeeklyBoundary(nowMs) - nowMs;
-    sMeta.textContent = `Rotates in ${formatDuration(untilNext)}`;
+    const live = _liveSeason && nowMs < _liveSeason.endsAtMs;
+    const untilNext = (live ? _liveSeason.endsAtMs : nextWeeklyBoundary(nowMs)) - nowMs;
+    sMeta.textContent = `${live ? 'Changes' : 'Rotates'} in ${formatDuration(untilNext)}`;
   } else {
     name.textContent = 'No seasons configured';
     sMeta.textContent = '';
