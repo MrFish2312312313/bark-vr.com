@@ -44,7 +44,7 @@
       "downloadUrl": "https://www.meta.com/experiences/bark/29216575844607934/",
       "downloadLabel": "META QUEST",
       "morePlatforms": "More platforms coming soon...",
-      "screenshot": "media/1790440433325-26620F71-507E-4CBD-AB4C-8369492751EE.png",
+      "screenshot": "media/1790615575466-4EE861DF-56D0-4801-9B30-66F9F59225F5.png",
       "reviews": [
         {
           "stars": 5,
@@ -613,12 +613,12 @@
         "name": "Paint",
         "description": "Very Glowy",
         "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
-        "effect": "Does nothing, hopefully future feature",
-        "subcategory": "Fun",
+        "effect": "You can paint with it!",
         "itemId": "Paint",
         "wheel": "Creations/Paintings",
         "model": "media/models/item-paint.glb",
-        "autoEffect": "Paint on whiteboards and easels."
+        "autoEffect": "Paint on whiteboards and easels.",
+        "subcategory": "Fun"
       },
       {
         "id": "puke",
@@ -708,12 +708,12 @@
         "name": "Walkie Talkie",
         "description": "\"Terry, you there?\"",
         "image": "media/1780510109825-SampleScene_Custom..._03.06.2026_13-07-26.png",
-        "effect": "Nothing as of now, future plans",
-        "subcategory": "Fun",
+        "effect": "Talk to your pals from a distance!",
         "itemId": "walkie talkie",
         "wheel": "Items/Useable",
         "model": "media/models/item-walkie-talkie.glb",
-        "autoEffect": "Talk to anyone else holding a walkie-talkie, from anywhere on the map."
+        "autoEffect": "Talk to anyone else holding a walkie-talkie, from anywhere on the map.",
+        "subcategory": "Useable"
       },
       {
         "id": "water-gun",
