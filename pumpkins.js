@@ -12,10 +12,10 @@
 // be tuned here too — that is the price of not shipping images, and it is worth
 // it. The functions are named the same on purpose so the two can be diffed.
 //
-// ONE SIMPLIFICATION against the game: a scrape is a vertex colour here rather
-// than a baked 1024 texture. The game needs the texture because a scraped letter
-// is millimetres wide on something held to your face; a gallery card is 300px,
-// and a browser can afford the extra tessellation instead.
+// The skin is baked exactly as PumpkinCarveSkin bakes it (same 512 size, same mask, same blur,
+// same dark rim), and every colour is lit the way the game's materials light it - see
+// gameAlbedo. The palette numbers are sRGB, not linear; getting that wrong is what made the
+// gallery pale.
 //
 // Three.js r128 UMD is loaded from CDN by the page. Everything degrades to a
 // plain message if it is absent. 🍍
@@ -280,11 +280,11 @@
   //
   // The carve file already carries shape.colorIndex — the game has always sent it, the website just
   // was not reading it. These are the twelve entries the game generates, converted to sRGB.
-  // LINEAR, exactly as PumpkinGenerator.BodyColor has them. These used to be the
-  // sRGB-ENCODED versions, which is why every pumpkin came out pale and chalky:
-  // three.js lights in linear space, so handing it gamma numbers makes the whole
-  // fruit read about a stop and a half too bright. Paired with sRGBEncoding on
-  // the renderer (see makeViewer) this now matches the game.
+  // Exactly the numbers PumpkinGenerator.BodyColor has. They are NOT linear: the game writes them as
+  // raw bytes into an sRGB texture (or a material Color, which Unity treats as sRGB too), so what
+  // the shader lights is these numbers DECODED. Treating them as linear here re-encoded them on the
+  // way into the canvas, and classic orange (0.86, 0.38, 0.09) turned into pale peach. See
+  // gameAlbedo below for the whole route.
   const BODY_COLORS = [
     [0.86, 0.38, 0.09], [0.78, 0.31, 0.07], [0.91, 0.47, 0.14],
     [0.83, 0.44, 0.13], [0.90, 0.60, 0.20], [0.92, 0.72, 0.30],
@@ -295,7 +295,40 @@
     const i = carve && carve.shape ? (carve.shape.colorIndex | 0) : 0;
     return BODY_COLORS[((i % BODY_COLORS.length) + BODY_COLORS.length) % BODY_COLORS.length];
   }
-  const FLESH = [0.93, 0.82, 0.55];      // PumpkinFlesh's _BaseColor, linear
+  // ── WHAT THE GAME ACTUALLY LIGHTS: ALBEDO, MEASURED IN THE EDITOR ──────────────────────────
+  //
+  // Every colour on a Bark pumpkin reaches the shader through a texture that darkens or tints it,
+  // and the site used to skip all of them. Measured from the real assets (average, linear):
+  //
+  //   PumpkinSkin_Albedo   (0.783, 0.757, 0.705)   the rind; also the stem's base map
+  //   PumpkinFlesh_Albedo  (0.681, 0.635, 0.537)   the cut walls and the cavity
+  //
+  // A CARVED pumpkin is drawn with its own baked texture times PumpkinSkin_Albedo times TWO
+  // (URP's _DETAIL_MULX2). The game halves the rind colour before baking so the rind comes out the
+  // same as an uncarved one, but NOT the flesh of a scrape - so a scrape is about twice as bright
+  // as the skin around it, which is exactly why it reads in the game and did not here.
+  const SKIN_MAP  = [0.783, 0.757, 0.705];
+  const FLESH_MAP = [0.681, 0.635, 0.537];
+  const BAKE_COMPENSATION = Math.pow(0.5, 1 / 2.2);   // CarvablePumpkin.DetailMulX2Compensation
+
+  // ── HEADROOM, NOT CLIPPING ──────────────────────────────────────────────────
+  //
+  // That doubled scrape flesh is brighter than 1.0 (about 1.5 on the red), which a canvas cannot
+  // hold. So every albedo on the site is stored at HEADROOM of its real value and every light is
+  // 1 / HEADROOM as bright. Lighting is linear, so that is the same picture with nothing clipped.
+  const HEADROOM = 0.65;
+  const LIGHT_GAIN = 1 / HEADROOM;
+
+  function toLinear(c) {
+    c = Math.min(1, Math.max(0, c));
+    return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  }
+  // A material colour as the game lights it: decoded, times its texture's average, into headroom.
+  const gameAlbedo = (srgb, map) => [0, 1, 2].map((k) => toLinear(srgb[k]) * map[k] * HEADROOM);
+
+  const FLESH_COLOR = [0.93, 0.82, 0.55];     // PumpkinFlesh's _BaseColor (sRGB, like every Color)
+  const FLESH = gameAlbedo(FLESH_COLOR, FLESH_MAP);   // vertex colours are linear: pre-lit albedo
+  const SCRAPE_FLESH = [0.97, 0.88, 0.52];    // PumpkinCarveSkin.FleshColor, baked as bytes
 
   // ── THE SKIN TEXTURE ───────────────────────────────────────────────────────
   //
@@ -336,15 +369,27 @@
     return (sum / Math.max(1e-4, norm)) * 2 - 1;
   }
 
-  // linear -> sRGB. The palette and FLESH are LINEAR (they are Unity's raw
-  // values); a canvas holds display bytes, so they have to be encoded on the way
-  // in and the texture told it is sRGB so three decodes it back for lighting.
   function toSRGB(x) {
     x = Math.min(1, Math.max(0, x));
     return x <= 0.0031308 ? x * 12.92 : 1.055 * Math.pow(x, 1 / 2.4) - 0.055;
   }
 
-  const SKIN_TEX = 256;
+  // ── GAME BYTE -> SITE BYTE, ONE TABLE PER CHANNEL ──────────────────────────
+  //
+  // The skin below is baked into BYTES exactly as PumpkinCarveSkin bakes it. What the game's shader
+  // then does to a byte is fixed - decode it, times the skin map, times two - so it is done once per
+  // possible byte here instead of with two Math.pow calls per texel. The result is re-encoded for
+  // the canvas (it is an sRGB texture; three decodes it back before lighting).
+  const BYTE_TO_SITE = [0, 1, 2].map((k) => {
+    const t = new Uint8ClampedArray(256);
+    for (let i = 0; i < 256; i++)
+      t[i] = Math.round(toSRGB(toLinear(i / 255) * 2 * SKIN_MAP[k] * HEADROOM) * 255);
+    return t;
+  });
+  const toByte = (x) => Math.round(Math.min(1, Math.max(0, x)) * 255);   // Unity's Color -> Color32
+
+  // The game's size. At 256 a scrape's darker rim was half a texel and simply vanished.
+  const SKIN_TEX = 512;
 
   // ── THE MOTTLE IS CACHED, NOT RECOMPUTED PER PUMPKIN ───────────────────────
   //
@@ -373,6 +418,114 @@
     return f;
   }
 
+  // ── THE CARVE MASK, AS PumpkinCarveMask.Rasterise WRITES IT ────────────────
+  //
+  // One byte per texel, in stroke order: a knife writes 255, a scrape its depth x 254, patch tape
+  // puts it back to 0. KNIFE CUTS ARE IN IT TOO, and that matters: the blur below carries a hole a
+  // texel out onto the skin, which is what gives every cut in the game its thin pale lip and dark
+  // line.
+  //
+  // RASTERISED, NOT QUERIED. Asking "is this texel in a stroke?" for every texel near one cost up
+  // to 125ms on a busy pumpkin; stamping each stroke into the mask, the way the game does it, costs
+  // only the area actually carved.
+  function carveMask(prepped) {
+    const N = SKIN_TEX;
+    const px = new Uint8Array(N * N);
+    let any = false;
+    for (const e of prepped) {
+      const st = e.st, tool = st.tool;
+      if (tool !== KNIFE && tool !== SCRAPER && tool !== TAPE) continue;
+      const erase = tool === TAPE;
+      const depth = Math.min(1, Math.max(0, st.depth == null ? 0.6 : st.depth));
+      const value = tool === KNIFE ? 255 : erase ? 0 : Math.min(254, Math.max(1, Math.round(depth * 254)));
+
+      const ry = st.closed ? 0 : Math.max(0.5 / N, (st.width || 0.02) * 0.5);
+      const rx = st.closed ? 0 : Math.max(0.5 / N, ry / (st.aspect > 0.001 ? st.aspect : 1));
+      // THREE PASSES FOR THE SEAM, as the game: u = 0 and u = 1 are the same line on the fruit.
+      for (let wrap = -1; wrap <= 1; wrap++) {
+        if (e.maxU + wrap + rx < 0 || e.minU + wrap - rx > 1) continue;   // nowhere on this pass
+        if (st.closed) fillPolygon(px, N, st, e.uu, wrap, value, erase);
+        else stampPolyline(px, N, st, e.uu, wrap, rx, ry, value, erase);
+      }
+      if (!erase) any = true;
+    }
+    if (!any) return null;
+
+    // Which rows hold anything: everything outside is untouched skin (the game's FindBounds).
+    let y0 = N, y1 = -1;
+    for (let y = 0; y < N; y++) {
+      const row = y * N;
+      for (let x = 0; x < N; x++) if (px[row + x]) { if (y < y0) y0 = y; y1 = y; break; }
+    }
+    return y1 < 0 ? null : { px, y0, y1 };
+  }
+
+  // Deepest wins; tape forces it back to bare skin. (PumpkinCarveMask.Write)
+  function writeMask(px, i, value, erase) {
+    if (erase) px[i] = 0;
+    else if (value > px[i]) px[i] = value;
+  }
+
+  // Scanline even-odd fill, so the inside of an O stays skin. (PumpkinCarveMask.FillPolygon)
+  function fillPolygon(px, N, st, uu, wrap, value, erase) {
+    const n = Math.min(st.u.length, st.v.length, uu.length);
+    let minV = Infinity, maxV = -Infinity;
+    for (let i = 0; i < n; i++) { if (st.v[i] < minV) minV = st.v[i]; if (st.v[i] > maxV) maxV = st.v[i]; }
+    const ya = Math.max(0, Math.floor(minV * N)), yb = Math.min(N - 1, Math.ceil(maxV * N));
+    const xs = [];
+    for (let y = ya; y <= yb; y++) {
+      const py = (y + 0.5) / N;
+      xs.length = 0;
+      for (let i = 0; i < n; i++) {
+        const j = (i + 1) % n;
+        const v0 = st.v[i], v1 = st.v[j];
+        if ((v0 <= py && v1 > py) || (v1 <= py && v0 > py))
+          xs.push(uu[i] + wrap + ((py - v0) / (v1 - v0)) * (uu[j] - uu[i]));
+      }
+      if (xs.length < 2) continue;
+      xs.sort((a, b) => a - b);
+      for (let k = 0; k + 1 < xs.length; k += 2) {
+        const xa = Math.max(0, Math.floor(xs[k] * N)), xb = Math.min(N - 1, Math.ceil(xs[k + 1] * N));
+        for (let x = xa; x <= xb; x++) writeMask(px, y * N + x, value, erase);
+      }
+    }
+  }
+
+  // An ellipse in UV (a circle on the fruit) stamped every half texel along the line, so the
+  // stamps overlap into a solid stroke. (PumpkinCarveMask.StampPolyline + Disc)
+  function stampPolyline(px, N, st, uu, wrap, rx, ry, value, erase) {
+    const n = Math.min(st.u.length, st.v.length, uu.length);
+    for (let i = 0; i + 1 < n; i++) {
+      const ax = uu[i] + wrap, ay = st.v[i], bx = uu[i + 1] + wrap, by = st.v[i + 1];
+      const steps = Math.max(1, Math.ceil(Math.hypot(bx - ax, by - ay) * N * 2));
+      for (let j = 0; j <= steps; j++) {
+        const t = j / steps, cx = ax + (bx - ax) * t, cy = ay + (by - ay) * t;
+        const xa = Math.max(0, Math.floor((cx - rx) * N)), xb = Math.min(N - 1, Math.ceil((cx + rx) * N));
+        if (xa > xb) continue;
+        const ya = Math.max(0, Math.floor((cy - ry) * N)), yb = Math.min(N - 1, Math.ceil((cy + ry) * N));
+        for (let y = ya; y <= yb; y++) {
+          const dy = ((y + 0.5) / N - cy) / ry, dy2 = dy * dy;
+          if (dy2 > 1) continue;
+          for (let x = xa; x <= xb; x++) {
+            const dx = ((x + 0.5) / N - cx) / rx;
+            if (dx * dx + dy2 <= 1) writeMask(px, y * N + x, value, erase);
+          }
+        }
+      }
+    }
+  }
+
+  // 3x3 average, as PumpkinCarveSkin.Blur3: u WRAPS (or the back of every pumpkin gets a hard
+  // line up the seam), v clamps.
+  function blur3(mask, x, y) {
+    const N = SKIN_TEX, px = mask.px;
+    const xm = (x - 1 + N) % N, xp = (x + 1) % N;
+    const ym = Math.max(0, y - 1) * N, yc = y * N, yp = Math.min(N - 1, y + 1) * N;
+    return (px[ym + xm] + px[ym + x] + px[ym + xp] +
+            px[yc + xm] + px[yc + x] + px[yc + xp] +
+            px[yp + xm] + px[yp + x] + px[yp + xp]) / 9;
+  }
+
   function makeSkinTexture(carve, prepped) {
     const s = carve.shape;
     const cv = document.createElement('canvas');
@@ -381,51 +534,84 @@
     const img = ctx.createImageData(SKIN_TEX, SKIN_TEX);
     const d = img.data;
 
+    // Baked exactly as PumpkinCarveSkin bakes it - the rind halved first (the carved material
+    // doubles it back), everything in BYTES - then turned into what the game's shader would light.
     const SKIN = bodyColor(carve);
+    const BAKE = SKIN.map((c) => c * BAKE_COMPENSATION);
+    const [R8, G8, B8] = BYTE_TO_SITE;
 
     // The mottle repeats around u, so the lattice period has to be a whole
     // number or the noise does not meet itself at the seam.
     const circumference = Math.PI * Math.max(0.01, s.width);
-    const aspect = Math.max(1, Math.round(circumference / Math.max(0.01, s.height)));
+    const aspect = Math.min(8, Math.max(1, Math.round(circumference / Math.max(0.01, s.height))));
 
-    // Only bother asking about scrapes where a stroke actually is.
-    let sLo = 1, sHi = 0;
-    for (const { st } of prepped)
-      if (st.tool === SCRAPER)
-        for (const vv of st.v) { if (vv < sLo) sLo = vv; if (vv > sHi) sHi = vv; }
-    sLo -= 0.08; sHi += 0.08;
-
+    const N = SKIN_TEX;
+    const mask = carveMask(prepped);     // null when nothing touches the skin
     const mottle = mottleField(aspect);
 
-    for (let y = 0; y < SKIN_TEX; y++) {
-      const v = (y + 0.5) / SKIN_TEX;
-      const rowScrape = sHi >= sLo && v >= sLo && v <= sHi;
-      const mrow = (((y * MOTTLE) / SKIN_TEX) | 0) * MOTTLE;
-      for (let x = 0; x < SKIN_TEX; x++) {
-        const u = (x + 0.5) / SKIN_TEX;
-        const m = mottle[mrow + (((x * MOTTLE) / SKIN_TEX) | 0)];
+    // WHAT GLOWS WHEN A CANDLE IS LIT: thin skin, by how thin (PumpkinCarveSkin's emission map).
+    // Only a pumpkin with marks gets one. Opaque black to start: a canvas keeps colour
+    // premultiplied, so a transparent texel would lose its value on the way to the GPU.
+    let glowCv = null, glowImg = null, glowD = null;
+    if (mask) {
+      glowCv = document.createElement('canvas');
+      glowCv.width = glowCv.height = N;
+      glowImg = glowCv.getContext('2d').createImageData(N, N);
+      glowD = glowImg.data;
+      new Uint32Array(glowD.buffer).fill(0xff000000);
+    }
 
-        let r = SKIN[0] * (1 + m);
-        let g = SKIN[1] * (1 + m) * (1 + m * 0.45);   // paler patches drift yellow
-        let b = SKIN[2] * (1 + m);
+    for (let y = 0; y < N; y++) {
+      const v = (y + 0.5) / N;
+      const marked = mask !== null && y >= mask.y0 - 1 && y <= mask.y1 + 1;
+      const mrow = (((y * MOTTLE) / N) | 0) * MOTTLE;
+      for (let x = 0; x < N; x++) {
+        const m = mottle[mrow + (((x * MOTTLE) / N) | 0)];
 
-        if (rowScrape) {
-          const dep = scrapeDepth(prepped, u, v);
-          if (dep > 0) {
-            const t = smoothstep01((dep - 0.04) / 0.18);
-            r += (FLESH[0] - r) * t; g += (FLESH[1] - g) * t; b += (FLESH[2] - b) * t;
+        let r = toByte(BAKE[0] * (1 + m));
+        let g = toByte(BAKE[1] * (1 + m) * (1 + m * 0.45));   // paler patches drift yellow
+        let b = toByte(BAKE[2] * (1 + m));
+
+        if (marked) {
+          // PumpkinCarveSkin.Composite, line for line.
+          const scrape = Math.min(1, blur3(mask, x, y) / 254);
+          if (scrape > 0.001) {
+            const t = smoothstep01((scrape - 0.04) / 0.18);
+            if (t > 0.001) {
+              const u = (x + 0.5) / N;
+              const grain = 0.92 + fbm(u * aspect * 4, v * 1.6, 9, 2) * 0.10;
+              // A DARKER LINE AT THE EDGE - the skin is cut through at the rim of a scrape, and
+              // without it the marks read as painted on rather than gouged in.
+              const edge = Math.min(1, Math.max(0, 1 - Math.abs(scrape - 0.13) / 0.11));
+              const dark = 1 - edge * 0.34;
+              r = toByte((r / 255 + (SCRAPE_FLESH[0] * grain - r / 255) * t) * dark);
+              g = toByte((g / 255 + (SCRAPE_FLESH[1] * grain - g / 255) * t) * dark);
+              b = toByte((b / 255 + (SCRAPE_FLESH[2] * grain - b / 255) * t) * dark);
+
+              const glow = toByte(smoothstep01((scrape - 0.15) / 0.8));
+              const gi = (y * N + x) * 4;
+              glowD[gi] = glowD[gi + 1] = glowD[gi + 2] = glow;
+            }
           }
         }
 
-        const i = (y * SKIN_TEX + x) * 4;
-        d[i]     = toSRGB(r) * 255;
-        d[i + 1] = toSRGB(g) * 255;
-        d[i + 2] = toSRGB(b) * 255;
+        const i = (y * N + x) * 4;
+        d[i]     = R8[r];
+        d[i + 1] = G8[g];
+        d[i + 2] = B8[b];
         d[i + 3] = 255;
       }
     }
     ctx.putImageData(img, 0, 0);
+    if (glowCv) glowCv.getContext('2d').putImageData(glowImg, 0, 0);
 
+    return {
+      map: skinCanvasTexture(cv, true),
+      glow: glowCv ? skinCanvasTexture(glowCv, false) : null,   // linear, like the game's
+    };
+  }
+
+  function skinCanvasTexture(cv, srgb) {
     const tex = new THREE.CanvasTexture(cv);
     // ── NOT FLIPPED, OR EVERY SCRAPE COMES OUT UPSIDE DOWN ────────────────────
     //
@@ -437,7 +623,7 @@
     tex.wrapS = THREE.RepeatWrapping;    // u goes around
     tex.wrapT = THREE.ClampToEdgeWrapping;
     tex.anisotropy = 4;
-    if (THREE.sRGBEncoding !== undefined) tex.encoding = THREE.sRGBEncoding;
+    if (srgb && THREE.sRGBEncoding !== undefined) tex.encoding = THREE.sRGBEncoding;
     tex.needsUpdate = true;
     return tex;
   }
@@ -448,7 +634,10 @@
   // body mesh with nothing sitting on it. Ported from PumpkinGenerator.BuildStem,
   // including the seating: the base starts BELOW the top and is swallowed by the
   // shoulder, or every pumpkin gets a stem hovering over a hole.
-  const STEM_COLORS = [[0.60, 0.50, 0.32], [0.55, 0.46, 0.28], [0.64, 0.55, 0.36]];
+  // PumpkinGenerator.StemColor, lit as the game lights it (the stem wears PumpkinSkin_Albedo too).
+  // Used raw, as linear vertex colours, they came out pale beige instead of brown.
+  const STEM_COLORS = [[0.60, 0.50, 0.32], [0.55, 0.46, 0.28], [0.64, 0.55, 0.36]]
+    .map((c) => gameAlbedo(c, SKIN_MAP));
 
   function buildStem(s, colorIndex, push) {
     const rings = 14;
@@ -620,7 +809,8 @@
       }
     }
 
-    buildStem(s, (s.colorIndex | 0), push);
+    const stemStart = fPos.length / 3;   // the stem gets its own group: a candle lights the
+    buildStem(s, (s.colorIndex | 0), push);   // flesh, and a glowing stem looked plugged in
 
     // Concatenated skin-first, so the two groups are contiguous ranges. Every
     // vertex carries both a uv and a colour; each material only reads the one it
@@ -660,7 +850,8 @@
     g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
     g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
     g.addGroup(0, skinCount, 0);                 // skin  -> textured material
-    g.addGroup(skinCount, fleshCount, 1);        // flesh + stem -> vertex colours
+    g.addGroup(skinCount, stemStart, 1);         // flesh -> vertex colours, glows when lit
+    g.addGroup(skinCount + stemStart, fleshCount - stemStart, 2);   // stem -> vertex colours
     g.computeBoundingSphere();
     return g;
   }
@@ -708,20 +899,33 @@
     const cam = new THREE.PerspectiveCamera(32, 1, 0.01, 50);
 
     const geo = buildPumpkin(carve);
-    const skinTex = makeSkinTexture(carve, prepStrokes(carve));
+    const skin = makeSkinTexture(carve, prepStrokes(carve));
+    // Nearly matte, as the game has them (smoothness 0.06 rind, 0.05 flesh). At 0.78 a broad
+    // white sheen sat over the top of every fruit and paled it further.
+    // The emissive is the game's GlowColor (linear) through the scrape glow map, off until lit.
     const skinMat = new THREE.MeshStandardMaterial({
-      map: skinTex, roughness: 0.78, metalness: 0.0, side: THREE.DoubleSide });
+      map: skin.map, roughness: 0.93, metalness: 0.0, side: THREE.DoubleSide,
+      emissive: new THREE.Color(1.0, 0.063, 0.0048), emissiveMap: skin.glow, emissiveIntensity: 0.0 });
     const fleshMat = new THREE.MeshStandardMaterial({
-      vertexColors: true, roughness: 0.85, metalness: 0.0, side: THREE.DoubleSide,
+      vertexColors: true, roughness: 0.95, metalness: 0.0, side: THREE.DoubleSide,
       // The inside is what a candle lights, so it is the part that glows. Driven
       // by setLit below rather than baked in, so an unlit pumpkin looks unlit.
       emissive: new THREE.Color(0xff6a1a), emissiveIntensity: 0.0 });
-    const mesh = new THREE.Mesh(geo, [skinMat, fleshMat]);
+    const stemMat = new THREE.MeshStandardMaterial({
+      vertexColors: true, roughness: 0.96, metalness: 0.0, side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(geo, [skinMat, fleshMat, stemMat]);
     scene.add(mesh);
 
-    const amb = new THREE.AmbientLight(0xfff2e4, 0.42);   // warm, so it cannot grey the rind
+    // ── DAYLIGHT, NOT A PHOTO STUDIO ─────────────────────────────────────────
+    //
+    // This was ambient 0.42 + key 1.45: a face turned to the key got 1.9x its own colour, and with
+    // no tone mapping everything past 1.0 simply clips - orange went peach, cream went white. Now
+    // the front of a pumpkin gets about its own colour and only the brightest shoulder a little
+    // more, which is how it looks in the game in daylight. (x LIGHT_GAIN: see HEADROOM.)
+    const AMB = 0.5 * LIGHT_GAIN, KEY = 0.8 * LIGHT_GAIN, RIM = 0.2 * LIGHT_GAIN;
+    const amb = new THREE.AmbientLight(0xfff2e4, AMB);   // warm, so it cannot grey the rind
     scene.add(amb);
-    const key = new THREE.DirectionalLight(0xfff4e6, 1.45);
+    const key = new THREE.DirectionalLight(0xfff4e6, KEY);
     key.position.set(2, 3, 2.5);
     scene.add(key);
 
@@ -733,7 +937,7 @@
     // (0.86, 0.38, 0.09), almost no blue in it — rendered with 2.76x too much
     // blue. A blue fill on a surface with nothing to reflect it lands entirely as
     // desaturation, so the most orange pumpkins came out the palest.
-    const rim = new THREE.DirectionalLight(0xffe9d2, 0.22);
+    const rim = new THREE.DirectionalLight(0xffe9d2, RIM);
     rim.position.set(-2, 1, -2);
     scene.add(rim);
 
@@ -766,7 +970,8 @@
       // A paged gallery throws cards away every page turn. The GPU-side geometry and the skin
       // texture outlive their canvas unless they are released here.
       dispose() {
-        geo.dispose(); skinTex.dispose(); skinMat.dispose(); fleshMat.dispose();
+        geo.dispose(); skin.map.dispose(); if (skin.glow) skin.glow.dispose();
+        skinMat.dispose(); fleshMat.dispose(); stemMat.dispose();
       },
       setLit(on) {
         // ── WHAT MAKES A LIT PUMPKIN READ ────────────────────────────────────
@@ -785,11 +990,14 @@
         // when the holes are brighter than what surrounds them. So only the
         // INSIDE emits, and the rind is left to a dim warm ambient plus whatever
         // the candle throws on it. Contrast is the effect; brightness is not.
-        candle.intensity = on ? 2.2 : 0.0;
-        amb.intensity    = on ? 0.13 : 0.42;
-        key.intensity    = on ? 0.20 : 1.45;
-        rim.intensity    = on ? 0.05 : 0.22;
+        candle.intensity = on ? 2.2 * LIGHT_GAIN : 0.0;
+        amb.intensity    = on ? 0.13 * LIGHT_GAIN : AMB;
+        key.intensity    = on ? 0.20 * LIGHT_GAIN : KEY;
+        rim.intensity    = on ? 0.05 * LIGHT_GAIN : RIM;
         fleshMat.emissiveIntensity = on ? 0.85 : 0.0;
+        // Scraped skin is thin enough for the candle to show through, as in the game
+        // (CarvablePumpkin.SkinGlow). No glow map = no marks = nothing to light.
+        skinMat.emissiveIntensity = on && skin.glow ? 0.45 : 0.0;
       },
       tick(dt) {
         const w = canvas.clientWidth | 0, h = canvas.clientHeight | 0;
