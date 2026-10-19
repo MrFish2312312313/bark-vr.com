@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T22:50:38.488Z",
+  "updatedAt": "2026-10-19T16:53:49.855Z",
   "woodTypes": [
     {
       "woodID": "Oak",
@@ -93,6 +93,11 @@
     },
     {
       "woodID": "Sand",
+      "rarityWeight": 20,
+      "isFancyWood": true
+    },
+    {
+      "woodID": "Rotten",
       "rarityWeight": 20,
       "isFancyWood": true
     }
