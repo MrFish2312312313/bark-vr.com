@@ -255,17 +255,19 @@
   },
   "woodOverrides": {
     "Bean": {
+      "image": "media/1780419379707-IMG_8514.png",
       "cannotGet": true,
-      "rarity": "uncommon",
-      "image": "media/1780419379707-IMG_8514.png"
+      "isLimited": true,
+      "rarity": "uncommon"
     },
     "easter special": {
       "cannotGet": true
     },
     "easter": {
+      "image": "media/1780419288506-screen.png",
       "cannotGet": true,
-      "rarity": "uncommon",
-      "image": "media/1780419288506-screen.png"
+      "isLimited": true,
+      "rarity": "uncommon"
     },
     "Rust": {
       "rarity": "legendary",
