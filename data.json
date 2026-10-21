@@ -329,6 +329,10 @@
     },
     "Sand": {
       "image": "media/1788139419945-sand.png"
+    },
+    "Rotten": {
+      "isLimited": true,
+      "image": "media/1792557107515-Rotten_Wood.png"
     }
   },
   "database": {
