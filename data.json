@@ -1993,6 +1993,40 @@
         "wheel": "Items/Useable",
         "model": "media/models/item-leafblower.glb",
         "autoEffect": "Blows leaves everywhere."
+      },
+      {
+        "id": "portable-carve-station",
+        "name": "Portable Carve Station",
+        "description": "",
+        "subcategory": "Creations",
+        "subsubcategory": "Pumpkins",
+        "auto": true,
+        "itemId": "PortableCarveStation",
+        "wheel": "Creations/Pumpkins",
+        "model": "media/models/item-portablecarvestation.glb",
+        "autoEffect": "A carving table in your pocket. Throw it down on flat ground and it unfolds into a full carving bench anyone can use. It folds itself away once nobody's around."
+      },
+      {
+        "id": "chimkin-stand",
+        "name": "Chimkin Stand",
+        "description": "",
+        "subcategory": "Pet Item",
+        "auto": true,
+        "itemId": "Chimkin Stand",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-chimkin-stand.glb",
+        "autoEffect": "Put it down and it sets up a feeding stand. Your Fat Chimkin sits in front - grab kernels from the heap and feed it by hand, and it gets fatter and fatter."
+      },
+      {
+        "id": "bark-chip-rotten",
+        "name": "Bark Chip Rotten",
+        "description": "",
+        "subcategory": "Bark Chip",
+        "auto": true,
+        "itemId": "Bark Chip Rotten",
+        "wheel": "Items/Bark Chip",
+        "model": "media/models/item-bark-chip-rotten.glb",
+        "autoEffect": "Hold it to your mouth to turn into Rotten wood for a while."
       }
     ],
     "cosmetics": [
@@ -3346,6 +3380,138 @@
         "itemId": "AcornHat",
         "wheel": "Cosmetics/Head",
         "model": "media/models/item-acornhat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "skeleton-shirt",
+        "name": "Skeleton Shirt",
+        "description": "",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "Skeleton Shirt",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-skeleton-shirt.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "oni-hat",
+        "name": "Oni Hat",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "OniHat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-onihat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "oni-mask",
+        "name": "Oni Mask",
+        "description": "",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "OniMask",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-onimask.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "skeleton-mask",
+        "name": "Skeleton Mask",
+        "description": "",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "Skeleton Mask",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-skeleton-mask.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "wizard-beard",
+        "name": "Wizard Beard",
+        "description": "",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Wizard Beard",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-wizard-beard.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "wizard-eyebrows",
+        "name": "Wizard Eyebrows",
+        "description": "",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "Wizard Eyebrows",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-wizard-eyebrows.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "wizard-hat",
+        "name": "Wizard Hat",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Wizard Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-wizard-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "wizard-cape",
+        "name": "Wizard Cape",
+        "description": "",
+        "subcategory": "Back",
+        "auto": true,
+        "itemId": "Wizard Cape",
+        "wheel": "Cosmetics/Back",
+        "model": "media/models/item-wizard-cape.glb",
+        "autoEffect": "A cosmetic you wear on your back. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "witch-nose",
+        "name": "Witch Nose",
+        "description": "",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Witch Nose",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-witch-nose.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "franken-bolts",
+        "name": "Franken Bolts",
+        "description": "",
+        "subcategory": "Face",
+        "auto": true,
+        "itemId": "Franken Bolts",
+        "wheel": "Cosmetics/Face",
+        "model": "media/models/item-franken-bolts.glb",
+        "autoEffect": "A cosmetic you wear on your face. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "pumpkin-body",
+        "name": "Pumpkin Body",
+        "description": "",
+        "subcategory": "Body",
+        "auto": true,
+        "itemId": "Pumpkin Body",
+        "wheel": "Cosmetics/Body",
+        "model": "media/models/item-pumpkin-body.glb",
+        "autoEffect": "A cosmetic you wear on your body. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "pumpkin-lid",
+        "name": "Pumpkin Lid",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Pumpkin Lid",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-pumpkin-lid.glb",
         "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
       }
     ],
@@ -4904,6 +5070,108 @@
         }
       ],
       "prefabResource": "Puklian"
+    },
+    {
+      "id": "crow",
+      "name": "Crow",
+      "description": "",
+      "hidden": false,
+      "image": "media/pet-Icon_Crow.png",
+      "model": "media/models/pet-crow.glb",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-kave_msri-crow-sfx-318131.mp3",
+        "media/pet-dragon-studio-crow-caw-with-echoing-reverb-472375.mp3",
+        "media/pet-mish7913-hooded-crow-cawing-217457.mp3"
+      ],
+      "normalColors": [],
+      "naturalColors": [],
+      "colorSlots": [],
+      "prefabResource": "Crow"
+    },
+    {
+      "id": "fat-chimkin",
+      "name": "Fat Chimkin",
+      "description": "",
+      "hidden": false,
+      "image": "",
+      "model": "media/models/pet-fat-chimkin.glb",
+      "modelScale": 1.0,
+      "sounds": [
+        "media/pet-kave_msri-crow-sfx-318131.mp3",
+        "media/pet-dragon-studio-crow-caw-with-echoing-reverb-472375.mp3",
+        "media/pet-mish7913-hooded-crow-cawing-217457.mp3"
+      ],
+      "normalColors": [
+        "#FCFFDC",
+        "#E79708",
+        "#E7000D"
+      ],
+      "naturalColors": [
+        "#FCFFDC",
+        "#F7F5EE",
+        "#E8C27A",
+        "#D99A3A",
+        "#8E3B1F",
+        "#2A2A30",
+        "#A9AEB8",
+        "#B9A8D0",
+        "#5E3B24",
+        "#F2E6C9",
+        "#E79708",
+        "#F2C53D",
+        "#7A808A",
+        "#3C3C40",
+        "#E7000D",
+        "#B0122E",
+        "#F0507A",
+        "#7A1FA0"
+      ],
+      "colorSlots": [
+        {
+          "name": "Feathers",
+          "material": "Feathers_0",
+          "mode": "Palette",
+          "normal": "#FCFFDC",
+          "palette": [
+            "#FCFFDC",
+            "#F7F5EE",
+            "#E8C27A",
+            "#D99A3A",
+            "#8E3B1F",
+            "#2A2A30",
+            "#A9AEB8",
+            "#B9A8D0",
+            "#5E3B24",
+            "#F2E6C9"
+          ]
+        },
+        {
+          "name": "Beak & Feet",
+          "material": "BeakFeet_1",
+          "mode": "Palette",
+          "normal": "#E79708",
+          "palette": [
+            "#E79708",
+            "#F2C53D",
+            "#7A808A",
+            "#3C3C40"
+          ]
+        },
+        {
+          "name": "Comb",
+          "material": "Comb_2",
+          "mode": "Palette",
+          "normal": "#E7000D",
+          "palette": [
+            "#E7000D",
+            "#B0122E",
+            "#F0507A",
+            "#7A1FA0"
+          ]
+        }
+      ],
+      "prefabResource": "Items/Fat Chimkin"
     }
   ],
   "mutations": [
@@ -4966,5 +5234,5 @@
   "petsConfig": {
     "mutationsPublic": true
   },
-  "modelsVersion": "20260926170642"
+  "modelsVersion": "20261024185337"
 }
