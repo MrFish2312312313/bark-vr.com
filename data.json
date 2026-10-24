@@ -622,7 +622,7 @@
         "image": "media/1780508455105-SampleScene_Custom..._03.06.2026_12-40-07.png",
         "effect": "You can paint with it!",
         "itemId": "Paint",
-        "wheel": "Creations/Paintings",
+        "wheel": "Creations/Paintings/Tools",
         "model": "media/models/item-paint.glb",
         "autoEffect": "Paint on whiteboards and easels.",
         "subcategory": "Fun"
@@ -1473,7 +1473,7 @@
         "subsubcategory": "Paintings",
         "auto": true,
         "itemId": "Easel",
-        "wheel": "Creations/Paintings",
+        "wheel": "Creations/Paintings/Tools",
         "model": "media/models/item-easel.glb",
         "autoEffect": "Set it down and paint on it, then print your painting to keep it."
       },
@@ -1933,7 +1933,7 @@
         "subsubcategory": "Pumpkins",
         "auto": true,
         "itemId": "Small Candle",
-        "wheel": "Creations/Pumpkins",
+        "wheel": "Creations/Pumpkins/Tools",
         "model": "media/models/item-small-candle.glb",
         "autoEffect": "Put it inside a carved pumpkin and the face lights up."
       },
@@ -1945,7 +1945,7 @@
         "subsubcategory": "Pumpkins",
         "auto": true,
         "itemId": "Pumpkin Knife",
-        "wheel": "Creations/Pumpkins",
+        "wheel": "Creations/Pumpkins/Tools",
         "model": "media/models/item-pumpkin-knife.glb",
         "autoEffect": "Carves holes in a pumpkin at the carving bench. Tap to place points, or hold and draw."
       },
@@ -1957,7 +1957,7 @@
         "subsubcategory": "Pumpkins",
         "auto": true,
         "itemId": "Pumpkin Scraper",
-        "wheel": "Creations/Pumpkins",
+        "wheel": "Creations/Pumpkins/Tools",
         "model": "media/models/item-pumpkin-scraper.glb",
         "autoEffect": "Scrapes the skin off a pumpkin at the carving bench, for shading and detail."
       },
@@ -1969,7 +1969,7 @@
         "subsubcategory": "Pumpkins",
         "auto": true,
         "itemId": "PumpkinPatchTape",
-        "wheel": "Creations/Pumpkins",
+        "wheel": "Creations/Pumpkins/Tools",
         "model": "media/models/item-pumpkinpatchtape.glb",
         "autoEffect": "Tape over a cut you didn't mean to make - it puts the skin back."
       },
@@ -2003,7 +2003,7 @@
         "subsubcategory": "Pumpkins",
         "auto": true,
         "itemId": "PortableCarveStation",
-        "wheel": "Creations/Pumpkins",
+        "wheel": "Creations/Pumpkins/Tools",
         "model": "media/models/item-portablecarvestation.glb",
         "autoEffect": "A carving table in your pocket. Throw it down on flat ground and it unfolds into a full carving bench anyone can use. It folds itself away once nobody's around."
       },
@@ -2028,6 +2028,189 @@
         "wheel": "Items/Bark Chip",
         "model": "media/models/item-bark-chip-rotten.glb",
         "autoEffect": "Hold it to your mouth to turn into Rotten wood for a while."
+      },
+      {
+        "id": "backpack",
+        "name": "Backpack",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_backpack",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-backpack.glb"
+      },
+      {
+        "id": "candy-bucket",
+        "name": "Candy Bucket",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_candy_bucket",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-candy-bucket.glb"
+      },
+      {
+        "id": "oil-lantern",
+        "name": "Oil Lantern",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_lantern",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-lantern.glb"
+      },
+      {
+        "id": "golden-ear",
+        "name": "Golden Ear",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_golden_ear",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-golden-ear.glb"
+      },
+      {
+        "id": "dowsing-rod",
+        "name": "Dowsing Rod",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_dowsing_rod",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-dowsing-rod.glb"
+      },
+      {
+        "id": "ball-of-twine",
+        "name": "Ball Of Twine",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_twine",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-twine.glb"
+      },
+      {
+        "id": "shears",
+        "name": "Shears",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_shears",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-shears.glb"
+      },
+      {
+        "id": "straw-doll",
+        "name": "Straw Doll",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_straw_doll",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-straw-doll.glb"
+      },
+      {
+        "id": "lockpick",
+        "name": "Lockpick",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_lockpick",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-lockpick.glb"
+      },
+      {
+        "id": "bandage",
+        "name": "Bandage",
+        "description": "",
+        "subcategory": "Useable",
+        "auto": true,
+        "itemId": "hal_bandage",
+        "wheel": "Items/Useable",
+        "model": "media/models/item-hal-bandage.glb"
+      },
+      {
+        "id": "soul-wisp",
+        "name": "Soul Wisp",
+        "description": "",
+        "subcategory": "Pet Item",
+        "auto": true,
+        "itemId": "Soul Wisp",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-soul-wisp.glb",
+        "autoEffect": "A little cold flame you catch drifting in the ground fog. Touch it to Ectoplasm to make a Rebirth Wisp, which reborns a ghost pet."
+      },
+      {
+        "id": "ectoplasm",
+        "name": "Ectoplasm",
+        "description": "",
+        "subcategory": "Pet Item",
+        "auto": true,
+        "itemId": "Ectoplasm",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-ectoplasm.glb",
+        "autoEffect": "Touch a wandering ghost in the fog or at night and it leaves this behind. Touch it to a Soul Wisp to make a Rebirth Wisp."
+      },
+      {
+        "id": "rebirth-wisp",
+        "name": "Rebirth Wisp",
+        "description": "",
+        "subcategory": "Pet Item",
+        "auto": true,
+        "itemId": "Rebirth Wisp",
+        "wheel": "Pets/Items",
+        "model": "media/models/item-rebirth-wisp.glb",
+        "autoEffect": "A Soul Wisp and Ectoplasm fused into one. Hold it to your ghost pet (level 100+) and it's reborn - back to level 0, just as big as it was, and it keeps growing."
+      },
+      {
+        "id": "1st-place-pumpkin-trophy",
+        "name": "1st Place Pumpkin Trophy",
+        "description": "",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Pumpkin Trophy 1",
+        "wheel": "Items/Special/Trophies",
+        "model": "media/models/item-pumpkin-trophy-1.glb"
+      },
+      {
+        "id": "2nd-place-pumpkin-trophy",
+        "name": "2nd Place Pumpkin Trophy",
+        "description": "",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Pumpkin Trophy 2",
+        "wheel": "Items/Special/Trophies",
+        "model": "media/models/item-pumpkin-trophy-2.glb"
+      },
+      {
+        "id": "3rd-place-pumpkin-trophy",
+        "name": "3rd Place Pumpkin Trophy",
+        "description": "",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Pumpkin Trophy 3",
+        "wheel": "Items/Special/Trophies",
+        "model": "media/models/item-pumpkin-trophy-3.glb"
+      },
+      {
+        "id": "4th-place-pumpkin-trophy",
+        "name": "4th Place Pumpkin Trophy",
+        "description": "",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Pumpkin Trophy 4",
+        "wheel": "Items/Special/Trophies",
+        "model": "media/models/item-pumpkin-trophy-4.glb"
+      },
+      {
+        "id": "5th-place-pumpkin-trophy",
+        "name": "5th Place Pumpkin Trophy",
+        "description": "",
+        "subcategory": "Special",
+        "auto": true,
+        "itemId": "Pumpkin Trophy 5",
+        "wheel": "Items/Special/Trophies",
+        "model": "media/models/item-pumpkin-trophy-5.glb"
       }
     ],
     "cosmetics": [
@@ -3514,6 +3697,17 @@
         "wheel": "Cosmetics/Head",
         "model": "media/models/item-pumpkin-lid.glb",
         "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "pumpkin-head",
+        "name": "Pumpkin Head",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Pumpkin Head",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-pumpkin-head.glb",
+        "autoEffect": "Turns your head into one of YOUR carved pumpkins. Set a saved pumpkin on the stand to see how it'll look, pull the trigger to turn its face, then put it on."
       }
     ],
     "maps": [
@@ -5235,5 +5429,5 @@
   "petsConfig": {
     "mutationsPublic": true
   },
-  "modelsVersion": "20261024185337"
+  "modelsVersion": "20261024192636"
 }
