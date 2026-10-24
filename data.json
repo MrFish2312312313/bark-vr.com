@@ -333,8 +333,9 @@
       "image": "media/1788139419945-sand.png"
     },
     "Rotten": {
+      "image": "media/1792557107515-Rotten_Wood.png",
       "isLimited": true,
-      "image": "media/1792557107515-Rotten_Wood.png"
+      "rarity": "uncommon"
     }
   },
   "database": {
@@ -5078,7 +5079,7 @@
       "hidden": false,
       "image": "media/pet-Icon_Crow.png",
       "model": "media/models/pet-crow.glb",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-kave_msri-crow-sfx-318131.mp3",
         "media/pet-dragon-studio-crow-caw-with-echoing-reverb-472375.mp3",
@@ -5096,7 +5097,7 @@
       "hidden": false,
       "image": "",
       "model": "media/models/pet-fat-chimkin.glb",
-      "modelScale": 1.0,
+      "modelScale": 1,
       "sounds": [
         "media/pet-kave_msri-crow-sfx-318131.mp3",
         "media/pet-dragon-studio-crow-caw-with-echoing-reverb-472375.mp3",
