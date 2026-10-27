@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- BARK-SEO-START -->
+  <meta name="description" content="FEVERDREAM worlds: what players built in the dream, and the species they photographed." />
+  <link rel="canonical" href="https://bark-vr.com/feverdream" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bark-vr.com/feverdream" />
+  <meta property="og:title" content="FEVERDREAM Worlds | BARKVR" />
+  <meta property="og:description" content="What players built in the dream, and the species they photographed." />
+  <meta property="og:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta property="og:site_name" content="BARKVR" />
+  <meta name="theme-color" content="#ff7a1a" />
+  <!-- BARK-SEO-END -->
+  <title>FEVERDREAM Worlds | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="stylesheet" href="style.css?v=35" />
+  <link rel="stylesheet" href="halloween.css?v=1" />
+  <style>
+    .fd-bar { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1.4rem; }
+    .fd-status { color:var(--text-muted); font-size:.9rem; }
+    .fd-code { display:flex; gap:.4rem; margin-left:auto; }
+    .fd-code input { width:8.5rem; padding:.5rem .7rem; border-radius:8px; border:1px solid #2b3a49; background:var(--bg2);
+                     color:var(--text); font:inherit; font-size:1rem; letter-spacing:.15em; }
+    .fd-code button, .fd-back { padding:.5rem 1rem; border-radius:999px; border:1px solid var(--accent); background:transparent;
+                     color:var(--accent); font:inherit; font-weight:600; cursor:pointer; }
+    .fd-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
+    .fd-card { background:var(--bg2); border:1px solid #202a36; border-radius:14px; overflow:hidden; cursor:pointer;
+               transition:border-color .15s, transform .15s; text-align:left; color:inherit; font:inherit; padding:0; }
+    .fd-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+    .fd-thumbs { display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; aspect-ratio:3/1; background:var(--bg3); }
+    .fd-thumbs img { width:100%; height:100%; object-fit:cover; display:block; }
+    .fd-thumbs .fd-none { grid-column:1 / -1; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:.8rem; }
+    .fd-card-body { padding:.8rem 1rem 1rem; }
+    .fd-card h3 { font-family:'Bebas Neue', sans-serif; letter-spacing:.04em; font-size:1.5rem; font-weight:400; margin:0 0 .2rem; }
+    .fd-meta { color:var(--text-muted); font-size:.85rem; }
+    .fd-world h2 { font-family:'Bebas Neue', sans-serif; letter-spacing:.04em; font-size:2.6rem; font-weight:400; margin:.6rem 0 .1rem; }
+    .fd-sub { color:var(--text-muted); margin:0 0 1.4rem; }
+    .fd-sub b { color:var(--accent); letter-spacing:.12em; }
+    .fd-h { font-family:'Bebas Neue', sans-serif; letter-spacing:.05em; font-size:1.5rem; font-weight:400; margin:1.8rem 0 .7rem; }
+    .fd-maps { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px; }
+    .fd-map { background:var(--bg2); border:1px solid #202a36; border-radius:14px; padding:.6rem; }
+    .fd-map canvas { width:100%; aspect-ratio:1; display:block; border-radius:8px; background:#0b1016; }
+    .fd-map p { margin:.5rem .2rem 0; color:var(--text-muted); font-size:.8rem; }
+    .fd-photos { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:14px; }
+    .fd-photo { margin:0; background:var(--bg2); border:1px solid #202a36; border-radius:12px; overflow:hidden; }
+    .fd-photo img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+    .fd-photo figcaption { padding:.5rem .7rem; font-size:.85rem; }
+    .fd-photo figcaption span { display:block; color:var(--text-muted); font-size:.75rem; }
+    .fd-empty { color:var(--text-muted); }
+    .fd-note { margin-top:2rem; font-size:.85rem; opacity:.65; max-width:62ch; line-height:1.5; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/community">COMMUNITY</a>
+      <a href="/creations">CREATIONS</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
+    <a href="/creations" onclick="toggleMenu()">CREATIONS</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// FEVERDREAM</div>
+      <h1>DREAM WORLDS</h1>
+    </div>
+  </section>
+
+  <section class="community-section">
+    <div class="container">
+      <div class="fd-bar">
+        <span class="fd-status" id="fdStatus">Waking the dream&hellip;</span>
+        <form class="fd-code" id="fdCodeForm">
+          <input id="fdCode" inputmode="numeric" maxlength="6" placeholder="world code" aria-label="World code" />
+          <button type="submit">OPEN</button>
+        </form>
+      </div>
+      <div id="fdView"></div>
+      <p class="fd-note">Every FEVERDREAM world has a six-number code. Public worlds show up here with what was built in them
+        and the species players chose to share. Private worlds never appear. Photos are only shared when a player turns
+        on PHOTOS: SHARED in the game.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="/#about">About</a>
+        <a href="/games">Games</a>
+        <a href="/store">Store</a>
+        <a href="/extras">Extras</a>
+        <a href="/database">Index</a>
+        <a href="/players">Players</a>
+        <a href="/community">Community</a>
+        <a href="/creations">Creations</a>
+        <a href="/careers">Hiring</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js?v=12"></script>
+  <script src="feverdream.js?v=1"></script>
+</body>
+</html>
