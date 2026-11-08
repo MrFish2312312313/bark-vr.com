@@ -125,7 +125,37 @@
                 border: 1px solid var(--accent, #00e5ff); color: var(--cr-strong, #e6edf3); font-size: .9rem;
                 box-shadow: 0 10px 30px rgba(0,0,0,.45); max-width: calc(100vw - 32px); }
     .cr-toast[hidden] { display: none; }
-  </style>
+  
+    /* ── TOYS (toys.js) ── */
+    .cr-play { margin:.6rem .9rem .9rem; padding:.5rem 1rem; border-radius:999px; border:0; cursor:pointer; font-weight:700;
+               background:var(--accent, #00e5ff); color:var(--cr-on-accent, #04121a); }
+    .cr-play:hover { filter:brightness(1.1); }
+    .cr-card canvas.cr-canvas { cursor:pointer; }
+    .ty-player { position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:1rem; }
+    .ty-backdrop { position:absolute; inset:0; background:rgba(0,0,0,.72); }
+    .ty-card { position:relative; width:min(860px, 100%); max-height:96vh; overflow:auto; border-radius:18px; padding:1.1rem 1.2rem 1.3rem;
+               background:var(--cr-card, #0e141b); border:1px solid var(--cr-line-strong, #2b3a49); color:var(--cr-strong, #e6edf3); }
+    .ty-x { position:absolute; top:.6rem; right:.7rem; background:none; border:0; color:inherit; font-size:1.3rem; cursor:pointer; }
+    .ty-title { margin:0 2rem 0 0; font-size:1.5rem; }
+    .ty-by { margin:.2rem 0 .8rem; opacity:.75; }
+    .ty-stage { position:relative; border-radius:14px; overflow:hidden; background:radial-gradient(circle at 50% 40%, #3a2a22, #160f0c); }
+    .ty-canvas { display:block; width:100%; height:min(56vh, 460px); touch-action:none; cursor:grab; }
+    .ty-hint { position:absolute; left:0; right:0; bottom:.4rem; margin:0; text-align:center; font-size:.85rem; opacity:.7; pointer-events:none; }
+    .ty-row { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; margin-top:.7rem; }
+    .ty-row:empty { display:none; }
+    .ty-label { font-size:.75rem; letter-spacing:.08em; opacity:.6; margin-right:.3rem; }
+    .ty-btn { padding:.4rem .85rem; border-radius:999px; border:1px solid var(--cr-line-strong, #2b3a49); background:transparent; color:inherit; cursor:pointer; font-weight:600; }
+    .ty-btn:hover { border-color:var(--accent, #00e5ff); }
+    .ty-btn.is-on { background:var(--accent, #00e5ff); border-color:var(--accent, #00e5ff); color:var(--cr-on-accent, #04121a); }
+    .ty-rules { margin-top:1rem; }
+    .ty-rules h3 { font-size:.8rem; letter-spacing:.1em; opacity:.65; margin:0 0 .5rem; }
+    .ty-rule { display:flex; flex-wrap:wrap; gap:.3rem; align-items:center; margin:.35rem 0; }
+    .ty-blk { display:inline-flex; align-items:center; gap:.35rem; padding:.3rem .6rem; border-radius:8px; font-size:.8rem; font-weight:700; letter-spacing:.02em; background:#3b2a20; }
+    .ty-when { background:#b5651d; color:#fff; } .ty-on { background:#7a4b1f; color:#fff; } .ty-do { background:#2f5d8a; color:#fff; } .ty-wait { background:#555; color:#fff; }
+    .ty-arrow { opacity:.6; margin:0 .2rem; }
+    .ty-sw { width:.85rem; height:.85rem; border-radius:3px; display:inline-block; border:1px solid rgba(255,255,255,.5); }
+    .ty-none { opacity:.7; }
+</style>
 </head>
 <body>
 
@@ -173,6 +203,7 @@
   <section class="community-section">
     <div class="container">
       <div class="cr-tabs" role="tablist">
+        <button class="cr-tab" role="tab" id="tab-toys" data-tab="toys" aria-selected="false">TOYS</button>
         <button class="cr-tab" role="tab" id="tab-pumpkins" data-tab="pumpkins" aria-selected="false" hidden>PUMPKINS</button>
         <button class="cr-tab" role="tab" id="tab-paintings" data-tab="paintings" aria-selected="false">PAINTINGS</button>
       </div>
@@ -236,10 +267,13 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="main.js?v=12"></script>
   <script src="editor.js?v=36"></script>
   <script src="pumpkins.js?v=7"></script>
-  <script src="creations.js?v=2"></script>
+  <script src="toys.js?v=1"></script>
+  <script src="creations.js?v=3"></script>
 </body>
 </html>

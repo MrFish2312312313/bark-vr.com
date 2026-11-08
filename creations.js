@@ -1,6 +1,8 @@
 // creations.js — bark-vr.com/creations: everything players have made in BARK, for everyone.
 //
-// Two tabs:
+// Three tabs:
+//   TOYS       toys made at the Workshop's toy benches - in 3D, and ALIVE: their states and their code blocks play here
+//              (toys.js). They come from the CREATIONS SERVER (backend-url.json's `creationsUrl`, run by Bark Manager).
 //   PUMPKINS   carved pumpkins, rebuilt in 3D from the cuts (the viewer lives in pumpkins.js and
 //              is shared with the moderation page). Only open while the game's season is AUTUMN -
 //              the backend's /season/current says which real season the in-game one belongs to -
@@ -22,10 +24,11 @@
 // Discord bot posts it to #reports. 🍍
 
 const Creations = (() => {
-  const PER_PAGE = { pumpkins: 10, paintings: 12 };
+  const PER_PAGE = { pumpkins: 10, paintings: 12, toys: 12 };
   const REPORTED_KEY = 'bark.reported';               // ids this browser already reported
 
   let BACKEND = '';
+  let CREATIONS = '';                                 // the creations server (toys)
   let tab = null;
   let page = 1;
   let autumn = false;
@@ -52,7 +55,13 @@ const Creations = (() => {
       const r = await fetch('backend-url.json?t=' + Date.now());
       const j = await r.json();
       if (j && j.backendUrl) BACKEND = String(j.backendUrl).replace(/\/$/, '');
+      if (j && j.creationsUrl) CREATIONS = String(j.creationsUrl).replace(/\/$/, '');
     } catch (e) { console.warn('[creations] backend-url.json failed:', e.message); }
+    // Testing on this computer: ?backend= / ?creations= may point at a local server (never anywhere else).
+    const q = new URLSearchParams(location.search);
+    const local = (u) => (u && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(u) ? u : '');
+    if (local(q.get('backend'))) BACKEND = local(q.get('backend'));
+    if (local(q.get('creations'))) CREATIONS = local(q.get('creations'));
     return BACKEND;
   }
 
@@ -181,6 +190,14 @@ const Creations = (() => {
       return { items: all.slice(offset, offset + per), total: all.length };
     }
 
+    if (which === 'toys') {
+      if (!CREATIONS) throw new Error('toys-offline');
+      const r = await fetch(`${CREATIONS}/api/creations/public?limit=${per}&offset=${offset}`, { headers: authHeaders() });
+      if (!r.ok) throw new Error('toys-offline');
+      const j = await r.json();
+      return { items: j.toys || [], total: j.total | 0 };
+    }
+
     if (which === 'pumpkins') {
       if (legacy.pumpkins) return { items: legacy.pumpkins.slice(offset, offset + per), total: legacy.pumpkins.length };
       const r = await fetch(`${BACKEND}/api/pumpkins/public?limit=${per}&offset=${offset}`);
@@ -207,7 +224,9 @@ const Creations = (() => {
     setTabs();
 
     $('crLights').hidden = tab !== 'pumpkins';
-    $('crNote').textContent = tab === 'pumpkins'
+    $('crNote').textContent = tab === 'toys'
+      ? 'Made at the toy benches in the Workshop, out of shapes, bends and twists. PLAY one: click its pieces, try its states, and watch the code blocks its maker gave it.'
+      : tab === 'pumpkins'
       ? 'Every pumpkin here is rebuilt from the cuts that were actually made to it - the shape it grew with, and every point placed with the knife and the scraper. Drag any of them around to see the inside.'
       : 'Painted on whiteboards in BARK and printed in-game.';
 
@@ -216,7 +235,9 @@ const Creations = (() => {
     try { res = await fetchPage(tab, page); }
     catch (e) {
       if (token !== loadToken) return;
-      status(tab === 'paintings' && e.message === 'offline'
+      status(e.message === 'toys-offline'
+        ? 'The toy shelf is not online right now - check back soon.'
+        : tab === 'paintings' && e.message === 'offline'
         ? 'The paintings gallery is not online yet - check back soon.'
         : 'Could not reach the gallery: ' + e.message);
       pager(0);
@@ -229,7 +250,7 @@ const Creations = (() => {
     if (page > pages && res.total > 0) { page = pages; updateUrl(); return render(); }
     pager(pages);
 
-    const noun = tab === 'pumpkins' ? 'pumpkin' : 'painting';
+    const noun = tab === 'pumpkins' ? 'pumpkin' : tab === 'toys' ? 'toy' : 'painting';
     if (!res.total) { status(`No ${noun}s yet.`); return; }
     let line = `${res.total} ${noun}${res.total === 1 ? '' : 's'}`;
     if (pages > 1) line += ` · page ${page} of ${pages}`;
@@ -237,6 +258,7 @@ const Creations = (() => {
     status(line);
 
     if (tab === 'pumpkins') await renderPumpkins(res.items, token);
+    else if (tab === 'toys') renderToys(res.items);
     else renderPaintings(res.items);
     if (token === loadToken) showFocus();
   }
@@ -315,6 +337,37 @@ const Creations = (() => {
     }
   }
 
+  function renderToys(items) {
+    const grid = $('crGrid');
+    for (const rec of items) {
+      const card = document.createElement('div');
+      card.className = 'cr-card' + (rec.hidden ? ' is-hidden' : '');
+      card.dataset.id = rec.id;
+      const states = Array.isArray(rec.states) ? rec.states.length : 0, rules = rec.rules | 0;
+      const bits = [`${rec.parts | 0} piece${(rec.parts | 0) === 1 ? '' : 's'}`];
+      if (states > 1) bits.push(`${states} states`);
+      if (rules > 0) bits.push(`${rules} rule${rules === 1 ? '' : 's'}`);
+      card.innerHTML =
+        `<canvas class="cr-canvas"></canvas>` +
+        `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
+        `<div class="cr-meta-top"><strong>${esc(rec.name || 'Toy')}</strong>${reportButton(rec)}</div>` +
+        `by ${esc(rec.author || 'someone')} · ${bits.join(' · ')} · ${esc(new Date(rec.updatedAt || Date.now()).toLocaleDateString())}` +
+        `${modMeta(rec)}</div>` +
+        `<button type="button" class="cr-play" data-play="${esc(rec.id)}">▶ PLAY</button>` + modBlock(rec);
+      grid.appendChild(card);
+      if (window.Toys && rec.hasModel !== false) window.Toys.still(card.querySelector('.cr-canvas'), CREATIONS, rec);
+    }
+    grid.querySelectorAll('button[data-play]').forEach((b) => b.addEventListener('click', () => {
+      const rec = items.find((x) => x.id === b.dataset.play);
+      if (rec && window.Toys) window.Toys.open(CREATIONS, rec);
+    }));
+    grid.querySelectorAll('canvas.cr-canvas').forEach((c) => c.addEventListener('click', () => {
+      const rec = items.find((x) => x.id === c.closest('.cr-card').dataset.id);
+      if (rec && window.Toys) window.Toys.open(CREATIONS, rec);
+    }));
+    wireCards(items.map((r) => ({ ...r, artist: r.author })), 'toy');
+  }
+
   function renderPaintings(items) {
     const grid = $('crGrid');
     for (const rec of items) {
@@ -354,6 +407,7 @@ const Creations = (() => {
   /// item, so the right page can be worked out; for anyone else it simply opens the tab.
   function showFocus() {
     if (!focusId) return;
+    if (tab === 'toys' && window.Toys) { window.Toys.open(CREATIONS, { id: focusId, name: '', author: '' }); }
     const card = $('crGrid').querySelector(`.cr-card[data-id="${CSS.escape(focusId)}"]`);
     if (!card) return;
     card.classList.add('cr-focus');
@@ -384,7 +438,7 @@ const Creations = (() => {
   function openReport(kind, id, artist, button) {
     reportCtx = { kind, id, button };
     const box = $('crReport');
-    $('crReportTitle').textContent = kind === 'pumpkin' ? 'Report this pumpkin' : 'Report this painting';
+    $('crReportTitle').textContent = kind === 'pumpkin' ? 'Report this pumpkin' : kind === 'toy' ? 'Report this toy' : 'Report this painting';
     $('crReportWho').textContent = artist ? `Made by ${artist}` : '';
     $('crReportReasons').innerHTML = REASONS.map(([v, label], i) => `
       <label class="cr-reason">
@@ -432,7 +486,7 @@ const Creations = (() => {
     send.disabled = true;
     $('crReportMsg').textContent = 'Sending…';
     try {
-      const r = await fetch(`${BACKEND}/api/reports`, {
+      const r = await fetch(reportCtx.kind === 'toy' ? `${CREATIONS}/api/creations/report` : `${BACKEND}/api/reports`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ kind: reportCtx.kind, id: reportCtx.id, reason: chosenReason(),
@@ -520,14 +574,15 @@ const Creations = (() => {
 
   async function act(id, action) {
     if (!mod) return;
-    const kind = tab;                                   // 'pumpkins' or 'paintings' - same routes
-    const noun = kind === 'pumpkins' ? 'pumpkin' : 'painting';
+    const kind = tab;                                   // 'pumpkins' or 'paintings' - same routes; toys live on the creations server
+    const noun = kind === 'pumpkins' ? 'pumpkin' : kind === 'toys' ? 'toy' : 'painting';
+    const base = kind === 'toys' ? `${CREATIONS}/api/creations` : `${BACKEND}/api/${kind}`;
     if (action === 'delete' &&
         !confirm(`Permanently delete this ${noun}? It vanishes from every player's game and cannot be recovered.`)) return;
     try {
       const r = action === 'delete'
-        ? await fetch(`${BACKEND}/api/${kind}/${encodeURIComponent(id)}`, { method: 'DELETE', headers: authHeaders() })
-        : await fetch(`${BACKEND}/api/${kind}/${encodeURIComponent(id)}/${action}`, { method: 'POST', headers: authHeaders() });
+        ? await fetch(`${base}/${encodeURIComponent(id)}`, { method: 'DELETE', headers: authHeaders() })
+        : await fetch(`${base}/${encodeURIComponent(id)}/${action}`, { method: 'POST', headers: authHeaders() });
       if (r.status === 401) {
         mod = null;
         modLine('Your sign-in has expired - sign in again from the editor bar to keep moderating.');
@@ -579,7 +634,8 @@ const Creations = (() => {
     await checkSeason();
     await refreshMod();
 
-    tab = wantTab === 'paintings' ? 'paintings'
+    tab = wantTab === 'toys' ? 'toys'
+        : wantTab === 'paintings' ? 'paintings'
         : wantTab === 'pumpkins' && pumpkinsOpen() ? 'pumpkins'
         : pumpkinsOpen() ? 'pumpkins' : 'paintings';
     if (wantTab === 'pumpkins' && tab !== 'pumpkins') page = 1;
