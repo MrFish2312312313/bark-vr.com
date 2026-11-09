@@ -84,22 +84,25 @@ window.Toys = (() => {
       let shown = !p.hidden && !(g && g.hidden), color = p.color, finish = p.finish | 0;
       const st = this.states[this.state];
       if (this.state > 0 && st) {
-        let gl = null, pl = null;
+        let wl = null, gl = null, pl = null;
         for (const l of st.looks || []) {
-          if (l.target.kind === 2 && p.group !== 0 && l.target.id === p.group) gl = l;
+          if (l.target.kind === 0) wl = l;
+          else if (l.target.kind === 2 && p.group !== 0 && l.target.id === p.group) gl = l;
           else if (l.target.kind === 1 && l.target.id === p.id) pl = l;
-          else if (l.target.kind === 0 && !gl) gl = l;
         }
-        for (const l of [gl, pl]) {
+        // Colour + finish: the most particular wins. Seen or not: HIDING WINS (as in the game).
+        let anyHide = false, anyShow = false;
+        for (const l of [wl, gl, pl]) {
           if (!l) continue;
-          if (l.hidden >= 0) shown = l.hidden === 0;
+          if (l.hidden === 1) anyHide = true; else if (l.hidden === 0) anyShow = true;
           if (l.recolor) color = l.color;
           if (l.refinish) finish = l.finish | 0;
         }
+        if (anyHide) shown = false; else if (anyShow) shown = true;
       }
       let glow = 0;
-      for (const pass of [0, 2, 1]) for (const ch of this.changes) {
-        if (ch.target.kind !== pass || !this.covers(ch.target, p)) continue;
+      for (const ch of this.changes) {                    // in the order they were made: the latest wins (as in the game)
+        if (!this.covers(ch.target, p)) continue;
         if (ch.hidden >= 0) shown = ch.hidden === 0;
         if (ch.recolor) color = ch.color;
         if (ch.refinish) finish = ch.finish;
@@ -141,7 +144,9 @@ window.Toys = (() => {
 
     change(t) {
       let c = this.changes.find((x) => this.same(x.target, t));
-      if (!c) { c = { target: t, hidden: -1, recolor: false, refinish: false, glow: -1 }; this.changes.push(c); }
+      if (c) this.changes.splice(this.changes.indexOf(c), 1);   // moved to the end: the latest change wins
+      else c = { target: t, hidden: -1, recolor: false, refinish: false, glow: -1 };
+      this.changes.push(c);
       return c;
     }
 
