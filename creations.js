@@ -78,7 +78,8 @@ const Creations = (() => {
     } catch (e) { autumn = false; }
   }
 
-  function pumpkinsOpen() { return autumn || !!mod; }
+  // Pumpkins stay public all year (the user, 2026-11-08) - `autumn` only picks which tab opens first.
+  function pumpkinsOpen() { return true; }
 
   // ── Who is moderating ─────────────────────────────────────────────────────────────────────────
 
@@ -637,7 +638,7 @@ const Creations = (() => {
     tab = wantTab === 'toys' ? 'toys'
         : wantTab === 'paintings' ? 'paintings'
         : wantTab === 'pumpkins' && pumpkinsOpen() ? 'pumpkins'
-        : pumpkinsOpen() ? 'pumpkins' : 'paintings';
+        : autumn ? 'pumpkins' : 'toys';
     if (wantTab === 'pumpkins' && tab !== 'pumpkins') page = 1;
     const fp = pageOfFocus();
     if (fp) page = fp;

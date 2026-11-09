@@ -18,10 +18,10 @@ window.Toys = (() => {
     { s: 0.18 }, { s: 0.38 }, { s: 0.95, glass: true }, { s: 0.5, glow: 1.6 }, { s: 0.72 },
   ];
   const TRIGGERS = ['TOUCHED', 'CLICKED', 'A / X PRESSED', 'GRABBED', 'LET GO', 'SHAKEN', 'THROWN', 'LANDED', 'EVERY', 'STARTED', 'IN STATE'];
-  const VERBS = ['SHOW', 'HIDE', 'TOGGLE', 'COLOUR', 'NEXT COLOUR', 'FINISH', 'GO TO STATE', 'NEXT STATE', 'SPIN', 'WOBBLE', 'GROW', 'GLOW', 'SOUND', 'BUZZ', 'SPARKLES', 'WAIT'];
+  const VERBS = ['SHOW', 'HIDE', 'TOGGLE', 'COLOUR', 'NEXT COLOUR', 'FINISH', 'GO TO STATE', 'NEXT STATE', 'SPIN', 'WOBBLE', 'GROW', 'GLOW', 'SOUND', 'BUZZ', 'SPARKLES', 'WAIT', 'RESET LOOK', 'SOAR'];
   const FINISHES = ['Plastic', 'Matte', 'Glossy', 'Metal', 'Wood', 'Plush', 'Clay', 'Rubber', 'Glass', 'Glow', 'Glitter'];
   const SOUNDS = ['SQUEAK', 'HONK', 'BELL', 'POP', 'BOING', 'CHIME', 'DRUM', 'WHISTLE', 'ZAP', 'BLIP'];
-  const V = { Show: 0, Hide: 1, Toggle: 2, Colour: 3, NextColour: 4, Finish: 5, GoToState: 6, NextState: 7, Spin: 8, Wobble: 9, Grow: 10, Glow: 11, Sound: 12, Buzz: 13, Sparkles: 14, Wait: 15 };
+  const V = { Show: 0, Hide: 1, Toggle: 2, Colour: 3, NextColour: 4, Finish: 5, GoToState: 6, NextState: 7, Spin: 8, Wobble: 9, Grow: 10, Glow: 11, Sound: 12, Buzz: 13, Sparkles: 14, Wait: 15, Reset: 16, Soar: 17 };
   const TR = { Touched: 0, Clicked: 1, ButtonA: 2, Grabbed: 3, LetGo: 4, Shaken: 5, Thrown: 6, Landed: 7, Every: 8, Started: 9, EnteredState: 10 };
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -72,6 +72,7 @@ window.Toys = (() => {
       this.onState = null;                              // the player redraws its buttons
       this.fired = new Map(); this.budgetT = 0; this.budget = 0;
       this.alive = true;
+      this.size = new T.Box3().setFromObject(root).getSize(new T.Vector3()).length();
       this.apply();
     }
 
@@ -132,8 +133,7 @@ window.Toys = (() => {
       const n = Math.max(1, this.states.length);
       const before = this.state;
       this.state = Math.max(0, Math.min(n - 1, s | 0));
-      this.changes = [];
-      this.apply();
+      this.apply();                                     // the blocks' changes stay on top (RESET LOOK clears them)
       if (this.onState) this.onState();
       if (this.state !== before)
         this.rules.forEach((r, i) => { if (r.when === TR.EnteredState && Math.round(r.every) === this.state) this.run(i); });
@@ -146,6 +146,7 @@ window.Toys = (() => {
     }
 
     pivot(t) {
+      if (t && t.kind === 2) { const g = this.groups.get(t.id); if (g && g.pivotSet) return new T.Vector3(-g.pivot.x, g.pivot.y, g.pivot.z); }
       const box = new T.Box3(), tmp = new T.Box3();
       let any = false;
       this.root.updateMatrixWorld(true);
@@ -212,6 +213,8 @@ window.Toys = (() => {
           case V.Buzz: if (navigator.vibrate) navigator.vibrate(Math.round(60 + 140 * (a.a || 0.5))); break;
           case V.Sparkles: if (this.sparkle) this.sparkle(this.pivot(t), a.color); break;
           case V.Wait: await sleep(Math.min(10, a.a || 1) * 1000); break;
+          case V.Reset: this.changes = []; this.apply(); break;
+          case V.Soar: this.anims.push({ t: { kind: 0, id: 0 }, kind: V.Soar, t0: performance.now() / 1000, dur: Math.max(0.5, Math.min(8, a.a || 2.5)), amount: a.a, pivot: this.pivot({ kind: 0 }) }); break;
         }
       }
     }
@@ -231,6 +234,7 @@ window.Toys = (() => {
             if (a.kind === V.Spin) { const e = f * f * (3 - 2 * f); q.setFromAxisAngle(Y, Math.PI * 2 * a.amount * e); }
             else if (a.kind === V.Wobble) { const d = Math.exp(-f * 3); q.setFromAxisAngle(Z, (14 * Math.PI / 180) * Math.sin(f * Math.PI * 6) * d); s = 1 + 0.12 * Math.sin(f * Math.PI * 7) * d; }
             else if (a.kind === V.Grow) s = 1 + (a.amount - 1) * Math.sin(f * Math.PI);
+            else if (a.kind === V.Soar) { const lift = Math.sin(f * Math.PI); q.setFromAxisAngle(Z, 0.25 * Math.sin(f * Math.PI * 4) * lift); pos.y += lift * 0.6 * Math.max(0.05, this.size || 0.1); }
             tmp.copy(pos).sub(a.pivot).multiplyScalar(s).applyQuaternion(q);
             pos.copy(a.pivot).add(tmp);
             quat.premultiply(q);
@@ -379,12 +383,13 @@ window.Toys = (() => {
     const head = `<span class="ty-blk ty-when">WHEN ${esc(when)}</span>` + (r.when === TR.Touched ? `<span class="ty-blk ty-on">ON ${esc(nameOf(info, r.on).toUpperCase())}</span>` : '');
     const acts = (r.acts || []).map((a) => {
       let txt = VERBS[a.verb] || '?';
-      const targeted = ![V.GoToState, V.NextState, V.Sound, V.Buzz, V.Wait].includes(a.verb);
+      const targeted = ![V.GoToState, V.NextState, V.Sound, V.Buzz, V.Wait, V.Reset, V.Soar].includes(a.verb);
       if (targeted) txt += ' ' + nameOf(info, a.target).toUpperCase();
       if (a.verb === V.Sound) txt += ' ' + (SOUNDS[Math.round(a.a)] || '');
       if (a.verb === V.GoToState) { const s = (info.states || [])[Math.round(a.a)]; txt += ' ' + (s ? s.name : Math.round(a.a)); }
       if (a.verb === V.Finish) txt += ' ' + (FINISHES[Math.round(a.a)] || '').toUpperCase();
-      if (a.verb === V.Wait) txt += ` ${(+a.a).toFixed(1)} s`;
+      if (a.verb === V.Wait || a.verb === V.Soar) txt += ` ${(+a.a).toFixed(1)} s`;
+      if (a.verb === V.Sound && Math.round(a.a) >= SOUNDS.length) txt = 'SOUND RECORDED ' + (Math.round(a.a) - SOUNDS.length + 1);
       const sw = a.verb === V.Colour ? `<i class="ty-sw" style="background:rgb(${Math.round(a.color.r * 255)},${Math.round(a.color.g * 255)},${Math.round(a.color.b * 255)})"></i>` : '';
       return (a.wait > 0 ? `<span class="ty-blk ty-wait">WAIT ${(+a.wait).toFixed(2).replace(/0$/, '')} s</span>` : '') + `<span class="ty-blk ty-do">${sw}${esc(txt)}</span>`;
     }).join('');
