@@ -18,10 +18,11 @@ window.Toys = (() => {
     { s: 0.18 }, { s: 0.38 }, { s: 0.95, glass: true }, { s: 0.5, glow: 1.6 }, { s: 0.72 },
   ];
   const TRIGGERS = ['TOUCHED', 'CLICKED', 'A / X PRESSED', 'GRABBED', 'LET GO', 'SHAKEN', 'THROWN', 'LANDED', 'EVERY', 'STARTED', 'IN STATE'];
-  const VERBS = ['SHOW', 'HIDE', 'TOGGLE', 'COLOUR', 'NEXT COLOUR', 'FINISH', 'GO TO STATE', 'NEXT STATE', 'SPIN', 'WOBBLE', 'GROW', 'GLOW', 'SOUND', 'BUZZ', 'SPARKLES', 'WAIT', 'RESET LOOK', 'SOAR', 'CHANGE PICTURE', 'TURN', 'SLIDE'];
+  const VERBS = ['SHOW', 'HIDE', 'TOGGLE', 'COLOUR', 'NEXT COLOUR', 'FINISH', 'GO TO STATE', 'NEXT STATE', 'SPIN', 'WOBBLE', 'GROW', 'GLOW', 'SOUND', 'BUZZ', 'SPARKLES', 'WAIT', 'RESET LOOK', 'SOAR', 'CHANGE PICTURE', 'TURN', 'SLIDE', 'PLAY PICTURES', 'VOLUME', 'TURN OFF BLOCK', 'TURN ON BLOCK'];
+  const FLIP_FPS = [1, 2, 5, 10];
   const FINISHES = ['Plastic', 'Matte', 'Glossy', 'Metal', 'Wood', 'Plush', 'Clay', 'Rubber', 'Glass', 'Glow', 'Glitter'];
   const SOUNDS = ['SQUEAK', 'HONK', 'BELL', 'POP', 'BOING', 'CHIME', 'DRUM', 'WHISTLE', 'ZAP', 'BLIP'];
-  const V = { Show: 0, Hide: 1, Toggle: 2, Colour: 3, NextColour: 4, Finish: 5, GoToState: 6, NextState: 7, Spin: 8, Wobble: 9, Grow: 10, Glow: 11, Sound: 12, Buzz: 13, Sparkles: 14, Wait: 15, Reset: 16, Soar: 17, Picture: 18 };
+  const V = { Show: 0, Hide: 1, Toggle: 2, Colour: 3, NextColour: 4, Finish: 5, GoToState: 6, NextState: 7, Spin: 8, Wobble: 9, Grow: 10, Glow: 11, Sound: 12, Buzz: 13, Sparkles: 14, Wait: 15, Reset: 16, Soar: 17, Picture: 18, Turn: 19, Slide: 20, Flipbook: 21, Volume: 22, BlockOff: 23, BlockOn: 24 };
   const TR = { Touched: 0, Clicked: 1, ButtonA: 2, Grabbed: 3, LetGo: 4, Shaken: 5, Thrown: 6, Landed: 7, Every: 8, Started: 9, EnteredState: 10 };
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -139,6 +140,7 @@ window.Toys = (() => {
       this.anims = [];
       this.onState = null;                              // the player redraws its buttons
       this.fired = new Map(); this.budgetT = 0; this.budget = 0;
+      this.off = new Set(); this.volume = 1; this.held = [];   // TURN OFF BLOCK, VOLUME, TURN / SLIDE that stay
       this.alive = true;
       this.size = new T.Box3().setFromObject(root).getSize(new T.Vector3()).length();
       this.apply();
@@ -257,6 +259,7 @@ window.Toys = (() => {
     }
 
     async run(i) {
+      if (this.off.has(i)) return;                              // switched off by a TURN OFF BLOCK
       const now = performance.now();
       if (now - (this.fired.get(i) || -1e9) < 250) return;
       if (now - this.budgetT > 1000) { this.budgetT = now; this.budget = 0; }
@@ -293,20 +296,39 @@ window.Toys = (() => {
             this.anims.push({ t, kind: a.verb, t0: performance.now() / 1000, dur, amount: a.a, pivot: this.pivot(t) });
             break;
           }
-          case V.Sound: Sound.play(Math.round(a.a), this.info.recorded); break;
+          case V.Sound: Sound.play(Math.round(a.a), this.info.recorded, this.volume); break;
           case V.Buzz: if (navigator.vibrate) navigator.vibrate(Math.round(60 + 140 * (a.a || 0.5))); break;
           case V.Sparkles: if (this.sparkle) this.sparkle(this.pivot(t), a.color); break;
           case V.Wait: await sleep(Math.min(10, a.a || 1) * 1000); break;
-          case V.Reset: this.changes = []; for (const e of this.parts.values()) if (e.pages) e.page = 0; this.apply(); break;
+          case V.Reset: this.changes = []; this.held = []; for (const e of this.parts.values()) if (e.pages) { e.page = 0; e.flip = null; } this.apply(); break;
           case V.Picture: {
             // CHANGE PICTURE: 0 = each painted piece it covers moves on to its next picture, 1-4 = that picture.
             const pg = Math.round(a.a);
             for (const e of this.parts.values()) {
               if (!e.pages || !this.covers(t, e.part)) continue;
+              e.flip = null;
               const n = Math.max(1, e.pages.length);
               e.page = pg <= 0 ? ((e.page | 0) + 1) % n : Math.min(pg - 1, n - 1);
             }
             this.apply(); break;
+          }
+          case V.Flipbook: {
+            // PLAY PICTURES: flip through each covered piece's pictures, so many a second, once or round and round.
+            const fps = FLIP_FPS[Math.max(0, Math.min(FLIP_FPS.length - 1, Math.round(a.a)))];
+            for (const e of this.parts.values()) {
+              if (!e.pages || e.pages.length < 2 || !this.covers(t, e.part)) continue;
+              e.flip = { fps, loop: !!a.back, t0: performance.now() / 1000 }; e.page = 0;
+            }
+            this.apply(); break;
+          }
+          case V.Volume: this.volume = Math.max(0, Math.min(1, (+a.a) / 100)); break;
+          case V.BlockOff: this.off.add(Math.round(a.a) - 1); break;
+          case V.BlockOn: this.off.delete(Math.round(a.a) - 1); break;
+          case V.Turn: case V.Slide: {
+            const m = { t, kind: a.verb, axis: a.axis | 0, amount: +a.a, t0: performance.now() / 1000, time: Math.max(0.05, +a.time || 0.35), back: !!a.back, pivot: this.pivot(t) };
+            m.dur = m.back ? m.time * 2 : m.time;
+            this.anims.push(m);
+            break;
           }
           case V.Soar: this.anims.push({ t: { kind: 0, id: 0 }, kind: V.Soar, t0: performance.now() / 1000, dur: Math.max(0.5, Math.min(8, a.a || 2.5)), amount: a.a, pivot: this.pivot({ kind: 0 }) }); break;
         }
@@ -314,13 +336,25 @@ window.Toys = (() => {
     }
 
     pose(now) {
+      // PLAY PICTURES ticking
+      let flipped = false;
+      for (const e of this.parts.values()) {
+        if (!e.flip || !e.pages) continue;
+        const n = e.pages.length;
+        let i = Math.floor((now - e.flip.t0) * e.flip.fps);
+        if (e.flip.loop) i = ((i % n) + n) % n; else if (i >= n - 1) { i = n - 1; e.flip = null; }
+        if (i !== e.page) { e.page = i; flipped = true; }
+      }
+      if (flipped) this.apply();
+      // a TURN / SLIDE that STAYS is kept once it's done
+      for (const a of this.anims) if ((a.kind === V.Turn || a.kind === V.Slide) && !a.back && now - a.t0 > a.dur) this.held.push(Object.assign({}, a, { t0: -1e9, dur: 1e-6 }));
       this.anims = this.anims.filter((a) => now - a.t0 <= a.dur);
       const q = new T.Quaternion(), tmp = new T.Vector3(), Y = new T.Vector3(0, 1, 0), Z = new T.Vector3(0, 0, 1);
       for (const { part, objs } of this.parts.values()) {
         for (const b of objs) {
           const pos = b.pos.clone(), quat = b.quat.clone();
           let k = 1;
-          for (const a of this.anims) {
+          for (const a of this.held.concat(this.anims)) {
             if (!this.covers(a.t, part)) continue;
             const f = Math.min(1, Math.max(0, (now - a.t0) / a.dur));
             let s = 1;
@@ -328,6 +362,12 @@ window.Toys = (() => {
             if (a.kind === V.Spin) { const e = f * f * (3 - 2 * f); q.setFromAxisAngle(Y, Math.PI * 2 * a.amount * e); }
             else if (a.kind === V.Wobble) { const d = Math.exp(-f * 3); q.setFromAxisAngle(Z, (14 * Math.PI / 180) * Math.sin(f * Math.PI * 6) * d); s = 1 + 0.12 * Math.sin(f * Math.PI * 7) * d; }
             else if (a.kind === V.Grow) s = 1 + (a.amount - 1) * Math.sin(f * Math.PI);
+            else if (a.kind === V.Turn || a.kind === V.Slide) {
+              const g = a.back ? (f < 0.5 ? f * 2 : 2 - f * 2) : f, e = g * g * (3 - 2 * g);
+              const ax = a.axis === 0 ? new T.Vector3(1, 0, 0) : a.axis === 2 ? new T.Vector3(0, 0, 1) : Y;
+              if (a.kind === V.Turn) q.setFromAxisAngle(ax, (a.amount * Math.PI / 180) * e);
+              else pos.addScaledVector(ax, a.amount * e);
+            }
             else if (a.kind === V.Soar) { const lift = Math.sin(f * Math.PI); q.setFromAxisAngle(Z, 0.25 * Math.sin(f * Math.PI * 4) * lift); pos.y += lift * 0.6 * Math.max(0.05, this.size || 0.1); }
             tmp.copy(pos).sub(a.pivot).multiplyScalar(s).applyQuaternion(q);
             pos.copy(a.pivot).add(tmp);
@@ -394,7 +434,7 @@ window.Toys = (() => {
       recordedBuffers.set(b64, b);
       return b;
     }
-    function play(i, recorded) {
+    function play(i, recorded, vol) {
       try {
         ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
         if (ctx.state === 'suspended') ctx.resume();
@@ -411,7 +451,7 @@ window.Toys = (() => {
         }
         if (!buffer) return;
         const src = ctx.createBufferSource(), g = ctx.createGain();
-        g.gain.value = 0.5;
+        g.gain.value = 0.5 * (vol == null ? 1 : vol);
         src.buffer = buffer; src.connect(g); g.connect(ctx.destination); src.start();
       } catch (e) { /* no sound in this browser */ }
     }
@@ -504,12 +544,17 @@ window.Toys = (() => {
     const head = `<span class="ty-blk ty-when">WHEN ${esc(when)}</span>` + (r.when === TR.Touched ? `<span class="ty-blk ty-on">ON ${esc(nameOf(info, r.on).toUpperCase())}</span>` : '');
     const acts = (r.acts || []).map((a) => {
       let txt = VERBS[a.verb] || '?';
-      const targeted = ![V.GoToState, V.NextState, V.Sound, V.Buzz, V.Wait, V.Reset, V.Soar].includes(a.verb);
+      const targeted = ![V.GoToState, V.NextState, V.Sound, V.Buzz, V.Wait, V.Reset, V.Soar, V.Volume, V.BlockOff, V.BlockOn].includes(a.verb);
       if (targeted) txt += ' ' + nameOf(info, a.target).toUpperCase();
       if (a.verb === V.Sound) txt += ' ' + (SOUNDS[Math.round(a.a)] || '');
       if (a.verb === V.GoToState) { const s = (info.states || [])[Math.round(a.a)]; txt += ' ' + (s ? s.name : Math.round(a.a)); }
       if (a.verb === V.Finish) txt += ' ' + (FINISHES[Math.round(a.a)] || '').toUpperCase();
       if (a.verb === V.Wait || a.verb === V.Soar) txt += ` ${(+a.a).toFixed(1)} s`;
+      if (a.verb === V.Flipbook) txt += ` ${FLIP_FPS[Math.max(0, Math.min(3, Math.round(a.a)))]}/S ${a.back ? 'LOOP' : 'ONCE'}`;
+      if (a.verb === V.Volume) txt += ` ${Math.round(a.a)}%`;
+      if (a.verb === V.BlockOff || a.verb === V.BlockOn) txt += ` ${Math.round(a.a)}`;
+      if (a.verb === V.Turn) txt += ` ${Math.round(a.a)}° ${'XYZ'[a.axis | 0] || 'Y'}${a.back ? ' & BACK' : ''}`;
+      if (a.verb === V.Slide) txt += ` ${(a.a * 100).toFixed(1)} CM ${'XYZ'[a.axis | 0] || 'Y'}${a.back ? ' & BACK' : ''}`;
       if (a.verb === V.Sound && Math.round(a.a) >= SOUNDS.length) txt = 'SOUND RECORDED ' + (Math.round(a.a) - SOUNDS.length + 1);
       const sw = a.verb === V.Colour ? `<i class="ty-sw" style="background:rgb(${Math.round(a.color.r * 255)},${Math.round(a.color.g * 255)},${Math.round(a.color.b * 255)})"></i>` : '';
       return (a.wait > 0 ? `<span class="ty-blk ty-wait">WAIT ${(+a.wait).toFixed(2).replace(/0$/, '')} s</span>` : '') + `<span class="ty-blk ty-do">${sw}${esc(txt)}</span>`;
