@@ -18,10 +18,10 @@ window.Toys = (() => {
     { s: 0.18 }, { s: 0.38 }, { s: 0.95, glass: true }, { s: 0.5, glow: 1.6 }, { s: 0.72 },
   ];
   const TRIGGERS = ['TOUCHED', 'CLICKED', 'A / X PRESSED', 'GRABBED', 'LET GO', 'SHAKEN', 'THROWN', 'LANDED', 'EVERY', 'STARTED', 'IN STATE'];
-  const VERBS = ['SHOW', 'HIDE', 'TOGGLE', 'COLOUR', 'NEXT COLOUR', 'FINISH', 'GO TO STATE', 'NEXT STATE', 'SPIN', 'WOBBLE', 'GROW', 'GLOW', 'SOUND', 'BUZZ', 'SPARKLES', 'WAIT', 'RESET LOOK', 'SOAR'];
+  const VERBS = ['SHOW', 'HIDE', 'TOGGLE', 'COLOUR', 'NEXT COLOUR', 'FINISH', 'GO TO STATE', 'NEXT STATE', 'SPIN', 'WOBBLE', 'GROW', 'GLOW', 'SOUND', 'BUZZ', 'SPARKLES', 'WAIT', 'RESET LOOK', 'SOAR', 'CHANGE PICTURE', 'TURN', 'SLIDE'];
   const FINISHES = ['Plastic', 'Matte', 'Glossy', 'Metal', 'Wood', 'Plush', 'Clay', 'Rubber', 'Glass', 'Glow', 'Glitter'];
   const SOUNDS = ['SQUEAK', 'HONK', 'BELL', 'POP', 'BOING', 'CHIME', 'DRUM', 'WHISTLE', 'ZAP', 'BLIP'];
-  const V = { Show: 0, Hide: 1, Toggle: 2, Colour: 3, NextColour: 4, Finish: 5, GoToState: 6, NextState: 7, Spin: 8, Wobble: 9, Grow: 10, Glow: 11, Sound: 12, Buzz: 13, Sparkles: 14, Wait: 15, Reset: 16, Soar: 17 };
+  const V = { Show: 0, Hide: 1, Toggle: 2, Colour: 3, NextColour: 4, Finish: 5, GoToState: 6, NextState: 7, Spin: 8, Wobble: 9, Grow: 10, Glow: 11, Sound: 12, Buzz: 13, Sparkles: 14, Wait: 15, Reset: 16, Soar: 17, Picture: 18 };
   const TR = { Touched: 0, Clicked: 1, ButtonA: 2, Grabbed: 3, LetGo: 4, Shaken: 5, Thrown: 6, Landed: 7, Every: 8, Started: 9, EnteredState: 10 };
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -43,13 +43,56 @@ window.Toys = (() => {
   }
 
   function parse(buffer) {
-    return new Promise((resolve, reject) => new T.GLTFLoader().parse(buffer.slice(0), '', (g) => resolve(g.scene), reject));
+    return new Promise((resolve, reject) => new T.GLTFLoader().parse(buffer.slice(0), '', (g) => resolve(g), reject));
+  }
+
+  // ── FINISHES + PAINT (the game's Bark/Creation shader, in three.js) ──────────────────────────────────────────
+  // Every piece wears its FINISH's detail texture (wood grain, plush, clay, brushed metal, rubber, glitter - the game's own,
+  // media/toys/detail-N.png) the way the game does: colour x lerp(1, detail x 2, strength), 9 tiles a metre. A PAINTED piece
+  // lays its picture over that (the paint atlas = TEXCOORD_1; its pages are its node's extras.pages). 🍍
+  const DETAIL = [];
+  function detailTex(slice) {
+    slice = Math.max(0, Math.min(7, slice | 0));
+    if (!DETAIL[slice]) {
+      const t = new T.TextureLoader().load('media/toys/detail-' + slice + '.png');
+      t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(9, 9);
+      DETAIL[slice] = t;
+    }
+    return DETAIL[slice];
+  }
+  let WHITE = null;
+  function white() {
+    if (!WHITE) { WHITE = new T.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, T.RGBAFormat); WHITE.needsUpdate = true; }
+    return WHITE;
+  }
+  function lookCompile(shader) {
+    Object.assign(shader.uniforms, this.userData.u);
+    shader.fragmentShader = 'uniform float uDetailStrength;\nuniform sampler2D uPaint;\nuniform float uHasPaint;\n' +
+      shader.fragmentShader.replace('#include <map_fragment>', [
+        'vec4 detT = vec4(0.5);',
+        '#ifdef USE_MAP',
+        '  detT = texture2D(map, vUv);',
+        '  diffuseColor.rgb *= mix(1.0, detT.r * 2.0, uDetailStrength);',
+        '#endif',
+        '#ifdef USE_AOMAP',
+        '  vec4 pt = texture2D(uPaint, vUv2);',
+        '  pt.rgb = pow(pt.rgb, vec3(2.2));',
+        '  diffuseColor.rgb = mix(diffuseColor.rgb, pt.rgb * mix(1.0, detT.r * 2.0, uDetailStrength * 0.5), pt.a * uHasPaint);',
+        '#endif',
+      ].join('\n'));
+  }
+  function setupLook(mat, painted) {
+    mat.userData.u = { uDetailStrength: { value: 0 }, uPaint: { value: white() }, uHasPaint: { value: 0 } };
+    mat.map = detailTex(0);
+    if (painted) { mat.aoMap = white(); mat.aoMapIntensity = 0; }
+    mat.onBeforeCompile = lookCompile;
+    mat.needsUpdate = true;
   }
 
   // ── A TOY (looks, states, blocks) ─────────────────────────────────────────────────────────────────────────────
 
   class Toy {
-    constructor(scene, details) {
+    constructor(scene, details, parser) {
       this.scene = scene;
       this.info = (details && details.info) || {};
       this.parts = new Map();                           // id -> { part, objs: [{ o, pos, quat, scale }] }
@@ -63,8 +106,22 @@ window.Toys = (() => {
         if (!this.parts.has(id)) this.parts.set(id, { part: { id, color: { r: 1, g: 1, b: 1 }, finish: 0, group: 0 }, objs: [] });
         const meshes = [];
         if (o.isMesh) meshes.push(o); else o.traverse((c) => { if (c.isMesh) meshes.push(c); });
-        for (const mm of meshes) { mm.material = mm.material.clone(); mm.userData.part = id; }
-        this.parts.get(id).objs.push({ o, meshes, pos: o.position.clone(), quat: o.quaternion.clone(), scale: o.scale.clone() });
+        const pages = Array.isArray(o.userData && o.userData.pages) ? o.userData.pages : null;
+        for (const mm of meshes) { mm.material = mm.material.clone(); mm.userData.part = id; setupLook(mm.material, !!pages && !!mm.geometry.attributes.uv2); }
+        const entry = this.parts.get(id);
+        entry.objs.push({ o, meshes, pos: o.position.clone(), quat: o.quaternion.clone(), scale: o.scale.clone() });
+        if (pages && !entry.pages) {
+          // Its pictures, loaded from inside the model (one texture per page; null = a blank page).
+          entry.pages = pages.map(() => null); entry.page = 0;
+          pages.forEach((ti, k) => {
+            if (!parser || ti < 0) return;
+            parser.getDependency('texture', ti).then((tex) => {
+              tex.flipY = false; tex.wrapS = tex.wrapT = T.ClampToEdgeWrapping; tex.needsUpdate = true;
+              entry.pages[k] = tex;
+              if (this.alive) this.apply();
+            }).catch(() => {});
+          });
+        }
       });
       this.groups = new Map((this.info.groups || []).map((g) => [g.id, g]));
       this.states = this.info.states || [];
@@ -124,6 +181,16 @@ window.Toys = (() => {
             const mat = m.material;
             mat.color.setRGB(l.color.r, l.color.g, l.color.b).convertSRGBToLinear();
             mat.roughness = 1 - look.s; mat.metalness = look.m || 0;
+            if (mat.userData.u) {
+              const slices = this.info.lookSlice, strengths = this.info.lookDetail;
+              const slice = slices ? slices[l.finish] | 0 : 0, str = strengths ? +strengths[l.finish] || 0 : 0;
+              if (mat.map !== detailTex(slice)) mat.map = detailTex(slice);
+              mat.userData.u.uDetailStrength.value = str;
+              const ent = this.parts.get(part.id);
+              const tex = ent && ent.pages ? ent.pages[Math.min(ent.page | 0, ent.pages.length - 1)] : null;
+              mat.userData.u.uPaint.value = tex || white();
+              mat.userData.u.uHasPaint.value = tex ? 1 : 0;
+            }
             const g = Math.max(look.glow || 0, l.glow || 0);
             mat.emissive.copy(mat.color).multiplyScalar(Math.min(1, g));
             const glass = !!look.glass;
@@ -217,11 +284,21 @@ window.Toys = (() => {
             this.anims.push({ t, kind: a.verb, t0: performance.now() / 1000, dur, amount: a.a, pivot: this.pivot(t) });
             break;
           }
-          case V.Sound: Sound.play(Math.round(a.a)); break;
+          case V.Sound: Sound.play(Math.round(a.a), this.info.recorded); break;
           case V.Buzz: if (navigator.vibrate) navigator.vibrate(Math.round(60 + 140 * (a.a || 0.5))); break;
           case V.Sparkles: if (this.sparkle) this.sparkle(this.pivot(t), a.color); break;
           case V.Wait: await sleep(Math.min(10, a.a || 1) * 1000); break;
-          case V.Reset: this.changes = []; this.apply(); break;
+          case V.Reset: this.changes = []; for (const e of this.parts.values()) if (e.pages) e.page = 0; this.apply(); break;
+          case V.Picture: {
+            // CHANGE PICTURE: 0 = each painted piece it covers moves on to its next picture, 1-4 = that picture.
+            const pg = Math.round(a.a);
+            for (const e of this.parts.values()) {
+              if (!e.pages || !this.covers(t, e.part)) continue;
+              const n = Math.max(1, e.pages.length);
+              e.page = pg <= 0 ? ((e.page | 0) + 1) % n : Math.min(pg - 1, n - 1);
+            }
+            this.apply(); break;
+          }
           case V.Soar: this.anims.push({ t: { kind: 0, id: 0 }, kind: V.Soar, t0: performance.now() / 1000, dur: Math.max(0.5, Math.min(8, a.a || 2.5)), amount: a.a, pivot: this.pivot({ kind: 0 }) }); break;
         }
       }
@@ -291,15 +368,42 @@ window.Toys = (() => {
       if (peak > 1e-5) for (let i = 0; i < n; i++) d[i] *= 0.8 / peak;
       return d;
     }
-    function play(i) {
+    // A recording made in the game (CreationSounds.ToMulaw: 8 kHz mu-law, one byte a sample).
+    const recordedBuffers = new Map();
+    function mulaw(u) {
+      const v = ~u & 0xff, sign = v & 0x80, exp = (v >> 4) & 7, mant = v & 0x0f;
+      const s = (((mant << 3) + 0x84) << exp) - 0x84;
+      return (sign ? -s : s) / 32768;
+    }
+    function recordedBuffer(b64) {
+      if (recordedBuffers.has(b64)) return recordedBuffers.get(b64);
+      const bin = atob(b64), n = bin.length;
+      if (n < 2) return null;
+      const d = new Float32Array(n);
+      for (let k = 0; k < n; k++) d[k] = mulaw(bin.charCodeAt(k));
+      const b = ctx.createBuffer(1, n, 8000); b.copyToChannel(d, 0);
+      recordedBuffers.set(b64, b);
+      return b;
+    }
+    function play(i, recorded) {
       try {
         ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
         if (ctx.state === 'suspended') ctx.resume();
-        i = Math.max(0, Math.min(SOUNDS.length - 1, i | 0));
-        if (!buffers[i]) { const d = synth(i, 22050); const b = ctx.createBuffer(1, d.length, 22050); b.copyToChannel(d, 0); buffers[i] = b; }
+        i = i | 0;
+        let buffer = null;
+        if (i >= SOUNDS.length) {
+          const r = recorded && recorded[i - SOUNDS.length];
+          if (!r) return;
+          buffer = recordedBuffer(r);
+        } else {
+          i = Math.max(0, i);
+          if (!buffers[i]) { const d = synth(i, 22050); const b = ctx.createBuffer(1, d.length, 22050); b.copyToChannel(d, 0); buffers[i] = b; }
+          buffer = buffers[i];
+        }
+        if (!buffer) return;
         const src = ctx.createBufferSource(), g = ctx.createGain();
         g.gain.value = 0.5;
-        src.buffer = buffers[i]; src.connect(g); g.connect(ctx.destination); src.start();
+        src.buffer = buffer; src.connect(g); g.connect(ctx.destination); src.start();
       } catch (e) { /* no sound in this browser */ }
     }
     return { play };
@@ -345,8 +449,8 @@ window.Toys = (() => {
         const w = canvas.clientWidth || 300, h = canvas.clientHeight || 240, dpr = Math.min(2, window.devicePixelRatio || 1);
         shared.setSize(w * dpr, h * dpr, false);
         const [details, buf] = await fetchToy(base, rec.id, rec.updatedAt);
-        const scene = await parse(buf);
-        const toy = new Toy(scene, details);
+        const gltf = await parse(buf), scene = gltf.scene;
+        const toy = new Toy(scene, details, gltf.parser);
         const s = stage(); s.add(scene);
         const cam = new T.PerspectiveCamera(35, w / h, 0.01, 100);
         frame(cam, scene);
@@ -433,9 +537,9 @@ window.Toys = (() => {
     try { [details, buf] = await fetchToy(base, rec.id, rec.updatedAt); }
     catch (e) { box.querySelector('.ty-hint').textContent = "Couldn't load this toy right now."; return; }
     if (!me.alive) return;
-    const scene = await parse(buf);
+    const gltf = await parse(buf), scene = gltf.scene;
     if (!me.alive) return;
-    const toy = me.toy = new Toy(scene, details);
+    const toy = me.toy = new Toy(scene, details, gltf.parser);
     const info = toy.info;
     const s = stage(); s.add(scene);
     const cam = new T.PerspectiveCamera(35, 1, 0.01, 100);
