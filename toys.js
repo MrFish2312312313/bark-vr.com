@@ -30,13 +30,18 @@ window.Toys = (() => {
 
   const cache = new Map();
   // Keyed by the toy's last save: a toy saved again in the game is fetched again (never a stale copy from the browser's cache).
-  function fetchToy(base, id, version) {
-    const v = encodeURIComponent(version || '');
-    const key = id + '@' + v;
+  // rec.detailsUrl / rec.modelUrl / rec.headers: a toy kept somewhere else (a PRESENT sent to the tree - the moderators look at
+  // it on the main backend before it's given).
+  function fetchToy(base, rec) {
+    const id = rec.id, v = encodeURIComponent(rec.updatedAt || rec.at || '');
+    const key = (rec.modelUrl || id) + '@' + v;
+    const headers = rec.headers || {};
+    const details = rec.detailsUrl || `${base}/api/creations/${encodeURIComponent(id)}?v=${v}`;
+    const model = rec.modelUrl || `${base}/api/creations/${encodeURIComponent(id)}/model?v=${v}`;
     if (!cache.has(key)) {
       cache.set(key, Promise.all([
-        fetch(`${base}/api/creations/${encodeURIComponent(id)}?v=${v}`, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error('details ' + r.status); return r.json(); }),
-        fetch(`${base}/api/creations/${encodeURIComponent(id)}/model?v=${v}`, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error('model ' + r.status); return r.arrayBuffer(); }),
+        fetch(details, { cache: 'no-cache', headers }).then((r) => { if (!r.ok) throw new Error('details ' + r.status); return r.json(); }),
+        fetch(model, { cache: 'no-cache', headers }).then((r) => { if (!r.ok) throw new Error('model ' + r.status); return r.arrayBuffer(); }),
       ]).catch((e) => { cache.delete(key); throw e; }));
     }
     return cache.get(key);
@@ -448,7 +453,7 @@ window.Toys = (() => {
         if (!shared) { shared = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); shared.outputEncoding = T.sRGBEncoding; }
         const w = canvas.clientWidth || 300, h = canvas.clientHeight || 240, dpr = Math.min(2, window.devicePixelRatio || 1);
         shared.setSize(w * dpr, h * dpr, false);
-        const [details, buf] = await fetchToy(base, rec.id, rec.updatedAt);
+        const [details, buf] = await fetchToy(base, rec);
         const gltf = await parse(buf), scene = gltf.scene;
         const toy = new Toy(scene, details, gltf.parser);
         const s = stage(); s.add(scene);
@@ -534,7 +539,7 @@ window.Toys = (() => {
     document.addEventListener('keydown', me.onKey);
 
     let details, buf;
-    try { [details, buf] = await fetchToy(base, rec.id, rec.updatedAt); }
+    try { [details, buf] = await fetchToy(base, rec); }
     catch (e) { box.querySelector('.ty-hint').textContent = "Couldn't load this toy right now."; return; }
     if (!me.alive) return;
     const gltf = await parse(buf), scene = gltf.scene;

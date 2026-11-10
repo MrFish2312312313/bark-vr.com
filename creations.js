@@ -24,7 +24,10 @@
 // Discord bot posts it to #reports. 🍍
 
 const Creations = (() => {
-  const PER_PAGE = { pumpkins: 10, paintings: 12, toys: 12 };
+  const PER_PAGE = { pumpkins: 10, paintings: 12, toys: 12, letters: 24, presents: 12 };
+  // Winter Fest (moderators only): LETTERS to Santa + PRESENTS sent to the tree - on the main backend (workshop.js). A hidden
+  // letter leaves the elves' board; a hidden present is never given to anyone. 🍍
+  const WORKSHOP = { letters: 'letters', presents: 'toys' };
   const REPORTED_KEY = 'bark.reported';               // ids this browser already reported
 
   let BACKEND = '';
@@ -191,6 +194,15 @@ const Creations = (() => {
       return { items: all.slice(offset, offset + per), total: all.length };
     }
 
+    if (WORKSHOP[which]) {
+      if (!mod) throw new Error('moderators only');
+      const r = await fetch(`${BACKEND}/api/workshop/mod/${WORKSHOP[which]}`, { headers: authHeaders() });
+      if (!r.ok) throw new Error(r.status === 401 ? 'moderators only' : 'the workshop is offline');
+      const j = await r.json();
+      const all = (which === 'letters' ? j.letters : j.toys) || [];
+      return { items: all.slice(offset, offset + per), total: all.length };
+    }
+
     if (which === 'toys') {
       if (!CREATIONS) throw new Error('toys-offline');
       const r = await fetch(`${CREATIONS}/api/creations/public?limit=${per}&offset=${offset}`, { headers: authHeaders() });
@@ -225,7 +237,11 @@ const Creations = (() => {
     setTabs();
 
     $('crLights').hidden = tab !== 'pumpkins';
-    $('crNote').textContent = tab === 'toys'
+    $('crNote').textContent = tab === 'letters'
+      ? 'Letters to Santa, written in the game (MODERATORS). Hide one and it leaves the elves\' board in the Workshop.'
+      : tab === 'presents'
+      ? 'Toys sent off to the big tree (MODERATORS). From Christmas each goes to one player - hide one and it is never given.'
+      : tab === 'toys'
       ? 'Made at the toy benches in the Workshop, out of shapes, bends and twists. PLAY one: click its pieces, try its states, and watch the code blocks its maker gave it.'
       : tab === 'pumpkins'
       ? 'Every pumpkin here is rebuilt from the cuts that were actually made to it - the shape it grew with, and every point placed with the knife and the scraper. Drag any of them around to see the inside.'
@@ -251,7 +267,7 @@ const Creations = (() => {
     if (page > pages && res.total > 0) { page = pages; updateUrl(); return render(); }
     pager(pages);
 
-    const noun = tab === 'pumpkins' ? 'pumpkin' : tab === 'toys' ? 'toy' : 'painting';
+    const noun = tab === 'pumpkins' ? 'pumpkin' : tab === 'toys' ? 'toy' : tab === 'letters' ? 'letter' : tab === 'presents' ? 'present' : 'painting';
     if (!res.total) { status(`No ${noun}s yet.`); return; }
     let line = `${res.total} ${noun}${res.total === 1 ? '' : 's'}`;
     if (pages > 1) line += ` · page ${page} of ${pages}`;
@@ -260,6 +276,8 @@ const Creations = (() => {
 
     if (tab === 'pumpkins') await renderPumpkins(res.items, token);
     else if (tab === 'toys') renderToys(res.items);
+    else if (tab === 'letters') renderLetters(res.items);
+    else if (tab === 'presents') renderPresents(res.items);
     else renderPaintings(res.items);
     if (token === loadToken) showFocus();
   }
@@ -516,8 +534,47 @@ const Creations = (() => {
 
   // ── Tabs, pages, URL ──────────────────────────────────────────────────────────────────────────
 
+  function renderLetters(items) {
+    const grid = $('crGrid');
+    for (const rec of items) {
+      const card = document.createElement('div');
+      card.className = 'cr-card' + (rec.hidden ? ' is-hidden' : '');
+      card.dataset.id = rec.id;
+      card.innerHTML =
+        `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
+        `<div class="cr-meta-top"><strong>${esc(rec.name || 'Someone')}</strong></div>` +
+        `<p style="white-space:pre-wrap;margin:.5em 0">${esc(rec.text || '')}</p>` +
+        `${esc(new Date(rec.at || Date.now()).toLocaleString())} · ${(rec.answers || []).length} toy(s) made for it` +
+        `${modMeta(rec)}</div>` + modBlock(rec);
+      grid.appendChild(card);
+    }
+  }
+
+  function renderPresents(items) {
+    const grid = $('crGrid');
+    for (const rec of items) {
+      const card = document.createElement('div');
+      card.className = 'cr-card' + (rec.hidden ? ' is-hidden' : '');
+      card.dataset.id = rec.id;
+      const kind = ['gift-wrapped', 'in a toy box', 'on a blister card'][rec.kind | 0] || 'wrapped';
+      card.innerHTML =
+        (rec.hasModel ? `<canvas class="cr-canvas"></canvas>` : '') +
+        `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
+        `<div class="cr-meta-top"><strong>${esc(rec.name || 'Toy')}</strong></div>` +
+        `made by ${esc(rec.maker || 'an elf')} · ${kind}${rec.letter ? ' · for a letter' : ''} · ${rec.givenTo ? 'GIVEN' : 'under the tree'} · ${esc(new Date(rec.at || Date.now()).toLocaleDateString())}` +
+        `${modMeta(rec)}</div>` + modBlock(rec);
+      grid.appendChild(card);
+      if (rec.hasModel && window.Toys) {
+        const base = `${BACKEND}/api/workshop/mod/toys/${encodeURIComponent(rec.id)}`;
+        window.Toys.still(card.querySelector('.cr-canvas'), BACKEND, { ...rec, detailsUrl: base, modelUrl: base + '/model', headers: authHeaders() });
+      }
+    }
+  }
+
   function setTabs() {
     $('tab-pumpkins').hidden = !pumpkinsOpen();
+    $('tab-letters').hidden = !mod;
+    $('tab-presents').hidden = !mod;
     for (const b of document.querySelectorAll('.cr-tab'))
       b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false');
   }
@@ -576,8 +633,8 @@ const Creations = (() => {
   async function act(id, action) {
     if (!mod) return;
     const kind = tab;                                   // 'pumpkins' or 'paintings' - same routes; toys live on the creations server
-    const noun = kind === 'pumpkins' ? 'pumpkin' : kind === 'toys' ? 'toy' : 'painting';
-    const base = kind === 'toys' ? `${CREATIONS}/api/creations` : `${BACKEND}/api/${kind}`;
+    const noun = kind === 'pumpkins' ? 'pumpkin' : kind === 'toys' ? 'toy' : kind === 'letters' ? 'letter' : kind === 'presents' ? 'present' : 'painting';
+    const base = WORKSHOP[kind] ? `${BACKEND}/api/workshop/mod/${WORKSHOP[kind]}` : kind === 'toys' ? `${CREATIONS}/api/creations` : `${BACKEND}/api/${kind}`;
     if (action === 'delete' &&
         !confirm(`Permanently delete this ${noun}? It vanishes from every player's game and cannot be recovered.`)) return;
     try {
