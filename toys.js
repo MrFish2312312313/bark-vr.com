@@ -72,7 +72,7 @@ window.Toys = (() => {
   }
   function lookCompile(shader) {
     Object.assign(shader.uniforms, this.userData.u);
-    shader.fragmentShader = 'uniform float uDetailStrength;\nuniform sampler2D uPaint;\nuniform float uHasPaint;\n' +
+    shader.fragmentShader = 'uniform float uDetailStrength;\nuniform sampler2D uPaint;\nuniform float uHasPaint;\nuniform float uGlow;\n' +
       shader.fragmentShader.replace('#include <map_fragment>', [
         'vec4 detT = vec4(0.5);',
         '#ifdef USE_MAP',
@@ -84,10 +84,13 @@ window.Toys = (() => {
         '  pt.rgb = pow(pt.rgb, vec3(2.2));',
         '  diffuseColor.rgb = mix(diffuseColor.rgb, pt.rgb * mix(1.0, detT.r * 2.0, uDetailStrength * 0.5), pt.a * uHasPaint);',
         '#endif',
+        // A GLOWING piece glows in its own (painted) colours, like the game - it used to add the piece's plain colour over the
+        // paint (a glowing cyan phone screen turned its green grass light cyan and the red icon white).
+        '  totalEmissiveRadiance = diffuseColor.rgb * uGlow;',
       ].join('\n'));
   }
   function setupLook(mat, painted) {
-    mat.userData.u = { uDetailStrength: { value: 0 }, uPaint: { value: white() }, uHasPaint: { value: 0 } };
+    mat.userData.u = { uDetailStrength: { value: 0 }, uPaint: { value: white() }, uHasPaint: { value: 0 }, uGlow: { value: 0 } };
     mat.map = detailTex(0);
     if (painted) { mat.aoMap = white(); mat.aoMapIntensity = 0; }
     mat.onBeforeCompile = lookCompile;
@@ -197,7 +200,8 @@ window.Toys = (() => {
               mat.userData.u.uHasPaint.value = tex ? 1 : 0;
             }
             const g = Math.max(look.glow || 0, l.glow || 0);
-            mat.emissive.copy(mat.color).multiplyScalar(Math.min(1, g));
+            if (mat.userData.u) { mat.userData.u.uGlow.value = Math.min(1, g); mat.emissive.setRGB(0, 0, 0); }
+            else mat.emissive.copy(mat.color).multiplyScalar(Math.min(1, g));
             const glass = !!look.glass;
             if (mat.transparent !== glass) { mat.transparent = glass; mat.depthWrite = !glass; mat.needsUpdate = true; }
             mat.opacity = glass ? 0.35 : 1;
