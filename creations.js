@@ -24,10 +24,11 @@
 // Discord bot posts it to #reports. 🍍
 
 const Creations = (() => {
-  const PER_PAGE = { pumpkins: 10, paintings: 12, toys: 12, letters: 24, presents: 12 };
+  const PER_PAGE = { pumpkins: 10, paintings: 12, toys: 12, letters: 24, presents: 12, barkazon: 12 };
   // Winter Fest (moderators only): LETTERS to Santa + PRESENTS sent to the tree - on the main backend (workshop.js). A hidden
   // letter leaves the elves' board; a hidden present is never given to anyone. 🍍
-  const WORKSHOP = { letters: 'letters', presents: 'toys' };
+  // Moderator-only lists on the main backend: the Workshop's letters + presents, Barkazon's listings.
+  const WORKSHOP = { letters: '/api/workshop/mod/letters', presents: '/api/workshop/mod/toys', barkazon: '/api/barkazon/mod/listings' };
   const REPORTED_KEY = 'bark.reported';               // ids this browser already reported
 
   let BACKEND = '';
@@ -196,10 +197,10 @@ const Creations = (() => {
 
     if (WORKSHOP[which]) {
       if (!mod) throw new Error('moderators only');
-      const r = await fetch(`${BACKEND}/api/workshop/mod/${WORKSHOP[which]}`, { headers: authHeaders() });
+      const r = await fetch(`${BACKEND}${WORKSHOP[which]}`, { headers: authHeaders() });
       if (!r.ok) throw new Error(r.status === 401 ? 'moderators only' : 'the workshop is offline');
       const j = await r.json();
-      const all = (which === 'letters' ? j.letters : j.toys) || [];
+      const all = j.letters || j.toys || j.listings || [];
       return { items: all.slice(offset, offset + per), total: all.length };
     }
 
@@ -239,6 +240,8 @@ const Creations = (() => {
     $('crLights').hidden = tab !== 'pumpkins';
     $('crNote').textContent = tab === 'letters'
       ? 'Letters to Santa, written in the game (MODERATORS). Hide one and it leaves the elves\' board in the Workshop.'
+      : tab === 'barkazon'
+      ? 'Toys players are selling on BARKAZON (MODERATORS). Hide one and nobody can see or buy it; the seller sees TAKEN DOWN BY THE MODS.'
       : tab === 'presents'
       ? 'Toys sent off to the big tree (MODERATORS). From Christmas each goes to one player - hide one and it is never given.'
       : tab === 'toys'
@@ -267,7 +270,7 @@ const Creations = (() => {
     if (page > pages && res.total > 0) { page = pages; updateUrl(); return render(); }
     pager(pages);
 
-    const noun = tab === 'pumpkins' ? 'pumpkin' : tab === 'toys' ? 'toy' : tab === 'letters' ? 'letter' : tab === 'presents' ? 'present' : 'painting';
+    const noun = tab === 'pumpkins' ? 'pumpkin' : tab === 'toys' ? 'toy' : tab === 'letters' ? 'letter' : tab === 'presents' ? 'present' : tab === 'barkazon' ? 'listing' : 'painting';
     if (!res.total) { status(`No ${noun}s yet.`); return; }
     let line = `${res.total} ${noun}${res.total === 1 ? '' : 's'}`;
     if (pages > 1) line += ` · page ${page} of ${pages}`;
@@ -278,6 +281,7 @@ const Creations = (() => {
     else if (tab === 'toys') renderToys(res.items);
     else if (tab === 'letters') renderLetters(res.items);
     else if (tab === 'presents') renderPresents(res.items);
+    else if (tab === 'barkazon') renderListings(res.items);
     else renderPaintings(res.items);
     if (token === loadToken) showFocus();
   }
@@ -565,7 +569,27 @@ const Creations = (() => {
         `${modMeta(rec)}</div>` + modBlock(rec);
       grid.appendChild(card);
       if (rec.hasModel && window.Toys) {
-        const base = `${BACKEND}/api/workshop/mod/toys/${encodeURIComponent(rec.id)}`;
+        const base = `${BACKEND}${WORKSHOP.presents}/${encodeURIComponent(rec.id)}`;
+        window.Toys.still(card.querySelector('.cr-canvas'), BACKEND, { ...rec, detailsUrl: base, modelUrl: base + '/model', headers: authHeaders() });
+      }
+    }
+  }
+
+  function renderListings(items) {
+    const grid = $('crGrid');
+    for (const rec of items) {
+      const card = document.createElement('div');
+      card.className = 'cr-card' + (rec.hidden ? ' is-hidden' : '');
+      card.dataset.id = rec.id;
+      card.innerHTML =
+        (rec.hasModel ? `<canvas class="cr-canvas"></canvas>` : '') +
+        `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
+        `<div class="cr-meta-top"><strong>${esc(rec.name || 'Toy')}</strong></div>` +
+        `sold by ${esc(rec.sellerName || 'someone')} · ${rec.price ? (rec.price | 0) + ' PC' : 'FREE'} · ${rec.sales | 0} sold (${rec.earned | 0} PC) · ${esc(new Date(rec.updated || rec.at || Date.now()).toLocaleDateString())}` +
+        `${modMeta({ ...rec, playfabId: rec.seller })}</div>` + modBlock(rec);
+      grid.appendChild(card);
+      if (rec.hasModel && window.Toys) {
+        const base = `${BACKEND}${WORKSHOP.barkazon}/${encodeURIComponent(rec.id)}`;
         window.Toys.still(card.querySelector('.cr-canvas'), BACKEND, { ...rec, detailsUrl: base, modelUrl: base + '/model', headers: authHeaders() });
       }
     }
@@ -575,6 +599,7 @@ const Creations = (() => {
     $('tab-pumpkins').hidden = !pumpkinsOpen();
     $('tab-letters').hidden = !mod;
     $('tab-presents').hidden = !mod;
+    $('tab-barkazon').hidden = !mod;
     for (const b of document.querySelectorAll('.cr-tab'))
       b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false');
   }
@@ -633,8 +658,8 @@ const Creations = (() => {
   async function act(id, action) {
     if (!mod) return;
     const kind = tab;                                   // 'pumpkins' or 'paintings' - same routes; toys live on the creations server
-    const noun = kind === 'pumpkins' ? 'pumpkin' : kind === 'toys' ? 'toy' : kind === 'letters' ? 'letter' : kind === 'presents' ? 'present' : 'painting';
-    const base = WORKSHOP[kind] ? `${BACKEND}/api/workshop/mod/${WORKSHOP[kind]}` : kind === 'toys' ? `${CREATIONS}/api/creations` : `${BACKEND}/api/${kind}`;
+    const noun = kind === 'pumpkins' ? 'pumpkin' : kind === 'toys' ? 'toy' : kind === 'letters' ? 'letter' : kind === 'presents' ? 'present' : kind === 'barkazon' ? 'listing' : 'painting';
+    const base = WORKSHOP[kind] ? `${BACKEND}${WORKSHOP[kind]}` : kind === 'toys' ? `${CREATIONS}/api/creations` : `${BACKEND}/api/${kind}`;
     if (action === 'delete' &&
         !confirm(`Permanently delete this ${noun}? It vanishes from every player's game and cannot be recovered.`)) return;
     try {
