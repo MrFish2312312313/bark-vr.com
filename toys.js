@@ -9,7 +9,7 @@
 //   ACTIONS  show / hide / toggle / colour / next colour / finish / glow, go to / next state, spin / wobble / grow round the
 //            target's middle, the game's own sounds (the same recipes, made in the browser), sparkles, a buzz on phones, waits
 // Cards get a STILL from ONE shared renderer (like the pumpkins); PLAY opens a live player.
-// window.Toys = { still(canvas, base, rec), open(base, rec), close() }. Needs three r128 + GLTFLoader + OrbitControls. 🍍
+// window.Toys = { still(canvas, base, rec), open(base, rec), close(), spin(canvas, base, rec) }. Needs three r128 + GLTFLoader + OrbitControls. 🍍
 
 window.Toys = (() => {
   const T = window.THREE;
@@ -692,5 +692,50 @@ window.Toys = (() => {
     me.raf = requestAnimationFrame(loop);
   }
 
-  return { still, open, close };
+  // ── SPIN: a toy turning on a stand, right in the page (bark-vr.com/barkazon - the display stand beside the computer) ──
+  // spin(canvas, base, rec) -> { dispose() }; rec.onError(e) is called if it can't be loaded.
+  function spin(canvas, base, rec) {
+    const st = { alive: true, raf: 0, renderer: null, toy: null };
+    (async () => {
+      try {
+        const [details, buf] = await fetchToy(base, rec);
+        if (!st.alive) return;
+        const gltf = await parse(buf);
+        if (!st.alive) return;
+        const r = new T.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        r.outputEncoding = T.sRGBEncoding;
+        st.renderer = r;
+        const scene = gltf.scene;
+        st.toy = new Toy(scene, details, gltf.parser);
+        const s = stage();
+        const box = new T.Box3().setFromObject(scene);
+        const c = box.isEmpty() ? new T.Vector3() : box.getCenter(new T.Vector3());
+        const turn = new T.Group();                     // turns round the toy's own middle
+        turn.position.copy(c); scene.position.sub(c); turn.add(scene); s.add(turn);
+        const cam = new T.PerspectiveCamera(32, 1, 0.01, 100);
+        frame(cam, turn);
+        let w = 0, h = 0, last = performance.now();
+        const tick = (now) => {
+          if (!st.alive) return;
+          const cw = canvas.clientWidth || 300, ch = canvas.clientHeight || 300, dpr = Math.min(2, window.devicePixelRatio || 1);
+          if (cw !== w || ch !== h) { w = cw; h = ch; r.setSize(w * dpr, h * dpr, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+          const dt = Math.min(0.05, ((now || performance.now()) - last) / 1000); last = now || performance.now();
+          turn.rotation.y += dt * 0.9;                  // (the game's stand turns about this fast)
+          r.render(s, cam);
+          st.raf = requestAnimationFrame(tick);
+        };
+        st.raf = requestAnimationFrame(tick);
+      } catch (e) { if (st.alive && rec && rec.onError) rec.onError(e); }
+    })();
+    return {
+      dispose() {
+        st.alive = false;
+        cancelAnimationFrame(st.raf);
+        if (st.toy) { try { st.toy.dispose(); } catch (e) {} }
+        if (st.renderer) { try { st.renderer.dispose(); st.renderer.forceContextLoss(); } catch (e) {} }
+      },
+    };
+  }
+
+  return { still, open, close, spin };
 })();

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- BARK-SEO-START -->
+  <meta name="description" content="BARKAZON - the toy shop on the Bemu Interwebs. Toys made by BARK players at the Workshop's toy benches, and the Barkazon toy book." />
+  <link rel="canonical" href="https://bark-vr.com/barkazon" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bark-vr.com/barkazon" />
+  <meta property="og:title" content="Barkazon | BARKVR" />
+  <meta property="og:description" content="The toy shop on the Bemu Interwebs - toys made by BARK players, and the Barkazon toy book." />
+  <meta property="og:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta property="og:site_name" content="BARKVR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Barkazon | BARKVR" />
+  <meta name="twitter:description" content="The toy shop on the Bemu Interwebs - toys made by BARK players, and the Barkazon toy book." />
+  <meta name="twitter:image" content="https://bark-vr.com/logo-wide.png" />
+  <meta name="theme-color" content="#ff8c1f" />
+  <!-- BARK-SEO-END -->
+  <title>Barkazon | BARKVR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="stylesheet" href="style.css?v=35" />
+  <style>
+    /* BARKAZON - the Workshop computer's screen, as it is in the game (BarkazonKiosk: a 0.88 x 0.55 m screen; every place and
+       size below is the game's, in container units: 1 cqw = 1/100 of the screen's width). */
+    :root {
+      --bz-page: #f2f0eb; --bz-orange: #ff8c1f; --bz-amber: #ffbd38; --bz-ink: #241f1c; --bz-grey: #736b66;
+      --bz-price: #b5540f; --bz-soft: #e0ded9; --bz-lit: #ff9e33; --bz-on-ink: #1f0f05;
+      --bz-graphite: #222226; --bz-walnut: #66402a; --bz-velvet: #8c1414; --bz-gold: #d9a64d;
+    }
+    .bz-wrap { max-width: 1180px; margin: 0 auto; }
+    .bz-desk { display: flex; gap: 28px; align-items: flex-end; justify-content: center; flex-wrap: wrap; }
+    .bz-monitor { flex: 1 1 640px; max-width: 900px; min-width: 0; }
+    .bz-bezel { background: linear-gradient(180deg, #2c2c31, var(--bz-graphite)); border-radius: 18px; padding: 2.2% 2.2% 1.2%;
+                box-shadow: 0 18px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08); }
+    .bz-chin { text-align: center; font-family: 'MonkeyLand', 'Barlow', sans-serif; font-weight: 700; color: #bfbfc7;
+               font-size: clamp(11px, 1.6vw, 16px); padding-top: .5em; letter-spacing: .02em; }
+    .bz-neck { width: 9%; height: 46px; margin: 0 auto; background: linear-gradient(90deg, #a9a9b0, #d3d3d8, #9a9aa1); }
+    .bz-foot { width: 40%; height: 14px; margin: 0 auto; border-radius: 6px 6px 3px 3px; background: linear-gradient(180deg, #d6d6db, #a3a3aa); }
+
+    .bz-screen { container-type: inline-size; position: relative; background: var(--bz-page); border-radius: 6px; overflow: hidden;
+                 aspect-ratio: 88 / 55; font-family: 'MonkeyLand', 'Barlow', sans-serif; color: var(--bz-ink); user-select: none; }
+    .bz-screen * { box-sizing: border-box; }
+    .bz-abs { position: absolute; }
+    .bz-head { left: 0; top: 0; width: 100%; height: 7.955cqw; background: var(--bz-orange); }
+    .bz-brand { left: 2.27cqw; top: 0; height: 7.5cqw; display: flex; align-items: center; color: #fff; font-size: 5.56cqw; white-space: nowrap; }
+    .bz-brand small { font-size: 45%; margin-left: .35em; font-weight: 400; }
+    .bz-status { left: 38.6cqw; top: 0; width: 23.9cqw; height: 7.5cqw; display: flex; align-items: center; justify-content: center;
+                 text-align: center; color: #fff; font-size: 1.88cqw; line-height: 1.1; }
+    .bz-text { display: flex; align-items: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 1.1; }
+    .bz-text.c { justify-content: center; text-align: center; }
+    .bz-text.wrap { white-space: normal; }
+
+    /* BUTTONS: raised (BenchUI): a face shaded top to bottom, a dark lip under it; LIT when on. */
+    .bz-btn { position: absolute; border: 0; padding: 0 .4em; cursor: pointer; font: inherit; color: var(--bz-ink);
+              border-radius: .9cqw; background: linear-gradient(180deg, #fff, #ecebe8); box-shadow: 0 .45cqw 0 rgba(60,40,25,.35);
+              display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.05; transition: transform .06s; }
+    .bz-btn:hover { filter: brightness(1.04); }
+    .bz-btn:active { transform: translateY(.3cqw); box-shadow: 0 .15cqw 0 rgba(60,40,25,.35); }
+    .bz-btn.soft { background: linear-gradient(180deg, #e8e6e1, #d8d6d0); }
+    .bz-btn.on { background: linear-gradient(180deg, #ffb35c, var(--bz-lit)); color: var(--bz-on-ink); }
+    .bz-btn.amber { background: linear-gradient(180deg, #ffd06a, var(--bz-amber)); }
+    .bz-btn.amber.on { background: linear-gradient(180deg, #ffb35c, var(--bz-lit)); }
+    .bz-btn:focus-visible { outline: 3px solid #2a7fff; outline-offset: 2px; }
+    .bz-head .bz-btn { font-size: 3.1cqw; }
+
+    .bz-card { flex-direction: column; justify-content: flex-start; padding: 0; }
+    .bz-photo { position: absolute; background: #e6e3de; display: flex; align-items: center; justify-content: center; color: var(--bz-grey);
+                overflow: hidden; border-radius: .4cqw; }
+    .bz-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bz-card .bz-name { font-weight: 700; font-size: 2.54cqw; color: var(--bz-ink); }
+    .bz-card .bz-sub { font-size: 1.88cqw; color: var(--bz-grey); }
+    .bz-card .bz-price { font-size: 3.1cqw; color: var(--bz-price); }
+
+    /* THE DISPLAY STAND (the turntable beside the computer): the picked toy turns on it. */
+    .bz-stand { flex: 0 0 250px; display: flex; flex-direction: column; align-items: center; }
+    .bz-spin { width: 250px; height: 250px; display: block; }
+    .bz-velvet { width: 200px; height: 34px; border-radius: 50%; margin-top: -26px;
+                 background: radial-gradient(ellipse at 50% 35%, #b02020, var(--bz-velvet) 70%); box-shadow: 0 6px 0 var(--bz-gold), 0 14px 18px rgba(0,0,0,.35); }
+    .bz-post { width: 150px; height: 120px; margin-top: 6px; border-radius: 8px;
+               background: linear-gradient(90deg, #5b3622, var(--bz-walnut) 45%, #4a2c1c); box-shadow: 0 12px 24px rgba(0,0,0,.35); }
+    .bz-standtag { margin-top: 12px; text-align: center; font-family: 'MonkeyLand', 'Barlow', sans-serif; font-size: 15px; color: var(--text-dim, #9aa7b4); max-width: 250px; }
+    .bz-play { margin-top: 10px; }
+
+    /* NARROW (a phone): the same screen, its cards two by two - the words stay readable. */
+    .bz-screen.narrow { aspect-ratio: auto; padding-bottom: 12px; }
+    .bz-screen.narrow .bz-abs, .bz-screen.narrow .bz-btn, .bz-screen.narrow .bz-photo { position: static; }
+    .bz-screen.narrow .bz-head { display: flex; align-items: center; gap: 8px; padding: 8px 10px; height: auto; flex-wrap: wrap; }
+    .bz-screen.narrow .bz-brand { font-size: 22px; height: auto; flex: 1 1 auto; }
+    .bz-screen.narrow .bz-status { order: 3; width: 100%; height: auto; font-size: 12px; justify-content: flex-start; }
+    .bz-screen.narrow .bz-head .bz-btn { font-size: 14px; padding: 6px 12px; border-radius: 6px; box-shadow: 0 3px 0 rgba(60,40,25,.35); }
+    .bz-screen.narrow .bz-toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; align-items: center; }
+    .bz-screen.narrow .bz-toolbar .bz-btn { font-size: 12px; padding: 6px 10px; border-radius: 6px; box-shadow: 0 3px 0 rgba(60,40,25,.35); }
+    .bz-screen.narrow .bz-pagenum { font-size: 12px; padding: 0 4px; }
+    .bz-screen.narrow .bz-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px; }
+    .bz-screen.narrow .bz-card { padding: 8px; border-radius: 8px; box-shadow: 0 3px 0 rgba(60,40,25,.35); gap: 3px; }
+    .bz-screen.narrow .bz-photo { width: 100%; aspect-ratio: 1; }
+    .bz-screen.narrow .bz-card .bz-name { font-size: 14px; } .bz-screen.narrow .bz-card .bz-sub { font-size: 11px; }
+    .bz-screen.narrow .bz-card .bz-price { font-size: 16px; }
+    .bz-screen.narrow .bz-bottom { display: flex; gap: 10px; padding: 12px 10px 0; align-items: center; }
+    .bz-screen.narrow .bz-detail { flex: 1 1 auto; font-size: 14px; white-space: normal; }
+    .bz-screen.narrow .bz-buy { flex: 0 0 auto; font-size: 14px; padding: 10px 14px; border-radius: 8px; box-shadow: 0 3px 0 rgba(60,40,25,.35); }
+    .bz-screen.narrow .bz-hint, .bz-screen.narrow .bz-empty { font-size: 13px; padding: 14px 10px; white-space: normal; justify-content: center; }
+
+    /* THE TOY BOOK */
+    .bz-book-wrap { margin-top: 64px; }
+    .bz-book-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .bz-book-head h2 { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: .03em; margin: 0; }
+    .bz-book-note { color: var(--text-dim, #9aa7b4); font-size: 14px; }
+    .bz-book { display: flex; justify-content: center; align-items: stretch; perspective: 1600px; }
+    .bz-spread { display: flex; background: #5a1d1d; padding: 10px; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,.45); max-width: 100%; }
+    .bz-page { width: min(42vw, 420px); aspect-ratio: 3 / 4; background: #f3ecdf; position: relative; overflow: hidden; }
+    .bz-page img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bz-page.left { border-radius: 4px 0 0 4px; box-shadow: inset -14px 0 18px -12px rgba(0,0,0,.45); }
+    .bz-page.right { border-radius: 0 4px 4px 0; box-shadow: inset 14px 0 18px -12px rgba(0,0,0,.35); }
+    .bz-page.blank { background: transparent; box-shadow: none; }
+    .bz-page .bz-unprinted { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+                             padding: 20px; color: #8b7b6b; font-family: 'MonkeyLand', 'Barlow', sans-serif; font-size: 15px; }
+    .bz-book-nav { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+    .bz-book-nav button { font-family: 'MonkeyLand', 'Barlow', sans-serif; font-size: 16px; padding: 10px 18px; border-radius: 8px; border: 0; cursor: pointer;
+                          background: var(--bz-amber); color: var(--bz-on-ink); box-shadow: 0 4px 0 rgba(60,40,25,.45); }
+    .bz-book-nav button:disabled { opacity: .4; cursor: default; }
+    .bz-book-nav .bz-pn { font-family: 'MonkeyLand', 'Barlow', sans-serif; color: var(--text, #e6edf3); min-width: 110px; text-align: center; }
+    @media (max-width: 700px) {
+      .bz-desk { gap: 10px; }
+      .bz-stand { flex-basis: 100%; }
+      .bz-page { width: 44vw; }
+      .bz-spread { padding: 6px; }
+    }
+    .bz-cross { font-size: 14px; color: var(--text-dim, #9aa7b4); text-align: center; margin-top: 18px; }
+    .bz-cross a { color: var(--accent, #00e5ff); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="BARKVR" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#about">ABOUT US</a>
+      <a href="/games">GAMES</a>
+      <a href="/store">STORE</a>
+      <a href="/extras">EXTRAS</a>
+      <a href="/database">INDEX</a>
+      <a href="/players">PLAYERS</a>
+      <a href="/community">COMMUNITY</a>
+      <a href="/creations" class="active">CREATIONS</a>
+      <a href="/careers">HIRING</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#about" onclick="toggleMenu()">ABOUT US</a>
+    <a href="/games" onclick="toggleMenu()">GAMES</a>
+    <a href="/store" onclick="toggleMenu()">STORE</a>
+    <a href="/extras" onclick="toggleMenu()">EXTRAS</a>
+    <a href="/database" onclick="toggleMenu()">INDEX</a>
+    <a href="/players" onclick="toggleMenu()">PLAYERS</a>
+    <a href="/community" onclick="toggleMenu()">COMMUNITY</a>
+    <a href="/creations" onclick="toggleMenu()">CREATIONS</a>
+    <a href="/careers" onclick="toggleMenu()">HIRING</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </div>
+    <div class="page-hero-content">
+      <div class="section-label">// ON THE BEMU INTERWEBS</div>
+      <h1>BARKAZON</h1>
+    </div>
+  </section>
+
+  <section class="community-section">
+    <div class="container bz-wrap">
+      <div class="bz-desk">
+        <div class="bz-monitor">
+          <div class="bz-bezel">
+            <div class="bz-screen" id="bzScreen" aria-label="Barkazon - the toy shop"></div>
+            <div class="bz-chin">barkazon</div>
+          </div>
+          <div class="bz-neck"></div>
+          <div class="bz-foot"></div>
+        </div>
+        <div class="bz-stand" aria-live="polite">
+          <canvas class="bz-spin" id="bzSpin" width="250" height="250" aria-label="The picked toy, turning on the stand"></canvas>
+          <div class="bz-velvet"></div>
+          <div class="bz-post"></div>
+          <div class="bz-standtag" id="bzStandTag">Tap a toy to see it spin on the stand.</div>
+        </div>
+      </div>
+
+      <div class="bz-book-wrap" id="bzBookWrap">
+        <div class="bz-book-head">
+          <h2>THE BARKAZON TOY BOOK</h2>
+          <span class="bz-book-note" id="bzBookNote">Loading the book&hellip;</span>
+        </div>
+        <div class="bz-book" id="bzBook"></div>
+        <div class="bz-book-nav">
+          <button type="button" id="bzBookPrev" aria-label="Previous pages">&lsaquo; BACK</button>
+          <span class="bz-pn" id="bzBookPn"></span>
+          <button type="button" id="bzBookNext" aria-label="Next pages">NEXT &rsaquo;</button>
+        </div>
+      </div>
+
+      <p class="bz-cross">Toys are bought and sold at the BARKAZON computer in the Workshop, in BARK. Play them all on the
+        <a href="/creations?tab=toys">Creations</a> page.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <a href="/" class="footer-logo">
+        <img src="logo.png" alt="BARKVR" class="footer-logo-img" />
+      </a>
+      <div class="footer-links">
+        <a href="/#about">About</a>
+        <a href="/games">Games</a>
+        <a href="/store">Store</a>
+        <a href="/extras">Extras</a>
+        <a href="/database">Index</a>
+        <a href="/players">Players</a>
+        <a href="/community">Community</a>
+        <a href="/creations">Creations</a>
+        <a href="/careers">Hiring</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">© 2026 BARKVR. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="main.js?v=12"></script>
+  <script src="toys.js?v=9"></script>
+  <script src="barkazon.js?v=1"></script>
+</body>
+</html>

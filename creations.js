@@ -673,6 +673,15 @@ const Creations = (() => {
         return;
       }
       if (!r.ok) { toast(`${action} failed (${r.status}).`); return; }
+      // Deleting a Barkazon listing removes its TOY too (the creations server remembers it: no re-upload, and every
+      // game drops it - and the copies people bought - from their saved toys).
+      if (kind === 'barkazon' && action === 'delete') {
+        const rec = (modLists[kind] || []).find((x) => x.id === id);
+        if (rec && rec.toyId) {
+          try { await fetch(`${CREATIONS}/api/creations/${encodeURIComponent(String(rec.toyId).toLowerCase())}`, { method: 'DELETE', headers: authHeaders() }); }
+          catch (e) { console.warn('[creations] could not remove the listing\'s toy:', e.message); }
+        }
+      }
       const list = modLists[kind];
       if (list) {
         if (action === 'delete') modLists[kind] = list.filter((x) => x.id !== id);
