@@ -3721,6 +3721,149 @@
         "wheel": "Cosmetics/Head",
         "model": "media/models/item-pumpkin-head.glb",
         "autoEffect": "Turns your head into one of YOUR carved pumpkins. Set a saved pumpkin on the stand to see how it'll look, pull the trigger to turn its face, then put it on."
+      },
+      {
+        "id": "santa-hat",
+        "name": "Santa Hat",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Santa Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-santa-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "elf-hat",
+        "name": "Elf Hat",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Elf Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-elf-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "earmuffs",
+        "name": "Earmuffs",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Earmuffs",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-earmuffs.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "nutcracker-hat",
+        "name": "Nutcracker Hat",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Nutcracker Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-nutcracker-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "frostys-top-hat",
+        "name": "Frosty's Top Hat",
+        "description": "",
+        "subcategory": "Head",
+        "auto": true,
+        "itemId": "Frosty's Top Hat",
+        "wheel": "Cosmetics/Head",
+        "model": "media/models/item-frostys-top-hat.glb",
+        "autoEffect": "A cosmetic you wear on your head. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "rudolph-nose",
+        "name": "Rudolph Nose",
+        "description": "",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Rudolph Nose",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-rudolph-nose.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "carrot-nose",
+        "name": "Carrot Nose",
+        "description": "",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Carrot Nose",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-carrot-nose.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "candy-cane-nose",
+        "name": "Candy Cane Nose",
+        "description": "",
+        "subcategory": "Nose",
+        "auto": true,
+        "itemId": "Candy Cane Nose",
+        "wheel": "Cosmetics/Nose",
+        "model": "media/models/item-candy-cane-nose.glb",
+        "autoEffect": "A cosmetic you wear on your nose. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "frostys-scarf",
+        "name": "Frosty's Scarf",
+        "description": "",
+        "subcategory": "Neck",
+        "auto": true,
+        "itemId": "Frosty's Scarf",
+        "wheel": "Cosmetics/Neck",
+        "model": "media/models/item-frostys-scarf.glb",
+        "autoEffect": "A cosmetic you wear round your neck. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "light-necklace",
+        "name": "Light Necklace",
+        "description": "",
+        "subcategory": "Neck",
+        "auto": true,
+        "itemId": "Light Necklace",
+        "wheel": "Cosmetics/Neck",
+        "model": "media/models/item-light-necklace.glb",
+        "autoEffect": "A cosmetic you wear round your neck. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "christmas-buttons",
+        "name": "Christmas Buttons",
+        "description": "",
+        "subcategory": "Badge",
+        "auto": true,
+        "itemId": "Christmas Buttons",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-christmas-buttons.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "peppermint-buttons",
+        "name": "Peppermint Buttons",
+        "description": "",
+        "subcategory": "Badge",
+        "auto": true,
+        "itemId": "Peppermint Buttons",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-peppermint-buttons.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
+      },
+      {
+        "id": "coal-buttons",
+        "name": "Coal Buttons",
+        "description": "",
+        "subcategory": "Badge",
+        "auto": true,
+        "itemId": "Coal Buttons",
+        "wheel": "Cosmetics/Badge",
+        "model": "media/models/item-coal-buttons.glb",
+        "autoEffect": "A cosmetic you wear as a badge. Pull it from your wheel, hold it against yourself and let go to put it on."
       }
     ],
     "maps": [
@@ -5442,5 +5585,5 @@
   "petsConfig": {
     "mutationsPublic": true
   },
-  "modelsVersion": "20261109225056"
+  "modelsVersion": "20261110234941"
 }
