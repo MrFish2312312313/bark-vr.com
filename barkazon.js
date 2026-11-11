@@ -74,6 +74,11 @@
   }
 
   function draw() {
+    drawScreen();
+    fit($('bzScreen'));
+  }
+
+  function drawScreen() {
     const screen = $('bzScreen');
     S.narrow = screen.clientWidth < 560;
     screen.classList.toggle('narrow', S.narrow);
@@ -143,6 +148,17 @@
         () => flash('BUY IT AT THE BARKAZON COMPUTER IN THE WORKSHOP'), { cls: 'amber bz-buy', size: 0.021 }));
     }
     screen.appendChild(bottom);
+  }
+
+  /// A long label SHRINKS TO FIT its box, as TMP does in the game (the web font runs a little wider than the game's).
+  function fit(screen) {
+    if (S.narrow) return;
+    for (const el of screen.querySelectorAll('.bz-brand, .bz-text:not(.wrap), .bz-btn:not(.bz-card)')) {
+      if (el.dataset.size === undefined) el.dataset.size = el.style.fontSize || '';     // (its own size, before any fitting)
+      el.style.fontSize = el.dataset.size;
+      const over = el.scrollWidth / Math.max(1, el.clientWidth);
+      if (over > 1.02) el.style.fontSize = (parseFloat(getComputedStyle(el).fontSize) / over * 0.97) + 'px';
+    }
   }
 
   function drawSell(screen) {
@@ -302,6 +318,7 @@
     if (typeof ResizeObserver !== 'undefined')
       new ResizeObserver(() => { const n = $('bzScreen').clientWidth < 560; if (n !== wasNarrow) { wasNarrow = n; draw(); } }).observe($('bzScreen'));
     draw();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fit($('bzScreen')));
     await resolveBackend();
     if (!BACKEND) { S.list = null; S.flash = 'BARKAZON IS OFFLINE RIGHT NOW'; S.flashUntil = Date.now() + 1e9; draw(); return; }
     await Promise.all([refresh(), loadBook()]);

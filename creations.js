@@ -600,7 +600,7 @@ const Creations = (() => {
     $('tab-letters').hidden = !mod;
     $('tab-presents').hidden = !mod;
     $('tab-barkazon').hidden = !mod;
-    for (const b of document.querySelectorAll('.cr-tab'))
+    for (const b of document.querySelectorAll('.cr-tab[data-tab]'))
       b.setAttribute('aria-selected', b.dataset.tab === tab ? 'true' : 'false');
   }
 
@@ -701,7 +701,7 @@ const Creations = (() => {
     page = Math.max(1, parseInt(q.get('page'), 10) || 1);
     focusId = q.get('focus');
 
-    for (const b of document.querySelectorAll('.cr-tab'))
+    for (const b of document.querySelectorAll('.cr-tab[data-tab]'))
       b.addEventListener('click', () => { if (b.dataset.tab !== tab) go(b.dataset.tab, 1); });
     $('crLights').addEventListener('click', () => {
       lit = !lit;
@@ -726,7 +726,9 @@ const Creations = (() => {
     await checkSeason();
     await refreshMod();
 
+    // (moderators can link straight to LETTERS / PRESENTS / BARKAZON - e.g. ?tab=letters)
     tab = wantTab === 'toys' ? 'toys'
+        : mod && ['letters', 'presents', 'barkazon'].includes(wantTab) ? wantTab
         : wantTab === 'paintings' ? 'paintings'
         : wantTab === 'pumpkins' && pumpkinsOpen() ? 'pumpkins'
         : autumn ? 'pumpkins' : 'toys';
