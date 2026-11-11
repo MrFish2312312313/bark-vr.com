@@ -595,6 +595,12 @@ window.Toys = (() => {
     if (!me.alive) return;
     const toy = me.toy = new Toy(scene, details, gltf.parser);
     const info = toy.info;
+    // BUILT FROM: the toys it was built out of in the game (ADD A TOY at the bench) - credited under the maker.
+    const built = Array.isArray(info.built) ? info.built.filter((b) => b && b.name) : [];
+    if (built.length) {
+      const by = box.querySelector('.ty-by');
+      if (by) by.insertAdjacentHTML('afterend', `<p class="ty-by">built from ${built.map((b) => `<b>${esc(b.name)}</b>${b.maker ? ' by ' + esc(b.maker) : ''}`).join(', ')}</p>`);
+    }
     const s = stage(); s.add(scene);
     const cam = new T.PerspectiveCamera(35, 1, 0.01, 100);
     const controls = T.OrbitControls ? new T.OrbitControls(cam, canvas) : null;
