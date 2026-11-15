@@ -258,6 +258,26 @@ window.Toys = (() => {
       });
     }
 
+    /// AND IF: every condition must hold (IN STATE, NOT IN STATE, IS SHOWN, IS HIDDEN, IS HELD, NOT HELD, CHANCE).
+    /// Nobody holds a toy on the website: IS HELD never holds, NOT HELD always does.
+    passes(r) {
+      for (const f of r.ifs || []) {
+        const shown = () => { for (const { part, objs } of this.parts.values()) if (this.covers(f.target, part) && objs.some((x) => x.o.visible)) return true; return false; };
+        let ok = true;
+        switch (f.kind | 0) {
+          case 0: ok = this.state === Math.round(f.value); break;
+          case 1: ok = this.state !== Math.round(f.value); break;
+          case 2: ok = shown(); break;
+          case 3: ok = !shown(); break;
+          case 4: ok = false; break;
+          case 5: ok = true; break;
+          case 6: ok = Math.random() * 100 < f.value; break;
+        }
+        if (!ok) return false;
+      }
+      return true;
+    }
+
     async run(i) {
       if (this.off.has(i)) return;                              // switched off by a TURN OFF BLOCK
       const now = performance.now();
@@ -266,6 +286,7 @@ window.Toys = (() => {
       if (++this.budget > 8) return;
       this.fired.set(i, now);
       const r = this.rules[i];
+      if (!this.passes(r)) return;                              // AND IF (the game's CondKind, same order)
       for (const a of r.acts || []) {
         if (a.wait > 0) await sleep(a.wait * 1000);
         if (!this.alive) return;
@@ -541,7 +562,15 @@ window.Toys = (() => {
     let when = TRIGGERS[r.when] || '?';
     if (r.when === TR.Every) when += ` ${(+r.every).toFixed(1).replace(/\.0$/, '')} s`;
     if (r.when === TR.EnteredState) { const s = (info.states || [])[Math.round(r.every)]; when += ` ${s ? s.name : Math.round(r.every)}`; }
-    const head = `<span class="ty-blk ty-when">WHEN ${esc(when)}</span>` + (r.when === TR.Touched ? `<span class="ty-blk ty-on">ON ${esc(nameOf(info, r.on).toUpperCase())}</span>` : '');
+    const IFS = ['IN STATE', 'NOT IN STATE', 'IS SHOWN', 'IS HIDDEN', 'IS HELD', 'NOT HELD', 'CHANCE'];
+    const ifs = (r.ifs || []).map((f) => {
+      let t = IFS[f.kind | 0] || '?';
+      if ((f.kind | 0) <= 1) { const s = (info.states || [])[Math.round(f.value)]; t += ' ' + (s ? s.name : Math.round(f.value)); }
+      if ((f.kind | 0) === 2 || (f.kind | 0) === 3) t = nameOf(info, f.target).toUpperCase() + ' ' + t;
+      if ((f.kind | 0) === 6) t += ' ' + Math.round(f.value) + '%';
+      return `<span class="ty-blk ty-on">AND IF ${esc(t)}</span>`;
+    }).join('');
+    const head = `<span class="ty-blk ty-when">WHEN ${esc(when)}</span>` + (r.when === TR.Touched ? `<span class="ty-blk ty-on">ON ${esc(nameOf(info, r.on).toUpperCase())}</span>` : '') + ifs;
     const acts = (r.acts || []).map((a) => {
       let txt = VERBS[a.verb] || '?';
       const targeted = ![V.GoToState, V.NextState, V.Sound, V.Buzz, V.Wait, V.Reset, V.Soar, V.Volume, V.BlockOff, V.BlockOn].includes(a.verb);

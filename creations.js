@@ -552,6 +552,7 @@ const Creations = (() => {
         `${modMeta(rec)}</div>` + modBlock(rec);
       grid.appendChild(card);
     }
+    wireCards(items, 'letter');      // (the Hide / Delete buttons - these three tabs drew them and never wired them up)
   }
 
   function renderPresents(items) {
@@ -573,6 +574,7 @@ const Creations = (() => {
         window.Toys.still(card.querySelector('.cr-canvas'), BACKEND, { ...rec, detailsUrl: base, modelUrl: base + '/model', headers: authHeaders() });
       }
     }
+    wireCards(items, 'present');
   }
 
   function renderListings(items) {
@@ -593,6 +595,7 @@ const Creations = (() => {
         window.Toys.still(card.querySelector('.cr-canvas'), BACKEND, { ...rec, detailsUrl: base, modelUrl: base + '/model', headers: authHeaders() });
       }
     }
+    wireCards(items, 'listing');
   }
 
   function setTabs() {
