@@ -1,0 +1,256 @@
+/* ============================
+   BARKVR — seasons/winter.css
+   The WINTER dress (season.js puts it on from early November to mid January), layered over style.css: a Christmas card -
+   an evergreen night, snow white, cranberry red and a little gold (the game's Winter Fest colours). Snow drifting down
+   behind everything, snow heaped along the menu bar with a string of coloured lights under it, a glowing gold star,
+   candy-cane trim, titles in snow white with a warm glow.
+   The middle section is every rule of style.css that used the site's cyan or pink, re-tinted (cyan -> cranberry
+   #e63946, pink -> gold #ffce5c) - generated from seasons/halloween.css's list. A new style.css rule that hardcodes cyan
+   stays cyan until its twin is added there.
+   Every motion is slow and gentle; with reduced motion asked for, nothing moves (the colours stay). 🍍
+   ============================ */
+
+:root {
+  --bg:        #05140e;
+  --bg2:       #081c14;
+  --bg3:       #0c241a;
+  --accent:    #e63946;
+  --accent2:   #ffce5c;
+  --text:      #fbf7ef;
+  --text-muted:#a9bdb1;
+  --border:    rgba(255,240,220,0.14);
+  --card-bg:   rgba(255,250,240,0.035);
+
+  /* Creations page palette (creations.html reads these, falling back to the normal cool one). */
+  --cr-card:        #0b2219;
+  --cr-line:        #173a2b;
+  --cr-line-strong: #24563f;
+  --cr-raised:      #10301f;
+  --cr-raised-hover:#163d29;
+  --cr-meta:        #b9cdbf;
+  --cr-strong:      #fbf7ef;
+  --cr-on-accent:   #fff8f0;
+  --cr-canvas-hi:   #12372a;
+  --cr-canvas-lo:   #04100b;
+  --cr-check-a:     #0d281c;
+  --cr-check-b:     #0a2016;
+}
+
+/* ── Re-tinted from style.css (generated) ──────────────────────────────────────────────────── */
+
+.btn-primary:hover { background: #ff6b74; box-shadow: 0 0 20px rgba(230,57,70,0.4); }
+nav { background: rgba(5,20,14,0.85); }
+.nav-logo { text-shadow: 0 0 12px rgba(230,57,70,0.5); }
+.mobile-menu { background: rgba(5,20,14,0.98); }
+.grid-overlay { background-image:
+    linear-gradient(rgba(230,57,70,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230,57,70,0.04) 1px, transparent 1px); }
+.hero-title { text-shadow: 0 0 60px rgba(230,57,70,0.2); }
+.game-screen-placeholder { background: linear-gradient(135deg, #0a2419, #0f3022); color: rgba(230,57,70,0.15); }
+.game-screen-placeholder::before { background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(230,57,70,0.03) 2px,
+    rgba(230,57,70,0.03) 4px
+  ); }
+.game-detail-inner + .game-detail-inner::before { box-shadow: 0 0 12px rgba(230,57,70,0.5); }
+.platform-btn:hover { background: #ff6b74; box-shadow: 0 0 20px rgba(230,57,70,0.4); }
+.screenshot-placeholder { background: linear-gradient(135deg, #0a2419, #0f3022); }
+.screenshot-placeholder::before { background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(230,57,70,0.025) 3px, rgba(230,57,70,0.025) 4px
+  ); }
+.shot-label { color: rgba(230,57,70,0.5); }
+.volunteer-note { background: rgba(255,206,92,0.08); border: 1px solid rgba(255,206,92,0.25); }
+.form-success { background: rgba(230,57,70,0.08); border: 1px solid rgba(230,57,70,0.3); }
+.form-error { background: rgba(255,206,92,0.08); border: 1px solid rgba(255,206,92,0.3); }
+.editor-bar { background: rgba(5,20,14,0.96); box-shadow: 0 -4px 20px rgba(230,57,70,0.15); }
+.bark-modal-card { box-shadow: 0 0 60px rgba(230,57,70,0.2); }
+.store-card:hover:not(.sold-out) { box-shadow: 0 8px 24px rgba(230,57,70,0.15); }
+.badge-limited { background: linear-gradient(135deg, #ffce5c, #ffe08a); }
+body.editing .inline-editable { outline: 1px dashed rgba(230,57,70,0.35); }
+body.editing .inline-editable:hover { background: rgba(230,57,70,0.04); }
+body.editing .inline-editable.inline-editing { background: rgba(230,57,70,0.08); }
+.weather-initial { background: rgba(230,57,70,0.08); }
+.wood-card-fancy { background: linear-gradient(160deg, rgba(255,206,92,0.08), rgba(230,57,70,0.03)); }
+.db-tab.active::after { box-shadow: 0 0 8px rgba(230,57,70,0.5); }
+.db-card:hover { box-shadow: 0 8px 22px rgba(230,57,70,0.15); }
+.db-card-img.placeholder { background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(255,206,92,0.1)); }
+.pv-list-item.active { background: rgba(230,57,70, 0.08); }
+.pv-canvas-wrap { background: radial-gradient(circle at 50% 30%, rgba(230,57,70,0.06), transparent 70%), var(--card-bg); }
+.pv-tf-row label span { color: var(--accent, #e63946); }
+.pv-transform input[type="range"] { accent-color: var(--accent, #e63946); }
+.players-meta code { background: rgba(230,57,70,0.08); }
+.player-card:hover { box-shadow: 0 8px 22px rgba(230,57,70,0.15); }
+.player-card-img.placeholder { background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(255,206,92,0.1)); }
+.player-detail-img.placeholder { background: linear-gradient(135deg, rgba(230,57,70,0.15), rgba(255,206,92,0.15)); }
+.secret-waffle-firing { background: rgba(230,57,70,0.2) !important; }
+@media (max-width: 720px) {
+  body.editing .inline-editable { outline-color: rgba(230,57,70,0.5); }
+  body.editing .inline-editable:active { background: rgba(230,57,70,0.12); }
+}
+.bark-spin { border: 3px solid rgba(230,57,70,0.2); }
+.dev-selected-bar { background: rgba(230,57,70,0.06); }
+
+/* ── The evergreen night ───────────────────────────────────────────────────────────────────── */
+
+body {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% -8%, rgba(255,214,140,0.07), transparent 70%),
+    radial-gradient(ellipse 90% 45% at 50% 120%, rgba(255,255,255,0.06), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+}
+::selection { background: #e63946; color: #fff8f0; }
+html { scrollbar-color: #1f4a35 var(--bg); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1d4532; border-radius: 6px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: #e63946; }
+
+/* ── Snow, drifting down behind the page (two layers, two speeds) ──────────────────────────── */
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0; top: -100vh;
+  height: 200vh;
+  pointer-events: none;
+  z-index: -1;
+  background-repeat: repeat;
+}
+body::before {
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 140px 90px, rgba(255,255,255,0.65), transparent 60%),
+    radial-gradient(2.5px 2.5px at 230px 160px, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(1.5px 1.5px at 90px 210px, rgba(255,255,255,0.6), transparent 60%),
+    radial-gradient(2px 2px at 300px 260px, rgba(255,255,255,0.7), transparent 60%);
+  background-size: 340px 300px;
+  animation: snowFall 38s linear infinite;
+  opacity: 0.75;
+}
+body::after {
+  background-image:
+    radial-gradient(3px 3px at 60px 80px, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(2.5px 2.5px at 260px 40px, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(3.5px 3.5px at 170px 230px, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(2.5px 2.5px at 380px 300px, rgba(255,255,255,0.65), transparent 60%);
+  background-size: 460px 380px;
+  animation: snowFall 24s linear infinite, snowSway 9s ease-in-out infinite alternate;
+  opacity: 0.6;
+}
+@keyframes snowFall {
+  from { transform: translateY(0); }
+  to   { transform: translateY(50%); }
+}
+@keyframes snowSway {
+  from { margin-left: -14px; }
+  to   { margin-left: 14px; }
+}
+
+/* ── The menu bar: snow heaped along it, a string of lights under it ───────────────────────── */
+
+nav { background: rgba(5,20,14,0.88); border-bottom-color: rgba(255,240,220,0.16); box-shadow: 0 1px 26px rgba(0,0,0,0.25); }
+nav::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -9px;
+  height: 12px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath fill='%23fbf7ef' d='M0 0 H120 V4 C112 4 110 9 102 9 C95 9 93 5 86 5 C79 5 77 11 68 11 C60 11 58 6 51 6 C44 6 42 10 34 10 C26 10 24 4 17 4 C10 4 8 8 0 8 Z'/%3E%3C/svg%3E") left top / 120px 12px repeat-x;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35));
+  pointer-events: none;
+}
+nav::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -21px;
+  height: 14px;
+  background:
+    radial-gradient(circle at 12px 8px, #ff4d5a 0 3px, transparent 4px),
+    radial-gradient(circle at 42px 10px, #ffd36b 0 3px, transparent 4px),
+    radial-gradient(circle at 72px 8px, #57d98a 0 3px, transparent 4px),
+    radial-gradient(circle at 102px 10px, #fff6e0 0 3px, transparent 4px);
+  background-size: 120px 14px;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 0 4px rgba(255,220,160,0.75));
+  animation: twinkle 4.5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes twinkle {
+  from { opacity: 0.72; }
+  to   { opacity: 1; }
+}
+.nav-logo { text-shadow: 0 0 12px rgba(255,206,92,0.45); }
+.nav-logo-img { filter: drop-shadow(0 0 10px rgba(255,206,92,0.35)); }
+
+/* ── Titles: snow white, a warm glow, a red line under the big one ────────────────────────── */
+
+.page-hero-content h1,
+.hero-title {
+  color: #fffaf0;
+  text-shadow: 0 0 16px rgba(255,214,140,0.45), 0 0 54px rgba(230,57,70,0.28), 0 3px 0 #3d0d12;
+}
+.page-hero-content .section-label::before { content: '\2744\00A0'; }
+.page-hero-content .section-label { color: #ffce5c; }
+.btn-primary { color: #fff8f0; }
+
+/* ── A glowing gold star over the hero ──────────────────────────────────────────────────────── */
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 14%; right: 9%;
+  width: 96px; height: 96px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='45%25' r='55%25'%3E%3Cstop offset='0' stop-color='%23fff6d6'/%3E%3Cstop offset='.55' stop-color='%23ffd36b'/%3E%3Cstop offset='1' stop-color='%23e8a52c'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M50 4 L61 37 L96 38 L68 59 L78 93 L50 73 L22 93 L32 59 L4 38 L39 37 Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 0 18px rgba(255,214,120,0.65)) drop-shadow(0 0 60px rgba(255,190,80,0.35));
+  animation: starGlow 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.page-hero .hero-bg::before { top: 38%; width: 58px; height: 58px; right: 8%; }   /* (the short page headers: clear of the lights) */
+@keyframes starGlow {
+  from { opacity: 0.85; }
+  to   { opacity: 1; }
+}
+
+/* ── Candy-cane trim under every page header ───────────────────────────────────────────────── */
+
+.page-hero::after,
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 6px;
+  background: repeating-linear-gradient(135deg, #e63946 0 12px, #fbf7ef 12px 24px);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  left: -10%; right: -10%; bottom: -40px;
+  height: 130px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.08), transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Cards with a little snow on top ────────────────────────────────────────────────────────── */
+
+.store-card, .db-card, .player-card, .cr-card { border-top: 2px solid rgba(251,247,239,0.55); }
+
+footer { border-top-color: rgba(230,57,70,0.35); }
+.footer-copy::after { content: '  \00B7  Merry Christmas & Happy Holidays \2744'; }
+
+@media (max-width: 768px) {
+  .hero-bg::before { width: 62px; height: 62px; top: 20%; right: 6%; }
+}
+
+/* Motion off: the snow stops falling, the lights stop twinkling, the star stops glowing - the colours stay. */
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after, nav::before, .hero-bg::before { animation: none; }
+}
