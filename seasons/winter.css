@@ -159,7 +159,7 @@ nav::after {
   position: absolute;
   left: 0; right: 0; bottom: -9px;
   height: 12px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath fill='%23fbf7ef' d='M0 0 H120 V4 C112 4 110 9 102 9 C95 9 93 5 86 5 C79 5 77 11 68 11 C60 11 58 6 51 6 C44 6 42 10 34 10 C26 10 24 4 17 4 C10 4 8 8 0 8 Z'/%3E%3C/svg%3E") left top / 120px 12px repeat-x;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath fill='%23fbf7ef' d='M0 0 H120 V6 C105 6 105 10 90 10 C75 10 75 4 60 4 C45 4 45 9 30 9 C15 9 15 6 0 6 Z'/%3E%3C/svg%3E") left top / 120px 12px repeat-x;
   filter: drop-shadow(0 2px 2px rgba(0,0,0,0.35));
   pointer-events: none;
 }
