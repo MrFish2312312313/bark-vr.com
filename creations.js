@@ -311,7 +311,7 @@ const Creations = (() => {
   }
 
   function cardHead(rec) {
-    return `<div class="cr-meta-top"><strong>${esc(rec.artist || 'Someone')}</strong>${reportButton(rec)}</div>`;
+    return `<div class="cr-meta-top"><strong>${esc(barkName(rec.artist) || 'Someone')}</strong>${reportButton(rec)}</div>`;
   }
 
   async function renderPumpkins(items, token) {
@@ -374,7 +374,7 @@ const Creations = (() => {
         `<canvas class="cr-canvas"></canvas>` +
         `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
         `<div class="cr-meta-top"><strong>${esc(rec.name || 'Toy')}</strong>${reportButton(rec)}</div>` +
-        `by ${esc(rec.author || 'someone')} · ${bits.join(' · ')} · ${esc(new Date(rec.updatedAt || Date.now()).toLocaleDateString())}` +
+        `by ${esc(barkName(rec.author) || 'someone')} · ${bits.join(' · ')} · ${esc(new Date(rec.updatedAt || Date.now()).toLocaleDateString())}` +
         `${modMeta(rec)}</div>` +
         `<button type="button" class="cr-play" data-play="${esc(rec.id)}">▶ PLAY</button>` + modBlock(rec);
       grid.appendChild(card);
@@ -395,20 +395,24 @@ const Creations = (() => {
     const grid = $('crGrid');
     for (const rec of items) {
       const card = document.createElement('div');
-      card.className = 'cr-card' + (rec.hidden ? ' is-hidden' : '');
+      card.className = 'cr-card cr-paint-card' + (rec.hidden ? ' is-hidden' : '');
       card.dataset.id = rec.id;
       // ?v= because an edited painting keeps its id and the image is cached for a day.
       const src = `${BACKEND}/paintings/${encodeURIComponent(rec.id)}.png?v=${rec.versions || 1}`;
+      const artist = barkName(rec.artist) || 'Someone';
+      // The game saves the whiteboard as a square PNG turned a quarter clockwise; .cr-paint turns it back and
+      // stretches it to the board's 4:3 shape (see creations.html).
       card.innerHTML =
-        `<a href="${src}" target="_blank" rel="noopener"><img class="cr-img" loading="lazy" src="${src}" alt="Painting by ${esc(rec.artist || 'someone')}" /></a>` +
-        `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
-        cardHead(rec) +
-        `${esc(new Date(rec.createdAt || Date.now()).toLocaleDateString())}` +
-        `${(rec.versions | 0) > 1 ? ` · v${rec.versions | 0}` : ''}${modMeta(rec)}</div>` + modBlock(rec);
+        `<a class="cr-paint" href="${src}" target="_blank" rel="noopener"><img class="cr-paint-img" loading="lazy" src="${src}" alt="Painting by ${esc(artist)}" /></a>` +
+        `<div class="cr-meta cr-paint-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
+        `<div class="cr-meta-top"><strong class="cr-paint-artist">${esc(artist)}</strong>${reportButton(rec)}</div>` +
+        `${modMeta(rec)}` +
+        `<div class="cr-paint-date">${esc(new Date(rec.createdAt || Date.now()).toLocaleDateString())}` +
+        `${(rec.versions | 0) > 1 ? ` · v${rec.versions | 0}` : ''}</div></div>` + modBlock(rec);
       const img = card.querySelector('img');
       img.addEventListener('error', () => {
         img.style.opacity = '.2';
-        if (rec.hidden) card.querySelector('.cr-meta').innerHTML += '<br><em>hidden - not served</em>';
+        if (rec.hidden) card.querySelector('.cr-paint-date').insertAdjacentHTML('beforebegin', '<em>hidden - not served</em>');
       });
       grid.appendChild(card);
     }
@@ -546,7 +550,7 @@ const Creations = (() => {
       card.dataset.id = rec.id;
       card.innerHTML =
         `<div class="cr-meta">${rec.hidden ? '<span class="cr-badge">HIDDEN</span><br>' : ''}` +
-        `<div class="cr-meta-top"><strong>${esc(rec.name || 'Someone')}</strong></div>` +
+        `<div class="cr-meta-top"><strong>${esc(barkName(rec.name) || 'Someone')}</strong></div>` +
         `<p style="white-space:pre-wrap;margin:.5em 0">${esc(rec.text || '')}</p>` +
         `${esc(new Date(rec.at || Date.now()).toLocaleString())} · ${(rec.answers || []).length} toy(s) made for it` +
         `${modMeta(rec)}</div>` + modBlock(rec);

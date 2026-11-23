@@ -994,12 +994,12 @@ function renderPlayers(container) {
     card.innerHTML = `
       <div class="player-card-img-wrap">
         ${p.imageUrl
-          ? `<img src="${escapeAttr(imgSrc(p.imageUrl))}" alt="${escapeAttr(p.displayName)}" class="player-card-img" onerror="this.style.display='none'" />`
+          ? `<img src="${escapeAttr(imgSrc(p.imageUrl))}" alt="${escapeAttr(barkName(p.displayName))}" class="player-card-img" onerror="this.style.display='none'" />`
           : `<div class="player-card-img placeholder">${escapeHtml((p.displayName || '?')[0].toUpperCase())}</div>`}
         ${p.moderated && BarkEditor.editing ? `<div class="player-mod-badge" title="Has moderator overrides">MOD</div>` : ''}
       </div>
       <div class="player-card-body">
-        <h3 class="player-card-name">${escapeHtml(p.displayName || 'Unknown')}</h3>
+        <h3 class="player-card-name">${escapeHtml(barkName(p.displayName) || 'Unknown')}</h3>
         ${p.trelativeName ? `<p class="player-card-sub">${escapeHtml(p.trelativeName)}</p>` : ''}
         ${p.description ? `<p class="player-card-desc">${escapeHtml(p.description)}</p>` : ''}
       </div>
@@ -1046,7 +1046,7 @@ function openPlayerDetail(discordId) {
   const target = document.getElementById('playerDetailTarget');
   if (!p || !target) return;
 
-  document.title = `${p.displayName} | BARKVR`;
+  document.title = `${barkName(p.displayName)} | BARKVR`;
   if (grid) grid.style.display = 'none';
   document.querySelector('.players-toolbar')?.style.setProperty('display', 'none');
   target.style.display = 'block';
@@ -1057,11 +1057,11 @@ function openPlayerDetail(discordId) {
     <div class="player-detail">
       <div class="player-detail-head">
         ${p.imageUrl
-          ? `<img src="${escapeAttr(imgSrc(p.imageUrl))}" alt="${escapeAttr(p.displayName)}" class="player-detail-img" />`
+          ? `<img src="${escapeAttr(imgSrc(p.imageUrl))}" alt="${escapeAttr(barkName(p.displayName))}" class="player-detail-img" />`
           : `<div class="player-detail-img placeholder">${escapeHtml((p.displayName || '?')[0].toUpperCase())}</div>`}
         <div>
           <div class="section-label">// PLAYER</div>
-          <h1>${escapeHtml(p.displayName)}</h1>
+          <h1>${escapeHtml(barkName(p.displayName))}</h1>
           ${p.trelativeName ? `<p class="player-detail-tre">🪪 ${escapeHtml(p.trelativeName)}</p>` : ''}
           ${p.description ? `<p class="player-detail-desc">${escapeHtml(p.description)}</p>` : ''}
         </div>

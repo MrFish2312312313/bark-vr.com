@@ -52,6 +52,14 @@
     .cr-canvas:active { cursor:grabbing; }
     .cr-img { width:100%; aspect-ratio:1/1; object-fit:contain; display:block;
               background:repeating-conic-gradient(var(--cr-check-a, #141b23) 0% 25%, var(--cr-check-b, #10161d) 0% 50%) 50% / 22px 22px; }
+    /* Paintings: a 4:3 whiteboard. The PNG is square and turned a quarter clockwise, so the img is sized
+       board-height x board-width (cqw = the frame's width) and turned back a quarter. */
+    .cr-paint { position:relative; display:block; aspect-ratio:4/3; overflow:hidden; container-type:inline-size; background:#fff; }
+    .cr-paint-img { position:absolute; left:50%; top:50%; width:75cqw; height:100cqw; object-fit:fill;
+                    transform:translate(-50%,-50%) rotate(-90deg); }
+    .cr-paint-meta { flex:1; display:flex; flex-direction:column; padding:.7rem .8rem .65rem; }
+    .cr-paint-artist { font-size:1.2rem; letter-spacing:.01em; }
+    .cr-paint-date { margin-top:auto; padding-top:.45rem; font-size:.75rem; opacity:.85; }
     .cr-meta { padding:.6rem .7rem; font-size:.82rem; line-height:1.4; color:var(--cr-meta, #9fb0c0); word-break:break-word; }
     .cr-meta strong { color:var(--cr-strong, #e6edf3); }
     .cr-badge { display:inline-block; font-size:.7rem; padding:.1rem .4rem; border-radius:5px;
@@ -274,10 +282,10 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="main.js?v=12"></script>
-  <script src="editor.js?v=36"></script>
+  <script src="main.js?v=13"></script>
+  <script src="editor.js?v=37"></script>
   <script src="pumpkins.js?v=7"></script>
   <script src="toys.js?v=11"></script>
-  <script src="creations.js?v=8"></script>
+  <script src="creations.js?v=9"></script>
 </body>
 </html>
