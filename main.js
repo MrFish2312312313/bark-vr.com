@@ -2,6 +2,13 @@
 
 const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1511183372309758002/lR0Nr-eoMTwJvGlj5rk831mxc-KtFdUDpFJ7hN6aS3E2t0OafdI0rnhYbT-ZDMX-ESx9';
 
+// Player names come from the game in ALL CAPS ("TONY"). barkName() shows them as "Tony": first letter
+// capital, the rest lowercase. Display only - anything that looks a player up keeps the raw name.
+function barkName(s) {
+  s = String(s == null ? "" : s).trim();
+  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s;
+}
+
 // Mobile menu toggle
 function toggleMenu() {
   const menu = document.getElementById('mobileMenu');

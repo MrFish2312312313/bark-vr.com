@@ -15,8 +15,9 @@
     { name: 'halloween', from: [10, 1], to: [11, 2], color: '#ff7a1a' },   // spooky October, through the day after Halloween
     { name: 'winter',    from: [11, 3], to: [1, 15], color: '#e63946' },   // snow from November until the middle of January
   ];
+  var WITH_JS = { winter: true };   // seasons with moving parts: they also get seasons/<name>.js (kept off the rows above, which Bark Manager reads)
   var NORMAL_COLOR = '#00e5ff';
-  var VERSION = 1;
+  var VERSION = 3;
 
   function inside(s, now) {
     var m = now.getMonth() + 1, d = now.getDate();
@@ -38,6 +39,8 @@
   document.documentElement.setAttribute('data-season', name || 'none');
   // written while the head is still being read, so the page never shows undressed first 🍍
   if (name) document.write('<link rel="stylesheet" href="seasons/' + name + '.css?v=' + VERSION + '" />');
+  // a season with moving parts also gets seasons/<name>.js, run once the page is read
+  if (name && WITH_JS[name]) document.write('<script src="seasons/' + name + '.js?v=' + VERSION + '" defer></' + 'script>');
 
   // the browser's bar follows the season even if a page's saved theme-color is behind
   function tint() {

@@ -119,7 +119,7 @@
     S.list.slice(0, PER).forEach((l, i) => {
       const r = { x: -0.42 + i * 0.212, y: -0.12, w: 0.2, h: 0.245 };
       const on = S.pick && S.pick.id === l.id;
-      const card = button('', [r.x, r.y, r.w, r.h], () => pick(l), { cls: 'bz-card', on, aria: `${l.name || 'Toy'} by ${l.maker || 'someone'}, ${price(l.price)}` });
+      const card = button('', [r.x, r.y, r.w, r.h], () => pick(l), { cls: 'bz-card', on, aria: `${l.name || 'Toy'} by ${barkName(l.maker) || 'someone'}, ${price(l.price)}` });
       const ph = make('div', 'bz-photo');
       at(ph, r.x + (r.w - 0.118) / 2, r.y + r.h - 0.126, 0.118, 0.118, r);
       if (l.photo) {
@@ -131,7 +131,7 @@
       } else ph.textContent = '…';
       card.appendChild(ph);
       card.appendChild(text('c bz-name', '<b>' + esc(short(l.name || 'Toy', 16)) + '</b>', [r.x + 0.008, r.y + 0.066, r.w - 0.016, 0.03], 0.0155, r));
-      card.appendChild(text('c bz-sub', 'by ' + esc(short(l.maker || 'someone', 14)), [r.x + 0.008, r.y + 0.042, r.w - 0.016, 0.024], 0.0115, r));
+      card.appendChild(text('c bz-sub', 'by ' + esc(short(barkName(l.maker) || 'someone', 14)), [r.x + 0.008, r.y + 0.042, r.w - 0.016, 0.024], 0.0115, r));
       card.appendChild(text('c bz-price', esc(price(l.price)), [r.x + 0.008, r.y + 0.008, r.w - 0.016, 0.034], 0.019, r));
       cards.appendChild(card);
     });
@@ -142,7 +142,7 @@
     if (!S.pick) bottom.appendChild(text('c bz-hint', 'Tap a toy to see it spin on the stand.', [-0.4, -0.245, 0.8, 0.09], 0.017));
     else {
       const p = S.pick;
-      bottom.appendChild(text('wrap bz-detail', `<span><b>${esc(p.name || 'Toy')}</b><br><span style="font-size:72%">made by ${esc(p.maker || 'someone')}  ·  ${p.parts | 0} parts  ·  ${p.sales | 0} sold</span></span>`,
+      bottom.appendChild(text('wrap bz-detail', `<span><b>${esc(p.name || 'Toy')}</b><br><span style="font-size:72%">made by ${esc(barkName(p.maker) || 'someone')}  ·  ${p.parts | 0} parts  ·  ${p.sales | 0} sold</span></span>`,
         [-0.42, -0.255, 0.52, 0.11], 0.02));
       bottom.appendChild(button((p.price | 0) <= 0 ? 'GET IT FREE' : 'BUY  ' + price(p.price), [0.13, -0.25, 0.29, 0.1],
         () => flash('BUY IT AT THE BARKAZON COMPUTER IN THE WORKSHOP'), { cls: 'amber bz-buy', size: 0.021 }));
@@ -202,7 +202,7 @@
     old.replaceWith(canvas);
     const tag = $('bzStandTag');
     if (!l) { tag.textContent = 'Tap a toy to see it spin on the stand.'; draw(); return; }
-    tag.innerHTML = `<b>${esc(l.name || 'Toy')}</b> by ${esc(l.maker || 'someone')}`;
+    tag.innerHTML = `<b>${esc(l.name || 'Toy')}</b> by ${esc(barkName(l.maker) || 'someone')}`;
     const showPhoto = () => {
       if (!S.pick || S.pick.id !== l.id || !l.photo) return;
       const g = canvas.getContext('2d');
