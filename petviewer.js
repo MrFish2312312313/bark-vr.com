@@ -340,6 +340,9 @@
       t.raf = requestAnimationFrame(loop);
       // Skip GPU work while the Extra Info tab is hidden (offsetParent null).
       if (!t.wrap || t.wrap.offsetParent === null) return;
+      // The box can change shape without a window resize (the tab opening, the layout settling), and a
+      // camera left on the old shape stretches the model - so follow the box every frame.
+      if (t.wrap.clientWidth !== t.w || t.wrap.clientHeight !== t.h) onResize();
       if (t.controls) t.controls.update();
       t.renderer.render(t.scene, t.camera);
     };
@@ -353,8 +356,9 @@
 
   function onResize() {
     const t = State.three; if (!t) return;
-    const w = Math.max(1, t.wrap.clientWidth || 420);
-    const h = Math.max(1, t.wrap.clientHeight || 360);
+    const w = t.wrap.clientWidth, h = t.wrap.clientHeight;
+    if (!w || !h) return;                 // hidden (tab closed): measure again once it shows
+    t.w = w; t.h = h;
     t.renderer.setSize(w, h, false);
     t.camera.aspect = w / h;
     t.camera.updateProjectionMatrix();

@@ -215,18 +215,22 @@ nav::before {
   to   { opacity: 1; }
 }
 
-/* ── Candy-cane trim under every page header ───────────────────────────────────────────────── */
+/* ── Candy-cane trim under every page header, turning like a barber pole ───────────────────── */
 
 .page-hero::after,
 .hero::after {
   content: '';
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: -34px; right: 0; bottom: 0;          /* one stripe-repeat wider, so the slide never shows an edge */
   height: 6px;
   background: repeating-linear-gradient(135deg, #e63946 0 12px, #fbf7ef 12px 24px);
   opacity: 0.85;
+  animation: barberTurn 1.8s linear infinite;
   pointer-events: none;
   z-index: 1;
+}
+@keyframes barberTurn {
+  to { transform: translateX(33.9411px); }   /* 24px of stripes along a 45deg line = 33.94px across */
 }
 .page-hero::before {
   content: '';
@@ -250,7 +254,94 @@ footer { border-top-color: rgba(230,57,70,0.35); }
   .hero-bg::before { width: 62px; height: 62px; top: 20%; right: 6%; }
 }
 
-/* Motion off: the snow stops falling, the lights stop twinkling, the star stops glowing - the colours stay. */
+/* ── winter.js is running: its canvas snow, wired lights and clickable star replace the CSS ones ── */
+
+html.wx-js body::before, html.wx-js body::after, html.wx-js nav::before, html.wx-js .hero-bg::before { display: none; }
+.wx-snow { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.wx-fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 10000; pointer-events: none; }
+
+/* lights: bulbs hung from a black wire, each on its own twinkle clock (winter.js sets --c, --d, --o, --r) */
+.wx-lights { position: absolute; left: 0; right: 0; top: calc(100% + 1px); height: 34px; overflow: hidden; pointer-events: none; }
+.wx-wire { position: absolute; left: 0; top: 0; overflow: visible; }
+.wx-wire path { fill: none; stroke: #050505; stroke-width: 2.4; stroke-linecap: round; }
+.wx-wire { filter: drop-shadow(0 1px 0 rgba(255,250,235,0.28)) drop-shadow(0 -0.5px 0 rgba(255,250,235,0.18)); }   /* a black wire still reads on the dark night */
+.wx-bulb { position: absolute; top: 8px; width: 9px; height: 18px; margin-left: -4.5px; transform: rotate(var(--r)); transform-origin: 50% 0; }
+.wx-bulb::before { content: ''; position: absolute; left: 2px; top: 0; width: 5px; height: 5px; border-radius: 1px; background: #1c1c1c; }
+.wx-bulb::after {
+  content: ''; position: absolute; left: 0; top: 4px; width: 9px; height: 13px; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 18%, var(--c) 45%);
+  box-shadow: 0 0 6px 1px var(--c);
+  animation: bulbTwinkle var(--d) ease-in-out var(--o) infinite alternate;
+}
+@keyframes bulbTwinkle {
+  0%   { opacity: 0.3;  box-shadow: 0 0 2px 0 var(--c); }
+  60%  { opacity: 0.85; }
+  100% { opacity: 1;    box-shadow: 0 0 12px 3px var(--c); }
+}
+
+/* the BARK logos: hover and they swell, tilt and puff snow (scale/rotate, not transform: the hero logo's
+   fade-in animation keeps hold of transform) */
+.nav-logo-img, .hero-logo-img { transition: scale .45s cubic-bezier(.34,1.56,.64,1), rotate .45s cubic-bezier(.34,1.56,.64,1), filter .3s; }
+.nav-logo:hover .nav-logo-img { scale: 1.22; rotate: -7deg; filter: drop-shadow(0 0 14px rgba(255,214,140,0.6)); }
+.hero-logo-img:hover { scale: 1.06; rotate: -3deg; }
+
+/* the star, as a button: ten clicks opens Sleigh Run. It glows hotter with every click. */
+.wx-star {
+  position: absolute; top: 14%; right: 9%; z-index: 3;
+  width: 96px; height: 96px; padding: 0; border: 0; cursor: pointer; --heat: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='45%25' r='55%25'%3E%3Cstop offset='0' stop-color='%23fff6d6'/%3E%3Cstop offset='.55' stop-color='%23ffd36b'/%3E%3Cstop offset='1' stop-color='%23e8a52c'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M50 4 L61 37 L96 38 L68 59 L78 93 L50 73 L22 93 L32 59 L4 38 L39 37 Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 0 calc(18px + var(--heat) * 22px) rgba(255,214,120,calc(0.65 + var(--heat) * 0.35))) drop-shadow(0 0 60px rgba(255,190,80,0.35));
+  animation: starGlow 6s ease-in-out infinite alternate;
+  -webkit-tap-highlight-color: transparent;
+}
+.wx-star:focus-visible { outline: 2px dashed #ffd36b; outline-offset: 6px; border-radius: 50%; }
+.wx-star.wx-pop { animation: starPop .45s cubic-bezier(.34,1.56,.64,1), starGlow 6s ease-in-out infinite alternate; }
+@keyframes starPop { 0% { scale: 1; rotate: 0deg; } 40% { scale: 1.25; rotate: 14deg; } 100% { scale: 1; rotate: 0deg; } }
+.wx-star-sm { top: 38%; right: 8%; width: 58px; height: 58px; }
+@media (max-width: 768px) { .wx-star { width: 62px; height: 62px; top: 20%; right: 6%; } }
+
+/* Sleigh Run */
+html.wx-game-open { overflow: hidden; }
+.wx-game[hidden], .wx-game-panel[hidden] { display: none !important; }
+.wx-game { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; padding: 16px;
+           background: rgba(2,10,7,0.78); backdrop-filter: blur(4px); }
+.wx-game-card { position: relative; width: min(960px, 100%, calc((100vh - 120px) * 16 / 9)); background: #08190f;
+                border: 1px solid rgba(255,240,220,0.18); border-radius: 16px; padding: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+.wx-game-x { position: absolute; top: -14px; right: -14px; z-index: 2; width: 34px; height: 34px; border-radius: 50%;
+             border: 1px solid rgba(255,240,220,0.3); background: #0c241a; color: #fbf7ef; font-size: 15px; cursor: pointer; }
+.wx-game-stage { position: relative; border-radius: 10px; overflow: hidden; }
+.wx-game-stage canvas { display: block; width: 100%; aspect-ratio: 16 / 9; touch-action: manipulation; cursor: pointer; }
+.wx-game-panel { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+                 gap: 8px; padding: 18px; text-align: center; color: #fbf7ef; background: rgba(4,15,12,0.72); overflow: auto; }
+.wx-game-panel h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 3rem); letter-spacing: .05em; margin: 0;
+                    color: #fffaf0; text-shadow: 0 0 16px rgba(255,214,140,0.45); }
+.wx-game-panel p { margin: 0; max-width: 560px; font-size: .95rem; line-height: 1.45; color: #d6e3da; }
+.wx-game-panel .wx-keys { font-size: .8rem; opacity: .75; }
+.wx-game-panel .wx-final { font-family: var(--font-display); font-size: 3.4rem; line-height: 1; color: #ffd36b; }
+.wx-go, .wx-save button, .wx-drop { font: inherit; font-weight: 700; letter-spacing: .06em; border: 0; border-radius: 8px; cursor: pointer;
+                                     background: #e63946; color: #fff8f0; padding: .6rem 1.6rem; }
+.wx-go:hover, .wx-save button:hover, .wx-drop:hover:not(:disabled) { background: #ff6b74; }
+.wx-save { display: flex; gap: 6px; }
+.wx-save input { font: inherit; padding: .5rem .7rem; border-radius: 8px; border: 1px solid rgba(255,240,220,0.3);
+                 background: #0c241a; color: #fbf7ef; width: 11rem; }
+.wx-board { width: min(320px, 100%); margin: 4px 0; }
+.wx-board h3 { margin: 0 0 4px; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #ffce5c; }
+.wx-board ol { list-style: none; margin: 0; padding: 0; }
+.wx-board li { display: grid; grid-template-columns: 2rem 1fr auto; gap: 6px; padding: 3px 8px; border-radius: 6px; font-size: .9rem; text-align: left; }
+.wx-board li:nth-child(odd) { background: rgba(255,250,240,0.05); }
+.wx-board li.wx-me { background: rgba(255,206,92,0.18); }
+.wx-board li span { opacity: .6; }
+.wx-board li em { font-style: normal; font-weight: 700; color: #ffd36b; }
+.wx-board li.wx-empty { display: block; text-align: center; opacity: .7; }
+.wx-note { font-size: .75rem !important; opacity: .65; }
+.wx-game-bar { display: flex; justify-content: center; padding-top: 10px; }
+.wx-drop { font-size: 1.15rem; padding: .7rem 2.6rem; }
+.wx-drop:disabled { opacity: .4; cursor: default; }
+@media (max-width: 600px) { .wx-game-panel p { font-size: .8rem; } .wx-game-panel .wx-final { font-size: 2.4rem; } }
+
+/* Motion off: the snow stops falling, the lights stop twinkling, the star and the pole stop - the colours stay. */
 @media (prefers-reduced-motion: reduce) {
-  body::before, body::after, nav::before, .hero-bg::before { animation: none; }
+  body::before, body::after, nav::before, .hero-bg::before, .page-hero::after, .hero::after,
+  .wx-bulb::after, .wx-star { animation: none !important; }
+  .nav-logo-img, .hero-logo-img { transition: none; }
 }
